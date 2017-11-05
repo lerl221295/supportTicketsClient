@@ -1,0 +1,22 @@
+query GetTicket($id: Int) {
+	ticket(id: $id){
+		titulo,
+		estado,
+		prioridad,
+		tipo,
+		cliente {
+			nombre,
+		    apellido
+		},
+		tecnico {
+			nombre,
+		    apellido
+		},
+		interacciones {
+			text,
+			tipo,
+			emisor,
+			timestamp
+		}
+	}
+}

@@ -1,0 +1,5 @@
+mutation UpdateCliente($cliente: cliente){
+	updateCliente(cliente: $cliente)
+}
+
+

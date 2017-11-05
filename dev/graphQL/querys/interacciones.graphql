@@ -1,0 +1,19 @@
+query GetInteracciones{
+	ultimasInteracciones{
+	    emisor,
+	    tipo,
+	    text,
+	    timestamp,
+	    ticket{
+	      _id,
+	      tecnico{
+	      	nombre,
+	        apellido
+	      },
+	      cliente{
+	        nombre,
+	        apellido
+	      }
+    	}
+  	}
+}

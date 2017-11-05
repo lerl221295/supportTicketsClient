@@ -1,0 +1,21 @@
+query GetTickets($onlyFirst: Boolean) {
+	tickets {
+		_id,
+		titulo,
+	    estado,
+	    prioridad,
+	    tipo,
+	    cliente{
+	      nombre,
+	      apellido
+	    },
+	    tecnico{
+	      nombre,
+	      apellido
+	    },
+	    interacciones(onlyFirst: $onlyFirst){
+	    	text,
+	    	timestamp
+	    }
+	}
+}

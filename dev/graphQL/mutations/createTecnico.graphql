@@ -1,0 +1,5 @@
+mutation CreateTecnico($tecnico: tecnico){
+	createTecnico(tecnico: $tecnico)
+}
+
+

@@ -1,0 +1,11 @@
+query GetCliente($id : Int!) {
+	cliente(id: $id){
+		id,
+		nombre,
+		apellido,
+		identificacion,
+		email,
+		telefono,
+		ubicacion
+	}
+}

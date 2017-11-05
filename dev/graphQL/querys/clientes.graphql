@@ -1,0 +1,10 @@
+query GetClientes {
+	clientes {
+		id,
+		nombre,
+	    apellido,
+	    identificacion,
+	    email,
+	   	telefono
+	}
+}

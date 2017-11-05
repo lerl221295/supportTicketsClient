@@ -1,0 +1,9 @@
+mutation Authenticate($user: login!){
+	authenticate(user: $user){
+		admin{
+			nombre,
+			apellido
+		},
+		token
+	}
+}
