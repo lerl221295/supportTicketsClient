@@ -52,7 +52,7 @@ module.exports = {
     },
     devServer: {
         host: 'localhost',
-        port: 8004,
+        port: 8000,
         inline: true,
         publicPath: "/",
         contentBase: './src',

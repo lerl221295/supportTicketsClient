@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from "react-dom";
-//import {Provider} from 'react-redux';
+import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, compose} from 'redux';
 import logger from 'redux-logger';
 import createReducers from './reducers';
@@ -21,22 +21,21 @@ import './styles.css';
 injectTapEventPlugin();
 
 export const store = createStore(
-    createReducers(client),
+    createReducers(),
     //{},//initial state (asi esta en la doc de apollo)
     compose(
         applyMiddleware(
-            routerMiddleware(browserHistory),
-            client.middleware()/*,
+            routerMiddleware(browserHistory)/*,
             logger*/
         ),
-        // If you are using the devToolsExtension, you can add it here also
-        (typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined') ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
     ) 
 );
 
 ReactDOM.render(
-    <ApolloProvider store={store} client={client}>
-    	<Routes history={syncHistoryWithStore(browserHistory, store)}/>
-    </ApolloProvider>,
+    <Provider store={store}>
+        <ApolloProvider client={client}>
+        	<Routes history={syncHistoryWithStore(browserHistory, store)}/>
+        </ApolloProvider>
+    </Provider>,
     document.getElementById('root')
 );

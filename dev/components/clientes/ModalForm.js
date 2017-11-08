@@ -19,14 +19,14 @@ const initialState = {
 @withApollo
 class ModalForm extends Component {
   componentWillReceiveProps = async (nextProps) => {
-    /*cuando el modal de edicion se presenta en pantalla*/
-    if(nextProps.edit && nextProps.open){ /*si es el formulario en edicion*/
+    //cuando el modal de edicion se presenta en pantalla
+    if(nextProps.edit && (!this.props.open && nextProps.open)){ //si es el formulario en edicion
       var cliente = await nextProps.client.query({
         query: GetCliente,
         fetchPolicy: 'network-only',
         variables: {id: nextProps.edit}
       }).then(response => {
-        /*le quito el __typename para que la mutacion posterior funcione bien*/
+        //le quito el __typename para que la mutacion posterior funcione bien
         let {__typename, ...cliente} = response.data.cliente; 
         return cliente;
       });

@@ -16,8 +16,8 @@ class TimeLine extends Component {
     subscribeToMore({
       document: newInteracciones,
       updateQuery: (prev, {subscriptionData}) => {
-        if (!subscriptionData.data) return prev;
-        const newInteraccion = subscriptionData.data.newInteracciones;
+        if (!subscriptionData.newInteracciones) return prev;
+        const newInteraccion = subscriptionData.newInteracciones;
         return Object.assign({}, prev, {
           ultimasInteracciones: [newInteraccion, ...prev.ultimasInteracciones],
         });
