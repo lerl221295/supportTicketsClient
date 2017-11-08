@@ -8,7 +8,9 @@ import { getMainDefinition } from 'apollo-utilities';
 
 import { getUser } from './Authenticate'
 
-const API_URL = "sidor.localhost:3000";
+let host = window.location.host.split(".")[0];
+
+const API_URL = `${host}.localhost:3000`;
 
 const wsLink = new WebSocketLink({
     uri: `ws://${API_URL}/subscriptions`,
@@ -35,14 +37,6 @@ const link = split( /*ni idea aun de que hace esta pinga!*/
     wsLink,
     httpLink,
 );
-
-const logger = new ApolloLink((operation, forward) => {
-  console.log(operation.operationName);
-  return forward(operation).map((result) => {
-    console.log(`received result from ${operation.operationName}`);
-    return result;
-  })
-});
 
 const client = new ApolloClient({
     link: link,
