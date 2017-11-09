@@ -19,7 +19,8 @@ const menu = [
     { text: 'TimeLine', icon: <TimeLine/>, link: '/' },
     { text: 'Tickets', icon: <Ticket/>, link: '/tickets' },
     { text: 'Tecnicos', icon: <Llave/>, link: '/tecnicos' },
-    { text: 'Clientes', icon: <PermIdentity/>, link: '/clientes' }
+    { text: 'Clientes', icon: <PermIdentity/>, link: '/clientes' },
+    { text: 'Doc', icon: null, link: '/doc' }
 ]
 
 @connect(null, { push })

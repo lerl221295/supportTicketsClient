@@ -3,14 +3,14 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { WebSocketLink } from 'apollo-link-ws';
-import { ApolloLink, split } from 'apollo-link';
+import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 
 import { getUser } from './Authenticate'
 
 let host = window.location.host.split(".")[0];
 
-const API_URL = `${host}.localhost:3000`;
+export const API_URL = `${host}.localhost:3000`;
 
 const wsLink = new WebSocketLink({
     uri: `ws://${API_URL}/subscriptions`,

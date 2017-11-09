@@ -8,6 +8,11 @@ module.exports = {
         filename: 'bundle.min.js'/*,
         publicPath: '/src/'*/
     },
+    resolve:{
+        alias: {
+            graphql: path.resolve('./node_modules/graphql'),
+        }
+    },
     module: {
         loaders: [
             {
@@ -43,6 +48,7 @@ module.exports = {
                 loader: 'file-loader?name=[name].[ext]',
                 /*exclude: /node_modules/*/
             },
+            {test: /\.flow$/, loader: 'ignore-loader'},
             {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader?modules',
