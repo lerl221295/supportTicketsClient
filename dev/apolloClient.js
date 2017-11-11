@@ -15,7 +15,11 @@ export const API_URL = `${host}.localhost:3000`;
 const wsLink = new WebSocketLink({
     uri: `ws://${API_URL}/subscriptions`,
     options: {
-        reconnect: true
+        reconnect: true,
+        connectionParams: {
+            token: "falta colocar aca el token",
+            subdomain : host
+        }
     }
 });
 
