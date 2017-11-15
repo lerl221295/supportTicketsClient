@@ -21,7 +21,7 @@ class Routes extends Component {
 					<Route path=":id" component={TicketDetail}/>
 				</Route>
 				<Route path="tecnicos" component={TecnicosPanel} />
-				<Route path="clientes" component={ClientesPanel} />
+				<Route path="clients" component={ClientesPanel} />
 				<Route path="doc" component={Doc} />
 				<Route path="*" component={notFound}/>
 		    </Route>

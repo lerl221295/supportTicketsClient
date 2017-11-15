@@ -7,20 +7,21 @@ import LeftDrawer from './LeftDrawer'
 import withWidth, { LARGE, SMALL } from 'material-ui/utils/withWidth'
 import ThemeDefault from '../theme-default';
 
+import Doc from 'material-ui/svg-icons/file/cloud-queue'
 import TimeLine from 'material-ui/svg-icons/action/timeline'
 import Llave from 'material-ui/svg-icons/action/build'
 import PermIdentity from 'material-ui/svg-icons/action/perm-identity'
 import Ticket from 'material-ui/svg-icons/notification/confirmation-number'
 
-import { getUser } from '../Authenticate'
+import { getUser } from '../utils/Authenticate'
 import { ToastContainer } from 'react-toastify'
 
 const menu = [
     { text: 'TimeLine', icon: <TimeLine/>, link: '/' },
     { text: 'Tickets', icon: <Ticket/>, link: '/tickets' },
     { text: 'Tecnicos', icon: <Llave/>, link: '/tecnicos' },
-    { text: 'Clientes', icon: <PermIdentity/>, link: '/clientes' },
-    { text: 'Doc', icon: null, link: '/doc' }
+    { text: 'Clientes', icon: <PermIdentity/>, link: '/clients' },
+    { text: 'Doc', icon: <Doc/>, link: '/doc' }
 ]
 
 @connect(null, { push })
@@ -32,10 +33,10 @@ class App extends Component {
         };
     }
 
-    componentWillMount = () => {
-        /*validar que el usuario este autenticado*/
+    /*componentWillMount = () => {
+        //validar que el usuario este autenticado
         if(!getUser()) this.props.push("login");
-    }
+    }*/
 
     componentWillReceiveProps(nextProps) {
         if (this.props.width !== nextProps.width) {

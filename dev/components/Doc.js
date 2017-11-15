@@ -2,7 +2,7 @@ import React from 'react'
 import GraphiQL from 'graphiql';
 import fetch from 'isomorphic-fetch';
 import { API_URL } from "../apolloClient";
-import { getUser } from "../Authenticate";
+import { getUser } from "../utils/Authenticate";
 import 'graphiql/graphiql.css';
 
 const graphQLFetcher = (graphQLParams) => {

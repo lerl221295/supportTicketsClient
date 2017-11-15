@@ -9,7 +9,7 @@ import TimerOff from 'material-ui/svg-icons/image/timer-off'
 import ServiceFail from '../ServiceFail'
 import List from './List'
 
-import filter from '../../filter'
+import filter from '../../utils/filter'
 
 const filterTickets = (tickets=[], estado) => (
   /*uso el includes para contemplar cerrado.ok y cerrado.bad como el mismo estado*/

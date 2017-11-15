@@ -1,4 +1,4 @@
-import {logout as logoutService, getUser as getUserService} from '../Authenticate'
+import {logout as logoutService, getUser as getUserService} from '../utils/Authenticate'
 import {USER_LOGOUT, USER_LOGIN} from '../actions/user'
 
 const defaultUser = getUserService();

@@ -12,7 +12,7 @@ import Menu from 'material-ui/svg-icons/navigation/menu'
 import ViewModule from 'material-ui/svg-icons/action/view-module'
 import {white} from 'material-ui/styles/colors'
 import SearchBox from './SearchBox'
-import { logout } from '../Authenticate'
+import { logout } from '../utils/Authenticate'
 
 @connect(null, { push })
 class Header extends React.Component {

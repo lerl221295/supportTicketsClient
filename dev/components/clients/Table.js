@@ -14,7 +14,7 @@ import Plus from 'material-ui/svg-icons/content/create'
 
 import FormEdit from '../../containers/EditCliente'
 
-import filter from '../../filter'
+import filter from '../../utils/filter'
 
 class ClientesTable extends Component {
   constructor(props){
