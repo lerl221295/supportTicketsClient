@@ -1,0 +1,12 @@
+query GetClients($search_text: String) {
+	clients(search_text: $search_text) {
+		id,
+		name,
+	    lastname,
+	    email,
+	   	phones,
+		organization{
+			name
+		}
+	}
+}

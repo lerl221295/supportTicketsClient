@@ -30,35 +30,37 @@ class ClientesTable extends Component {
 
   closeModal = event => this.setState({ modalOpen : false });
 
-  camposFiltrar = ['nombre', 'apellido', 'identificacion'];
-
   componentWillReceiveProps = (nextProps) => {
     if(nextProps.search !== "") this.setState({current: 1});
   };
 
   render = () => {
-    var cargarndo = do {
+    let loading = do {
       if (this.props.data.loading) { <LinearProgress mode="indeterminate" /> }
       else { "" }
     }
 
-    let clientes = filter(this.camposFiltrar, this.props.data.clientes, this.props.search);
-    
-    let pags = Math.ceil(clientes.length/8);
+    //let clients = filter(this.camposFiltrar, this.props.data.clients, this.props.search);
+    let clients = do {
+      if(this.props.data.clients) this.props.data.clients;
+      else [];
+    }
+
+    let pags = Math.ceil(clients.length/8);
     let n = (this.state.current-1)*8;
-    let clientesOfPag = clientes.slice(n, n+8);
+    let clientsOfPag = clients.slice(n, n+8);
 
     return (
       <div>  
-        {cargarndo}
+        {loading}
         <Table>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
               <TableHeaderColumn>Nombre</TableHeaderColumn>
               <TableHeaderColumn>Apellido</TableHeaderColumn>
-              <TableHeaderColumn>Identificacion</TableHeaderColumn>
               <TableHeaderColumn>Email</TableHeaderColumn>
               <TableHeaderColumn>Telefono</TableHeaderColumn>
+              <TableHeaderColumn>Organizacion</TableHeaderColumn>
               <TableHeaderColumn>Edit</TableHeaderColumn>
             </TableRow>
           </TableHeader>
@@ -67,15 +69,15 @@ class ClientesTable extends Component {
               do {
                 if(this.props.data.loading) "";
                 else {
-                  clientesOfPag.map((cliente, i) => (
+                  clientsOfPag.map((client, i) => (
                     <TableRow key={i}>
-                      <TableRowColumn>{cliente.nombre}</TableRowColumn>
-                      <TableRowColumn>{cliente.apellido}</TableRowColumn>
-                      <TableRowColumn>{cliente.identificacion}</TableRowColumn>
-                      <TableRowColumn>{cliente.email}</TableRowColumn>
-                      <TableRowColumn>{cliente.telefono}</TableRowColumn>
+                      <TableRowColumn>{client.name}</TableRowColumn>
+                      <TableRowColumn>{client.lastname}</TableRowColumn>
+                      <TableRowColumn>{client.email}</TableRowColumn>
+                      <TableRowColumn>{client.phones[0]}</TableRowColumn>
+                      <TableRowColumn>{client.organization.name}</TableRowColumn>
                       <TableRowColumn>
-                        <Plus onClick={this.edit(cliente.id)}
+                        <Plus onClick={this.edit(client.id)}
                           style={{cursor: "pointer"}}
                           hoverColor="blue"/>
                       </TableRowColumn>
