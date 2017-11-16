@@ -21,8 +21,7 @@ class ClientesTable extends Component {
     super(props);
     this.state = {
       modalOpen : false,
-      id_edit: 0,
-      current: 1
+      id_edit: 0
     }
   }
 
@@ -41,15 +40,15 @@ class ClientesTable extends Component {
     }
 
     //let clients = filter(this.camposFiltrar, this.props.data.clients, this.props.search);
-    let clients = do {
-      if(this.props.data.clients) this.props.data.clients;
-      else [];
+    let {clients, total} = do {
+      if(this.props.data.clients) ({
+          clients: this.props.data.clients.slice,
+          total: this.props.data.clients.total_clients
+      });
+      else ({clients: [], total: 1});
     }
 
-    let pags = Math.ceil(clients.length/8);
-    let n = (this.state.current-1)*8;
-    let clientsOfPag = clients.slice(n, n+8);
-
+    let pags = Math.ceil(total/this.props.limit);
     return (
       <div>  
         {loading}
@@ -69,7 +68,7 @@ class ClientesTable extends Component {
               do {
                 if(this.props.data.loading) "";
                 else {
-                  clientsOfPag.map((client, i) => (
+                  clients.map((client, i) => (
                     <TableRow key={i}>
                       <TableRowColumn>{client.name}</TableRowColumn>
                       <TableRowColumn>{client.lastname}</TableRowColumn>
@@ -93,9 +92,9 @@ class ClientesTable extends Component {
               <TableRowColumn colSpan="3" style={{textAlign: 'center'}}>
                 <Pagination
                   total = { pags }
-                  current = { this.state.current }
+                  current = { this.props.current }
                   display = { 5 }
-                  onChange = { number => this.setState({ current: number }) }
+                  onChange = { number => this.props.changePag(number) }
                 />
               </TableRowColumn>
             </TableRow>

@@ -1,12 +1,15 @@
-query GetClients($search_text: String) {
-	clients(search_text: $search_text) {
-		id,
-		name,
-	    lastname,
-	    email,
-	   	phones,
-		organization{
-			name
-		}
+query GetClients($search_text: String, $offset: Int, $limit: Int) {
+	clients(search_text: $search_text, offset: $offset, limit: $limit) {
+		slice {
+			id,
+			name,
+			lastname,
+			email,
+			phones,
+			organization{
+				name
+			}
+		},
+		total_clients
 	}
 }
