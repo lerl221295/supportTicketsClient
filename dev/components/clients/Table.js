@@ -11,8 +11,10 @@ import {
 import Pagination from 'material-ui-pagination'
 import LinearProgress from 'material-ui/LinearProgress'
 import Plus from 'material-ui/svg-icons/content/create'
+import Avatar from 'material-ui/Avatar';
+import Face from 'material-ui/svg-icons/action/face'
 
-import FormEdit from '../../containers/EditCliente'
+import FormEdit from '../../containers/EditClient'
 
 import filter from '../../utils/filter'
 
@@ -42,8 +44,8 @@ class ClientesTable extends Component {
     //let clients = filter(this.camposFiltrar, this.props.data.clients, this.props.search);
     let {clients, total} = do {
       if(this.props.data.clients) ({
-          clients: this.props.data.clients.slice,
-          total: this.props.data.clients.total_clients
+          clients: this.props.data.clients.nodes,
+          total: this.props.data.clients.count
       });
       else ({clients: [], total: 1});
     }
@@ -55,6 +57,7 @@ class ClientesTable extends Component {
         <Table>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
+              <TableHeaderColumn>Foto</TableHeaderColumn>
               <TableHeaderColumn>Nombre</TableHeaderColumn>
               <TableHeaderColumn>Apellido</TableHeaderColumn>
               <TableHeaderColumn>Email</TableHeaderColumn>
@@ -70,6 +73,15 @@ class ClientesTable extends Component {
                 else {
                   clients.map((client, i) => (
                     <TableRow key={i}>
+                      <TableRowColumn>
+                        {
+                          do {
+                            if(client.face_base64)
+                              (<Avatar src={client.face_base64} />)
+                            else (<Avatar icon={<Face/>}/>)
+                          }
+                        }
+                      </TableRowColumn>
                       <TableRowColumn>{client.name}</TableRowColumn>
                       <TableRowColumn>{client.lastname}</TableRowColumn>
                       <TableRowColumn>{client.email}</TableRowColumn>
@@ -104,7 +116,9 @@ class ClientesTable extends Component {
           title="Actualizar datos del Cliente"
           open={this.state.modalOpen} 
           close={this.closeModal}
-          edit={this.state.id_edit} />
+          edit={this.state.id_edit}
+          notificate={this.props.notificate}
+        />
       </div>
     )
   }

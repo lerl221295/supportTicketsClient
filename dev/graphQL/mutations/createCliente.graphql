@@ -1,5 +1,0 @@
-mutation CreateCliente($cliente: cliente){
-	createCliente(cliente: $cliente)
-}
-
-

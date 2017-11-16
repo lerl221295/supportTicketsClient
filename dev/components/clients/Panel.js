@@ -3,8 +3,9 @@ import Table from './Table'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import ServiceFail from '../ServiceFail'
-import FormCreate from '../../containers/CreateCliente'
+import FormCreate from '../../containers/CreateClient'
 import SearchBox from '../SearchBox'
+import Snackbar from 'material-ui/Snackbar';
 
 class Panel extends Component {
 	constructor(props){
@@ -12,7 +13,9 @@ class Panel extends Component {
 		this.state = {
 			modalOpen : false,
             table_pag: 1,
-            search_text: null //ultimo text sercheado xd
+            search_text: null, //ultimo text sercheado xd
+            notificationOpen: false,
+            notificationText: "hola"
 		}
 	}
 
@@ -30,6 +33,13 @@ class Panel extends Component {
         })
     }
 
+    notificate = (text) => {
+    	this.setState({
+    		notificationOpen: true,
+    		notificationText: text
+    	})
+    }
+
 	openModal = event => this.setState({ modalOpen : true });
 
 	closeModal = event => this.setState({ modalOpen : false });
@@ -43,6 +53,7 @@ class Panel extends Component {
                        limit={this.props.limit}
                        current={this.state.table_pag}
                        changePag={this.changePag}
+                       notificate={this.notificate}
                 />
 				<FloatingActionButton className="fab" onClick={this.openModal}> 
 			    	<ContentAdd />
@@ -50,7 +61,15 @@ class Panel extends Component {
 			    <FormCreate 
 			    	title="Crear un nuevo Cliente"
 			    	open={this.state.modalOpen} 
-			    	close={this.closeModal} />
+			    	close={this.closeModal} 
+			    	notificate={this.notificate}
+			    />
+			    <Snackbar
+		          	open={this.state.notificationOpen}
+		          	message={this.state.notificationText}
+		          	autoHideDuration={4000}
+		          	onRequestClose={() => this.setState({notificationOpen: false})}
+		        />
 			</div>
 		)
 	}
