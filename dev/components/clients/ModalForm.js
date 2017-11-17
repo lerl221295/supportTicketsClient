@@ -49,9 +49,8 @@ class ModalForm extends Component {
     client.phones = client.phones.replace(/\s/g, '').split(',');
     if(!this.props.edit) console.log("creando cliente", client);
     else console.log("actualizando cliente", client);
-    this.props.submit(client)
+    this.props.submit({...client, id: this.props.edit})
       .then(response => {
-        console.log(response);
         //if(!this.props.edit) toast.success(response.data.createCliente);
         //else toast.success(response.data.updateCliente);
         if(this.props.edit) this.props.notificate("Cliente actualizado con exito!");

@@ -8,6 +8,7 @@ query GetClients($search_text: String, $offset: Int, $limit: Int) {
 			phones,
 			face_base64,
 			organization{
+				id,
 				name
 			}
 		},

@@ -5,10 +5,22 @@ import UpdateClient from '../graphQL/mutations/updateClient.graphql'
 import Clients from '../graphQL/querys/clients.graphql'
 
 export default graphql(UpdateClient, {
-  props: ({ mutate }) => ({
+  props: ({ mutate, ownProps: {limit} }) => ({
     submit: (client) => mutate({ 
     	variables: { client },
-    	refetchQueries: [ { query: Clients }]
+    	//refetchQueries: ['GetClients']
+    	update: (proxy, {data: {updateClient} }) => {
+    		const data = proxy.readQuery({ 
+    			query: Clients, 
+    			// tengo que pasar las variables porque si no no funciona :(
+    			variables: {search_text: null, offset: null, limit}
+    		});
+    		data.clients.nodes.map(client => {
+    			if(client.id !== updateClient.id) return client;
+    			return updateClient;
+    		});
+    		proxy.writeQuery({ query: Clients, data });
+    	}
     })
   })
 })(ModalForm)
