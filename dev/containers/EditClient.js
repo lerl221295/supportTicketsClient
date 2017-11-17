@@ -17,7 +17,8 @@ export default graphql(UpdateClient, {
     		}
     	},
     	update: (proxy, {data: {updateClient} }) => {
-    		/*sin el try catch esto se va a la puta x( (no entiendo aun porque)*/
+    		/*sin el try catch esto se va a la puta x( (no entiendo aun porque)
+    		https://github.com/apollographql/apollo-client/issues/2051*/
     		try {
 				const data = proxy.readQuery({ 
 	    			query: Clients
@@ -29,7 +30,7 @@ export default graphql(UpdateClient, {
 	    		proxy.writeQuery({ query: Clients, data });
     		}
     		catch(e){
-    			console.log(e);
+    			//console.log(e);
     		}
 
     		

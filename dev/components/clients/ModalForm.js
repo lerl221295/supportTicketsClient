@@ -6,6 +6,7 @@ import Form from './Form'
 import { toast } from 'react-toastify'
 import { withApollo } from 'react-apollo'
 import GetClient from '../../graphQL/querys/client.graphql'
+import GetOrganizationsNames from '../../graphQL/querys/organizationsNames.graphql'
 
 const initialState = {
   name: "",
@@ -66,6 +67,34 @@ class ModalForm extends Component {
     reader.onload = () => this.setState({face_base64: reader.result});
   }
 
+  searchOrganizations = (search_text) => {
+    console.log("ire por organizaciones");
+    return (
+      this.props.client.query({
+        query: GetOrganizationsNames,
+        variables: {search_text}
+      }).then( ({data: {organizations}} ) => {
+        //console.log(organizations.nodes);
+        return organizations.nodes.map(organization => ({
+          label: organization.name,
+          value: organization.id
+        }))
+      })
+      .then(options => {
+        console.log("cargando estas opciones",options);
+        return {options}
+      })
+    )
+  }
+
+  changeOrganization = (organization) => {
+    console.log(organization)
+    if(organization) 
+      this.setState({organization_id: organization.value})
+    else
+      this.setState({organization_id: null});
+  }
+
   handleChange = e =>  this.setState({[e.target.name]: e.target.value});
 
   render = () => (
@@ -83,6 +112,8 @@ class ModalForm extends Component {
           clean={this.cleanForm}
           enviar={this.enviar}
           changeImage={this.changeImage}
+          changeOrganization={this.changeOrganization}
+          searchOrganizations={this.searchOrganizations}
         />
       </Dialog>
     </div>

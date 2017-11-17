@@ -7,7 +7,7 @@ import DatePicker from 'material-ui/DatePicker'
 import Divider from 'material-ui/Divider'
 import FlatButton from 'material-ui/FlatButton'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-
+import Select from 'react-select'
 import Person from 'material-ui/svg-icons/action/account-circle'
 import Image from 'material-ui/svg-icons/image/image'
 import Home from 'material-ui/svg-icons/action/home'
@@ -128,6 +128,24 @@ class Form extends Component {
                     rows={2}
                     rowsMax={6}
                 />
+                <Select.Async
+                  name="organization"
+                  value={this.props.organization_id}
+                  loadOptions={this.props.searchOrganizations}
+                  onChange={this.props.changeOrganization}
+                  autoload={false}
+                  filterOption={() => (true)}//para la data mock
+                />
+                {/*<Select
+                  name="organization"
+                  onBlurResetsInput={false}
+                  options={this.props.organizationsSelect.nodes}
+                  value={this.props.organization_id}
+                  onInputChange={this.props.searchOrganizations}
+                  onChange={this.props.changeOrganization}
+                  isLoading={this.props.organizationsSelect.loading}
+                  filterOption={() => (true)}//para la data mock
+                />*/}
               </Col>
               
               <Col xsOffset={8} xs={4} md={4} sm={6}>

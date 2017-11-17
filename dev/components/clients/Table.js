@@ -69,7 +69,7 @@ class ClientesTable extends Component {
           <TableBody displayRowCheckbox={false}>
             {
               do {
-                if(this.props.data.loading) "";
+                if(this.props.data.loading && !this.props.data.clients) "";
                 else {
                   clients.map((client, i) => (
                     <TableRow key={i}>
