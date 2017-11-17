@@ -8,18 +8,31 @@ export default graphql(UpdateClient, {
   props: ({ mutate, ownProps: {limit} }) => ({
     submit: (client) => mutate({ 
     	variables: { client },
-    	//refetchQueries: ['GetClients']
+    	//refetchQueries: ['GetClients'] //ya no te necesito xD
+    	optimisticResponse: {
+    		__typename: 'Mutation',
+    		updateClient : {
+    			__typename: 'Client',
+    			...client
+    		}
+    	},
     	update: (proxy, {data: {updateClient} }) => {
-    		const data = proxy.readQuery({ 
-    			query: Clients, 
-    			// tengo que pasar las variables porque si no no funciona :(
-    			variables: {search_text: null, offset: null, limit}
-    		});
-    		data.clients.nodes.map(client => {
-    			if(client.id !== updateClient.id) return client;
-    			return updateClient;
-    		});
-    		proxy.writeQuery({ query: Clients, data });
+    		/*sin el try catch esto se va a la puta x( (no entiendo aun porque)*/
+    		try {
+				const data = proxy.readQuery({ 
+	    			query: Clients
+	    		});
+	    		data.clients.nodes.map(client => {
+	    			if(client.id !== updateClient.id) return client;
+	    			return updateClient;
+	    		});
+	    		proxy.writeQuery({ query: Clients, data });
+    		}
+    		catch(e){
+    			console.log(e);
+    		}
+
+    		
     	}
     })
   })
