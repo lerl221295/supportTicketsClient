@@ -24,18 +24,19 @@ class ModalForm extends Component {
   state = initialState
 
   componentWillReceiveProps = async (nextProps) => {
-    /*cuando el modal de edicion se presenta en pantalla*/
-    if(nextProps.edit && nextProps.open){ /*si es el formulario en edicion*/
+    //cuando el modal de edicion se presenta en pantalla
+    if(nextProps.edit && (!this.props.open && nextProps.open)){ //si es el formulario en edicion
+      //console.log(nextProps)
       var tecnico = await nextProps.client.query({
         query: GetTecnico,
         fetchPolicy: 'network-only',
         variables: {id: nextProps.edit}
       }).then(response => {
-        /*le quito el __typename para que la mutacion posterior funcione bien*/
+        //le quito el __typename para que la mutacion posterior funcione bien
         let {__typename, ...tecnico} = response.data.tecnico; 
         return tecnico;
       });
-      //console.log(tecnico);
+
       this.setState({
         ...tecnico,
         fecha_nac : new Date(tecnico.fecha_nac)

@@ -1,0 +1,17 @@
+query GetClients($search_text: String, $offset: Int, $limit: Int) {
+	clients(search_text: $search_text, offset: $offset, limit: $limit) {
+		nodes {
+			id,
+			name,
+			lastname,
+			email,
+			phones,
+			face_base64,
+			organization{
+				id,
+				name
+			}
+		},
+		count
+	}
+}

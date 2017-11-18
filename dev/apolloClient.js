@@ -1,37 +1,50 @@
-import { ApolloClient, createNetworkInterface } from 'react-apollo';
-import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws';
-import { getUser } from './Authenticate'
+import { ApolloClient } from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { createHttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
+import { WebSocketLink } from 'apollo-link-ws';
+import { split } from 'apollo-link';
+import { getMainDefinition } from 'apollo-utilities';
 
-const API_URL = "localhost:3000";
+import { getUser } from './utils/Authenticate'
 
-const wsClient = new SubscriptionClient(`ws://${API_URL}/subscriptions`, {
-  	reconnect: true
-});
+let host = window.location.host.split(".")[0];
 
-const networkInterface = createNetworkInterface({
-    uri: `http://${API_URL}/graphql`
-});
+export const API_URL = `${host}.localhost:3000`;
 
-/*funcionalidad JTW*/
-networkInterface.use([{
-    applyMiddleware : (req, next) => {
-    	 // Crear el objeto de headers si es necesario.
-        if (!req.options.headers)  req.options.headers = {};
-        // obtener el token del local storage.
-        const user = getUser();
-        //agregar el token al header authorization si existe, sino: null.
-        req.options.headers.authorization = user ? `Bearer ${user.token}` : null;
-        next();
+const wsLink = new WebSocketLink({
+    uri: `ws://${API_URL}/subscriptions`,
+    options: {
+        reconnect: true,
+        connectionParams: {
+            token: "falta colocar aca el token",
+            subdomain : host
+        }
     }
-}]);
+});
 
-const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
- 	networkInterface,
-  	wsClient
+const httpLink = setContext(() => {
+    const user = getUser();
+    return ({
+        headers: { 
+            authorization: user ? `Bearer ${user.token}` : null,
+        }
+    })
+}).concat(createHttpLink({ uri: `http://${API_URL}/graphql` }));
+
+const link = split( /*ni idea aun de que hace esta pinga!*/
+    // split based on operation type
+    ({ query }) => {
+        const { kind, operation } = getMainDefinition(query);
+        return kind === 'OperationDefinition' && operation === 'subscription';
+    },
+    wsLink,
+    httpLink,
 );
 
 const client = new ApolloClient({
-    networkInterface: networkInterfaceWithSubscriptions
+    link: link,
+    cache: new InMemoryCache(),
 });
 
 export default client

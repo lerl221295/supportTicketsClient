@@ -1,4 +1,4 @@
-import {login as loginService} from '../Authenticate'
+import {login as loginService} from '../utils/Authenticate'
 
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_LOGIN = 'USER_LOGIN';
