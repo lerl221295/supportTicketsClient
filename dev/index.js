@@ -17,7 +17,6 @@ import 'react-toastify/dist/ReactToastify.min.css'
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import './styleSheets/styles.css';
-import 'react-select/dist/react-select.css';
 
 injectTapEventPlugin();
 
