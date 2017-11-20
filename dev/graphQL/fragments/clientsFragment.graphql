@@ -1,0 +1,12 @@
+fragment clientsFields on Client {
+    id,
+    name,
+    lastname,
+    email,
+    phones,
+    face_base64,
+    organization {
+        id,
+        name
+    }
+}

@@ -1,15 +1,7 @@
+#import "../fragments/clientsFragment.graphql"
 mutation UpdateClient($client: ClientInput!){
 	updateClient(client: $client){
-		id,
-		name,
-		lastname,
-		email,
-		phones,
-		face_base64,
-		organization{
-			id
-			name
-		}
+		...clientsFields
 	}
 }
 

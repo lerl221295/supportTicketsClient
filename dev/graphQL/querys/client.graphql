@@ -1,15 +1,8 @@
+#import "../fragments/clientsFragment.graphql"
 query GetClient($id : ID!) {
 	client(id: $id){
-		id,
-		name,
-		lastname,
-		address,
-		email,
-		phones,
-		about,
-		face_base64,
-		organization{
-			id
-		}
+		...clientsFields
+		address
+		about
 	}
 }

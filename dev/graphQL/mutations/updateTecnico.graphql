@@ -1,5 +1,0 @@
-mutation UpdateTecnico($tecnico: tecnico){
-	updateTecnico(tecnico: $tecnico)
-}
-
-
