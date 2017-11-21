@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43e1aaf0-8f08-4fd4-9d86-ee51daa93d1e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dev/graphQL/fragments/agentsFragment.graphql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/components/presentationals/agents/Table.js" afterPath="$PROJECT_DIR$/dev/components/presentationals/agents/Table.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/graphQL/mutations/createAgent.graphql" afterPath="$PROJECT_DIR$/dev/graphQL/mutations/createAgent.graphql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/graphQL/mutations/createClient.graphql" afterPath="$PROJECT_DIR$/dev/graphQL/mutations/createClient.graphql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/graphQL/mutations/updateAgent.graphql" afterPath="$PROJECT_DIR$/dev/graphQL/mutations/updateAgent.graphql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/graphQL/querys/agent.graphql" afterPath="$PROJECT_DIR$/dev/graphQL/querys/agent.graphql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/graphQL/querys/agents.graphql" afterPath="$PROJECT_DIR$/dev/graphQL/querys/agents.graphql" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -386,7 +380,7 @@
       <workItem from="1511010253662" duration="33346000" />
       <workItem from="1511144152616" duration="100000" />
       <workItem from="1511183388019" duration="20639000" />
-      <workItem from="1511218881899" duration="11219000" />
+      <workItem from="1511218881899" duration="11276000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/lerl221295/tesis-client&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/modules.xml">
       <created>1511024498998</created>
@@ -409,11 +403,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511228933807</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat(graphql): Agent Fragments&#10;&#10;Added fragment for agents">
+      <created>1511230622123</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1511230622123</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66548000" />
+    <option name="totallyTimeSpent" value="66605000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="1368" height="744" extended-state="6" />
@@ -475,7 +476,8 @@
     <MESSAGE value="Merge branch 'master' of https://github.com/lerl221295/tesis-client&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/modules.xml" />
     <MESSAGE value="refactor(project): Restructuring project&#10;&#10;Restructuring project folders.&#10;&#10;---------------------------------------&#10;&#10;feat(graphql): fragments&#10;&#10;Incorporating graphql fragments in clients&#10;&#10;---------------------------------------&#10;&#10;feat(agents): List Agents&#10;&#10;Listing all agents and one in form" />
     <MESSAGE value="feat(agents): Create and update agent&#10;&#10;Form for create and update it's ready. Both functionalities work fine." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(agents): Create and update agent&#10;&#10;Form for create and update it's ready. Both functionalities work fine." />
+    <MESSAGE value="feat(graphql): Agent Fragments&#10;&#10;Added fragment for agents" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(graphql): Agent Fragments&#10;&#10;Added fragment for agents" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

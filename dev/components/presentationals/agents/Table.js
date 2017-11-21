@@ -55,12 +55,11 @@ class AgentsTable extends Component {
 			<div>
 				{loading}
 				<Table>
-					<TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-						<TableRow>
-							<TableHeaderColumn>Foto</TableHeaderColumn>
-							<TableHeaderColumn>Nombre</TableHeaderColumn>
-							<TableHeaderColumn>Apellido</TableHeaderColumn>
-							<TableHeaderColumn>Email</TableHeaderColumn>
+					<TableHeader displaySelectAll={false} adjustForCheckbox={false} striped={true}>
+						<TableRow style={{textAlign: 'center'}}>
+							<TableHeaderColumn style={{width: '1rem'}}>Foto</TableHeaderColumn>
+							<TableHeaderColumn>Nombre completo</TableHeaderColumn>
+							<TableHeaderColumn style={{width: '12rem'}}>Email</TableHeaderColumn>
 							<TableHeaderColumn>Telefono</TableHeaderColumn>
 							<TableHeaderColumn>Role</TableHeaderColumn>
 							<TableHeaderColumn>Proveedor</TableHeaderColumn>
@@ -74,7 +73,7 @@ class AgentsTable extends Component {
 								else {
 									agents.map((agent, i) => (
 										<TableRow key={i}>
-											<TableRowColumn>
+											<TableRowColumn style={{width: '1rem'}}>
 												{
 													do {
 														if(agent.face_base64)
@@ -83,9 +82,8 @@ class AgentsTable extends Component {
 													}
 												}
 											</TableRowColumn>
-											<TableRowColumn>{agent.name}</TableRowColumn>
-											<TableRowColumn>{agent.lastname}</TableRowColumn>
-											<TableRowColumn>{agent.email}</TableRowColumn>
+											<TableRowColumn>{agent.name} {agent.lastname}</TableRowColumn>
+											<TableRowColumn style={{width: '12rem'}}>{agent.email}</TableRowColumn>
 											<TableRowColumn>{agent.phones[0]}</TableRowColumn>
 											<TableRowColumn>{agent.role}</TableRowColumn>
 											<TableRowColumn>{agent.supplier.name}</TableRowColumn>
