@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import Divider from 'material-ui/Divider'
 import {List, ListItem} from 'material-ui/List'
 
-import TimeAgo from './TimeAgo'
+import TimeAgo from '../../common/TimeAgo'
 import Agent from 'material-ui/svg-icons/action/account-circle'
 import Client from 'material-ui/svg-icons/action/face'
 import Avatar from 'material-ui/Avatar'
 import LinearProgress from 'material-ui/LinearProgress'
-import ServiceFail from './ServiceFail'
+import ServiceFail from '../../common/ServiceFail'
 import newInteracciones from '../graphQL/subscriptions/newInteracciones.graphql'
 
 class TimeLine extends Component {

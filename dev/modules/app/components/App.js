@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import Header from './Header'
-import LeftDrawer from './LeftDrawer'
+import Header from '../../../common/components/Header'
+import LeftDrawer from '../../../common/components/LeftDrawer'
 import withWidth, { LARGE, SMALL } from 'material-ui/utils/withWidth'
-import ThemeDefault from '../../theme-default';
+import ThemeDefault from '../../../theme-default';
 
 import Doc from 'material-ui/svg-icons/file/cloud-queue'
 import TimeLine from 'material-ui/svg-icons/action/timeline'

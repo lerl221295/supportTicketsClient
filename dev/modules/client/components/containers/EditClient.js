@@ -1,8 +1,8 @@
 import { graphql } from 'react-apollo'
 //import { connect } from 'react-redux'
-import ModalForm from '../../presentationals/clients/single/ModalForm'
-import UpdateClient from '../../../graphQL/mutations/updateClient.graphql'
-import Clients from '../../../graphQL/querys/clients.graphql'
+import ModalForm from '../presentationals/single/ModalForm'
+import UpdateClient from '../../graphql/mutations/updateClient.graphql'
+import Clients from '../../graphql/querys/clients.graphql'
 
 export default graphql(UpdateClient, {
   props: ({ mutate, ownProps: {limit} }) => ({

@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {Router, browserHistory, Route, IndexRoute} from 'react-router'
-import App from './components/presentationals/App'
-import LoginPage from './components/containers/LoginPage'
-import ClientsContainer from './components/containers/Clients/ClientsContainer'
-import AgentsContainer from './components/containers/Agents/AgentsContainer'
-import Doc from './components/presentationals/Doc'
+import App from './modules/app/components/App'
+import LoginPage from './modules/login/LoginPage'
+import ClientsContainer from './modules/client/components/containers/ClientsContainer'
+import AgentsContainer from './modules/agent/components/containers/AgentsContainer'
+import Doc from './modules/doc/Doc'
 
 const notFound = () => <h1> not found </h1>
 class Routes extends Component {

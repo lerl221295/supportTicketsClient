@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import Table from './Table'
+import Table from './single/Table'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import ServiceFail from '../ServiceFail'
-import FormCreate from '../../containers/Agents/CreateAgent'
-import SearchBox from '../SearchBox'
+import ServiceFail from '../../../../common/components/ServiceFail'
+import FormCreate from '../containers/CreateAgent'
+import SearchBox from '../../../../common/components/SearchBox'
 import Snackbar from 'material-ui/Snackbar';
 
 class Panel extends Component {

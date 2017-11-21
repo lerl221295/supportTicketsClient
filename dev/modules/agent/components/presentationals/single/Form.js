@@ -16,7 +16,7 @@ import Identy from 'material-ui/svg-icons/action/perm-identity'
 import Phone from 'material-ui/svg-icons/communication/phone'
 import Email from 'material-ui/svg-icons/communication/contact-mail'
 
-import InputWithIcon from '../InputWithIcon'
+import InputWithIcon from '../../../../../common/components/InputWithIcon'
 
 
 const styles = {

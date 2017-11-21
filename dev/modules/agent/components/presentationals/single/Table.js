@@ -13,7 +13,7 @@ import LinearProgress from 'material-ui/LinearProgress'
 import Plus from 'material-ui/svg-icons/content/create'
 import Avatar from 'material-ui/Avatar';
 
-import FormEdit from '../../containers/Agents/EditAgent'
+import FormEdit from '../../containers/EditAgent'
 
 const tableStyles = {
 	avatar: {

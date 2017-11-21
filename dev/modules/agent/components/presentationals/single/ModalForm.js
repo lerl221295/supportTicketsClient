@@ -5,8 +5,8 @@ import Form from './Form'
 
 import { toast } from 'react-toastify'
 import { withApollo } from 'react-apollo'
-import GetAgent from '../../../graphQL/querys/agent.graphql'
-import GetSuppliersNames from '../../../graphQL/querys/suppliersNames.graphql'
+import GetAgent from '../../../graphql/querys/agent.graphql'
+import GetSuppliersNames from '../../../graphql/querys/suppliersNames.graphql'
 
 const initialState = {
 	name: "",

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, compose} from 'redux';
 import logger from 'redux-logger';
-import createReducers from './reducers';
+import createReducers from './common/reducers/index';
 import Routes from './Routes'
 import {routerMiddleware, syncHistoryWithStore} from 'react-router-redux'
 import {browserHistory} from 'react-router'
@@ -16,7 +16,7 @@ import 'react-toastify/dist/ReactToastify.min.css'
 //import 'react-flexbox-grid/lib/index.css'
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import './styleSheets/styles.css';
+import './styles/styles.css';
 import 'react-select/dist/react-select.css';
 import  'flexboxgrid/css/flexboxgrid.css';
 

@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
-import {logout} from '../actions/user'
-import {push} from 'react-router-redux'
-import App from '../presentationals/App'
+// import {logout} from '../../../common/actions/user'
+import {push} from 'react-router-redux';
+import App from './App';
 
 /*const verifyAuth(user){
 	if(user) return true;
@@ -10,11 +10,11 @@ import App from '../presentationals/App'
 
 const mapStateToProps = (state) => ({
 	isAuthenticate : state.user != null
-})
+});
 
 const mapDispatchToProps = {
 	logout,
 	push
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

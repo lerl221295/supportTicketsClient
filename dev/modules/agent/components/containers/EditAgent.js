@@ -1,8 +1,8 @@
 import { graphql } from 'react-apollo'
 //import { connect } from 'react-redux'
-import ModalForm from '../../presentationals/agents/ModalForm'
-import UpdateAgent from '../../../graphQL/mutations/updateAgent.graphql'
-import Agents from '../../../graphQL/querys/agents.graphql'
+import ModalForm from '../presentationals/single/ModalForm'
+import UpdateAgent from '../../graphql/mutations/updateAgent.graphql'
+import Agents from '../../graphql/querys/agents.graphql'
 
 export default graphql(UpdateAgent, {
 	props: ({ mutate, ownProps: {limit} }) => ({

@@ -7,9 +7,9 @@ import Person from 'material-ui/svg-icons/social/person'
 import Organization from 'material-ui/svg-icons/communication/business'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-import ServiceFail from '../ServiceFail'
-import FormCreateClient from '../../containers/Clients/CreateClient'
-import SearchBox from '../SearchBox'
+import ServiceFail from '../../../../common/components/ServiceFail'
+import SearchBox from '../../../../common/components/SearchBox'
+import FormCreateClient from '../containers/CreateClient'
 import Snackbar from 'material-ui/Snackbar';
 
 class Panel extends Component {

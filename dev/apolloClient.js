@@ -6,7 +6,7 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 
-import { getUser } from './utils/Authenticate'
+import { getUser } from './common/utils/Authenticate'
 
 let host = window.location.host.split(".")[0];
 
