@@ -12,18 +12,19 @@ import Person from 'material-ui/svg-icons/action/account-circle'
 import Image from 'material-ui/svg-icons/image/image'
 import Home from 'material-ui/svg-icons/action/home'
 import Description from 'material-ui/svg-icons/action/description'
+import Wc from 'material-ui/svg-icons/notification/wc'
+import Identy from 'material-ui/svg-icons/action/perm-identity'
 import Phone from 'material-ui/svg-icons/communication/phone'
 import Email from 'material-ui/svg-icons/communication/contact-mail'
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 import InputWithIcon from '../InputWithIcon'
 
 
 const styles = {
 	img: {
-		width: 100,
-		height: 120,
-		borderRadius: 20,
-		marginRight: 40
+		width: '7rem',
+		borderRadius: 20
 	},
 	buttons: {
 		marginTop: 30,
@@ -40,7 +41,7 @@ class Form extends Component {
 		name: "",
 		lastname: "",
 		role: "",
-		sex: "",
+		sex: null,
 		email: "",
 		phones: "",
 		about: "",
@@ -52,26 +53,40 @@ class Form extends Component {
 	
 	render = () => {
 		return (
-      <form>
+      <form style={{padding: '1rem'}}>
         <Row>
           <Row>
-            <Col xsOffset={1} xs={4} md={4} sm={12}>
-							{
-								do {
-									if(this.props.face_base64)
-										(<img src={this.props.face_base64} style={styles.img}/>);
-									else
-										(<img src="images/user.png" style={styles.img}/>)
-								}
-							}
-              <RaisedButton
-                containerElement='label' // <-- Just add me!
-                label='Imagen de Perfil'
-              >
-                <Image/>
-                <input accept="image/*" type="file" style={{ display: 'none' }} onChange={this.props.changeImage}/>
-              </RaisedButton>
-              <InputWithIcon
+            <Col xs={12} sm={12} md={6} lg={6}>
+	            <Row>
+		            <Col xs={12} sm={12} md={4} lg={4}>
+			            {
+				            do {
+					            if(this.props.face_base64)
+						            (<img src={this.props.face_base64} style={styles.img}/>);
+					            else
+						            (<img src="images/user.png" style={styles.img}/>)
+				            }
+			            }
+		            </Col>
+		            <Col xs={12} sm={12} md={8} lg={8}>
+			            <TextField
+				            id={"avatar_filename"}
+				            disabled={true}
+				            style={{width: 'fit-content', marginTop: '1rem'}}
+				            value={this.props.avatar_filename}
+				            multiLine={false}
+				            rows={1}
+			            /><br />
+			            <RaisedButton
+				            containerElement='label' // <-- Just add me!
+				            label='Imagen de Perfil'
+				            icon={<Image />}
+			            >
+				            <input accept="image/*" type="file" style={{ display: 'none' }} onChange={this.props.changeImage}/>
+			            </RaisedButton>
+		            </Col>
+	            </Row>
+	            <InputWithIcon
                 Icon={Person}
                 Input={TextField}
                 hintText="Escriba el nombre"
@@ -89,8 +104,30 @@ class Form extends Component {
                 name="lastname"
                 onChange={this.props.handleChange}
               />
-              {/*VIENE EL ROL AQUÍ*/}
-              {/*VIENE EL SEXO AQUÍ*/}
+	            {/*<RadioButtonGroup name="role" onChange = {this.props.handleChange} valueSelected = { this.props.role || 'AGENT' }>
+		            <RadioButton
+			            value = "AGENT"
+			            label = "Agente"
+		            />
+		            <RadioButton
+			            value = "SUPERVISOR"
+			            label = "Supervisor"
+		            />
+		            <RadioButton
+			            value = "ADMIN"
+			            label = "Administrador"
+		            />
+	            </RadioButtonGroup>*/}
+	            <InputWithIcon
+		            Icon={Wc}
+		            Input={SelectField}
+		            floatingLabelText="Sexo"
+		            value={this.props.sex}
+		            onChange={this.props.handleSelectChange('sex')}
+	            >
+		            <MenuItem value={"MALE"} primaryText="Hombre" />
+		            <MenuItem value={"FEMALE"} primaryText="Mujer" />
+	            </InputWithIcon>
               <InputWithIcon
                 Icon={Email}
                 Input={TextField}
@@ -101,7 +138,8 @@ class Form extends Component {
                 onChange={this.props.handleChange}
               />
             </Col>
-            <Col xsOffset={1} xs={4} md={4} sm={12}>
+            {/*COLUMNA DE LA DERECHA*/}
+            <Col xs={12} sm={12} md={6} lg={6}>
               <InputWithIcon
                 Icon={Phone}
                 Input={TextField}
@@ -120,8 +158,7 @@ class Form extends Component {
 		            name="about"
 		            onChange={this.props.handleChange}
 		            multiLine={true}
-		            rows={2}
-		            rowsMax={6}
+		            rowsMax={5}
 	            />
               <InputWithIcon
                 Icon={Home}
@@ -129,30 +166,20 @@ class Form extends Component {
                 hintText="Escriba la profesión"
                 floatingLabelText="Profesión"
                 value={this.props.profession}
-                name="address"
+                name="profession"
                 onChange={this.props.handleChange}
-                multiLine={true}
-                rows={2}
-                rowsMax={6}
               />
-              <Select.Async
-                name="organization"
-                value={this.props.supplier_id}
-                loadOptions={this.props.searchSuppliers}
-                onChange={this.props.changeSupplier}
-                autoload={false}
-                filterOption={() => (true)}//para la data mock
-              />
-							{/*<Select
-                  name="organization"
-                  onBlurResetsInput={false}
-                  options={this.props.organizationsSelect.nodes}
-                  value={this.props.organization_id}
-                  onInputChange={this.props.searchOrganizations}
-                  onChange={this.props.changeOrganization}
-                  isLoading={this.props.organizationsSelect.loading}
-                  filterOption={() => (true)}//para la data mock
-                />*/}
+	            <InputWithIcon
+		            Icon={Identy}
+		            Input={SelectField}
+		            floatingLabelText="Role de usuario"
+		            value={this.props.role}
+		            onChange={this.props.handleSelectChange('role')}
+	            >
+		            <MenuItem value={"AGENT"} primaryText="Agent" />
+		            <MenuItem value={"SUPERVISOR"} primaryText="Supervisor" />
+		            <MenuItem value={"ADMIN"} primaryText="Admin" />
+	            </InputWithIcon>
             </Col>
             
             <Col xsOffset={8} xs={4} md={4} sm={6}>

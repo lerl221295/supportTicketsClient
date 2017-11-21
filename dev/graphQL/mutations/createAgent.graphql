@@ -1,0 +1,19 @@
+mutation CreateAgent($agent: AgentInput!){
+	createAgent(agent: $agent){
+		id,
+		name,
+		lastname,
+		role,
+		email,
+		phones,
+		about,
+		profession,
+		face_base64,
+		supplier {
+			id,
+			name
+		}
+	}
+}
+
+

@@ -5,16 +5,11 @@ query GetAgents($search_text: String, $offset: Int, $limit: Int) {
 			name,
 			lastname,
 			role,
-			sex,
 			email,
 			phones,
 			about,
 			profession,
 			face_base64,
-			groups {
-				id,
-				name
-			},
 			supplier {
 				id,
 				name

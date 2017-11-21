@@ -59,7 +59,7 @@ class Panel extends Component {
 					<ContentAdd />
 				</FloatingActionButton>
 				<FormCreate
-					title="Crear un nuevo Agente"
+					title="Crear un nuevo agente"
 					open={this.state.modalOpen}
 					close={this.closeModal}
 					notificate={this.notificate}

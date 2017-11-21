@@ -115,7 +115,7 @@ class AgentsTable extends Component {
 					</TableFooter>
 				</Table>
 				<FormEdit
-					title = "Actualizar datos del Agente"
+					title = "Actualizar datos del agente"
 					open = {this.state.modalOpen}
 					close = {this.closeModal}
 					edit = {this.state.id_edit}
