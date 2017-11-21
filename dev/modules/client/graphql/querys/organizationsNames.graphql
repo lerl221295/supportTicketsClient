@@ -1,0 +1,8 @@
+query GetOrganizationsNames {
+	organizations {
+		nodes {
+			id,
+			name
+		}
+	}
+}
