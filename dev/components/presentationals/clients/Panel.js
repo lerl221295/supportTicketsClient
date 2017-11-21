@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import Table from './Table'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
+import { SpeedDial, SpeedDialItem } from 'react-mui-speeddial'
+import Person from 'material-ui/svg-icons/social/person'
+import Organization from 'material-ui/svg-icons/communication/business'
+import NavigationClose from 'material-ui/svg-icons/navigation/close'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import ServiceFail from '../ServiceFail'
 import FormCreate from '../../containers/Clients/CreateClient'
@@ -55,9 +59,29 @@ class Panel extends Component {
 				       changePag={this.changePag}
 				       notificate={this.notificate}
 				/>
-				<FloatingActionButton className="fab" onClick={this.openModal}>
+				{/*<FloatingActionButton className="fab" onClick={this.openModal}>
 					<ContentAdd />
-				</FloatingActionButton>
+				</FloatingActionButton>*/}
+				<SpeedDial
+					style={{float: "right"}}
+				  	fabContentOpen={
+			        	<ContentAdd />
+			      	}
+			      	fabContentClose={
+			        	<NavigationClose />
+			      	}
+			    >
+			    	<SpeedDialItem
+				        label="Nuevo Cliente"
+				        fabContent={<Person/>}
+				        onTouchTap={this.openModal}
+				    />
+				    <SpeedDialItem
+				        label="Nueva Organizacion"
+				        fabContent={<Organization/>}
+				        onTouchTap={()=> console.log("modal para organizacion")}
+				    />
+			    </SpeedDial>
 				<FormCreate
 					title="Crear un nuevo Cliente"
 					open={this.state.modalOpen}

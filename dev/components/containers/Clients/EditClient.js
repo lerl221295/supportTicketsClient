@@ -13,7 +13,12 @@ export default graphql(UpdateClient, {
     		__typename: 'Mutation',
     		updateClient : {
     			__typename: 'Client',
-    			...client
+    			...client,
+                organization: {
+                    __typename: 'Organization',
+                    id: null,
+                    name: 'cargando'
+                }
     		}
     	},
     	update: (proxy, {data: {updateClient} }) => {

@@ -3,8 +3,10 @@ import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import MultiSelect from '../utils/MultiSelectChips'
+import SelectField from 'material-ui/SelectField'
+import MenuItem from 'material-ui/MenuItem'
 import Person from 'material-ui/svg-icons/action/account-circle'
+import Organization from 'material-ui/svg-icons/communication/business'
 import Image from 'material-ui/svg-icons/image/image'
 import Home from 'material-ui/svg-icons/action/home'
 import Description from 'material-ui/svg-icons/action/description'
@@ -138,13 +140,19 @@ class Form extends Component {
                     rows={2}
                     rowsMax={6}
                 />
-                <MultiSelect
-                    name={'organization'}
-                    floatingLabel={'Elija la organizacion'}
-                    hintText={'ALGO'}
-                    elementHeight={58}
-                    options={opciones}
-                />
+                <InputWithIcon
+                  Icon={Organization}
+                  Input={SelectField}
+                  floatingLabelText="Seleccione la organizacion"
+                  value={this.props.organization_id}
+                  onChange={this.props.handleSelectChange('organization_id')}
+                >
+                  {
+                    this.props.organizations.map((organization, i) => (
+                      <MenuItem key={i} primaryText={organization.name} value={organization.id}/>
+                    ))
+                  }
+                </InputWithIcon>
               </Col>
               
               <Col xsOffset={8} xs={4} md={4} sm={6}>

@@ -9,18 +9,28 @@ import GetClient from '../../../graphQL/querys/client.graphql'
 import GetOrganizationsNames from '../../../graphQL/querys/organizationsNames.graphql'
 
 const initialState = {
-  name: "",
-  lastname: "",
-  phones: "",
-  email: "",
-  face_base64: null,
-  address: "",
-  organization_id: null,
-  about: ""
+  client: {
+    name: "",
+    lastname: "",
+    phones: "",
+    email: "",
+    face_base64: null,
+    address: "",
+    organization_id: null,
+    about: ""
+  },
+  organizations: []
 }
 
 @withApollo
 class ModalForm extends Component {
+  state = initialState;
+
+  componentWillMount = () => {
+    this.props.client.query({ query: GetOrganizationsNames })
+    .then( ({data: {organizations}} ) => this.setState({organizations: organizations.nodes}) )  
+  }
+
 	componentWillReceiveProps = async (nextProps) => {
 		//cuando el modal de edicion se presenta en pantalla
 		if(nextProps.edit && (!this.props.open && nextProps.open)){ //si es el formulario en edicion
@@ -36,17 +46,19 @@ class ModalForm extends Component {
 				return client;
 			});
 			this.setState({
-				...client,
-				phones: client.phones.join(', ')
+				client: {
+          ...client,
+          phones: client.phones.join(', ')
+        }
 			});
 		}
 	};
 
-  cleanForm = () => this.setState(initialState);
+  cleanForm = () => this.setState({client: initialState.client});
 
   enviar = event => {
     event.preventDefault();
-    let client = this.state;
+    let { client } = this.state;
     client.phones = client.phones.replace(/\s/g, '').split(',');
     if(!this.props.edit) console.log("creando cliente", client);
     else console.log("actualizando cliente", client);
@@ -57,45 +69,25 @@ class ModalForm extends Component {
         //else toast.success(response.data.updateCliente);
         if(this.props.edit) this.props.notificate("Cliente actualizado con exito!");
         else this.props.notificate("Cliente guardado con exito!");
-        this.setState(initialState);
+        this.cleanForm()
       })
   };
 
   changeImage = ({target: { files: [file] } }) => {
     let reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => this.setState({face_base64: reader.result});
+    reader.onload = () => this.setState({ client: { ...this.state.client, face_base64: reader.result} });
   }
 
-  searchOrganizations = (search_text) => {
-    console.log("ire por organizaciones");
-    return (
-      this.props.client.query({
-        query: GetOrganizationsNames,
-        variables: {search_text}
-      }).then( ({data: {organizations}} ) => {
-        //console.log(organizations.nodes);
-        return organizations.nodes.map(organization => ({
-          label: organization.name,
-          value: organization.id
-        }))
-      })
-      .then(options => {
-        console.log("cargando estas opciones",options);
-        return {options}
-      })
-    )
-  }
+  handleChange = e =>  this.setState({
+    //...this.state,
+    client: { ...this.state.client, [e.target.name]: e.target.value }
+  });
 
-  changeOrganization = (organization) => {
-    console.log(organization)
-    if(organization) 
-      this.setState({organization_id: organization.value})
-    else
-      this.setState({organization_id: null});
-  }
-
-  handleChange = e =>  this.setState({[e.target.name]: e.target.value});
+  handleSelectChange = select_name => (e, i, value) => this.setState({
+    //...this.state,
+    client: { ...this.state.client, [select_name]: value }
+  });
 
   render = () => (
     <div>
@@ -105,15 +97,15 @@ class ModalForm extends Component {
         onRequestClose={this.props.close}
         autoScrollBodyContent={true}
       >
-        <Form {...this.state} 
+        <Form {...this.state.client} 
+          organizations={this.state.organizations}
           id={this.props.edit} 
           close={this.props.close}
           handleChange={this.handleChange}
           clean={this.cleanForm}
           enviar={this.enviar}
           changeImage={this.changeImage}
-          changeOrganization={this.changeOrganization}
-          searchOrganizations={this.searchOrganizations}
+          handleSelectChange={this.handleSelectChange}
         />
       </Dialog>
     </div>

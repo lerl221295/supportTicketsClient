@@ -1,5 +1,5 @@
-query GetOrganizationsNames($search_text: String) {
-	organizations(search_text: $search_text) {
+query GetOrganizationsNames {
+	organizations {
 		nodes {
 			id,
 			name
