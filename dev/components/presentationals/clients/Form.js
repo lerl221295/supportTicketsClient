@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
-import MenuItem from 'material-ui/MenuItem'
 import TextField from 'material-ui/TextField'
-import SelectField from 'material-ui/SelectField'
-import DatePicker from 'material-ui/DatePicker'
-import Divider from 'material-ui/Divider'
 import FlatButton from 'material-ui/FlatButton'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import Select from 'react-select'
+import MultiSelect from '../utils/MultiSelectChips'
 import Person from 'material-ui/svg-icons/action/account-circle'
 import Image from 'material-ui/svg-icons/image/image'
 import Home from 'material-ui/svg-icons/action/home'
@@ -17,6 +13,20 @@ import Email from 'material-ui/svg-icons/communication/contact-mail'
 
 import InputWithIcon from '../InputWithIcon'
 
+const opciones = [
+    {
+      label: "opcion 1",
+      value: "1"
+    },
+    {
+        label: "opcion 2",
+        value: "2"
+    },
+    {
+        label: "opcion 3",
+        value: "3"
+    }
+]
 
 const styles = {
     img: {
@@ -128,24 +138,13 @@ class Form extends Component {
                     rows={2}
                     rowsMax={6}
                 />
-                <Select.Async
-                  name="organization"
-                  value={this.props.organization_id}
-                  loadOptions={this.props.searchOrganizations}
-                  onChange={this.props.changeOrganization}
-                  autoload={false}
-                  filterOption={() => (true)}//para la data mock
+                <MultiSelect
+                    name={'organization'}
+                    floatingLabel={'Elija la organizacion'}
+                    hintText={'ALGO'}
+                    elementHeight={58}
+                    options={opciones}
                 />
-                {/*<Select
-                  name="organization"
-                  onBlurResetsInput={false}
-                  options={this.props.organizationsSelect.nodes}
-                  value={this.props.organization_id}
-                  onInputChange={this.props.searchOrganizations}
-                  onChange={this.props.changeOrganization}
-                  isLoading={this.props.organizationsSelect.loading}
-                  filterOption={() => (true)}//para la data mock
-                />*/}
               </Col>
               
               <Col xsOffset={8} xs={4} md={4} sm={6}>

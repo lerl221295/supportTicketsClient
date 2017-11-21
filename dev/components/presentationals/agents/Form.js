@@ -7,7 +7,6 @@ import DatePicker from 'material-ui/DatePicker'
 import Divider from 'material-ui/Divider'
 import FlatButton from 'material-ui/FlatButton'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import Select from 'react-select'
 import Person from 'material-ui/svg-icons/action/account-circle'
 import Image from 'material-ui/svg-icons/image/image'
 import Home from 'material-ui/svg-icons/action/home'
@@ -16,7 +15,6 @@ import Wc from 'material-ui/svg-icons/notification/wc'
 import Identy from 'material-ui/svg-icons/action/perm-identity'
 import Phone from 'material-ui/svg-icons/communication/phone'
 import Email from 'material-ui/svg-icons/communication/contact-mail'
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 import InputWithIcon from '../InputWithIcon'
 
