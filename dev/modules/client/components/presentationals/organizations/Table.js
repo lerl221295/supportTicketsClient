@@ -14,20 +14,20 @@ import Plus from 'material-ui/svg-icons/content/create'
 import Avatar from 'material-ui/Avatar';
 import Face from 'material-ui/svg-icons/action/face'
 
-import FormEdit from '../../containers/EditClient'
+import FormEdit from '../../containers/EditOrganization'
 
 //import filter from '../../../utils/filter'
 
-class ClientesTable extends Component {
+class OrganizationsTable extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
 			modalOpen : false,
-			id_edit: 0
+			editing: null
 		}
 	}
 	
-	edit = id => event =>  this.setState({id_edit: id, modalOpen : true});
+	edit = organization => event =>  this.setState({editing: organization, modalOpen : true});
 	
 	closeModal = event => this.setState({ modalOpen : false });
 	
@@ -41,13 +41,13 @@ class ClientesTable extends Component {
 			else { "" }
 		}
 		
-		//let clients = filter(this.camposFiltrar, this.props.data.clients, this.props.search);
-		let {clients, total} = do {
-			if(this.props.data.clients) ({
-				clients: this.props.data.clients.nodes,
-				total: this.props.data.clients.count
+		//let organizations = filter(this.camposFiltrar, this.props.data.organizations, this.props.search);
+		let {organizations, total} = do {
+			if(this.props.data.organizations) ({
+				organizations: this.props.data.organizations.nodes,
+				total: this.props.data.organizations.count
 			});
-			else ({clients: [], total: 1});
+			else ({organizations: [], total: 1});
 		};
 		
 		let pags = Math.ceil(total/this.props.limit);
@@ -57,40 +57,24 @@ class ClientesTable extends Component {
         <Table>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
-              <TableHeaderColumn>Foto</TableHeaderColumn>
               <TableHeaderColumn>Nombre</TableHeaderColumn>
-              <TableHeaderColumn>Apellido</TableHeaderColumn>
-              <TableHeaderColumn>Email</TableHeaderColumn>
-              <TableHeaderColumn>Telefono</TableHeaderColumn>
-              <TableHeaderColumn>Organizacion</TableHeaderColumn>
+              <TableHeaderColumn>Domains</TableHeaderColumn>
               <TableHeaderColumn>Edit</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
 						{
 							do {
-								if(this.props.data.loading && !this.props.data.clients) "";
+								if(this.props.data.loading && !this.props.data.organizations) "";
 								else {
-									clients.map((client, i) => (
-                    					<TableRow key={i}>
-                      						<TableRowColumn>
-												{
-													do {
-														if(client.face_base64)
-															(<Avatar src={client.face_base64} />)
-														else (<Avatar icon={<Face/>}/>)
-													}
-												}
-											</TableRowColumn>
-										  	<TableRowColumn>{client.name}</TableRowColumn>
-										  	<TableRowColumn>{client.lastname}</TableRowColumn>
-										  	<TableRowColumn>{client.email}</TableRowColumn>
-										  	<TableRowColumn>{client.phones[0]}</TableRowColumn>
-										  	<TableRowColumn>{client.organization.name}</TableRowColumn>
-										  	<TableRowColumn>
-												<Plus onClick={this.edit(client.id)}
-													  style={{cursor: "pointer"}}
-													  hoverColor="blue"/>
+									organizations.map((organization, i) => (
+										<TableRow key={i}>
+											<TableRowColumn>{organization.name}</TableRowColumn>
+										  	<TableRowColumn>{organization.domains.join(', ')}</TableRowColumn>
+											<TableRowColumn>
+												<Plus onClick={this.edit(organization)}
+												  style={{cursor: "pointer"}}
+												  hoverColor="blue"/>
 										  	</TableRowColumn>
 										</TableRow>
 									))
@@ -112,16 +96,16 @@ class ClientesTable extends Component {
           </TableFooter>
         </Table>
         <FormEdit
-          title="Actualizar datos del Cliente"
+          title="Actualizar datos de la Organizacion"
           open={this.state.modalOpen}
           close={this.closeModal}
-          edit={this.state.id_edit}
+          editing={this.state.editing}
           notificate={this.props.notificate}
-		  organizations={this.props.organizations}
+          limit={this.props.limit}
         />
       </div>
 		)
 	}
 }
 
-export default ClientesTable;
+export default OrganizationsTable;

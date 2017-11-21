@@ -1,0 +1,6 @@
+fragment organizationFields on Organization {
+    id
+    name
+    about
+    domains
+}

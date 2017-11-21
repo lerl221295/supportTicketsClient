@@ -97,9 +97,9 @@ class ModalForm extends Component {
         onRequestClose={this.props.close}
         autoScrollBodyContent={true}
       >
-        <Form {...this.state.client} 
+        <Form {...this.state.client}
           organizations={this.state.organizations}
-          id={this.props.edit} 
+          id={this.props.edit}
           close={this.props.close}
           handleChange={this.handleChange}
           clean={this.cleanForm}
