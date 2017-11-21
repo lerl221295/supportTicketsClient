@@ -1,0 +1,15 @@
+fragment agentsFields on Agent {
+    id,
+    name,
+    lastname,
+    role,
+    email,
+    phones,
+    about,
+    profession,
+    face_base64,
+    supplier {
+        id,
+        name
+    }
+}

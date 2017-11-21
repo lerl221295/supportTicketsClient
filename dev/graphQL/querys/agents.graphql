@@ -1,19 +1,8 @@
+#import "../fragments/agentsFragment.graphql"
 query GetAgents($search_text: String, $offset: Int, $limit: Int) {
 	agents(search_text: $search_text, offset: $offset, limit: $limit) {
 		nodes {
-			id,
-			name,
-			lastname,
-			role,
-			email,
-			phones,
-			about,
-			profession,
-			face_base64,
-			supplier {
-				id,
-				name
-			}
+            ...agentsFields
 		},
 		count
 	}

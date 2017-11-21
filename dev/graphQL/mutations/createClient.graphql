@@ -1,13 +1,7 @@
+#import "../fragments/clientsFragment.graphql"
 mutation CreateClient($client: ClientInput!){
 	createClient(client: $client){
-		id,
-		name,
-		lastname,
-		email,
-		phones,
-		organization{
-			name
-		}
+        ...clientsFields
 	}
 }
 

@@ -1,20 +1,9 @@
+#import "../fragments/agentsFragment.graphql"
 query GetAgent($id : ID!) {
 	agent(id: $id){
-		id,
-		name,
-		lastname,
-		role,
-		sex,
-		email,
-		phones,
-		about,
-		profession,
-		face_base64,
+		...agentsFields
+		sex
 		groups {
-			id,
-			name
-		},
-		supplier {
 			id,
 			name
 		}

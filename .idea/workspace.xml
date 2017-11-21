@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43e1aaf0-8f08-4fd4-9d86-ee51daa93d1e" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/dev/graphQL/mutations/createTecnico.graphql" afterPath="$PROJECT_DIR$/dev/graphQL/mutations/createAgent.graphql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dev/graphQL/fragments/agentsFragment.graphql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/components/containers/Agents/CreateAgent.js" afterPath="$PROJECT_DIR$/dev/components/containers/Agents/CreateAgent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/components/presentationals/agents/Form.js" afterPath="$PROJECT_DIR$/dev/components/presentationals/agents/Form.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/components/presentationals/agents/ModalForm.js" afterPath="$PROJECT_DIR$/dev/components/presentationals/agents/ModalForm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/components/presentationals/agents/Panel.js" afterPath="$PROJECT_DIR$/dev/components/presentationals/agents/Panel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/components/presentationals/agents/Table.js" afterPath="$PROJECT_DIR$/dev/components/presentationals/agents/Table.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/graphQL/mutations/createAgent.graphql" afterPath="$PROJECT_DIR$/dev/graphQL/mutations/createAgent.graphql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/graphQL/mutations/createClient.graphql" afterPath="$PROJECT_DIR$/dev/graphQL/mutations/createClient.graphql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/graphQL/mutations/updateAgent.graphql" afterPath="$PROJECT_DIR$/dev/graphQL/mutations/updateAgent.graphql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/graphQL/querys/agent.graphql" afterPath="$PROJECT_DIR$/dev/graphQL/querys/agent.graphql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/graphQL/querys/agents.graphql" afterPath="$PROJECT_DIR$/dev/graphQL/querys/agents.graphql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/index.js" afterPath="$PROJECT_DIR$/dev/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -34,11 +32,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Table.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Table.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dev/components/presentationals/agents/Table.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="117" column="41" lean-forward="false" selection-start-line="117" selection-start-column="41" selection-end-line="117" selection-end-column="41" />
+            <state relative-caret-position="475">
+              <caret line="61" column="51" lean-forward="false" selection-start-line="61" selection-start-column="51" selection-end-line="61" selection-end-column="51" />
+              <caret line="85" column="56" lean-forward="false" selection-start-line="85" selection-start-column="56" selection-end-line="85" selection-end-column="56" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -82,26 +81,52 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ModalForm.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dev/components/presentationals/agents/ModalForm.js">
+      <file leaf-file-name="createAgent.graphql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/graphQL/mutations/createAgent.graphql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="71" column="5" lean-forward="false" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="17">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Form.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dev/components/presentationals/agents/Form.js">
+      <file leaf-file-name="updateAgent.graphql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/graphQL/mutations/updateAgent.graphql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="154" column="34" lean-forward="false" selection-start-line="154" selection-start-column="26" selection-end-line="154" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="agents.graphql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/graphQL/querys/agents.graphql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="agent.graphql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/graphQL/querys/agent.graphql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="agentsFragment.graphql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/graphQL/fragments/agentsFragment.graphql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="21" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -156,7 +181,6 @@
         <option value="$PROJECT_DIR$/dev/components/presentationals/App.js" />
         <option value="$PROJECT_DIR$/dev/components/containers/Agents/EditAgent.js" />
         <option value="$PROJECT_DIR$/dev/graphQL/fragments/clientsFragment.graphql" />
-        <option value="$PROJECT_DIR$/dev/graphQL/querys/agent.graphql" />
         <option value="$PROJECT_DIR$/dev/graphQL/querys/suppliersNames.graphql" />
         <option value="$PROJECT_DIR$/dev/graphQL/querys/clients.graphql" />
         <option value="$PROJECT_DIR$/dev/components/containers/Clients/ClientsContainer.js" />
@@ -164,17 +188,20 @@
         <option value="$PROJECT_DIR$/dev/graphQL/mutations/updateClient.graphql" />
         <option value="$PROJECT_DIR$/dev/components/containers/Clients/EditClient.js" />
         <option value="$PROJECT_DIR$/dev/components/presentationals/clients/ModalForm.js" />
-        <option value="$PROJECT_DIR$/dev/graphQL/mutations/updateAgent.graphql" />
         <option value="$PROJECT_DIR$/dev/index.js" />
         <option value="$PROJECT_DIR$/src/index.html" />
-        <option value="$PROJECT_DIR$/dev/components/presentationals/agents/Table.js" />
-        <option value="$PROJECT_DIR$/dev/graphQL/querys/agents.graphql" />
-        <option value="$PROJECT_DIR$/dev/graphQL/mutations/createAgent.graphql" />
         <option value="$PROJECT_DIR$/dev/components/presentationals/clients/Panel.js" />
         <option value="$PROJECT_DIR$/dev/components/presentationals/agents/Panel.js" />
         <option value="$PROJECT_DIR$/dev/components/presentationals/agents/Form.js" />
         <option value="$PROJECT_DIR$/dev/components/containers/Agents/CreateAgent.js" />
         <option value="$PROJECT_DIR$/dev/components/presentationals/agents/ModalForm.js" />
+        <option value="$PROJECT_DIR$/dev/graphQL/mutations/createClient.graphql" />
+        <option value="$PROJECT_DIR$/dev/graphQL/fragments/agentsFragment.graphql" />
+        <option value="$PROJECT_DIR$/dev/graphQL/querys/agents.graphql" />
+        <option value="$PROJECT_DIR$/dev/graphQL/querys/agent.graphql" />
+        <option value="$PROJECT_DIR$/dev/graphQL/mutations/updateAgent.graphql" />
+        <option value="$PROJECT_DIR$/dev/graphQL/mutations/createAgent.graphql" />
+        <option value="$PROJECT_DIR$/dev/components/presentationals/agents/Table.js" />
       </list>
     </option>
   </component>
@@ -268,44 +295,6 @@
               <item name="tesis-client" type="b2602c69:ProjectViewProjectNode" />
               <item name="tesis-client" type="462c0819:PsiDirectoryNode" />
               <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tesis-client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tesis-client" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="Agents" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tesis-client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tesis-client" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="Clients" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tesis-client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tesis-client" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="presentationals" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tesis-client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tesis-client" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="presentationals" type="462c0819:PsiDirectoryNode" />
-              <item name="agents" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tesis-client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tesis-client" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
               <item name="graphQL" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -313,7 +302,7 @@
               <item name="tesis-client" type="462c0819:PsiDirectoryNode" />
               <item name="dev" type="462c0819:PsiDirectoryNode" />
               <item name="graphQL" type="462c0819:PsiDirectoryNode" />
-              <item name="mutations" type="462c0819:PsiDirectoryNode" />
+              <item name="fragments" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tesis-client" type="b2602c69:ProjectViewProjectNode" />
@@ -342,16 +331,17 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/dev/graphQL/querys" />
-      <recent name="$PROJECT_DIR$/dev/components/containers/Agents" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/dev/components" />
       <recent name="$PROJECT_DIR$/dev/containers/Dashboard" />
       <recent name="$PROJECT_DIR$/dev/containers/Tickets" />
       <recent name="$PROJECT_DIR$/dev/containers/Clients" />
       <recent name="$PROJECT_DIR$/dev/containers/Agents" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dev/graphQL/fragments" />
+      <recent name="$PROJECT_DIR$/dev/graphQL/querys" />
+      <recent name="$PROJECT_DIR$/dev/components/containers/Agents" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -396,7 +386,7 @@
       <workItem from="1511010253662" duration="33346000" />
       <workItem from="1511144152616" duration="100000" />
       <workItem from="1511183388019" duration="20639000" />
-      <workItem from="1511218881899" duration="9468000" />
+      <workItem from="1511218881899" duration="11219000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/lerl221295/tesis-client&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/modules.xml">
       <created>1511024498998</created>
@@ -412,11 +402,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511194689960</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat(agents): Create and update agent&#10;&#10;Form for create and update it's ready. Both functionalities work fine.">
+      <created>1511228933807</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1511228933807</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64797000" />
+    <option name="totallyTimeSpent" value="66548000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="1368" height="744" extended-state="6" />
@@ -477,7 +474,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merge branch 'master' of https://github.com/lerl221295/tesis-client&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;.idea/modules.xml" />
     <MESSAGE value="refactor(project): Restructuring project&#10;&#10;Restructuring project folders.&#10;&#10;---------------------------------------&#10;&#10;feat(graphql): fragments&#10;&#10;Incorporating graphql fragments in clients&#10;&#10;---------------------------------------&#10;&#10;feat(agents): List Agents&#10;&#10;Listing all agents and one in form" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor(project): Restructuring project&#10;&#10;Restructuring project folders.&#10;&#10;---------------------------------------&#10;&#10;feat(graphql): fragments&#10;&#10;Incorporating graphql fragments in clients&#10;&#10;---------------------------------------&#10;&#10;feat(agents): List Agents&#10;&#10;Listing all agents and one in form" />
+    <MESSAGE value="feat(agents): Create and update agent&#10;&#10;Form for create and update it's ready. Both functionalities work fine." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(agents): Create and update agent&#10;&#10;Form for create and update it's ready. Both functionalities work fine." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -486,16 +484,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dev/components/presentationals/agents/ModalForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="116" column="34" lean-forward="true" selection-start-line="116" selection-start-column="34" selection-end-line="116" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/graphQL/mutations/updateAgent.graphql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -710,13 +698,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/graphQL/querys/clients.graphql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/components/containers/Clients/EditClient.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -724,20 +705,6 @@
           <folding>
             <element signature="e#79#142#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/graphQL/fragments/clientsFragment.graphql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/graphQL/mutations/updateClient.graphql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -765,6 +732,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="15" lean-forward="true" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -786,6 +754,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="20" column="42" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+          <folding>
+            <element signature="e#609#667#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -797,35 +768,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/graphQL/mutations/updateAgent.graphql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="19" column="9" lean-forward="false" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/components/containers/Clients/CreateClient.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="3" column="32" lean-forward="false" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
           <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/graphQL/mutations/createClient.graphql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/graphQL/querys/agent.graphql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="8" lean-forward="false" selection-start-line="2" selection-start-column="8" selection-end-line="19" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -840,16 +787,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/components/presentationals/agents/Table.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="117" column="41" lean-forward="false" selection-start-line="117" selection-start-column="41" selection-end-line="117" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/components/presentationals/agents/Panel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -857,22 +794,6 @@
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/graphQL/querys/agents.graphql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/graphQL/mutations/createAgent.graphql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="14" lean-forward="true" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -908,8 +829,91 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dev/components/presentationals/agents/ModalForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="71" column="5" lean-forward="false" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
+        <state relative-caret-position="390">
+          <caret line="47" column="36" lean-forward="false" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/graphQL/mutations/createClient.graphql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="24" lean-forward="false" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/graphQL/mutations/updateClient.graphql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="8" lean-forward="false" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/graphQL/fragments/clientsFragment.graphql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/graphQL/querys/clients.graphql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/graphQL/fragments/agentsFragment.graphql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/graphQL/mutations/createAgent.graphql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/graphQL/mutations/updateAgent.graphql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/graphQL/querys/agents.graphql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/graphQL/querys/agent.graphql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/components/presentationals/agents/Table.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="61" column="51" lean-forward="false" selection-start-line="61" selection-start-column="51" selection-end-line="61" selection-end-column="51" />
+          <caret line="85" column="56" lean-forward="false" selection-start-line="85" selection-start-column="56" selection-end-line="85" selection-end-column="56" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
