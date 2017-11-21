@@ -14,9 +14,9 @@ import Plus from 'material-ui/svg-icons/content/create'
 import Avatar from 'material-ui/Avatar';
 import Face from 'material-ui/svg-icons/action/face'
 
-import FormEdit from '../../containers/Clients/EditClient'
+import FormEdit from '../../../containers/Clients/EditClient'
 
-import filter from '../../../utils/filter'
+//import filter from '../../../utils/filter'
 
 class ClientesTable extends Component {
 	constructor(props){
