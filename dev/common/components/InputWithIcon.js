@@ -1,13 +1,17 @@
 import React from 'react'
+import { Row, Col } from 'react-flexbox-grid'
 
 const InputWithIcon = ({Icon, Input, ...props, children}) => (
-	/*considerar cambiarlo a usar el sistema de rejillas a ver que tal luce*/
-	<div style={{position: 'relative', display: 'inline-block'}}>
-		<Icon style={{position: 'absolute', left: 0, top: 35}} color="skyBlue"/>
-		<Input {...props} style={{textIndent: 25}} >
-			{children}
-		</Input>
-	</div>
+		<Row bottom="xs">
+			<Col xs={2} md={1}>
+				<Icon color="skyBlue"/>
+			</Col>
+			<Col xs={10} md={11}>
+				<Input style={{width: '100%'}} {...props} >
+					{children}
+				</Input>
+			</Col>
+		</Row>
 )
 
 export default InputWithIcon
