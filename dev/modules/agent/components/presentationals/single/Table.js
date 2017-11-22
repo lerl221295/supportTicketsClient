@@ -11,28 +11,9 @@ import {
 import Pagination from 'material-ui-pagination'
 import LinearProgress from 'material-ui/LinearProgress'
 import Plus from 'material-ui/svg-icons/content/create'
-import Avatar from 'material-ui/Avatar';
-
+import Avatar from 'material-ui/Avatar'
 import FormEdit from '../../containers/EditAgent'
-
-const tableStyles = {
-	avatar: {
-		width: '2rem',
-		textAlign: 'center'
-	},
-	fullname: {
-		width: '8rem'
-	},
-	email: {
-		width: '12rem'
-	},
-	edit: {
-		cursor: "pointer"
-	},
-	center: {
-		textAlign: 'center'
-	}
-};
+import tableStyles from '../../../../../styles/javascript/tables'
 
 class AgentsTable extends Component {
 	constructor(props){
@@ -111,7 +92,7 @@ class AgentsTable extends Component {
 													}
 												}
 											</TableRowColumn>
-											<TableRowColumn style={tableStyles.name}>{agent.name} {agent.lastname}</TableRowColumn>
+											<TableRowColumn style={tableStyles.fullname}>{agent.name} {agent.lastname}</TableRowColumn>
 											<TableRowColumn style={tableStyles.email}>{agent.email}</TableRowColumn>
 											<TableRowColumn>{agent.phones[0]}</TableRowColumn>
 											<TableRowColumn>{agent.role}</TableRowColumn>
@@ -145,7 +126,7 @@ class AgentsTable extends Component {
 					title = "Actualizar datos del agente"
 					open = {this.state.modalOpen}
 					close = {this.closeModal}
-					edit = {this.state.id_edit}
+					id = {this.state.id_edit}
 					notificate = {this.props.notificate}
 					limit = {this.props.limit}
 				/>

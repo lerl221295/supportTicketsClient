@@ -8,6 +8,7 @@ import { withApollo } from 'react-apollo'
 import GetAgent from '../../../graphql/querys/agent.graphql'
 import GetSuppliersNames from '../../../graphql/querys/suppliersNames.graphql'
 import GetGroupsNames from '../../../graphql/querys/groupsNames.graphql'
+import stylesForm from '../../../../../styles/javascript/forms'
 
 const initialState = {
 	name: "",
@@ -25,25 +26,18 @@ const initialState = {
 	supplier: null
 };
 
-const customContentStyle = {
-	height: '95%',
-	maxHeight: 'none',
-};
-
 @withApollo
 class ModalForm extends Component {
 	
-	componentWillMount () {
-		this.setState(initialState);
-	}
+	state = initialState;
 	
 	componentWillReceiveProps = async (nextProps) => {
 		//cuando el modal de edicion se presenta en pantalla
-		if(nextProps.edit && (!this.props.open && nextProps.open)){ //si es el formulario en edicion
+		if(nextProps.id && (!this.props.open && nextProps.open)){ //si es el formulario en edicion
 			let agent = await nextProps.client.query({
 				query: GetAgent,
 				fetchPolicy: 'network-only',
-				variables: {id: nextProps.edit}
+				variables: {id: nextProps.id}
 			}).then(({ data }) => {
 				let {__typename, ...agent} = data.agent;
 				/*delete agent.supplier;//no pude sacarlo con el destructuring :c
@@ -60,7 +54,7 @@ class ModalForm extends Component {
 	
 	cleanForm = () => this.setState(initialState);
 	
-	enviar = event => {
+	send = event => {
 		event.preventDefault();
 		let agent = this.state;
 		agent.phones = agent.phones.replace(/\s/g, '').split(';');
@@ -78,14 +72,14 @@ class ModalForm extends Component {
 		// porque no están definidos en graph como inputs
 		delete agent.supplier;
 		delete agent.avatar_filename;
-		/*if(!this.props.edit) console.log("creando agente", agent);
-		else console.log("actualizando agente", agent);*/
+		if(!this.props.id) console.log("creando agente", agent);
+		else console.log("actualizando agente", agent);
 		this.props.close();
-		this.props.submit({...agent, id: this.props.edit})
+		this.props.submit({...agent, id: this.props.id})
 			.then(response => {
-				//if(!this.props.edit) toast.success(response.data.createCliente);
+				//if(!this.props.id) toast.success(response.data.createCliente);
 				//else toast.success(response.data.updateCliente);
-				if(this.props.edit) this.props.notificate("Agente actualizado con éxito!");
+				if(this.props.id) this.props.notificate("Agente actualizado con éxito!");
 				else this.props.notificate("Agente guardado con éxito!");
 				this.setState(initialState);
 			})
@@ -133,20 +127,19 @@ class ModalForm extends Component {
     <div>
       <Dialog
         title={this.props.title}
-        titleStyle={{textAlign: "center"}}
+        titleStyle={stylesForm.title}
         open={this.props.open}
         onRequestClose={this.props.close}
         autoScrollBodyContent={true}
-        contentStyle={customContentStyle}
       >
         <Form {...this.state}
-              id={this.props.edit}
+              id={this.props.id}
               close={this.props.close}
               handleChange={this.handleChange}
               handleSelectChange={this.handleSelectChange}
               handleReactSelectChange={this.handleReactSelectChange}
               clean={this.cleanForm}
-              enviar={this.enviar}
+              send={this.send}
               changeImage={this.changeImage}
               changeSupplier={this.changeSupplier}
               searchSuppliers={this.searchEntity(GetSuppliersNames, 'suppliers')}
