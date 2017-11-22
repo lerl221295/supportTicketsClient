@@ -11,28 +11,9 @@ import {
 import Pagination from 'material-ui-pagination'
 import LinearProgress from 'material-ui/LinearProgress'
 import Plus from 'material-ui/svg-icons/content/create'
-import Avatar from 'material-ui/Avatar';
-
+import Avatar from 'material-ui/Avatar'
 import FormEdit from '../../containers/EditAgent'
-
-const tableStyles = {
-	avatar: {
-		width: '2rem',
-		textAlign: 'center'
-	},
-	fullname: {
-		width: '8rem'
-	},
-	email: {
-		width: '12rem'
-	},
-	edit: {
-		cursor: "pointer"
-	},
-	center: {
-		textAlign: 'center'
-	}
-};
+import tableStyles from '../../../../../styles/javascript/tables'
 
 class AgentsTable extends Component {
 	constructor(props){

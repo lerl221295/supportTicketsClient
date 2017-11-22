@@ -8,6 +8,7 @@ import { withApollo } from 'react-apollo'
 import GetAgent from '../../../graphql/querys/agent.graphql'
 import GetSuppliersNames from '../../../graphql/querys/suppliersNames.graphql'
 import GetGroupsNames from '../../../graphql/querys/groupsNames.graphql'
+import stylesForm from '../../../../../styles/javascript/forms'
 
 const initialState = {
 	name: "",
@@ -25,17 +26,10 @@ const initialState = {
 	supplier: null
 };
 
-const customContentStyle = {
-	height: '95%',
-	maxHeight: 'none',
-};
-
 @withApollo
 class ModalForm extends Component {
 	
-	componentWillMount () {
-		this.setState(initialState);
-	}
+	state = initialState;
 	
 	componentWillReceiveProps = async (nextProps) => {
 		//cuando el modal de edicion se presenta en pantalla
@@ -133,11 +127,10 @@ class ModalForm extends Component {
     <div>
       <Dialog
         title={this.props.title}
-        titleStyle={{textAlign: "center"}}
+        titleStyle={stylesForm.title}
         open={this.props.open}
         onRequestClose={this.props.close}
         autoScrollBodyContent={true}
-        contentStyle={customContentStyle}
       >
         <Form {...this.state}
               id={this.props.edit}
