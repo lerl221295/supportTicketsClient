@@ -47,7 +47,7 @@ class Form extends Component {
         <form>
           <Row>
             <Row>
-              <Col xsOffset={1} xs={4} md={4} sm={12}>
+              <Col xs={6} md={6} sm={12}>
                 {
                   do {
                     if(this.props.face_base64) 
@@ -90,7 +90,7 @@ class Form extends Component {
                   onChange={this.props.handleChange}
                 />
               </Col>
-              <Col xsOffset={1} xs={4} md={4} sm={12}>
+              <Col xs={6} md={6} sm={12}>
                 <InputWithIcon
                   Icon={Phone}
                   Input={TextField}
