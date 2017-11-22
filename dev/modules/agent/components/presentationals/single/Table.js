@@ -65,6 +65,20 @@ class AgentsTable extends Component {
 			else ({agents: [], total: 1});
 		};
 		
+		agents = agents.map((agent) => {
+			switch (agent.role) {
+				case 'SUPERVISOR':
+					return ({ ...agent, role: 'Supervisor'});
+					break;
+				case 'AGENT':
+					return ({ ...agent, role: 'Agente'});
+					break;
+				case 'ADMIN':
+					return ({ ...agent, role: 'Administrador'});
+					break;
+			}
+		});
+		
 		let pags = Math.ceil(total/this.props.limit);
 		
 		return (

@@ -15,7 +15,7 @@ const ReactSelectWithIcon = ({Icon, label, ...props}) => (
       <Icon color="skyBlue"/>
     </Col>
     <Col xs={10} md={11}>
-      <Select.Async {...props} />
+      <Select.Async {...props} style={{ marginBottom: '0.8rem', marginTop: '0.2rem' }} />
     </Col>
   </Row>
 );

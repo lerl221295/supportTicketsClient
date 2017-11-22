@@ -123,9 +123,6 @@ class Form extends Component {
                 name="email"
                 onChange={this.props.handleChange}
               />
-            </Col>
-            {/*COLUMNA DE LA DERECHA*/}
-            <Col xs={12} sm={12} md={6} lg={6}>
 	            <InputWithIcon
 		            Icon={Phone}
 		            Input={TextField}
@@ -135,6 +132,9 @@ class Form extends Component {
 		            name="phones"
 		            onChange={this.props.handleChange}
 	            />
+            </Col>
+            {/*COLUMNA DE LA DERECHA*/}
+            <Col xs={12} sm={12} md={6} lg={6}>
 	            <InputWithIcon
 		            Icon={Description}
 		            Input={TextField}
@@ -178,9 +178,8 @@ class Form extends Component {
 		            autoload={false}
 		            filterOption={() => (true)}
 	            />
-	            {/*<ReactSelectWithIcon
+	            <ReactSelectWithIcon
 		            Icon={People}
-		            Select={Select.Async}
 		            label={"Grupos"}
 		            multi={true}
 		            value={this.props.groups}
@@ -191,7 +190,7 @@ class Form extends Component {
 		            placeholder="Seleccione los grupos"
 		            autoload={false}
 		            filterOption={() => (true)}
-	            />*/}
+	            />
             </Col>
             <Col style={{zIndex: 0, marginTop: '2rem'}} xsOffset={8} xs={4} md={4} sm={6}>
               <FlatButton
