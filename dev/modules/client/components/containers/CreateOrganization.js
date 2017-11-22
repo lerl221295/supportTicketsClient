@@ -1,14 +1,14 @@
 import { graphql } from 'react-apollo'
 //import { connect } from 'react-redux'
-import ModalForm from '../presentationals/single/ModalForm'
-import createClient from '../../graphql/mutations/createClient.graphql'
-import Clients from '../../graphql/querys/clients.graphql'
+import ModalForm from '../presentationals/organizations/ModalForm'
+import createOrganization from '../../graphql/mutations/createOrganization.graphql'
+import Organizations from '../../graphql/querys/organizations.graphql'
 
-export default graphql(createClient, {
+export default graphql(createOrganization, {
     props: ({ mutate }) => ({
-        submit: (client) => mutate({
-            variables: { client },
-            refetchQueries: [ { query: Clients }]
+        submit: (organization) => mutate({
+            variables: { organization },
+            refetchQueries: [ { query: Organizations }]
         })
     })
 })(ModalForm);

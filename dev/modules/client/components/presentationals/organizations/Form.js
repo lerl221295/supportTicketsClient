@@ -44,7 +44,7 @@ class Form extends Component {
         <form>
           <Row>
             <Row>
-              <Col xsOffset={1} xs={4} md={4} sm={12}>
+              <Col xsOffset={1} xs={11} md={11} sm={12}>
                 <InputWithIcon
                   Icon={Person}
                   Input={TextField}
@@ -71,7 +71,7 @@ class Form extends Component {
                     Input={TextField}
                     hintText="Escriba los dominios separados por ,"
                     floatingLabelText="Dominios"
-                    value={this.props.about}
+                    value={this.props.domains}
                     name="domains"
                     onChange={this.props.handleChange}
                     multiLine={true}
@@ -79,7 +79,7 @@ class Form extends Component {
                     rowsMax={6}
                 />
               </Col>
-              <Col xsOffset={8} xs={4} md={4} sm={6}>
+              <Col xsOffset={4} xs={4} md={4} sm={6}>
                 <FlatButton
                   label="Cancelar"
                   primary={true}

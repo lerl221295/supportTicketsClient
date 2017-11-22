@@ -1,7 +1,8 @@
 import React from 'react'
 import { Row, Col } from 'react-flexbox-grid'
+import Select from 'react-select'
 
-const ReactSelectWithIcon = ({Icon, Select, label, ...props}) => (
+const ReactSelectWithIcon = ({Icon, label, ...props}) => (
   <Row bottom={"xs"}>
     <Col md={12}>
       <label style={{
@@ -14,7 +15,7 @@ const ReactSelectWithIcon = ({Icon, Select, label, ...props}) => (
       <Icon color="skyBlue"/>
     </Col>
     <Col xs={10} md={11}>
-      <Select {...props} />
+      <Select.Async {...props} />
     </Col>
   </Row>
 );

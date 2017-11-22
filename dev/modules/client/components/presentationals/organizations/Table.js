@@ -27,7 +27,7 @@ class OrganizationsTable extends Component {
 		}
 	}
 	
-	edit = organization => event =>  this.setState({editing: organization, modalOpen : true});
+	edit = organization => event => this.setState({editing: organization, modalOpen : true});
 	
 	closeModal = event => this.setState({ modalOpen : false });
 	

@@ -9,27 +9,20 @@ import GetClient from '../../../graphql/querys/client.graphql'
 import GetOrganizationsNames from '../../../graphql/querys/organizationsNames.graphql'
 
 const initialState = {
-  client: {
-    name: "",
-    lastname: "",
-    phones: "",
-    email: "",
-    face_base64: null,
-    address: "",
-    organization_id: null,
-    about: ""
-  },
-  organizations: []
+  name: "",
+  lastname: "",
+  phones: "",
+  email: "",
+  face_base64: null,
+  address: "",
+  organization_id: null,
+  about: "",
+  organization: null
 }
 
 @withApollo
 class ModalForm extends Component {
   state = initialState;
-
-  componentWillMount = () => {
-    this.props.client.query({ query: GetOrganizationsNames })
-    .then( ({data: {organizations}} ) => this.setState({organizations: organizations.nodes}) )  
-  }
 
 	componentWillReceiveProps = async (nextProps) => {
 		//cuando el modal de edicion se presenta en pantalla
@@ -41,25 +34,25 @@ class ModalForm extends Component {
 			}).then(response => {
 				//le quito el __typename para que la mutacion posterior funcione bien
 				let {__typename, ...client} = response.data.client;
-				delete client.organization;//no pude sacarlo con el destructuring :c
-				client.organization_id = response.data.client.organization.id;
+				//delete client.organization;//no pude sacarlo con el destructuring :c
+				//client.organization_id = response.data.client.organization.id;
 				return client;
 			});
 			this.setState({
-				client: {
-          ...client,
-          phones: client.phones.join(', ')
-        }
+				...client,
+        phones: client.phones.join(', ')
 			});
 		}
 	};
 
-  cleanForm = () => this.setState({client: initialState.client});
+  cleanForm = () => this.setState({client: initialState});
 
   enviar = event => {
     event.preventDefault();
-    let { client } = this.state;
+    let client = this.state;
     client.phones = client.phones.replace(/\s/g, '').split(',');
+    client.organization_id = client.organization.id;
+    delete client.organization;
     if(!this.props.edit) console.log("creando cliente", client);
     else console.log("actualizando cliente", client);
     this.props.close();
@@ -73,21 +66,29 @@ class ModalForm extends Component {
       })
   };
 
+  searchOrganizations = (search_text) => (
+    this.props.client.query({
+      query: GetOrganizationsNames,
+      variables: {search_text}
+    }).then( ({data: {organizations}} ) => (
+      organizations.nodes.map(organization => ({
+        id: organization.id,
+        name: organization.name
+      }))
+    )).then(options =>  ({options}) )
+  )
+
   changeImage = ({target: { files: [file] } }) => {
     let reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => this.setState({ client: { ...this.state.client, face_base64: reader.result} });
+    reader.onload = () => this.setState({ face_base64: reader.result });
   }
 
-  handleChange = e =>  this.setState({
-    //...this.state,
-    client: { ...this.state.client, [e.target.name]: e.target.value }
-  });
+  handleChange = e =>  this.setState( { [e.target.name]: e.target.value } );
 
-  handleSelectChange = select_name => (e, i, value) => this.setState({
-    //...this.state,
-    client: { ...this.state.client, [select_name]: value }
-  });
+  handleSelectChange = select_name => (e, i, value) => this.setState({ [select_name]: value } );
+
+  handleReactSelectChange = (name) => (selectValue) => this.setState({[name] : selectValue});
 
   render = () => (
     <div>
@@ -97,8 +98,7 @@ class ModalForm extends Component {
         onRequestClose={this.props.close}
         autoScrollBodyContent={true}
       >
-        <Form {...this.state.client}
-          organizations={this.state.organizations}
+        <Form {...this.state}
           id={this.props.edit}
           close={this.props.close}
           handleChange={this.handleChange}
@@ -106,6 +106,8 @@ class ModalForm extends Component {
           enviar={this.enviar}
           changeImage={this.changeImage}
           handleSelectChange={this.handleSelectChange}
+          handleReactSelectChange={this.handleReactSelectChange}
+          searchOrganizations={this.searchOrganizations}
         />
       </Dialog>
     </div>

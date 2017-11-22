@@ -1,7 +1,7 @@
 #import "../fragments/organizationsFragment.graphql"
 mutation UpdateOrganization($organization: OrganizationInput!){
     updateOrganization(organization: $organization){
-        ...organizationsFields
+        ...organizationFields
     }
 }
 

@@ -14,21 +14,7 @@ import Phone from 'material-ui/svg-icons/communication/phone'
 import Email from 'material-ui/svg-icons/communication/contact-mail'
 
 import InputWithIcon from '../../../../../common/components/InputWithIcon'
-
-const opciones = [
-    {
-      label: "opcion 1",
-      value: "1"
-    },
-    {
-        label: "opcion 2",
-        value: "2"
-    },
-    {
-        label: "opcion 3",
-        value: "3"
-    }
-]
+import ReactSelectWithIcon from '../../../../../common/components/ReactSelectWithIcon'
 
 const styles = {
     img: {
@@ -140,19 +126,18 @@ class Form extends Component {
                     rows={2}
                     rowsMax={6}
                 />
-                <InputWithIcon
+                <ReactSelectWithIcon
                   Icon={Organization}
-                  Input={SelectField}
-                  floatingLabelText="Seleccione la organizacion"
-                  value={this.props.organization_id}
-                  onChange={this.props.handleSelectChange('organization_id')}
-                >
-                  {
-                    this.props.organizations.map((organization, i) => (
-                      <MenuItem key={i} primaryText={organization.name} value={organization.id}/>
-                    ))
-                  }
-                </InputWithIcon>
+                  label={"Organizacion"}
+                  value={this.props.organization}
+                  onChange={this.props.handleReactSelectChange("organization")}
+                  valueKey="id" labelKey="name"
+                  loadOptions={this.props.searchOrganizations}
+                  backspaceRemoves={true}
+                  placeholder="Seleccione la organizacion"
+                  autoload={false}
+                  filterOption={() => (true)}
+                />
               </Col>
               
               <Col xsOffset={8} xs={4} md={4} sm={6}>

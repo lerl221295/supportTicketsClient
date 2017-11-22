@@ -1,38 +1,31 @@
 import { graphql } from 'react-apollo'
 //import { connect } from 'react-redux'
-import ModalForm from '../presentationals/single/ModalForm'
-import UpdateClient from '../../graphql/mutations/updateClient.graphql'
-import Clients from '../../graphql/querys/clients.graphql'
+import ModalForm from '../presentationals/organizations/ModalForm'
+import UpdateOrganization from '../../graphql/mutations/updateOrganization.graphql'
+import Organizations from '../../graphql/querys/organizations.graphql'
 
-export default graphql(UpdateClient, {
+export default graphql(UpdateOrganization, {
     props: ({ mutate, ownProps: {limit} }) => ({
-        submit: (client) => mutate({
-            variables: { client },
-            //refetchQueries: ['GetClients'] //ya no te necesito xD
-            optimisticResponse: {
+        submit: (organization) => mutate({
+            variables: { organization },
+            //refetchQueries: ['GetOrganizations'] //ya no te necesito xD
+            /*optimisticResponse: {
                 __typename: 'Mutation',
-                updateClient : {
-                    __typename: 'Client',
-                    ...client,
-                    organization: {
-                        __typename: 'Organization',
-                        id: null,
-                        name: 'cargando'
-                    }
+                updateOrganization : {
+                    __typename: '0rganization',
+                    ...organization
                 }
-            },
-            update: (proxy, {data: {updateClient} }) => {
-                /*sin el try catch esto se va a la puta x( (no entiendo aun porque)
-                https://github.com/apollographql/apollo-client/issues/2051*/
+            },*/
+            update: (proxy, {data: {updateOrganization} }) => {
                 try {
                     const data = proxy.readQuery({
-                        query: Clients
+                        query: Organizations
                     });
-                    data.clients.nodes.map(client => {
-                        if(client.id !== updateClient.id) return client;
-                        return updateClient;
+                    data.organizations.nodes.map(organization => {
+                        if(organization.id !== updateOrganization.id) return organization;
+                        return updateOrganization;
                     });
-                    proxy.writeQuery({ query: Clients, data });
+                    proxy.writeQuery({ query: Organizations, data });
                 }
                 catch(e){
                     //console.log(e);

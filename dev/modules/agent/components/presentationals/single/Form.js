@@ -5,7 +5,6 @@ import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
 import DatePicker from 'material-ui/DatePicker'
 import Divider from 'material-ui/Divider'
-import Select from 'react-select';
 import FlatButton from 'material-ui/FlatButton'
 import { Row, Col } from 'react-flexbox-grid'
 import Person from 'material-ui/svg-icons/action/account-circle'
@@ -169,9 +168,7 @@ class Form extends Component {
 	            </InputWithIcon>
 	            <ReactSelectWithIcon
 		            Icon={People}
-		            Select={Select.Async}
 		            label={"Proveedor"}
-		            multi={false}
 		            value={this.props.supplier}
 		            onChange={this.props.handleReactSelectChange("supplier")}
 		            valueKey="id" labelKey="name"

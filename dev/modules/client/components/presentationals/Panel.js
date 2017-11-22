@@ -20,12 +20,13 @@ class Panel extends Component {
 		this.state = {
 			clients: {
                 modalOpen : false,
-                table_pag: 1
+                table_pag: 1,
+                search_text: ''
 			},
 			organizations: {
                 modalOpen : false,
                 table_pag: 1,
-
+                search_text: ''
 			},
 			notificationOpen: false,
 			notificationText: "hola"
@@ -39,15 +40,15 @@ class Panel extends Component {
 			clients: {...this.state.clients, table_pag: 1},
 			organizations:{...this.state.organizations, table_pag: 1}
 		});*/
-		this.props.data.refetch({search_text, offset: null, limit: this.props.limit});
+		this.props[name].refetch({search_text, offset: null, limit: this.props.limit});
 	};
 
 	changePag = name => number => {
 		this.setState({[name]: { ...this.state[name] , table_pag: number} });
-		this.props.data.refetch({
+		this.props[name].refetch({
 			limit: this.props.limit,
 			offset: (number-1)*this.props.limit,
-			search_text: this.state.search_text
+			search_text: this.state[name].search_text
 		})
 	};
 
@@ -71,11 +72,11 @@ class Panel extends Component {
 						label={"Clientes"}
 						icon={<Person/>}
 					>
-						<SearchBox search={this.clients.search}/>
+						<SearchBox search={this.search("clients")}/>
 						<ClientsTable
 							data={this.props.clients}
 							organizations={this.props.organizations.organizations || []}
-							search={this.props.search("clients")}
+							search={this.state.clients.search_text}
 							limit={this.props.limit}
 							current={this.state.clients.table_pag}
 							changePag={this.changePag("clients")}
@@ -86,10 +87,10 @@ class Panel extends Component {
 						label={"Organizaciones"}
 						icon={<Organization/>}
 					>
-						<SearchBox search={this.organizations.search}/>
+						<SearchBox search={this.search("organizations")}/>
 						<OrganizationsTable
 							data={this.props.organizations}
-							search={this.props.search("organizations")}
+							search={this.state.organizations.search_text}
 							limit={this.props.limit}
 							current={this.state.organizations.table_pag}
 							changePag={this.changePag("organizations")}
@@ -111,12 +112,12 @@ class Panel extends Component {
                     }
 				>
 					<SpeedDialItem
-						label="Nuevo Cliente"
+						//label="Nuevo Cliente"
 						fabContent={<Person/>}
 						onTouchTap={this.openModal("clients")}
 					/>
 					<SpeedDialItem
-						label="Nueva Organizacion"
+						//label="Nueva Organizacion"
 						fabContent={<Organization/>}
 						onTouchTap={this.openModal("organizations")}
 					/>
