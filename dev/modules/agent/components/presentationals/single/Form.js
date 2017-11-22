@@ -5,8 +5,9 @@ import TextField from 'material-ui/TextField'
 import SelectField from 'material-ui/SelectField'
 import DatePicker from 'material-ui/DatePicker'
 import Divider from 'material-ui/Divider'
+import Select from 'react-select';
 import FlatButton from 'material-ui/FlatButton'
-import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Row, Col } from 'react-flexbox-grid'
 import Person from 'material-ui/svg-icons/action/account-circle'
 import Image from 'material-ui/svg-icons/image/image'
 import Home from 'material-ui/svg-icons/action/home'
@@ -15,8 +16,10 @@ import Wc from 'material-ui/svg-icons/notification/wc'
 import Identy from 'material-ui/svg-icons/action/perm-identity'
 import Phone from 'material-ui/svg-icons/communication/phone'
 import Email from 'material-ui/svg-icons/communication/contact-mail'
+import People from 'material-ui/svg-icons/social/people'
 
 import InputWithIcon from '../../../../../common/components/InputWithIcon'
+import ReactSelectWithIcon from '../../../../../common/components/ReactSelectWithIcon'
 
 
 const styles = {
@@ -35,7 +38,7 @@ const styles = {
 
 
 class Form extends Component {
-	static defaultProps = {
+	/*static defaultProps = {
 		name: "",
 		lastname: "",
 		role: "",
@@ -47,7 +50,7 @@ class Form extends Component {
 		face_base64: null,
 		group: "",
 		supplier_id: null
-	};
+	};*/
 	
 	render = () => {
 		return (
@@ -102,20 +105,6 @@ class Form extends Component {
                 name="lastname"
                 onChange={this.props.handleChange}
               />
-	            {/*<RadioButtonGroup name="role" onChange = {this.props.handleChange} valueSelected = { this.props.role || 'AGENT' }>
-		            <RadioButton
-			            value = "AGENT"
-			            label = "Agente"
-		            />
-		            <RadioButton
-			            value = "SUPERVISOR"
-			            label = "Supervisor"
-		            />
-		            <RadioButton
-			            value = "ADMIN"
-			            label = "Administrador"
-		            />
-	            </RadioButtonGroup>*/}
 	            <InputWithIcon
 		            Icon={Wc}
 		            Input={SelectField}
@@ -138,15 +127,15 @@ class Form extends Component {
             </Col>
             {/*COLUMNA DE LA DERECHA*/}
             <Col xs={12} sm={12} md={6} lg={6}>
-              <InputWithIcon
-                Icon={Phone}
-                Input={TextField}
-                hintText="Escriba los telefonos"
-                floatingLabelText="Telefonos"
-                value={this.props.phones}
-                name="phones"
-                onChange={this.props.handleChange}
-              />
+	            <InputWithIcon
+		            Icon={Phone}
+		            Input={TextField}
+		            hintText="Escriba los telefonos"
+		            floatingLabelText="Telefonos"
+		            value={this.props.phones}
+		            name="phones"
+		            onChange={this.props.handleChange}
+	            />
 	            <InputWithIcon
 		            Icon={Description}
 		            Input={TextField}
@@ -156,16 +145,16 @@ class Form extends Component {
 		            name="about"
 		            onChange={this.props.handleChange}
 		            multiLine={true}
-		            rowsMax={5}
+		            rowsMax={3}
 	            />
               <InputWithIcon
-                Icon={Home}
-                Input={TextField}
-                hintText="Escriba la profesión"
-                floatingLabelText="Profesión"
-                value={this.props.profession}
-                name="profession"
-                onChange={this.props.handleChange}
+	              Icon={Home}
+	              Input={TextField}
+	              hintText="Escriba la profesión"
+	              floatingLabelText="Profesión"
+	              value={this.props.profession}
+	              name="profession"
+	              onChange={this.props.handleChange}
               />
 	            <InputWithIcon
 		            Icon={Identy}
@@ -178,18 +167,45 @@ class Form extends Component {
 		            <MenuItem value={"SUPERVISOR"} primaryText="Supervisor" />
 		            <MenuItem value={"ADMIN"} primaryText="Admin" />
 	            </InputWithIcon>
+	            <ReactSelectWithIcon
+		            Icon={People}
+		            Select={Select.Async}
+		            label={"Proveedor"}
+		            multi={false}
+		            value={this.props.supplier}
+		            onChange={this.props.handleReactSelectChange("supplier")}
+		            valueKey="id" labelKey="name"
+		            loadOptions={this.props.searchSuppliers}
+		            backspaceRemoves={true}
+		            placeholder="Seleccione un proveedor"
+		            autoload={false}
+		            filterOption={() => (true)}
+	            />
+	            {/*<ReactSelectWithIcon
+		            Icon={People}
+		            Select={Select.Async}
+		            label={"Grupos"}
+		            multi={true}
+		            value={this.props.groups}
+		            onChange={this.props.handleReactSelectChange("groups")}
+		            valueKey="id" labelKey="name"
+		            loadOptions={this.props.searchGroups}
+		            backspaceRemoves={true}
+		            placeholder="Seleccione los grupos"
+		            autoload={false}
+		            filterOption={() => (true)}
+	            />*/}
             </Col>
-            
-            <Col xsOffset={8} xs={4} md={4} sm={6}>
+            <Col style={{zIndex: 0, marginTop: '2rem'}} xsOffset={8} xs={4} md={4} sm={6}>
               <FlatButton
-                label="Cancelar"
-                primary={true}
-                onClick={()=> { this.props.close(); this.props.clean()} }
+	              label="Cancelar"
+	              primary={true}
+	              onClick={()=> { this.props.close(); this.props.clean()} }
               />
               <FlatButton
-                label="Guardar"
-                primary={true}
-                onClick={this.props.enviar}
+	              label="Guardar"
+	              primary={true}
+	              onClick={this.props.enviar}
               />
             </Col>
           </Row>

@@ -20,7 +20,8 @@ const initialState = {
 	face_base64: null,
 	avatar_filename: "Seleccione una imagen ...",
 	groups_id: [],
-	supplier_id: null
+	supplier_id: "",
+	supplier: null
 };
 
 const customContentStyle = {
@@ -38,20 +39,20 @@ class ModalForm extends Component {
 	componentWillReceiveProps = async (nextProps) => {
 		//cuando el modal de edicion se presenta en pantalla
 		if(nextProps.edit && (!this.props.open && nextProps.open)){ //si es el formulario en edicion
-			var agent = await nextProps.client.query({
+			let agent = await nextProps.client.query({
 				query: GetAgent,
 				fetchPolicy: 'network-only',
 				variables: {id: nextProps.edit}
 			}).then(({ data }) => {
-				//le quito el __typename para que la mutacion posterior funcione bien
 				let {__typename, ...agent} = data.agent;
-				delete agent.supplier;//no pude sacarlo con el destructuring :c
-				agent.supplier_id = data.agent.supplier.id;
+				/*delete agent.supplier;//no pude sacarlo con el destructuring :c
+				agent.supplier_id = data.agent.supplier.id;*/
 				return agent;
 			});
+			// console.log("El agente", agent);
 			this.setState({
 				...agent,
-				phones: agent.phones.join(', ')
+				phones: agent.phones.join('; ')
 			});
 		}
 	};
@@ -61,25 +62,30 @@ class ModalForm extends Component {
 	enviar = event => {
 		event.preventDefault();
 		let agent = this.state;
-		agent.phones = agent.phones.replace(/\s/g, '').split(',');
+		agent.phones = agent.phones.replace(/\s/g, '').split(';');
+		// Si no seleccionó ningún grupo, elimino groups
 		if (agent.groups) {
 			agent.groups_id = agent.groups.map(group => group.id);
 			delete agent.groups;
 		}
 		else delete agent.groups_id;
-		if (!agent.supplier_id) {
-			delete agent.supplier_id;
-		}
+		// Si no seleccionó ningún proveedor, elimino el supllier_id
+		if (!agent.supplier) delete agent.supplier_id;
+		// Si seleccionó un agente, entonces mapeo la data
+		else agent.supplier_id = agent.supplier.id;
+		// Siempre debo eliminar el supplier y el avatar_filename
+		// porque no están definidos en graph como inputs
+		delete agent.supplier;
 		delete agent.avatar_filename;
-		if(!this.props.edit) console.log("creando agente", agent);
-		else console.log("actualizando agente", agent);
+		/*if(!this.props.edit) console.log("creando agente", agent);
+		else console.log("actualizando agente", agent);*/
 		this.props.close();
 		this.props.submit({...agent, id: this.props.edit})
 			.then(response => {
 				//if(!this.props.edit) toast.success(response.data.createCliente);
 				//else toast.success(response.data.updateCliente);
-				if(this.props.edit) this.props.notificate("Cliente actualizado con exito!");
-				else this.props.notificate("Cliente guardado con exito!");
+				if(this.props.edit) this.props.notificate("Agente actualizado con éxito!");
+				else this.props.notificate("Agente guardado con éxito!");
 				this.setState(initialState);
 			})
 	};
@@ -98,12 +104,12 @@ class ModalForm extends Component {
 			}).then( ({data: {suppliers}} ) => {
 				//console.log(suppliers.nodes);
 				return suppliers.nodes.map(supplier => ({
-					label: supplier.name,
-					value: supplier.id
+					id: supplier.id,
+					name: supplier.name
 				}))
 			})
 				.then(options => {
-					console.log("cargando estas opciones",options);
+					// console.log("cargando estas opciones",options);
 					return {options}
 				})
 		)
@@ -117,9 +123,11 @@ class ModalForm extends Component {
 			this.setState({supplier_id: null});
 	};
 	
-	handleChange = e =>  this.setState({[e.target.name]: e.target.value});
+	handleChange = e => this.setState({[e.target.name]: e.target.value});
 	
 	handleSelectChange = (name) => (e, i, value) => this.setState({[name] : value});
+	
+	handleReactSelectChange = (name) => (selectValue) => this.setState({[name] : selectValue});
 	
 	render = () => (
     <div>
@@ -136,6 +144,7 @@ class ModalForm extends Component {
               close={this.props.close}
               handleChange={this.handleChange}
               handleSelectChange={this.handleSelectChange}
+              handleReactSelectChange={this.handleReactSelectChange}
               clean={this.cleanForm}
               enviar={this.enviar}
               changeImage={this.changeImage}

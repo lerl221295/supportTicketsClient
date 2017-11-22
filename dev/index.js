@@ -16,9 +16,10 @@ import 'react-toastify/dist/ReactToastify.min.css'
 //import 'react-flexbox-grid/lib/index.css'
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import './styles/styles.css';
 import 'react-select/dist/react-select.css';
 import  'flexboxgrid/css/flexboxgrid.css';
+import './styles/MaterialReactSelect/material-select.scss'
+import './styles/styles.css';
 
 injectTapEventPlugin();
 
