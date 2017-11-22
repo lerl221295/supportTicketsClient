@@ -30,7 +30,9 @@ export const store = createStore(
         applyMiddleware(
             routerMiddleware(browserHistory)/*,
             logger*/
+
         ),
+	      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     ) 
 );
 

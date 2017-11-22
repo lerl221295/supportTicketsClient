@@ -3,8 +3,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
 import Person from 'material-ui/svg-icons/action/account-circle'
 import Organization from 'material-ui/svg-icons/communication/business'
 import Image from 'material-ui/svg-icons/image/image'
@@ -49,7 +47,7 @@ class Form extends Component {
         <form>
           <Row>
             <Row>
-              <Col xsOffset={1} xs={4} md={4} sm={12}>
+              <Col xs={6} md={6} sm={12}>
                 {
                   do {
                     if(this.props.face_base64) 
@@ -92,7 +90,7 @@ class Form extends Component {
                   onChange={this.props.handleChange}
                 />
               </Col>
-              <Col xsOffset={1} xs={4} md={4} sm={12}>
+              <Col xs={6} md={6} sm={12}>
                 <InputWithIcon
                   Icon={Phone}
                   Input={TextField}
