@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
-import ClientsTable from './single/Table'
-import OrganizationsTable from './organizations/Table'
 //import FloatingActionButton from 'material-ui/FloatingActionButton'
-import { SpeedDial, SpeedDialItem } from 'react-mui-speeddial'
+// import { SpeedDial, SpeedDialItem } from 'react-mui-speeddial'
+import {Avatar, Snackbar} from "material-ui";
+import { pink400 } from 'material-ui/styles/colors';
 import Person from 'material-ui/svg-icons/social/person'
 import Organization from 'material-ui/svg-icons/communication/business'
-import NavigationClose from 'material-ui/svg-icons/navigation/close'
-import ContentAdd from 'material-ui/svg-icons/content/add'
-import ServiceFail from '../../../../common/components/ServiceFail'
-import SearchBox from '../../../../common/components/SearchBox'
+import { WrappedSpeedDial, ServiceFail, SearchBox } from '../../../../common/components'
 import FormCreateClient from '../containers/CreateClient'
 import FormCreateOrganization from '../containers/CreateOrganization'
-import Snackbar from 'material-ui/Snackbar';
+import ClientsTable from './single/Table'
+import OrganizationsTable from './organizations/Table'
 
 class Panel extends Component {
 	constructor(props){
@@ -30,7 +28,20 @@ class Panel extends Component {
 			},
 			notificationOpen: false,
 			notificationText: "hola"
-		}
+		};
+		
+		this.speedDialItems = [
+			{
+				itemClick: this.openModal('clients'),
+				primaryText: 'Cliente',
+				rightAvatar: <Avatar backgroundColor={pink400} icon={<Person />} />,
+			},
+			{
+				itemClick: this.openModal('organizations'),
+				primaryText: 'Organización',
+				rightAvatar: <Avatar backgroundColor={pink400} icon={<Organization />} />,
+			}
+		];
 	}
 
 	search = name => search_text => {
@@ -98,30 +109,7 @@ class Panel extends Component {
 						/>
 					</Tab>
 				</Tabs>
-
-                {/*<FloatingActionButton className="fab" onClick={this.openModal}>
-					<ContentAdd />
-				</FloatingActionButton>*/}
-				<SpeedDial
-					style={{float: "right"}}
-					fabContentOpen={
-						<ContentAdd />
-                    }
-					fabContentClose={
-						<NavigationClose />
-                    }
-				>
-					<SpeedDialItem
-						//label="Nuevo Cliente"
-						fabContent={<Person/>}
-						onTouchTap={this.openModal("clients")}
-					/>
-					<SpeedDialItem
-						//label="Nueva Organizacion"
-						fabContent={<Organization/>}
-						onTouchTap={this.openModal("organizations")}
-					/>
-				</SpeedDial>
+				<WrappedSpeedDial items={this.speedDialItems} />
 				<FormCreateClient
 					title="Crear un nuevo Cliente"
 					open={this.state.clients.modalOpen}
