@@ -4,7 +4,7 @@ export default {
 		textAlign: 'center'
 	},
 	fullname: {
-		width: '8rem'
+		width: '9rem'
 	},
 	email: {
 		width: '12rem'

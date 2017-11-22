@@ -1,23 +1,17 @@
 import React, { Component } from 'react'
-import MenuItem from 'material-ui/MenuItem'
-import TextField from 'material-ui/TextField'
-import SelectField from 'material-ui/SelectField'
-import DatePicker from 'material-ui/DatePicker'
-import Divider from 'material-ui/Divider'
-import FlatButton from 'material-ui/FlatButton'
+import { MenuItem, TextField, SelectField,	Divider, FlatButton } from 'material-ui'
 import { Row, Col } from 'react-flexbox-grid'
+// Íconos
 import Person from 'material-ui/svg-icons/action/account-circle'
 import Home from 'material-ui/svg-icons/action/home'
 import Description from 'material-ui/svg-icons/action/description'
-import Wc from 'material-ui/svg-icons/notification/wc'
 import Identy from 'material-ui/svg-icons/action/perm-identity'
+import Wc from 'material-ui/svg-icons/notification/wc'
 import Phone from 'material-ui/svg-icons/communication/phone'
 import Email from 'material-ui/svg-icons/communication/contact-mail'
 import People from 'material-ui/svg-icons/social/people'
-
-import InputWithIcon from '../../../../../common/components/InputWithIcon'
-import ReactSelectWithIcon from '../../../../../common/components/ReactSelectWithIcon'
-import AvatarImg from '../../../../../common/components/AvatarImg'
+// Componentes comunes
+import { InputWithIcon, ReactSelectWithIcon, AvatarImg, FormButtonGroup } from '../../../../../common/components'
 
 import stylesForm from '../../../../../styles/javascript/forms'
 
@@ -123,9 +117,9 @@ class Form extends Component {
 	            value={this.props.role}
 	            onChange={this.props.handleSelectChange('role')}
             >
-	            <MenuItem value={"AGENT"} primaryText="Agent" />
+	            <MenuItem value={"AGENT"} primaryText="Agente" />
 	            <MenuItem value={"SUPERVISOR"} primaryText="Supervisor" />
-	            <MenuItem value={"ADMIN"} primaryText="Admin" />
+	            <MenuItem value={"ADMIN"} primaryText="Administrador" />
             </InputWithIcon>
             <ReactSelectWithIcon
 	            Icon={People}
@@ -153,18 +147,12 @@ class Form extends Component {
 	            filterOption={() => (true)}
             />
           </Col>
-          <Col style={stylesForm.buttonGroup} xsOffset={8} xs={4} md={4} sm={6}>
-            <FlatButton
-              label="Cancelar"
-              primary={true}
-              onClick={()=> { this.props.close(); this.props.clean()} }
-            />
-            <FlatButton
-              label="Guardar"
-              primary={true}
-              onClick={this.props.enviar}
-            />
-          </Col>
+	        <FormButtonGroup
+		        stylesForm={stylesForm}
+		        close={this.props.close}
+		        clean={this.props.clean}
+		        send={this.props.send}
+	        />
         </Row>
       </form>
 		
