@@ -7,10 +7,10 @@ class TicketsPanel extends Component {
 	render = () => {
 		return(
 			<Row>
-				<Col md={3}>
+				<Col md={4}>
 					<TicketsFilter onSubmit={(values) => console.log(values)} />
 				</Col>
-				<Col md={9}>
+				<Col md={8}>
 					<TicketsList/>
 				</Col>
 			</Row>

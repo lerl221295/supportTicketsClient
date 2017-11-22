@@ -59,37 +59,37 @@ const renderSelectField = (
 		children,
 		...custom
 	}) => (
-	<SelectField
-		floatingLabelText={label}
-		errorText={touched && error}
-		{...input}
-		onChange={(event, index, value) => input.onChange(value)}
-		children={children}
-		{...custom}
-	/>
-)
+		<SelectField
+			floatingLabelText={label}
+			errorText={touched && error}
+			{...input}
+			onChange={(event, index, value) => input.onChange(value)}
+			children={children}
+			{...custom}
+		/>
+	)
 
 const renderSelectReactField = (
 	{
 		input,
 		label,
-		meta: { touched, error },
-		children,
 		...custom
 	}) => (
-	<ReactSelectWithIcon
-		Icon={Organization}
-		label={"Organizacion"}
-		onChange={(value) => input.onChange(value)}
-		valueKey="id" labelKey="name"
-		backspaceRemoves={true}
-		placeholder="Seleccione la organizacion"
-		autoload={false}
-		filterOption={() => (true)}
-		{...input}
-		{...custom}
-	/>
-)
+		<ReactSelectWithIcon
+			Icon={Organization}
+			label={"Organizacion"}
+			{...input}
+			onChange={(value) => input.onChange(value)}
+			onBlur={(e) => input.onBlur(input.value)}
+			valueKey="id" labelKey="name"
+			backspaceRemoves={true}
+			placeholder="Seleccione la organizacion"
+			autoload={false}
+			filterOption={() => (true)}
+			//value={input.value}
+			{...custom}
+		/>
+	)
 
 @withApollo
 @reduxForm({
@@ -163,6 +163,7 @@ class FilterForm extends Component {
 							component={renderSelectReactField}
 							label="Notes"
 							loadOptions={this.searchOrganizations}
+							multi
 						/>
 					</div>
 					<div>
