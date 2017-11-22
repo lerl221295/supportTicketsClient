@@ -1,0 +1,8 @@
+#import "../fragments/organizationsFragment.graphql"
+mutation CreateOrganization($client: OrganizationInput!){
+    createOrganization(organization: $organization){
+        ...organizationFields
+    }
+}
+
+

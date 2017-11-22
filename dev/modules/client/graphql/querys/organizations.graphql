@@ -1,0 +1,9 @@
+#import "../fragments/organizationsFragment.graphql"
+query GetOrganizations($search_text: String, $offset: Int, $limit: Int) {
+    organizations(search_text: $search_text, offset: $offset, limit: $limit) {
+        nodes {
+            ...organizationFields
+        }
+        count
+    }
+}
