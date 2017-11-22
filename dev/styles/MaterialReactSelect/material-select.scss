@@ -469,11 +469,12 @@ $select-value: rgba(0,0,0, .098);*/
   border-right: 0;
   color: #e0e0e0;
   fill: #e0e0e0;
-  margin: 1px 1px 1px 10px;
+  margin: 1px 4px 1px 0px;
   font-size: 14px;
   border-radius: 5rem;
   background-color: rgba(0, 0, 0, 0.26);
   padding: 0.1rem 0.5rem;
+  float: right;
 }
 
 .Select--multi .Select-value-icon:hover,
