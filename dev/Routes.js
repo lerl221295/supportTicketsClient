@@ -19,7 +19,7 @@ class Routes extends Component {
 					<IndexRoute component={Tickets} />
 					{/*<Route path=":id" component={TicketDetails}/>*/}
 				</Route>
-				<Route path="clients" component={() => <ClientsContainer limit={6}/>} />
+				<Route path="clients" component={() => <ClientsContainer limit={8}/>} />
 				<Route path="agents" component={() => <AgentsContainer limit={8}/>} />
 				<Route path="doc" component={Doc} />
 				<Route path="*" component={notFound}/>
