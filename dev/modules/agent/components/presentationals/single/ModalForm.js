@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { withApollo } from 'react-apollo'
 import GetAgent from '../../../graphql/querys/agent.graphql'
 import GetSuppliersNames from '../../../graphql/querys/suppliersNames.graphql'
+import GetGroupsNames from '../../../graphql/querys/groupsNames.graphql'
 
 const initialState = {
 	name: "",
@@ -96,16 +97,15 @@ class ModalForm extends Component {
 		reader.onload = () => this.setState({face_base64: reader.result, avatar_filename: file.name});
 	}
 	
-	searchSuppliers = (search_text) => {
+	searchEntity = (Query, entity) => (search_text) => {
 		return (
 			this.props.client.query({
-				query: GetSuppliersNames,
+				query: Query,
 				variables: {search_text}
-			}).then( ({data: {suppliers}} ) => {
-				//console.log(suppliers.nodes);
-				return suppliers.nodes.map(supplier => ({
-					id: supplier.id,
-					name: supplier.name
+			}).then( ({data}) => {
+				return data[entity].nodes.map(ent => ({
+					id: ent.id,
+					name: ent.name
 				}))
 			})
 				.then(options => {
@@ -149,7 +149,8 @@ class ModalForm extends Component {
               enviar={this.enviar}
               changeImage={this.changeImage}
               changeSupplier={this.changeSupplier}
-              searchSuppliers={this.searchSuppliers}
+              searchSuppliers={this.searchEntity(GetSuppliersNames, 'suppliers')}
+              searchGroups={this.searchEntity(GetGroupsNames, 'groups')}
         />
       </Dialog>
     </div>

@@ -447,3 +447,39 @@ $select-value: rgba(0,0,0, .098);*/
   background-color: rgba(0, 0, 0, 0.1);
   color: #ff4081;
 }
+
+.Select--multi .Select-value {
+  background-color: rgb(224, 224, 224);
+  border: 0;
+  color: #000000;
+  display: inline-block;
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin-left: 5px;
+  margin-top: 5px;
+  vertical-align: top;
+  border-radius: 16px;
+  position: relative;
+  padding: 0.1rem;
+}
+
+.Select--multi .Select-value-icon {
+  cursor: pointer;
+  border-right: 0;
+  border-right: 0;
+  color: #e0e0e0;
+  fill: #e0e0e0;
+  margin: 1px 1px 1px 10px;
+  font-size: 14px;
+  border-radius: 5rem;
+  background-color: rgba(0, 0, 0, 0.26);
+  padding: 0.1rem 0.5rem;
+}
+
+.Select--multi .Select-value-icon:hover,
+.Select--multi .Select-value-icon:focus {
+  /*background-color: #d8eafd;
+  !* Fallback color for IE 8 *!*/
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #e0e0e0;
+}

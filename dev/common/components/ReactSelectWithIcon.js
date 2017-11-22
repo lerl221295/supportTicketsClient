@@ -14,7 +14,7 @@ const ReactSelectWithIcon = ({Icon, Select, label, ...props}) => (
       <Icon color="skyBlue"/>
     </Col>
     <Col xs={10} md={11}>
-      <Select {...props} />
+      <Select {...props} style={{ marginBottom: '0.8rem', marginTop: '0.2rem' }}/>
     </Col>
   </Row>
 );
