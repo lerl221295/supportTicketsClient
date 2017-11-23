@@ -11,7 +11,6 @@ import stylesForm from '../../../../../styles/javascript/forms'
 const initialState = {
 	name: "",
 	about: "",
-	agents_id: [],
 	agents: []
 };
 
@@ -39,12 +38,14 @@ class ModalForm extends Component {
 	
 	send = event => {
 		event.preventDefault();
-		let supplier = this.state;
-		if (!supplier.agents.length) delete supplier.agents_id;
-		else supplier.agents_id = supplier.agents.map(agent => agent.id);
-		delete supplier.agents;
-		if(!this.props.id) console.log("creando suppliere", supplier);
-		else console.log("actualizando suppliere", supplier);
+		
+		let {agents, ...supplier} = this.state;
+		// Mapeando grupo con atributos que espera el server
+		if (agents.length) supplier.agents_id = agents.map(agent => agent.id);
+		
+		/*if(!this.props.id) console.log("creando suppliere", supplier);
+		else console.log("actualizando suppliere", supplier);*/
+		
 		this.props.close();
 		this.props.submit({...supplier, id: this.props.id})
 			.then(() => {

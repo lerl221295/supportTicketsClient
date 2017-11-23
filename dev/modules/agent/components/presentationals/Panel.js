@@ -45,7 +45,7 @@ class Panel extends Component {
 		this.speedDialItems = [
 			{
 				itemClick: this.openModal('agents'),
-				primaryText: 'Cliente',
+				primaryText: 'Agente',
 				rightAvatar: <Avatar backgroundColor={pink400} icon={<Person />} />,
 			},
 			{

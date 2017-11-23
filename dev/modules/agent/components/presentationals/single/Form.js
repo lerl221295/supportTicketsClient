@@ -17,20 +17,6 @@ import stylesForm from '../../../../../styles/javascript/forms'
 
 
 class Form extends Component {
-	static defaultProps = {
-		name: "",
-		lastname: "",
-		role: "",
-		sex: null,
-		email: "",
-		phones: "",
-		about: "",
-		profession: "",
-		face_base64: null,
-		group: "",
-		supplier_id: null
-	};
-	
 	render = () => {
 		return (
       <form style={stylesForm.padding}>
