@@ -13,9 +13,11 @@ import {SearchBox, WrappedSpeedDial} from '../../../../common/components'
 // Containers
 import FormCreateAgent from '../containers/CreateAgent'
 import FormCreateSupplier from '../containers/CreateSupplier'
+import FormCreateGroup from '../containers/CreateGroup'
 // Tablas
 import AgentsTable from './single/Table'
 import SuppliersTable from './suppliers/Table'
+import GroupsTable from './groups/Table'
 
 class Panel extends Component {
 	constructor(props){
@@ -122,20 +124,20 @@ class Panel extends Component {
 							notificate={this.notificate}
 						/>
 					</Tab>
-					{/*<Tab
+					<Tab
 						label={"Grupos"}
 						icon={<Organization/>}
 					>
 						<SearchBox search={this.search("groups")}/>
-						<OrganizationsTable
-							data={this.props.organizations}
-							search={this.state.organizations.search_text}
+						<GroupsTable
+							data={this.props.groups}
+							search={this.state.groups.search_text}
 							limit={this.props.limit}
-							current={this.state.organizations.table_pag}
-							changePag={this.changePag("organizations")}
+							current={this.state.groups.table_pag}
+							changePag={this.changePag("groups")}
 							notificate={this.notificate}
 						/>
-					</Tab>*/}
+					</Tab>
 				</Tabs>
 				<WrappedSpeedDial items={this.speedDialItems} />
 				<FormCreateAgent
@@ -148,6 +150,12 @@ class Panel extends Component {
 					title="Crear un nuevo proveedor"
 					open={this.state.suppliers.modalOpen}
 					close={this.closeModal('suppliers')}
+					notificate={this.notificate}
+				/>
+				<FormCreateGroup
+					title="Crear un nuevo grupo"
+					open={this.state.groups.modalOpen}
+					close={this.closeModal('groups')}
 					notificate={this.notificate}
 				/>
 				<Snackbar

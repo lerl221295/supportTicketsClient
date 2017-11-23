@@ -8,6 +8,7 @@ import Groups from '../../graphql/querys/groups.graphql'
 // const PanelWithSearch = connect((state) => ({search: state.search_text}))(Panel)
 export default compose(
 	graphql(Agents, {name: 'agents'}),
-	graphql(Suppliers, {name: 'suppliers'})
+	graphql(Suppliers, {name: 'suppliers'}),
+	graphql(Groups, {name: 'groups'})
 )(Panel)
 

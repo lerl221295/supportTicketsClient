@@ -32,17 +32,17 @@ class Form extends Component {
 	            Input={TextField}
 	            hintText="Acerca del agente"
 	            floatingLabelText="Acerca de"
-	            value={this.props.about}
 	            name="about"
 	            onChange={this.props.handleChange}
 	            multiLine={true}
 	            rowsMax={3}
+	            value={this.props.about}
+
             />
             <ReactSelectWithIcon
 	            Icon={People}
 	            label={"Agentes"}
 	            multi={true}
-	            value={this.props.agents}
 	            onChange={this.props.handleReactSelectChange("agents")}
 	            valueKey="id" labelKey="name"
 	            loadOptions={this.props.searchAgents}
@@ -50,7 +50,53 @@ class Form extends Component {
 	            placeholder="Seleccione un agent"
 	            autoload={false}
 	            filterOption={() => (true)}
+	            value={this.props.agents}
             />
+		        <ReactSelectWithIcon
+			        Icon={People}
+			        label={"Grupo de escalado"}
+			        onChange={this.props.handleReactSelectChange("group_scale")}
+			        valueKey="id" labelKey="name"
+			        loadOptions={this.props.searchGroups}
+			        placeholder="Seleccione un grupo de escalado"
+			        autoload={false}
+			        filterOption={() => (true)}
+			        value={this.props.group_scale}
+		        />
+		        <label>Notificar a agentes del grupo después que el ticket no haya sido tomado por ningún agente del grupo</label>
+		        <InputWithIcon
+			        Icon={Description}
+			        Input={TextField}
+			        type={"number"}
+			        hintText="Ingrese tiempo en horas en que desea avisar a los agentes"
+			        floatingLabelText="Tiempo de notificación"
+			        value={this.props.notification_hours}
+			        name="notification_hours"
+			        onChange={this.props.handleChange}
+			        multiLine={false}
+		        />
+		        <InputWithIcon
+			        Icon={Description}
+			        Input={TextField}
+			        hintText="Ingrese texto del correo a enviar"
+			        floatingLabelText="Mensaje a enviar"
+			        value={this.props.notification_text}
+			        name="notification_text"
+			        onChange={this.props.handleChange}
+			        multiLine={true}
+			        rowsMax={3}
+		        />
+		        <ReactSelectWithIcon
+			        Icon={People}
+			        label={"Agente que será notificado"}
+			        onChange={this.props.handleReactSelectChange("notification_agent")}
+			        valueKey="id" labelKey="name"
+			        loadOptions={this.props.searchAgents}
+			        placeholder="Seleccione agente a ser notificado"
+			        autoload={false}
+			        filterOption={() => (true)}
+			        value={this.props.notification_agent}
+		        />
           </Col>
 	        <FormButtonGroup
 		        stylesForm={stylesForm}
