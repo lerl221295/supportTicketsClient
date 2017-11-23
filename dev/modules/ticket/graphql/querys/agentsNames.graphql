@@ -1,8 +1,8 @@
 query GetAgentsNames($search_text: String) {
 	agents(search_text: $search_text) {
 		nodes {
-			id,
-			name
+			id
+			name: fullName
 		}
 	}
 }
