@@ -12,9 +12,14 @@ import {
 	RadioButtonGroup,
 	RadioButton
 } from 'material-ui'
-import GetOrganizationsNames from '../../graphql/querys/organizationsNames.graphql'
 import Person from 'material-ui/svg-icons/action/account-circle'
 import Organization from 'material-ui/svg-icons/communication/business'
+
+import GetOrganizationsNames from '../../graphql/querys/organizationsNames.graphql'
+import GetGroupsNames from '../../graphql/querys/groupsNames.graphql'
+import GetSuppliersNames from '../../graphql/querys/suppliersNames.graphql'
+import GetAgentsNames from '../../graphql/querys/agentsNames.graphql'
+import GetClientsNames from '../../graphql/querys/clientsNames.graphql'
 
 const renderTextField = (
 	{
@@ -55,19 +60,48 @@ const renderSelectField = (
 	{
 		input,
 		label,
-		meta: { touched, error },
 		children,
+		meta,
+		options,
 		...custom
 	}) => (
-		<SelectField
-			floatingLabelText={label}
-			errorText={touched && error}
+		<InputWithIcon
+			Input={SelectField}
 			{...input}
 			onChange={(event, index, value) => input.onChange(value)}
-			children={children}
 			{...custom}
-		/>
+		>
+			{
+				options.map(({value, text}, i) => (
+					<MenuItem 
+						key={i} 
+						primaryText={text} 
+						value={value}
+						checked={input.value.includes(value)}
+					/>
+				))
+			}
+		</InputWithIcon>
 	)
+
+	//sin icon:
+	/*<SelectField
+			floatingLabelText={label}
+			{...input}
+			onChange={(event, index, value) => input.onChange(value)}
+			{...custom}
+		>
+			{
+				options.map(({value, text}, i) => (
+					<MenuItem 
+						key={i} 
+						primaryText={text} 
+						value={value}
+						checked={input.value.includes(value)}
+					/>
+				))
+			}
+		</SelectField>*/
 
 const renderSelectReactField = (
 	{
@@ -76,14 +110,12 @@ const renderSelectReactField = (
 		...custom
 	}) => (
 		<ReactSelectWithIcon
-			Icon={Organization}
-			label={"Organizacion"}
+			label={label}
 			{...input}
 			onChange={(value) => input.onChange(value)}
 			onBlur={(e) => input.onBlur(input.value)}
 			valueKey="id" labelKey="name"
 			backspaceRemoves={true}
-			placeholder="Seleccione la organizacion"
 			autoload={false}
 			filterOption={() => (true)}
 			//value={input.value}
@@ -96,16 +128,13 @@ const renderSelectReactField = (
 	form: 'FilterForm'
 })
 class FilterForm extends Component {
-	searchOrganizations = (search_text) => (
+	searchData = (key, GraphqlQuery) => (search_text) => (
 		this.props.client.query({
-			query: GetOrganizationsNames,
+			query: GraphqlQuery,
 			variables: {search_text}
-		}).then( ({data: {organizations}} ) => (
-			organizations.nodes.map(organization => ({
-				id: organization.id,
-				name: organization.name
-			}))
-		)).then(options =>  ({options}) )
+		})
+		.then( ({data} ) => ( data[key].nodes ))
+		.then(options =>  ({options}) )
 	);
 
 	render = () => {
@@ -115,57 +144,78 @@ class FilterForm extends Component {
 				<h2>Filtrar Propiedades</h2>
 				<Divider />
 				<form onSubmit={handleSubmit}>
-					<div>
-						<Field
-							name="firstName"
-							component={renderTextField}
-							label="First Name"
-						/>
-					</div>
-					<div>
-						<Field name="lastName" component={renderTextField} label="Last Name" />
-					</div>
-					<div>
-						<Field name="email" component={renderTextField} label="Email" />
-					</div>
-					<div>
-						<Field name="sex" component={renderRadioGroup}>
-							<RadioButton value="male" label="male" />
-							<RadioButton value="female" label="female" />
-						</Field>
-					</div>
-					<div>
-						<Field
-							name="favoriteColor"
-							component={renderSelectField}
-							label="Favorite Color"
-						>
-							<MenuItem value="ff0000" primaryText="Red" />
-							<MenuItem value="00ff00" primaryText="Green" />
-							<MenuItem value="0000ff" primaryText="Blue" />
-						</Field>
-					</div>
-					<div>
-						<Field name="employed" component={renderCheckbox} label="Employed" />
-					</div>
-					<div>
-						<Field
-							name="notes"
-							component={renderTextField}
-							label="Notes"
-							multiLine={true}
-							rows={2}
-						/>
-					</div>
-					<div>
-						<Field
-							name="organization"
-							component={renderSelectReactField}
-							label="Notes"
-							loadOptions={this.searchOrganizations}
-							multi
-						/>
-					</div>
+					<Field
+						Icon={Person}
+						name="clients"
+						component={renderSelectReactField}
+						label="Clientes"
+						placeholder="Seleccione los clientes"
+						loadOptions={this.searchData("clients", GetClientsNames)}
+						multi
+					/>
+					<Field
+						Icon={Person}
+						name="agents"
+						component={renderSelectReactField}
+						label="Agentes"
+						placeholder="Seleccione los agentes"
+						loadOptions={this.searchData("agents", GetAgentsNames)}
+						multi
+					/>
+					<Field
+						Icon={Organization}
+						name="organizations"
+						component={renderSelectReactField}
+						label="Organizaciones"
+						placeholder="Seleccione las organizaciones"
+						loadOptions={this.searchData("organizations", GetOrganizationsNames)}
+						multi
+					/>
+					<Field
+						Icon={Organization}
+						name="suppliers"
+						component={renderSelectReactField}
+						label="Proveedores"
+						placeholder="Seleccione los proveedores"
+						loadOptions={this.searchData("suppliers", GetSuppliersNames)}
+						multi
+					/>
+					<Field
+						Icon={Organization}
+						name="groups"
+						component={renderSelectReactField}
+						label="Grupos"
+						placeholder="Seleccione los grupos"
+						loadOptions={this.searchData("groups", GetGroupsNames)}
+						multi
+					/>
+					<Field
+						Icon={Person}
+						name="priority"
+						component={renderSelectField}
+						label="Prioridades"
+						multiple
+						options={[
+							{value: "LOW", text: "Baja"},
+							{value: "MEDIUM", text: "Media"},
+							{value: "HIGH", text: "Alta"},
+							{value: "URGENT", text: "Urgente"}
+						]}
+					/>
+					{/*aqui falta poner select para estados y types (igual que el de arriba)
+					pero solicitando las opciones al servidor con un query graphql :D*/}
+					<Field
+						Icon={Person}
+						name="due_by"
+						component={renderSelectField}
+						label="Hecho en"
+						multiple
+						options={[
+							{value: "OVERDUE", text: "Atrasado"},
+							{value: "TODAY", text: "Hoy"},
+							{value: "TOMORROW", text: "Mañana"}
+						]}
+					/>
 					<div>
 						<button type="submit" disabled={pristine || submitting}>
 							Submit

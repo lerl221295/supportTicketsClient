@@ -1,0 +1,8 @@
+query GetGroupsNames($search_text: String) {
+	groups(search_text: $search_text) {
+		nodes {
+			id,
+			name
+		}
+	}
+}
