@@ -73,10 +73,10 @@ class Panel extends Component {
 	openModal = name => event => this.setState({[name]: { modalOpen : true }});
 
 	closeModal = name => event => this.setState({[name]: { modalOpen : false }});
-
+	
 	render = () => {
 		//console.log(this.props)
-        return(
+		return(
 			<div>
 				<Tabs>
 					<Tab
@@ -129,8 +129,8 @@ class Panel extends Component {
 					onRequestClose={() => this.setState({notificationOpen: false})}
 				/>
 			</div>
-        )
-        if(this.props.data.error) return <ServiceFail />;
+		)
+		if (this.props.data.error) return <ServiceFail />;
 	}
 }
 

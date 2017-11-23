@@ -1,0 +1,8 @@
+#import "../fragments/suppliersFragment.graphql"
+mutation UpdateSupplier($supplier: SupplierInput!){
+	updateSupplier(supplier: $supplier){
+        ...suppliersFields
+	}
+}
+
+

@@ -117,7 +117,7 @@ class ClientesTable extends Component {
           close={this.closeModal}
           edit={this.state.id_edit}
           notificate={this.props.notificate}
-		  organizations={this.props.organizations}
+		      organizations={this.props.organizations}
         />
       </div>
 		)

@@ -1,0 +1,5 @@
+fragment groupsFields on Group {
+    id,
+    name
+    about
+}

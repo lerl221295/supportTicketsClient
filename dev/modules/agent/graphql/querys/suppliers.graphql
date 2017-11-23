@@ -1,0 +1,9 @@
+#import "../fragments/suppliersFragment.graphql"
+query GetSuppliers($search_text: String, $offset: Int, $limit: Int) {
+	suppliers(search_text: $search_text, offset: $offset, limit: $limit) {
+		nodes {
+            ...suppliersFields
+		},
+        count
+	}
+}

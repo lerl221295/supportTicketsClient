@@ -10,6 +10,7 @@ export default {
 		width: '12rem'
 	},
 	edit: {
+		width: '2rem',
 		cursor: "pointer"
 	},
 	center: {

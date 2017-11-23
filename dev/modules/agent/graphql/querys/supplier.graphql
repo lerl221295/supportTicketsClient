@@ -1,0 +1,10 @@
+#import "../fragments/suppliersFragment.graphql"
+query GetSupplier($id: ID!) {
+	supplier(id: $id) {
+		...suppliersFields
+		agents {
+			id
+			name
+		}
+	}
+}

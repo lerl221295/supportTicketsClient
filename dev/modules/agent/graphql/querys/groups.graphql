@@ -1,0 +1,9 @@
+#import "../fragments/groupsFragment.graphql"
+query GetGroups($search_text: String, $offset: Int, $limit: Int) {
+	groups(search_text: $search_text, offset: $offset, limit: $limit) {
+		nodes {
+            ...groupsFields
+		},
+        count
+	}
+}

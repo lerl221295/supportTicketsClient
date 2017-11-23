@@ -1,35 +1,80 @@
 import React, { Component } from 'react'
-import Table from './single/Table'
-import FloatingActionButton from 'material-ui/FloatingActionButton'
-import ContentAdd from 'material-ui/svg-icons/content/add'
-import ServiceFail from '../../../../common/components/ServiceFail'
-import FormCreate from '../containers/CreateAgent'
-import SearchBox from '../../../../common/components/SearchBox'
-import Snackbar from 'material-ui/Snackbar';
+// Material Components
+import {Avatar, Snackbar, Tab, Tabs} from "material-ui";
+// Colores
+import { pink400 } from 'material-ui/styles/colors';
+// Íconos
+import Person from 'material-ui/svg-icons/social/person'
+import People from 'material-ui/svg-icons/social/people'
+import PeopleOutline from 'material-ui/svg-icons/social/people-outline'
+import Organization from 'material-ui/svg-icons/communication/business'
+// Common Components
+import {SearchBox, WrappedSpeedDial} from '../../../../common/components'
+// Containers
+import FormCreateAgent from '../containers/CreateAgent'
+import FormCreateSupplier from '../containers/CreateSupplier'
+// Tablas
+import AgentsTable from './single/Table'
+import SuppliersTable from './suppliers/Table'
 
 class Panel extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			modalOpen : false,
-			table_pag: 1,
-			search_text: null, //ultimo text sercheado xd
+			agents: {
+				modalOpen : false,
+				table_pag: 1,
+				search_text: ''
+			},
+			suppliers: {
+				modalOpen : false,
+				table_pag: 1,
+				search_text: ''
+			},
+			groups: {
+				modalOpen : false,
+				table_pag: 1,
+				search_text: ''
+			},
 			notificationOpen: false,
 			notificationText: "hola"
-		}
+		};
+		
+		this.speedDialItems = [
+			{
+				itemClick: this.openModal('agents'),
+				primaryText: 'Cliente',
+				rightAvatar: <Avatar backgroundColor={pink400} icon={<Person />} />,
+			},
+			{
+				itemClick: this.openModal('suppliers'),
+				primaryText: 'Proveedores',
+				rightAvatar: <Avatar backgroundColor={pink400} icon={<People />} />,
+			},
+			{
+				itemClick: this.openModal('groups'),
+				primaryText: 'Grupos',
+				rightAvatar: <Avatar backgroundColor={pink400} icon={<PeopleOutline />} />,
+			}
+		];
 	}
 	
-	search = search_text => {
-		this.setState({search_text, table_pag: 1});
-		this.props.data.refetch({search_text, offset: null, limit: this.props.limit});
+	search = name => search_text => {
+		this.setState({[name]: {...this.state[name], search_text}})
+		/*this.setState({
+			search_text,
+			clients: {...this.state.clients, table_pag: 1},
+			organizations:{...this.state.organizations, table_pag: 1}
+		});*/
+		this.props[name].refetch({search_text, offset: null, limit: this.props.limit});
 	};
 	
-	changePag = number => {
-		this.setState({ table_pag: number });
-		this.props.data.refetch({
+	changePag = name => number => {
+		this.setState({[name]: { ...this.state[name] , table_pag: number} });
+		this.props[name].refetch({
 			limit: this.props.limit,
 			offset: (number-1)*this.props.limit,
-			search_text: this.state.search_text
+			search_text: this.state[name].search_text
 		})
 	};
 	
@@ -40,28 +85,69 @@ class Panel extends Component {
 		})
 	};
 	
-	openModal = event => this.setState({ modalOpen : true });
+	openModal = name => event => this.setState({[name]: { modalOpen : true }});
 	
-	closeModal = event => this.setState({ modalOpen : false });
+	closeModal = name => event => this.setState({[name]: { modalOpen : false }});
 	
 	render = () => {
-		if(this.props.data.error) return <ServiceFail />;
+		// if(this.props.data.error) return <ServiceFail />;
 		return(
 			<div>
-				<SearchBox search={this.search}/>
-				<Table data={this.props.data} search={this.props.search}
-				       limit={this.props.limit}
-				       current={this.state.table_pag}
-				       changePag={this.changePag}
-				       notificate={this.notificate}
-				/>
-				<FloatingActionButton className="fab" onClick={this.openModal}>
-					<ContentAdd />
-				</FloatingActionButton>
-				<FormCreate
+				<Tabs>
+					<Tab
+						label={"Agentes"}
+						icon={<Person/>}
+					>
+						<SearchBox search={this.search("agents")}/>
+						<AgentsTable
+							data={this.props.agents}
+							search={this.props.search}
+							limit={this.props.limit}
+							current={this.state.table_pag}
+							changePag={this.changePag}
+							notificate={this.notificate}
+						/>
+					</Tab>
+					<Tab
+						label={"Proveedores"}
+						icon={<People/>}
+					>
+						<SearchBox search={this.search("suppliers")}/>
+						<SuppliersTable
+							data={this.props.suppliers}
+							search={this.state.suppliers.search_text}
+							limit={this.props.limit}
+							current={this.state.suppliers.table_pag}
+							changePag={this.changePag("suppliers")}
+							notificate={this.notificate}
+						/>
+					</Tab>
+					{/*<Tab
+						label={"Grupos"}
+						icon={<Organization/>}
+					>
+						<SearchBox search={this.search("groups")}/>
+						<OrganizationsTable
+							data={this.props.organizations}
+							search={this.state.organizations.search_text}
+							limit={this.props.limit}
+							current={this.state.organizations.table_pag}
+							changePag={this.changePag("organizations")}
+							notificate={this.notificate}
+						/>
+					</Tab>*/}
+				</Tabs>
+				<WrappedSpeedDial items={this.speedDialItems} />
+				<FormCreateAgent
 					title="Crear un nuevo agente"
-					open={this.state.modalOpen}
-					close={this.closeModal}
+					open={this.state.agents.modalOpen}
+					close={this.closeModal('agents')}
+					notificate={this.notificate}
+				/>
+				<FormCreateSupplier
+					title="Crear un nuevo proveedor"
+					open={this.state.suppliers.modalOpen}
+					close={this.closeModal('suppliers')}
 					notificate={this.notificate}
 				/>
 				<Snackbar

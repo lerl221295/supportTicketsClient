@@ -1,0 +1,5 @@
+fragment suppliersFields on Supplier {
+    id,
+    name
+    about
+}
