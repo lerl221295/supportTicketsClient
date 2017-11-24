@@ -1,0 +1,22 @@
+fragment ticketsFields on Ticket {
+    number
+    title
+    state {
+        key
+        label
+    }
+    type {
+        key
+        label
+    }
+    priority
+    time
+    resolve_by
+    client {
+        fullName
+        face_base64
+    }
+    agent {
+        fullName
+    }
+}

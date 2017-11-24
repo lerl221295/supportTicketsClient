@@ -1,26 +1,8 @@
+#import "../fragments/ticketsFragment.graphql"
 query GetTickets($filter: FilterTicketInput, $offset: Int, $limit: Int) {
     tickets(filter: $filter, offset: $offset, limit: $limit){
         nodes {
-            number
-            title
-            state {
-                key
-                label
-            }
-            type {
-                key
-                label
-            }
-            priority
-            time
-            resolve_by
-            client {
-                fullName
-                face_base64
-            }
-            agent {
-                fullName
-            }
+            ...ticketsFields
         }
     }
 }

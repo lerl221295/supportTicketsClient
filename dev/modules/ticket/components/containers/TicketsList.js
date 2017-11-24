@@ -1,7 +1,9 @@
 import { connect } from 'react-redux'
 import { graphql } from "react-apollo"
 import GetTickets from '../../graphql/querys/tickets.graphql'
+import MoreTickets from '../../graphql/subscriptions/newTickets.graphql'
 import TicketList from '../presentationals/TicketsList'
+import _ from 'lodash'
 
 const limit = 10;
 const TicketWithApolloData = graphql(GetTickets, {
@@ -12,7 +14,7 @@ const TicketWithApolloData = graphql(GetTickets, {
 		},
 		notifyOnNetworkStatusChange: true
 	}),
-	props: ({ ownProps, data: { fetchMore, refetch, tickets, loading, error } }) => {
+	props: ({ ownProps, data: { fetchMore, refetch, subscribeToMore, tickets, loading, error } }) => {
 		//console.log("tickets",tickets)
 		let ticketsArray;
 		if(tickets) ticketsArray = tickets.nodes;
@@ -36,6 +38,22 @@ const TicketWithApolloData = graphql(GetTickets, {
 						}
 					});
 				}
+			}),
+			subscribeToNewTickets: (filter) => subscribeToMore({
+				document: MoreTickets,
+				variables: { filter },
+				updateQuery: (prev, {subscriptionData}) => {
+                    if (!subscriptionData.newTicket) return prev;
+
+                    const { newTicket } = subscriptionData;
+
+                    return Object.assign({}, prev, {
+						tickets: {
+							__typename: "TicketsResponse",
+							nodes: [newTicket ,...prev.tickets.nodes]
+						}
+					});
+                }
 			})
 		})
 	}
@@ -47,12 +65,21 @@ const TicketWithApolloData = graphql(GetTickets, {
 
 const mapStateToProps = ({form: {FilterForm: {values}}}) => {
 	if(values){
-		const keysForMap = ["agents", "clients", "organizations", "suppliers", "groups"];
 		let filterMapedObject = {};
+		const keysForMap = ["agents", "clients", "organizations", "suppliers", "groups"];
 		for(let key of keysForMap){
-			if(values[key]) filterMapedObject[key] = values[key].map(ob => ob.id);
+			if(values[key] && values[key].length) filterMapedObject[key] = values[key].map(ob => ob.id);
 		}
-		return({filter_form: {...values, ...filterMapedObject} });
+		const keysForValidatedEmpty = ["priorities", "types_keys", "states_keys", "due_by"];
+		for(let key of keysForValidatedEmpty){
+			if(values[key] && values[key].length) filterMapedObject[key] = values[key];
+		}
+		if(_.isEmpty(filterMapedObject)) return undefined;
+		return({
+			filter_form: {
+				...filterMapedObject
+			}
+		});
 	}
 	return({filter_form: values})
 };

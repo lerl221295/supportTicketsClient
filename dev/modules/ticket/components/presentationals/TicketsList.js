@@ -4,6 +4,7 @@ import {typography} from 'material-ui/styles';
 import {grey400, cyan600, white} from 'material-ui/styles/colors';
 import Face from 'material-ui/svg-icons/action/face'
 import { Row, Col } from 'react-flexbox-grid'
+import _ from 'lodash'
 
 const styles = {
 	subheader: {
@@ -22,6 +23,19 @@ class TicketList extends Component {
 		}
 	}*/
 
+	componentWillMount = () => {
+		console.log("subscribiendome a estos tickets: ", this.props.filter_form);
+		this.props.subscribeToNewTickets(this.props.filter_form);
+	}
+
+	componentWillReceiveProps = nextProps => {
+		//console.log(!_.isEqual(nextProps.filter_form, this.props.filter_form))
+		if(nextProps.filter_form && !_.isEqual(nextProps.filter_form, this.props.filter_form)){
+			console.log("REsubscribiendome a estos:", nextProps.filter_form);
+			this.props.subscribeToNewTickets(nextProps.filter_form);
+		}
+	}
+
 	render = () => {
 		const {tickets, loading} = this.props;
 		if(loading && !tickets) return <h1>Cargando...</h1>
@@ -32,8 +46,8 @@ class TicketList extends Component {
 						<List>
 							<Subheader style={styles.subheader}>Tickets</Subheader>
 							{
-								tickets.map(ticket =>
-									<div key={ticket.number}>
+								tickets.map((ticket, i) =>
+									<div key={i}>
 										<ListItem
 											leftAvatar={
 												do {
@@ -56,6 +70,7 @@ class TicketList extends Component {
 							label="Cargar mas"
 							primary={true}
 							onClick={this.props.loadMoreTickets}
+							disabled={this.props.loading}
 						/>
 					</Col>
 				</Row>

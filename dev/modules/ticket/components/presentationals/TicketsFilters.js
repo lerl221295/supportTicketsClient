@@ -114,7 +114,10 @@ const renderSelectReactField = (
 			label={label}
 			{...input}
 			onChange={(value) => input.onChange(value)}
-			onBlur={(e) => input.onBlur(input.value)}
+			onBlur={(e) => {
+				e.preventDefault();
+				//input.onBlur(input.value);
+			}}
 			valueKey="id" labelKey="name"
 			backspaceRemoves={true}
 			autoload={false}
