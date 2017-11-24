@@ -8,11 +8,11 @@ query GetGroup($id : ID!) {
         }
         agents {
             id
-            name
+            name: fullName
         }
         notification_agent {
             id
-            name
+            name: fullName
         }
         notification_hours
         notification_text

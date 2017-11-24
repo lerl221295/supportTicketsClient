@@ -8,7 +8,6 @@ import { withApollo } from 'react-apollo'
 import GetAgent from '../../../graphql/querys/agent.graphql'
 import GetSuppliersNames from '../../../graphql/querys/suppliersNames.graphql'
 import GetGroupsNames from '../../../graphql/querys/groupsNames.graphql'
-import stylesForm from '../../../../../styles/javascript/forms'
 
 const initialState = {
 	name: "",
@@ -120,7 +119,7 @@ class ModalForm extends Component {
     <div>
       <Dialog
         title={this.props.title}
-        titleStyle={stylesForm.title}
+        titleClassName={"center-align"}
         open={this.props.open}
         onRequestClose={this.props.close}
         autoScrollBodyContent={true}

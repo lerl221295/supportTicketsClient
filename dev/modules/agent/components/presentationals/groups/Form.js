@@ -9,8 +9,6 @@ import People from 'material-ui/svg-icons/social/people'
 // Componentes comunes
 import { InputWithIcon, ReactSelectWithIcon, FormButtonGroup } from '../../../../../common/components'
 
-import stylesForm from '../../../../../styles/javascript/forms'
-
 class Form extends Component {
 	constructor(props) {
 		super(props);
@@ -21,9 +19,9 @@ class Form extends Component {
 		};
 	}
 	
-		render = () => {
+	render = () => {
 		return (
-      <form style={stylesForm.padding}>
+      <form className={"padding"}>
         <Row>
 	        <Col xs={12} >
             <InputWithIcon
@@ -72,36 +70,49 @@ class Form extends Component {
 			        value={this.props.group_scale}
 		        />
 		        <br/><Divider /><br/>
-		        <strong><label>Notificación luego que ha pasado un tiempo sin que un ticket sea tomado por el grupo</label></strong>
-		        <Row middle={"xs"} end={"xs"}>
+		        {/*<strong><label>Notificación luego que ha pasado un tiempo sin que un ticket sea tomado por el grupo</label></strong>*/}
+		        <h3 className={"center-align"}> Envío de notificación </h3>
+		        <Row bottom={"xs"}>
 			        <Col xs={6}>
-				        <h5 style={{fontSize: '0.7rem'}}>
-					        Si un ticket permanece sin asignar por más de...
+				        <h5 className={'label-description right-align'}>
+					        Si un ticket permanece sin asignar por más de:
 				        </h5>
 			        </Col>
-			        <Col xs={6}>
+			        <Col xs={3}>
 				        <TextField
 				          type={"number"}
-				          hintText="Ingrese tiempo en horas en que desea avisar a los agentes"
-				          floatingLabelText="Tiempo de notificación"
+				          hintText="tiempo"
 				          value={this.props.notification_hours}
 				          name="notification_hours"
 				          onChange={this.props.handleChange}
 				          multiLine={false}
+				          style={{width: '100%'}}
+				        />
+			        </Col>
+			        <Col xs>
+				        <h5 className={'label-description left-align'}>
+					        Horas
+				        </h5>
+			        </Col>
+		        </Row>
+		        <Row bottom={"xs"}>
+			        <Col xs={6}>
+				        <h5 className={'label-description right-align'}>
+					        ...enviar correo a:
+				        </h5>
+			        </Col>
+			        <Col xs={4}>
+				        <ReactSelectWithIcon
+					        onChange={this.props.handleReactSelectChange("notification_agent")}
+					        valueKey="id" labelKey="name"
+					        loadOptions={this.props.searchAgents}
+					        placeholder="Seleccione agente"
+					        autoload={false}
+					        filterOption={() => (true)}
+					        value={this.props.notification_agent}
 				        />
 			        </Col>
 		        </Row>
-		        <ReactSelectWithIcon
-			        Icon={People}
-			        label={"Agente que será notificado"}
-			        onChange={this.props.handleReactSelectChange("notification_agent")}
-			        valueKey="id" labelKey="name"
-			        loadOptions={this.props.searchAgents}
-			        placeholder="Seleccione agente a ser notificado"
-			        autoload={false}
-			        filterOption={() => (true)}
-			        value={this.props.notification_agent}
-		        />
 		        <Editor
 			        toolbar={this.toolbar}
 			        editorState={this.props.editorState}
@@ -110,7 +121,6 @@ class Form extends Component {
 		        />
           </Col>
 	        <FormButtonGroup
-		        stylesForm={stylesForm}
 		        close={this.props.close}
 		        clean={this.props.clean}
 		        send={this.props.send}

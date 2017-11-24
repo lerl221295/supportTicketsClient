@@ -13,7 +13,6 @@ import LinearProgress from 'material-ui/LinearProgress'
 import Plus from 'material-ui/svg-icons/content/create'
 import Avatar from 'material-ui/Avatar'
 import FormEdit from '../../containers/EditAgent'
-import tableStyles from '../../../../../styles/javascript/tables'
 
 class AgentsTable extends Component {
 	constructor(props){
@@ -68,13 +67,13 @@ class AgentsTable extends Component {
 				<Table>
 					<TableHeader displaySelectAll={false} adjustForCheckbox={false} striped={true}>
 						<TableRow>
-							<TableHeaderColumn style={tableStyles.avatar}>Foto</TableHeaderColumn>
-							<TableHeaderColumn style={tableStyles.fullname}>Nombre completo</TableHeaderColumn>
-							<TableHeaderColumn style={tableStyles.email}>Email</TableHeaderColumn>
+							<TableHeaderColumn className="avatar">Foto</TableHeaderColumn>
+							<TableHeaderColumn className="fullname">Nombre completo</TableHeaderColumn>
+							<TableHeaderColumn className="email">Email</TableHeaderColumn>
 							<TableHeaderColumn>Telefono</TableHeaderColumn>
 							<TableHeaderColumn>Role</TableHeaderColumn>
 							<TableHeaderColumn>Proveedor</TableHeaderColumn>
-							<TableHeaderColumn style={tableStyles.center}>Edit</TableHeaderColumn>
+							<TableHeaderColumn className="center">Edit</TableHeaderColumn>
 						</TableRow>
 					</TableHeader>
 					<TableBody displayRowCheckbox={false}>
@@ -83,7 +82,7 @@ class AgentsTable extends Component {
 								if(!this.props.data.loading && agents) {
 									agents.map((agent, i) => (
 										<TableRow key={i}>
-											<TableRowColumn style={tableStyles.avatar}>
+											<TableRowColumn className="avatar">
 												{
 													do {
 														if(agent.face_base64)
@@ -92,14 +91,14 @@ class AgentsTable extends Component {
 													}
 												}
 											</TableRowColumn>
-											<TableRowColumn style={tableStyles.fullname}>{agent.name} {agent.lastname}</TableRowColumn>
-											<TableRowColumn style={tableStyles.email}>{agent.email}</TableRowColumn>
+											<TableRowColumn className="fullname">{agent.name}</TableRowColumn>
+											<TableRowColumn className="email">{agent.email}</TableRowColumn>
 											<TableRowColumn>{agent.phones[0]}</TableRowColumn>
 											<TableRowColumn>{agent.role}</TableRowColumn>
 											<TableRowColumn>{agent.supplier.name}</TableRowColumn>
-											<TableRowColumn style={tableStyles.center}>
+											<TableRowColumn className="center">
 												<Plus onClick={this.edit(agent.id)}
-												      style={tableStyles.edit}
+												      className="edit"
 												      hoverColor="blue"/>
 											</TableRowColumn>
 										</TableRow>
@@ -111,7 +110,7 @@ class AgentsTable extends Component {
 					</TableBody>
 					<TableFooter>
 						<TableRow>
-							<TableRowColumn colSpan="3" style={tableStyles.center}>
+							<TableRowColumn colSpan="3" className="center">
 								<Pagination
 									total = { pags }
 									current = { this.props.current }

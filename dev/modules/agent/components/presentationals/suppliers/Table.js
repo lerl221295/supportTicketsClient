@@ -13,7 +13,6 @@ import LinearProgress from 'material-ui/LinearProgress'
 import Plus from 'material-ui/svg-icons/content/create'
 import Avatar from 'material-ui/Avatar'
 import FormEdit from '../../containers/EditSupplier'
-import tableStyles from '../../../../../styles/javascript/tables'
 
 class SupplierTable extends Component {
 	constructor(props){
@@ -54,19 +53,22 @@ class SupplierTable extends Component {
 				<Table>
 					<TableHeader displaySelectAll={false} adjustForCheckbox={false} striped={true}>
 						<TableRow>
-							<TableHeaderColumn style={tableStyles.center}>Nombre</TableHeaderColumn>
-							<TableHeaderColumn style={{...tableStyles.center, ...tableStyles.edit}}>Edit</TableHeaderColumn>
+							<TableHeaderColumn className="center fullname">Nombre</TableHeaderColumn>
+							<TableHeaderColumn className="center">Acerca de</TableHeaderColumn>
+							<TableHeaderColumn className="center edit">Edit</TableHeaderColumn>
 						</TableRow>
 					</TableHeader>
 					<TableBody displayRowCheckbox={false}>
 						{
 							suppliers.map((supplier, i) => (
 								<TableRow key={i}>
-									<TableRowColumn style={tableStyles.center}>{supplier.name}</TableRowColumn>
-									<TableRowColumn style={{...tableStyles.center, ...tableStyles.edit}}>
+									<TableRowColumn className="center fullname">{supplier.name}</TableRowColumn>
+									<TableRowColumn>{supplier.about}</TableRowColumn>
+									<TableRowColumn className="center edit">
 										<Plus onClick={this.edit(supplier.id)}
-										      style={tableStyles.edit}
-										      hoverColor="blue"/>
+										      className="edit"
+										      hoverColor="blue"
+										/>
 									</TableRowColumn>
 								</TableRow>
 							))
@@ -75,7 +77,7 @@ class SupplierTable extends Component {
 					</TableBody>
 					<TableFooter>
 						<TableRow>
-							<TableRowColumn colSpan="3" style={tableStyles.center}>
+							<TableRowColumn colSpan="3" className="center">
 								<Pagination
 									total = { pags }
 									current = { this.props.current }

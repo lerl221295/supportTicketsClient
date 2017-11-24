@@ -11,7 +11,6 @@ import draftToHtml from 'draftjs-to-html';
 import GetAgents from '../../../graphql/querys/agents.graphql'
 import GetGroup from '../../../graphql/querys/group.graphql'
 import GetGroups from '../../../graphql/querys/groups.graphql'
-import stylesForm from '../../../../../styles/javascript/forms'
 
 const initialState = {
 	name: "",
@@ -115,7 +114,7 @@ class ModalForm extends Component {
     <div>
       <Dialog
         title={this.props.title}
-        titleStyle={stylesForm.title}
+        titleClassName={'center-align'}
         open={this.props.open}
         onRequestClose={this.props.close}
         autoScrollBodyContent={true}
