@@ -69,6 +69,7 @@ const renderSelectField = (
 			Input={SelectField}
 			{...input}
 			onChange={(event, index, value) => input.onChange(value)}
+			floatingLabelText={label}
 			{...custom}
 		>
 			{
@@ -113,7 +114,10 @@ const renderSelectReactField = (
 			label={label}
 			{...input}
 			onChange={(value) => input.onChange(value)}
-			onBlur={(e) => input.onBlur(input.value)}
+			onBlur={(e) => {
+				e.preventDefault();
+				//input.onBlur(input.value);
+			}}
 			valueKey="id" labelKey="name"
 			backspaceRemoves={true}
 			autoload={false}
@@ -140,8 +144,8 @@ class FilterForm extends Component {
 	render = () => {
 		const { handleSubmit, pristine, reset, submitting } = this.props
 		return (
-			<Paper>
-				<h2>Filtrar Propiedades</h2>
+			<Paper style={{padding: "1rem"}}>
+				<h2 style={{textAlign: "center"}}>Filtrar Propiedades</h2>
 				<Divider />
 				<form onSubmit={handleSubmit}>
 					<Field
@@ -191,7 +195,7 @@ class FilterForm extends Component {
 					/>
 					<Field
 						Icon={Person}
-						name="priority"
+						name="priorities"
 						component={renderSelectField}
 						label="Prioridades"
 						multiple
@@ -202,8 +206,32 @@ class FilterForm extends Component {
 							{value: "URGENT", text: "Urgente"}
 						]}
 					/>
-					{/*aqui falta poner select para estados y types (igual que el de arriba)
-					pero solicitando las opciones al servidor con un query graphql :D*/}
+					{
+						do {
+							if(!this.props.data.loading && !this.props.data.error)
+									<Field
+										Icon={Person}
+										name="types_keys"
+										component={renderSelectField}
+										label="Tipos"
+										multiple
+										options={this.props.data.ticketTypes.map(({key, label}) => ({value: key, text: label}))}
+									/>
+						}
+					}
+					{
+						do {
+							if(!this.props.data.loading && !this.props.data.error)
+								<Field
+									Icon={Person}
+									name="states_keys"
+									component={renderSelectField}
+									label="Estatus"
+									multiple
+									options={this.props.data.ticketStatus.map(({key, label}) => ({value: key, text: label}))}
+								/>
+						}
+					}
 					<Field
 						Icon={Person}
 						name="due_by"
@@ -216,14 +244,14 @@ class FilterForm extends Component {
 							{value: "TOMORROW", text: "Mañana"}
 						]}
 					/>
-					<div>
+					{/*<div>
 						<button type="submit" disabled={pristine || submitting}>
 							Submit
 						</button>
 						<button type="button" disabled={pristine || submitting} onClick={reset}>
 							Clear Values
 						</button>
-					</div>
+					</div>*/}
 				</form>
 			</Paper>
 		)

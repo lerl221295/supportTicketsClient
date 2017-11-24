@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'react-flexbox-grid'
-import TicketsFilter from './TicketsFilters'
+import TicketsFilter from '../containers/TicketsFilters'
 import TicketsList from '../containers/TicketsList'
 
 class TicketsPanel extends Component {

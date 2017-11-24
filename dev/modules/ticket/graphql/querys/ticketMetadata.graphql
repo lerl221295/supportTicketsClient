@@ -1,0 +1,10 @@
+query getTicketMetadata {
+    ticketTypes{
+        key
+        label
+    }
+    ticketStatus{
+        key
+        label
+    }
+}
