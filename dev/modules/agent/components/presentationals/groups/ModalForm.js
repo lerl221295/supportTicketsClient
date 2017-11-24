@@ -4,6 +4,10 @@ import Dialog from 'material-ui/Dialog'
 import Form from './Form'
 
 import { withApollo } from 'react-apollo'
+
+import { EditorState, ContentState, convertFromHTML, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+
 import GetAgents from '../../../graphql/querys/agents.graphql'
 import GetGroup from '../../../graphql/querys/group.graphql'
 import GetGroups from '../../../graphql/querys/groups.graphql'
@@ -16,7 +20,7 @@ const initialState = {
 	agents: [],
 	notification_hours: "",
 	notification_agent: null,
-	notification_text: ""
+	editorState: EditorState.createEmpty()
 };
 
 @withApollo
@@ -36,7 +40,18 @@ class ModalForm extends Component {
 				console.log("El grupo---", group)
 				return group;
 			});
-			this.setState(group);
+			
+			const blocksFromHTML = convertFromHTML(group.notification_text);
+			
+			const state = ContentState.createFromBlockArray(
+				blocksFromHTML.contentBlocks,
+				blocksFromHTML.entityMap
+			);
+			
+			this.setState({
+				...group,
+				editorState: EditorState.createWithContent(state)
+			});
 		}
 	};
 	
@@ -45,14 +60,17 @@ class ModalForm extends Component {
 	send = event => {
 		event.preventDefault();
 		
-		let {agents, group_scale, notification_agent, ...group} = this.state;
+		let {agents, group_scale, notification_agent, editorState, ...group} = this.state;
 		// Mapeando grupo con atributos que espera el server
 		if (agents.length) group.agents_id = agents.map(agent => agent.id);
 		if (group_scale) group.group_scale_id = group_scale.id;
-		if (notification_agent) group.notification_agent_id = notification_agent.id;
+		if (notification_agent) {
+			group.notification_agent_id = notification_agent.id;
+			group.notification_text = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+		}
 		
-		/*if(!this.props.id) console.log("creando groupe", group);
-		else console.log("actualizando groupe", group);*/
+		/*if(!this.props.id) console.log("creando group", group);
+		else console.log("actualizando group", group);*/
 		
 		this.props.close();
 		this.props.submit({...group, id: this.props.id})
@@ -87,6 +105,12 @@ class ModalForm extends Component {
 	
 	handleReactSelectChange = (name) => (selectValue) => this.setState({[name] : selectValue});
 	
+	handleEditorChange = (editorState) => {
+		this.setState({
+			editorState
+		});
+	};
+	
 	render = () => (
     <div>
       <Dialog
@@ -102,6 +126,7 @@ class ModalForm extends Component {
               close={this.props.close}
               handleChange={this.handleChange}
               handleReactSelectChange={this.handleReactSelectChange}
+              handleEditorChange={this.handleEditorChange}
               clean={this.cleanForm}
               send={this.send}
               searchAgents={this.searchAgents}

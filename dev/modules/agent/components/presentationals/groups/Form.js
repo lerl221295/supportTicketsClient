@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import {  TextField } from 'material-ui'
+import {  TextField, Divider } from 'material-ui'
 import { Row, Col } from 'react-flexbox-grid'
+import { Editor } from 'react-draft-wysiwyg';
 // Íconos
 import Person from 'material-ui/svg-icons/action/account-circle'
 import Description from 'material-ui/svg-icons/action/description'
@@ -10,10 +11,17 @@ import { InputWithIcon, ReactSelectWithIcon, FormButtonGroup } from '../../../..
 
 import stylesForm from '../../../../../styles/javascript/forms'
 
-
 class Form extends Component {
+	constructor(props) {
+		super(props);
+		
+		// Opciones disponibles en el toolbar del editor enriquecido
+		this.toolbar = {
+			options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'emoji', 'image', 'remove', 'history'],
+		};
+	}
 	
-	render = () => {
+		render = () => {
 		return (
       <form style={stylesForm.padding}>
         <Row>
@@ -63,29 +71,26 @@ class Form extends Component {
 			        filterOption={() => (true)}
 			        value={this.props.group_scale}
 		        />
-		        <label>Notificar a agentes del grupo después que el ticket no haya sido tomado por ningún agente del grupo</label>
-		        <InputWithIcon
-			        Icon={Description}
-			        Input={TextField}
-			        type={"number"}
-			        hintText="Ingrese tiempo en horas en que desea avisar a los agentes"
-			        floatingLabelText="Tiempo de notificación"
-			        value={this.props.notification_hours}
-			        name="notification_hours"
-			        onChange={this.props.handleChange}
-			        multiLine={false}
-		        />
-		        <InputWithIcon
-			        Icon={Description}
-			        Input={TextField}
-			        hintText="Ingrese texto del correo a enviar"
-			        floatingLabelText="Mensaje a enviar"
-			        value={this.props.notification_text}
-			        name="notification_text"
-			        onChange={this.props.handleChange}
-			        multiLine={true}
-			        rowsMax={3}
-		        />
+		        <br/><Divider /><br/>
+		        <strong><label>Notificación luego que ha pasado un tiempo sin que un ticket sea tomado por el grupo</label></strong>
+		        <Row middle={"xs"} end={"xs"}>
+			        <Col xs={6}>
+				        <h5 style={{fontSize: '0.7rem'}}>
+					        Si un ticket permanece sin asignar por más de...
+				        </h5>
+			        </Col>
+			        <Col xs={6}>
+				        <TextField
+				          type={"number"}
+				          hintText="Ingrese tiempo en horas en que desea avisar a los agentes"
+				          floatingLabelText="Tiempo de notificación"
+				          value={this.props.notification_hours}
+				          name="notification_hours"
+				          onChange={this.props.handleChange}
+				          multiLine={false}
+				        />
+			        </Col>
+		        </Row>
 		        <ReactSelectWithIcon
 			        Icon={People}
 			        label={"Agente que será notificado"}
@@ -96,6 +101,12 @@ class Form extends Component {
 			        autoload={false}
 			        filterOption={() => (true)}
 			        value={this.props.notification_agent}
+		        />
+		        <Editor
+			        toolbar={this.toolbar}
+			        editorState={this.props.editorState}
+			        editorClassName="rich-editor"
+			        onEditorStateChange={this.props.handleEditorChange}
 		        />
           </Col>
 	        <FormButtonGroup

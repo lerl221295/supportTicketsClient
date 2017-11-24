@@ -18,8 +18,10 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import 'react-select/dist/react-select.css';
 import  'flexboxgrid/css/flexboxgrid.css';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './styles/css/material-select.scss'
 import './styles/css/styles.css';
+import './styles/css/richEditor.scss';
 
 injectTapEventPlugin();
 

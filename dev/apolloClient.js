@@ -10,6 +10,11 @@ import { getUser } from './common/utils/Authenticate'
 
 let host = window.location.host.split(".")[0];
 
+/*host = do {
+	if (host == "192") 'sidor'
+	else host;
+};*/
+
 export const API_URL = `${host}.localhost:3000`;
 
 const wsLink = new WebSocketLink({
