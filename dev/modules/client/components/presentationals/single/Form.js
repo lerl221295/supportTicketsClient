@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import RaisedButton from 'material-ui/RaisedButton'
-import TextField from 'material-ui/TextField'
-import FlatButton from 'material-ui/FlatButton'
+import { RaisedButton, TextField, FlatButton, Paper } from 'material-ui'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import Person from 'material-ui/svg-icons/action/account-circle'
 import Organization from 'material-ui/svg-icons/communication/business'
@@ -26,6 +24,7 @@ class Form extends Component {
 
   render = () => {
     return (
+      <Paper>
         <form className="padding">
           <Row>
             <Col xs={12} sm={12} md={6} lg={6}>
@@ -110,13 +109,12 @@ class Form extends Component {
               />
             </Col>
             <FormButtonGroup
-              close={this.props.close}
-              clean={this.props.clean}
+              cancel={this.props.cancel}
               send={this.props.send}
             />
           </Row>
         </form>
-      
+      </Paper>
     )
   }
 }

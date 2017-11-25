@@ -2,14 +2,14 @@ import React from 'react'
 import { Row, Col } from 'react-flexbox-grid'
 import {FlatButton} from "material-ui";
 
-const FormButtonGroup = ({close, clean, send}) => (
+const FormButtonGroup = ({cancel, send}) => (
 	<Col className={'button-group'} xs={12}>
 		<Row center={"xs"}>
 			<Col xs={3}>
 				<FlatButton
 					label="Cancelar"
 					primary={true}
-					onClick={()=> { close(); clean()} }
+					onClick={cancel}
 				/>
 			</Col>
 			<Col xs={3}>
