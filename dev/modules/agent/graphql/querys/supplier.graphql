@@ -4,7 +4,7 @@ query GetSupplier($id: ID!) {
 		...suppliersFields
 		agents {
 			id
-			name
+			name: fullName
 		}
 	}
 }

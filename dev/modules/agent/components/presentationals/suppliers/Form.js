@@ -8,14 +8,12 @@ import People from 'material-ui/svg-icons/social/people'
 // Componentes comunes
 import { InputWithIcon, ReactSelectWithIcon, FormButtonGroup } from '../../../../../common/components'
 
-import stylesForm from '../../../../../styles/javascript/forms'
-
 
 class Form extends Component {
 	
 	render = () => {
 		return (
-      <form style={stylesForm.padding}>
+      <form className={'padding'}>
         <Row>
 	        <Col xs={12} >
             <InputWithIcon
@@ -50,11 +48,9 @@ class Form extends Component {
 	            placeholder="Seleccione un agent"
 	            autoload={false}
 	            filterOption={() => (true)}
-	            mu
             />
           </Col>
 	        <FormButtonGroup
-		        stylesForm={stylesForm}
 		        close={this.props.close}
 		        clean={this.props.clean}
 		        send={this.props.send}

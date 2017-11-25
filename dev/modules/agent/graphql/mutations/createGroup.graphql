@@ -1,0 +1,8 @@
+#import "../fragments/groupsFragment.graphql"
+mutation CreateGroup($group: GroupInput!){
+	createGroup(group: $group){
+		...groupsFields
+	}
+}
+
+

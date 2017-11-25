@@ -13,27 +13,11 @@ import People from 'material-ui/svg-icons/social/people'
 // Componentes comunes
 import { InputWithIcon, ReactSelectWithIcon, AvatarImg, FormButtonGroup } from '../../../../../common/components'
 
-import stylesForm from '../../../../../styles/javascript/forms'
-
 
 class Form extends Component {
-	static defaultProps = {
-		name: "",
-		lastname: "",
-		role: "",
-		sex: null,
-		email: "",
-		phones: "",
-		about: "",
-		profession: "",
-		face_base64: null,
-		group: "",
-		supplier_id: null
-	};
-	
 	render = () => {
 		return (
-      <form style={stylesForm.padding}>
+      <form className="padding">
         <Row>
 	        {/*COLUMNA DE LA IZQUIERDA*/}
 	        <Col xs={12} sm={12} md={6} lg={6}>
@@ -148,7 +132,6 @@ class Form extends Component {
             />
           </Col>
 	        <FormButtonGroup
-		        stylesForm={stylesForm}
 		        close={this.props.close}
 		        clean={this.props.clean}
 		        send={this.props.send}

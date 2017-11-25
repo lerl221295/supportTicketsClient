@@ -8,7 +8,6 @@ import { withApollo } from 'react-apollo'
 import GetAgent from '../../../graphql/querys/agent.graphql'
 import GetSuppliersNames from '../../../graphql/querys/suppliersNames.graphql'
 import GetGroupsNames from '../../../graphql/querys/groupsNames.graphql'
-import stylesForm from '../../../../../styles/javascript/forms'
 
 const initialState = {
 	name: "",
@@ -16,13 +15,12 @@ const initialState = {
 	role: "",
 	sex: "",
 	email: "",
-	phones: "",
+	phones: [],
 	about: "",
 	profession: "",
-	face_base64: null,
+	face_base64: "",
 	avatar_filename: "Seleccione una imagen ...",
-	groups_id: [],
-	supplier_id: "",
+	groups: [],
 	supplier: null
 };
 
@@ -56,22 +54,16 @@ class ModalForm extends Component {
 	
 	send = event => {
 		event.preventDefault();
-		let agent = this.state;
+		
+		let {groups, supplier, ...agent} = this.state;
+		// Mapeando grupo con atributos que espera el server
+		if (groups.length) agent.groups_id = groups.map(group => group.id);
+		if (supplier) agent.supplier_id = supplier.id;
+		// Los teléfonos van en un array
 		agent.phones = agent.phones.replace(/\s/g, '').split(';');
-		// Si no seleccionó ningún grupo, elimino groups
-		if (agent.groups) {
-			agent.groups_id = agent.groups.map(group => group.id);
-			delete agent.groups;
-		}
-		else delete agent.groups_id;
-		// Si no seleccionó ningún proveedor, elimino el supllier_id
-		if (!agent.supplier) delete agent.supplier_id;
-		// Si seleccionó un agente, entonces mapeo la data
-		else agent.supplier_id = agent.supplier.id;
-		// Siempre debo eliminar el supplier y el avatar_filename
-		// porque no están definidos en graph como inputs
-		delete agent.supplier;
+		// El filename se elimina siempre
 		delete agent.avatar_filename;
+		
 		if(!this.props.id) console.log("creando agente", agent);
 		else console.log("actualizando agente", agent);
 		this.props.close();
@@ -89,7 +81,7 @@ class ModalForm extends Component {
 		let reader = new FileReader();
 		reader.readAsDataURL(file);
 		reader.onload = () => this.setState({face_base64: reader.result, avatar_filename: file.name});
-	}
+	};
 	
 	searchEntity = (Query, entity) => (search_text) => {
 		return (
@@ -127,7 +119,7 @@ class ModalForm extends Component {
     <div>
       <Dialog
         title={this.props.title}
-        titleStyle={stylesForm.title}
+        titleClassName={"center-align"}
         open={this.props.open}
         onRequestClose={this.props.close}
         autoScrollBodyContent={true}

@@ -1,3 +1,8 @@
+@import "richEditor";
+@import "material-select";
+@import "create-edit-forms";
+@import "tables";
+
 html {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -93,9 +98,6 @@ input[name='undefined_filename']{
 .commentBox{
     float:right;
 }
-.tableBox{
-
-}
 
 .tableElm ~ div {
   width: 100%;
@@ -111,4 +113,18 @@ input[name='undefined_filename']{
     bottom: 20px;
     left: auto;
     position: fixed;
+}
+
+// Utilidades
+
+.center-align {
+  text-align: center;
+}
+
+.right-align {
+  text-align: right;
+}
+
+.left-align {
+  text-align: left;
 }
