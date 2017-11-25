@@ -14,6 +14,7 @@ const initialState = {
   phones: "",
   email: "",
   face_base64: null,
+  avatar_filename: "Seleccione una imagen ...",
   address: "",
   organization_id: null,
   about: "",
@@ -32,10 +33,7 @@ class ModalForm extends Component {
 				fetchPolicy: 'network-only',
 				variables: {id: nextProps.edit}
 			}).then(response => {
-				//le quito el __typename para que la mutacion posterior funcione bien
 				let {__typename, ...client} = response.data.client;
-				//delete client.organization;//no pude sacarlo con el destructuring :c
-				//client.organization_id = response.data.client.organization.id;
 				return client;
 			});
 			this.setState({
@@ -45,21 +43,18 @@ class ModalForm extends Component {
 		}
 	};
 
-  cleanForm = () => this.setState({client: initialState});
+  cleanForm = () => this.setState(initialState);
 
-  enviar = event => {
+  send = event => {
     event.preventDefault();
     let client = this.state;
     client.phones = client.phones.replace(/\s/g, '').split(',');
     client.organization_id = client.organization.id;
     delete client.organization;
-    if(!this.props.edit) console.log("creando cliente", client);
-    else console.log("actualizando cliente", client);
+    delete client.avatar_filename;
     this.props.close();
     this.props.submit({...client, id: this.props.edit})
       .then(response => {
-        //if(!this.props.edit) toast.success(response.data.createCliente);
-        //else toast.success(response.data.updateCliente);
         if(this.props.edit) this.props.notificate("Cliente actualizado con exito!");
         else this.props.notificate("Cliente guardado con exito!");
         this.cleanForm()
@@ -70,18 +65,14 @@ class ModalForm extends Component {
     this.props.client.query({
       query: GetOrganizationsNames,
       variables: {search_text}
-    }).then( ({data: {organizations}} ) => (
-      organizations.nodes.map(organization => ({
-        id: organization.id,
-        name: organization.name
-      }))
-    )).then(options =>  ({options}) )
+    })
+    .then( ({data: {organizations}} ) => ({options: organizations.nodes}))
   )
 
   changeImage = ({target: { files: [file] } }) => {
     let reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => this.setState({ face_base64: reader.result });
+    reader.onload = () => this.setState({ face_base64: reader.result, avatar_filename: file.name });
   }
 
   handleChange = e =>  this.setState( { [e.target.name]: e.target.value } );
@@ -97,13 +88,14 @@ class ModalForm extends Component {
         open={this.props.open}
         onRequestClose={this.props.close}
         autoScrollBodyContent={true}
+        titleClassName="center-align"
       >
         <Form {...this.state}
-          id={this.props.edit}
+          //id={this.props.edit}
           close={this.props.close}
           handleChange={this.handleChange}
           clean={this.cleanForm}
-          enviar={this.enviar}
+          send={this.send}
           changeImage={this.changeImage}
           handleSelectChange={this.handleSelectChange}
           handleReactSelectChange={this.handleReactSelectChange}

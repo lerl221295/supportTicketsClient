@@ -70,8 +70,9 @@ class TicketList extends Component {
 					
 				</Row>
 				<Row center="xs">
-					<Col xs={6} md={6} sm={6}>
+					<Col xs={12} md={12} sm={12}>
 						<FlatButton
+							style={{width: "100%"}}
 							label="Cargar mas"
 							primary={true}
 							onClick={this.props.loadMoreTickets}

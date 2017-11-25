@@ -30,7 +30,7 @@ class ModalForm extends Component {
 
   cleanForm = () => this.setState({organization: initialState.organization});
 
-  enviar = event => {
+  send = event => {
     event.preventDefault();
     let { organization } = this.state;
     organization.domains = organization.domains.replace(/\s/g, '').split(',');
@@ -60,13 +60,14 @@ class ModalForm extends Component {
         onRequestClose={this.props.close}
         autoScrollBodyContent={true}
         contentStyle={{width: '40%'}}
+        titleClassName="center-align"
       >
         <Form
             {...this.state.organization}
             close={this.props.close}
             handleChange={this.handleChange}
             clean={this.cleanForm}
-            enviar={this.enviar}
+            send={this.send}
         />
       </Dialog>
     </div>

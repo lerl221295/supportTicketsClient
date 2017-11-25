@@ -139,8 +139,7 @@ class FilterForm extends Component {
 			query: GraphqlQuery,
 			variables: {search_text}
 		})
-		.then( ({data} ) => ( data[key].nodes ))
-		.then(options =>  ({options}) )
+		.then( ({data} ) => ({options: data[key].nodes}))
 	);
 
 	render = () => {

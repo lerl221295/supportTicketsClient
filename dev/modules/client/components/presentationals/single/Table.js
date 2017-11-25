@@ -57,13 +57,12 @@ class ClientesTable extends Component {
         <Table>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
-              <TableHeaderColumn>Foto</TableHeaderColumn>
-              <TableHeaderColumn>Nombre</TableHeaderColumn>
-              <TableHeaderColumn>Apellido</TableHeaderColumn>
-              <TableHeaderColumn>Email</TableHeaderColumn>
+              <TableHeaderColumn className="avatar">Foto</TableHeaderColumn>
+              <TableHeaderColumn className="fullname">Nombre</TableHeaderColumn>
+              <TableHeaderColumn className="email">Email</TableHeaderColumn>
               <TableHeaderColumn>Telefono</TableHeaderColumn>
               <TableHeaderColumn>Organizacion</TableHeaderColumn>
-              <TableHeaderColumn>Edit</TableHeaderColumn>
+              <TableHeaderColumn className="center">Edit</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
@@ -73,7 +72,7 @@ class ClientesTable extends Component {
 								else {
 									clients.map((client, i) => (
                     					<TableRow key={i}>
-                      						<TableRowColumn>
+                      						<TableRowColumn className="avatar">
 												{
 													do {
 														if(client.face_base64)
@@ -82,12 +81,11 @@ class ClientesTable extends Component {
 													}
 												}
 											</TableRowColumn>
-										  	<TableRowColumn>{client.name}</TableRowColumn>
-										  	<TableRowColumn>{client.lastname}</TableRowColumn>
-										  	<TableRowColumn>{client.email}</TableRowColumn>
+										  	<TableRowColumn className="fullname">{`${client.name} ${client.lastname}`}</TableRowColumn>
+										  	<TableRowColumn className="email">{client.email}</TableRowColumn>
 										  	<TableRowColumn>{client.phones[0]}</TableRowColumn>
 										  	<TableRowColumn>{client.organization.name}</TableRowColumn>
-										  	<TableRowColumn>
+										  	<TableRowColumn className="center">
 												<Plus onClick={this.edit(client.id)}
 													  style={{cursor: "pointer"}}
 													  hoverColor="blue"/>
