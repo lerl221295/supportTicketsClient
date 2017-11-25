@@ -4,9 +4,13 @@ import App from './modules/app/components/AppContainer'
 import Tickets from './modules/ticket/components/containers/TicketsContainer'
 import TicketDetails from './modules/ticket/components/containers/TicketDetails'
 import LoginPage from './modules/login/LoginPage'
+
 import ClientsContainer from './modules/client/components/containers/ClientsContainer'
 import CreateClient from './modules/client/components/containers/CreateClient'
 import EditClient from './modules/client/components/containers/EditClient'
+import CreateOrganization from './modules/client/components/containers/CreateOrganization'
+import EditOrganization from './modules/client/components/containers/EditOrganization'
+
 import AgentsContainer from './modules/agent/components/containers/AgentsContainer'
 import Doc from './modules/doc/Doc'
 
@@ -24,6 +28,8 @@ class Routes extends Component {
 				<Route path="clients">
 					<IndexRoute component={() => <ClientsContainer limit={7}/>} />
 					<Route path="new" component={CreateClient}/>
+					<Route path="organizations/new" component={CreateOrganization}/>
+					<Route path="organizations/:id" component={EditOrganization}/>
 					<Route path=":id" component={EditClient}/>
 				</Route>
 				<Route path="agents" component={() => <AgentsContainer limit={7}/>} />

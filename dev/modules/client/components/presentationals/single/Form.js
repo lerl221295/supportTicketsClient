@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { RaisedButton, TextField, FlatButton, Paper } from 'material-ui'
+import { TextField, Paper } from 'material-ui'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import Person from 'material-ui/svg-icons/action/account-circle'
 import Organization from 'material-ui/svg-icons/communication/business'

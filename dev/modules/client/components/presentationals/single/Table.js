@@ -16,7 +16,7 @@ import Face from 'material-ui/svg-icons/action/face'
 
 
 class ClientesTable extends Component {
-	constructor(props){
+	/*constructor(props){
 		super(props);
 		this.state = {
 			modalOpen : false,
@@ -24,7 +24,7 @@ class ClientesTable extends Component {
 		}
 	}
 		
-	closeModal = event => this.setState({ modalOpen : false });
+	closeModal = event => this.setState({ modalOpen : false });*/
 	
 	componentWillReceiveProps = (nextProps) => {
 		if(nextProps.search !== "") this.setState({current: 1});

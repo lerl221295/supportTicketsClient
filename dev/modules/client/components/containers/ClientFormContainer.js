@@ -19,12 +19,7 @@ const initialState = {
 
 @withApollo
 class FormContainer extends Component {
-	constructor(props){
-		super(props);
-		console.log("FormContainer", props);
-	}
-
-    state = initialState;
+	state = initialState;
 
     componentWillMount = async () => {
         if (this.props.edit) { //si es el formulario en edicion
