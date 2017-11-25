@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withApollo } from 'react-apollo'
 import { Field, reduxForm } from 'redux-form'
-import { Paper, Divider} from 'material-ui'
+import { Paper, Divider, FlatButton } from 'material-ui'
 import ReactSelectWithIcon from '../../../../common/components/ReactSelectWithIcon'
 import InputWithIcon from '../../../../common/components/InputWithIcon'
 import {
@@ -14,12 +14,14 @@ import {
 } from 'material-ui'
 import Person from 'material-ui/svg-icons/action/account-circle'
 import Organization from 'material-ui/svg-icons/communication/business'
-
+import { Row, Col } from 'react-flexbox-grid'
 import GetOrganizationsNames from '../../graphql/querys/organizationsNames.graphql'
 import GetGroupsNames from '../../graphql/querys/groupsNames.graphql'
 import GetSuppliersNames from '../../graphql/querys/suppliersNames.graphql'
 import GetAgentsNames from '../../graphql/querys/agentsNames.graphql'
 import GetClientsNames from '../../graphql/querys/clientsNames.graphql'
+
+import { PRIORITIES, DUE_BY } from '../../../../common/utils/consts'
 
 const renderTextField = (
 	{
@@ -199,12 +201,7 @@ class FilterForm extends Component {
 						component={renderSelectField}
 						label="Prioridades"
 						multiple
-						options={[
-							{value: "LOW", text: "Baja"},
-							{value: "MEDIUM", text: "Media"},
-							{value: "HIGH", text: "Alta"},
-							{value: "URGENT", text: "Urgente"}
-						]}
+						options={PRIORITIES}
 					/>
 					{
 						do {
@@ -238,20 +235,19 @@ class FilterForm extends Component {
 						component={renderSelectField}
 						label="Hecho en"
 						multiple
-						options={[
-							{value: "OVERDUE", text: "Atrasado"},
-							{value: "TODAY", text: "Hoy"},
-							{value: "TOMORROW", text: "Mañana"}
-						]}
+						options={DUE_BY}
 					/>
-					{/*<div>
-						<button type="submit" disabled={pristine || submitting}>
-							Submit
-						</button>
-						<button type="button" disabled={pristine || submitting} onClick={reset}>
-							Clear Values
-						</button>
-					</div>*/}
+					<Col xs={12} md={12} sm={12}>
+						<Row center="xs">
+							<Col xs={6} md={6} sm={6}>
+								<FlatButton
+									label="Limpiar"
+									primary={true}
+									onClick={reset}
+								/>
+							</Col>
+						</Row>
+					</Col>
 				</form>
 			</Paper>
 		)

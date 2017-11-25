@@ -5,6 +5,7 @@ import {grey400, cyan600, white} from 'material-ui/styles/colors';
 import Face from 'material-ui/svg-icons/action/face'
 import { Row, Col } from 'react-flexbox-grid'
 import _ from 'lodash'
+import Item from './TicketItemList'
 
 const styles = {
 	subheader: {
@@ -49,14 +50,15 @@ class TicketList extends Component {
 								tickets.map((ticket, i) =>
 									<div key={i}>
 										<ListItem
-											leftAvatar={
-												do {
-													if(!ticket.client.face_base64) <Avatar icon={<Face/>} />
-													else <Avatar src={ticket.client.face_base64} />
-												}
-											}
-											primaryText={`#${ticket.number}: ${ticket.title}`}
-											secondaryText={ticket.client.fullName}
+											containerElement={<Item {...ticket}/>}
+											// leftAvatar={
+											// 	do {
+											// 		if(!ticket.client.face_base64) (<Avatar icon={<Face/>} />)
+											// 		else (<Avatar src={ticket.client.face_base64} />)
+											// 	}
+											// }
+											// primaryText={`#${ticket.number}: ${ticket.title}`}
+											// secondaryText={ticket.client.fullName}
 											//rightIconButton={rightIconMenu}
 										/>
 										<Divider inset={true} />
@@ -65,7 +67,10 @@ class TicketList extends Component {
 							}
 						</List>
 					</Col>
-					<Col xsOffset={5} xs={4} md={4} sm={4}>
+					
+				</Row>
+				<Row center="xs">
+					<Col xs={6} md={6} sm={6}>
 						<FlatButton
 							label="Cargar mas"
 							primary={true}
