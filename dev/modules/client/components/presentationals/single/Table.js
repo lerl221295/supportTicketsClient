@@ -16,20 +16,6 @@ import Face from 'material-ui/svg-icons/action/face'
 
 
 class ClientesTable extends Component {
-	/*constructor(props){
-		super(props);
-		this.state = {
-			modalOpen : false,
-			id_edit: 0
-		}
-	}
-		
-	closeModal = event => this.setState({ modalOpen : false });*/
-	
-	componentWillReceiveProps = (nextProps) => {
-		if(nextProps.search !== "") this.setState({current: 1});
-	};
-	
 	render = () => {
 		let loading = do {
 			if (this.props.data.loading) { <LinearProgress mode="indeterminate" /> }

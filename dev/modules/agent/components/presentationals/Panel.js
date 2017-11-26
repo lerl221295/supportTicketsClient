@@ -78,10 +78,10 @@ class Panel extends Component {
 						<SearchBox search={this.search("agents")}/>
 						<AgentsTable
 							data={this.props.agents}
-							search={this.props.search}
+							search={this.props.agents.search_text}
 							limit={this.props.limit}
-							current={this.state.table_pag}
-							changePag={this.changePag}
+							current={this.state.agents.table_pag}
+							changePag={this.changePag("agents")}
 							edit={(id) => event => this.props.push(`agents/${id}`)}
 						/>
 					</Tab>

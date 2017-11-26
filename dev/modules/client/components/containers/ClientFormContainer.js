@@ -39,8 +39,13 @@ class FormContainer extends Component {
     };
 
     cleanAndBack = () => {
-    	this.setState(initialState);
-    	this.props.goBack();
+        this.setState(initialState);
+        this.props.goBack();
+    };
+
+    cancel = event => {
+    	event.preventDefault();
+    	this.cleanAndBack();
     };
 
     send = event => {
@@ -59,11 +64,6 @@ class FormContainer extends Component {
             })
     };
 
-    cancel = event => {
-    	event.preventDefault();
-    	this.cleanAndBack();
-    };
-
     searchOrganizations = (search_text) => (
         this.props.client.query({
             query: GetOrganizationsNames,
@@ -78,9 +78,7 @@ class FormContainer extends Component {
         reader.onload = () => this.setState({ face_base64: reader.result, avatar_filename: file.name });
     };
 
-    handleChange = e => this.setState({
-        [e.target.name]: e.target.value 
-    });
+    handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
     handleSelectChange = select_name => (e, i, value) => this.setState({
         [select_name]: value 

@@ -9,7 +9,8 @@ import Organizations from '../../graphql/querys/organizations.graphql'
 const formWithRedux = connect(null, { goBack, openAlert })(FormContainer);
 
 export default graphql(UpdateOrganization, {
-  props: ({ mutate, ownProps: { routeParams } }) => ({
+  props: ({ mutate, ownProps: { routeParams: {id} } }) => ({
+    edit: id,
     submit: (organization) => mutate({ 
     	variables: { organization },
     	//refetchQueries: ['GetClients'] //ya no te necesito xD
@@ -37,7 +38,6 @@ export default graphql(UpdateOrganization, {
     			//console.log(e);
     		}
     	}
-    }),
-    edit: routeParams.id
+    })
   })
 })(formWithRedux)

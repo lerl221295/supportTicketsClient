@@ -9,7 +9,8 @@ import Clients from '../../graphql/querys/clients.graphql'
 const formWithRedux = connect(null, { goBack, openAlert })(FormContainer);
 
 export default graphql(UpdateClient, {
-  props: ({ mutate, ownProps: { routeParams } }) => ({
+  props: ({ mutate, ownProps: { routeParams: {id} } }) => ({
+    edit: id,
     submit: (client) => mutate({ 
     	variables: { client },
     	//refetchQueries: ['GetClients'] //ya no te necesito xD
@@ -42,7 +43,6 @@ export default graphql(UpdateClient, {
     			//console.log(e);
     		}
     	}
-    }),
-    edit: routeParams.id
+    })    
   })
 })(formWithRedux)

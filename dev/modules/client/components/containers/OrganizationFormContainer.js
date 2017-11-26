@@ -35,6 +35,11 @@ class FormContainer extends Component {
         this.props.goBack();
     };
 
+    cancel = event => {
+        event.preventDefault();
+        this.cleanAndBack();
+    };
+
     send = event => {
         event.preventDefault();
         let organization = this.state;
@@ -47,14 +52,7 @@ class FormContainer extends Component {
             })
     };
 
-    cancel = event => {
-        event.preventDefault();
-        this.cleanAndBack();
-    };
-
-    handleChange = e => this.setState({
-        [e.target.name]: e.target.value
-    });
+    handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
     render = () => ( 
         <Form

@@ -15,22 +15,6 @@ import Avatar from 'material-ui/Avatar'
 import FormEdit from '../../containers/EditSupplier'
 
 class SupplierTable extends Component {
-	constructor(props){
-		super(props);
-		this.state = {
-			modalOpen : false,
-			id_edit: 0
-		}
-	}
-	
-	edit = id => event =>  this.setState({id_edit: id, modalOpen : true});
-	
-	closeModal = event => this.setState({ modalOpen : false });
-	
-	componentWillReceiveProps = (nextProps) => {
-		if(nextProps.search !== "") this.setState({current: 1});
-	};
-	
 	render = () => {
 		let loading = do {
 			if (this.props.data.loading) { <LinearProgress mode="indeterminate" /> }

@@ -15,10 +15,6 @@ import Avatar from 'material-ui/Avatar';
 import Face from 'material-ui/svg-icons/action/face'
 
 class OrganizationsTable extends Component {
-	componentWillReceiveProps = (nextProps) => {
-		if(nextProps.search !== "") this.setState({current: 1});
-	};
-	
 	render = () => {
 		let loading = do {
 			if (this.props.data.loading) { <LinearProgress mode="indeterminate" /> }
