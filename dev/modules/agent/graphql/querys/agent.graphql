@@ -2,6 +2,8 @@
 query GetAgent($id : ID!) {
 	agent(id: $id){
 		...agentsFields
+		name
+		lastname
 		sex
 		groups {
 			id,

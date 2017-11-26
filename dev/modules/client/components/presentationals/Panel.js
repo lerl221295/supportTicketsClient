@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import {Tabs, Tab} from 'material-ui/Tabs'
-import {Avatar, Snackbar} from "material-ui";
+import {Avatar, Snackbar, Tabs, Tab} from "material-ui";
 import { pink400 } from 'material-ui/styles/colors';
 import Person from 'material-ui/svg-icons/social/person'
 import Organization from 'material-ui/svg-icons/communication/business'
 import { WrappedSpeedDial, ServiceFail, SearchBox } from '../../../../common/components'
-import FormCreateOrganization from '../containers/CreateOrganization'
 import ClientsTable from './single/Table'
 import OrganizationsTable from './organizations/Table'
 

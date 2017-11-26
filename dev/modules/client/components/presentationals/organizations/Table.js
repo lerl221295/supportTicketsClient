@@ -15,14 +15,6 @@ import Avatar from 'material-ui/Avatar';
 import Face from 'material-ui/svg-icons/action/face'
 
 class OrganizationsTable extends Component {
-	/*constructor(props){
-		super(props);
-		this.state = {
-			modalOpen : false,
-			editing: null
-		}
-	}*/
-	
 	componentWillReceiveProps = (nextProps) => {
 		if(nextProps.search !== "") this.setState({current: 1});
 	};

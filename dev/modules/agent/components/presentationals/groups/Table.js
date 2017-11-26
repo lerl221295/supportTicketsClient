@@ -15,18 +15,6 @@ import Avatar from 'material-ui/Avatar'
 import FormEdit from '../../containers/EditGroup'
 
 class SupplierTable extends Component {
-	constructor(props){
-		super(props);
-		this.state = {
-			modalOpen : false,
-			id_edit: 0
-		}
-	}
-	
-	edit = id => event =>  this.setState({id_edit: id, modalOpen : true});
-	
-	closeModal = event => this.setState({ modalOpen : false });
-	
 	componentWillReceiveProps = (nextProps) => {
 		if(nextProps.search !== "") this.setState({current: 1});
 	};
@@ -64,7 +52,7 @@ class SupplierTable extends Component {
 									<TableRowColumn className={"center fullname"}>{group.name}</TableRowColumn>
 									<TableRowColumn>{group.about}</TableRowColumn>
 									<TableRowColumn className={"center edit"}>
-										<Plus onClick={this.edit(group.id)}
+										<Plus onClick={this.props.edit(group.id)}
 										      className="edit"
 										      hoverColor="blue"/>
 									</TableRowColumn>
@@ -86,14 +74,6 @@ class SupplierTable extends Component {
 						</TableRow>
 					</TableFooter>
 				</Table>
-				<FormEdit
-					title = "Actualizar datos del grupo"
-					open = {this.state.modalOpen}
-					close = {this.closeModal}
-					id = {this.state.id_edit}
-					notificate = {this.props.notificate}
-					limit = {this.props.limit}
-				/>
 			</div>
 		)
 	}

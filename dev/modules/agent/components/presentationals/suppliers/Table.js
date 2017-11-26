@@ -65,7 +65,7 @@ class SupplierTable extends Component {
 									<TableRowColumn className="center fullname">{supplier.name}</TableRowColumn>
 									<TableRowColumn>{supplier.about}</TableRowColumn>
 									<TableRowColumn className="center edit">
-										<Plus onClick={this.edit(supplier.id)}
+										<Plus onClick={this.props.edit(supplier.id)}
 										      className="edit"
 										      hoverColor="blue"
 										/>
@@ -88,14 +88,6 @@ class SupplierTable extends Component {
 						</TableRow>
 					</TableFooter>
 				</Table>
-				<FormEdit
-					title = "Actualizar datos del proveedor"
-					open = {this.state.modalOpen}
-					close = {this.closeModal}
-					id = {this.state.id_edit}
-					notificate = {this.props.notificate}
-					limit = {this.props.limit}
-				/>
 			</div>
 		)
 	}

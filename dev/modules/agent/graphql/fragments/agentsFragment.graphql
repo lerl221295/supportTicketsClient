@@ -1,6 +1,5 @@
 fragment agentsFields on Agent {
     id,
-    name: fullName,
     role,
     email,
     phones,

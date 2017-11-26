@@ -12,6 +12,13 @@ import CreateOrganization from './modules/client/components/containers/CreateOrg
 import EditOrganization from './modules/client/components/containers/EditOrganization'
 
 import AgentsContainer from './modules/agent/components/containers/AgentsContainer'
+import CreateAgent from './modules/agent/components/containers/CreateAgent'
+import EditAgent from './modules/agent/components/containers/EditAgent'
+import CreateSupplier from './modules/agent/components/containers/CreateSupplier'
+import EditSupplier from './modules/agent/components/containers/EditSupplier'
+import EditGroup from './modules/agent/components/containers/EditGroup'
+import CreateGroup from './modules/agent/components/containers/CreateGroup'
+
 import Doc from './modules/doc/Doc'
 
 const notFound = () => <h1> not found </h1>
@@ -32,7 +39,15 @@ class Routes extends Component {
 					<Route path="organizations/:id" component={EditOrganization}/>
 					<Route path=":id" component={EditClient}/>
 				</Route>
-				<Route path="agents" component={() => <AgentsContainer limit={7}/>} />
+				<Route path="agents">
+					<IndexRoute component={AgentsContainer} />
+					<Route path="new" component={CreateAgent}/>
+					<Route path="suppliers/new" component={CreateSupplier}/>
+					<Route path="suppliers/:id" component={EditSupplier}/>
+					<Route path="groups/new" component={CreateGroup}/>
+					<Route path="groups/:id" component={EditGroup}/>
+					<Route path=":id" component={EditAgent}/>
+				</Route>
 				<Route path="doc" component={Doc} />
 				<Route path="*" component={notFound}/>
 			</Route>
