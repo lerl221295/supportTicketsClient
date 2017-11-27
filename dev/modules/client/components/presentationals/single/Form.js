@@ -80,7 +80,7 @@ class Form extends Component {
                 name="address"
                 onChange={this.props.handleChange}
                 multiLine={true}
-                rows={2}
+                //rows={2}
                 rowsMax={6}
               />
               <InputWithIcon
@@ -92,7 +92,7 @@ class Form extends Component {
                   name="about"
                   onChange={this.props.handleChange}
                   multiLine={true}
-                  rows={2}
+                  //rows={2}
                   rowsMax={6}
               />
               <ReactSelectWithIcon
