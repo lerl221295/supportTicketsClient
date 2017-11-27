@@ -1,0 +1,10 @@
+fragment statusAndTypes on TicketMetadata {
+	ticketTypes: types_values {
+        key
+        label
+    }
+    ticketStatus: status_values {
+        key
+        label
+    }
+}

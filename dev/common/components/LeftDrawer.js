@@ -27,7 +27,7 @@ const LeftDrawer = (props) => {
       avatar: {
           div: {
               padding: '15px 0 20px 15px',
-              backgroundImage: 'url(images/material_bg.png)',
+              backgroundImage: 'url(/images/material_bg.png)',
               height: 45
           },
           icon: {
@@ -54,7 +54,7 @@ const LeftDrawer = (props) => {
           Support Admin
         </div>
         <div style={styles.avatar.div}>
-          <Avatar src="images/user.png"
+          <Avatar src="/images/user.png"
                   size={50}
                   style={styles.avatar.icon}/>
           <span style={styles.avatar.span}>{props.username}</span>

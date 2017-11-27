@@ -1,0 +1,75 @@
+#import "../fragments/ticketStatusAndTypes.graphql"
+#import "../fragments/ticketsFragment.graphql"
+query GetTicketDetailsAndMetadata($number: Int!) {
+	ticket(number: $number) {
+		...ticketsFields
+		response_by
+		next_states {
+			key
+			label
+		}
+		client {
+			email
+			phones
+			address
+			organization {
+				id
+				name
+			}
+			devices {
+				code
+				name
+			}
+		}
+		agent {
+			face_base64
+			email
+			profession
+		}
+		group {
+			id
+			name
+			group_scale {
+				name
+			}
+		}
+		supplier {
+			id
+			name
+		}
+		tasks {
+			text
+			done
+		}
+	}
+	ticketMetadata {
+		...statusAndTypes
+		custom_fields {
+			type 
+			key
+			position
+			label
+			... on SelectField {
+				options {
+					label
+					key
+					position
+				}
+			}
+			value(ticket_number: $number) {
+		        ...on TextValue {
+					text
+				}
+				...on NumberValue {
+					number
+				}
+				...on CheckValue {
+					check
+				}
+				...on SelectValue {
+					key
+				}
+		    }
+		}
+	}
+}

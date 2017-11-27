@@ -1,10 +1,20 @@
+#import "../fragments/ticketStatusAndTypes.graphql"
 query getTicketMetadata {
-    ticketTypes{
-        key
-        label
-    }
-    ticketStatus{
-        key
-        label
-    }
+    ticketMetadata {
+    	...statusAndTypes
+    	custom_fields {
+	    	__typename
+	      	key
+	      	label
+	      	position
+	      	type
+	      	... on SelectField {
+	        	options {
+	          		label
+	          		key
+	          		position
+	        	}
+	      	}
+	    }
+    } 
 }

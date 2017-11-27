@@ -31,7 +31,7 @@ class Routes extends Component {
 				<IndexRoute component={() => <DashboardContainer limit={10}/>} />
 				<Route path="tickets">
 					<IndexRoute component={Tickets} />
-					{/*<Route path=":id" component={TicketDetails}/>*/}
+					<Route path=":number" component={TicketDetails}/>
 				</Route>
 				<Route path="clients">
 					<IndexRoute component={ClientsContainer} />

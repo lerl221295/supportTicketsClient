@@ -143,7 +143,7 @@ class FilterForm extends Component {
 	);
 
 	render = () => {
-		const { handleSubmit, pristine, reset, submitting } = this.props
+		const { handleSubmit, pristine, reset, submitting } = this.props;
 		return (
 			<Paper style={{padding: "1rem"}}>
 				<h2 style={{textAlign: "center"}}>Filtrar Propiedades</h2>
@@ -205,14 +205,14 @@ class FilterForm extends Component {
 					{
 						do {
 							if(!this.props.data.loading && !this.props.data.error)
-									<Field
-										Icon={Person}
-										name="types_keys"
-										component={renderSelectField}
-										label="Tipos"
-										multiple
-										options={this.props.data.ticketTypes.map(({key, label}) => ({value: key, text: label}))}
-									/>
+								<Field
+									Icon={Person}
+									name="types_keys"
+									component={renderSelectField}
+									label="Tipos"
+									multiple
+									options={this.props.data.ticketMetadata.ticketTypes.map(({key, label}) => ({value: key, text: label}))}
+								/>
 						}
 					}
 					{
@@ -224,7 +224,7 @@ class FilterForm extends Component {
 									component={renderSelectField}
 									label="Estatus"
 									multiple
-									options={this.props.data.ticketStatus.map(({key, label}) => ({value: key, text: label}))}
+									options={this.props.data.ticketMetadata.ticketStatus.map(({key, label}) => ({value: key, text: label}))}
 								/>
 						}
 					}

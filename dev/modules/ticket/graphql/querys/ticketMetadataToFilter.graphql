@@ -1,0 +1,6 @@
+#import "../fragments/ticketStatusAndTypes.graphql"
+query getTicketTypesAndStatus {
+    ticketMetadata {
+    	...statusAndTypes
+    } 
+}
