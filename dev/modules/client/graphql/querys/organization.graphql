@@ -1,0 +1,6 @@
+#import "../fragments/organizationsFragment.graphql"
+query GetOrganization($id : ID!) {
+	organization(id: $id){
+		...organizationFields
+	}
+}

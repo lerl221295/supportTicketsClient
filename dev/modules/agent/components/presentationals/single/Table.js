@@ -14,23 +14,7 @@ import Plus from 'material-ui/svg-icons/content/create'
 import Avatar from 'material-ui/Avatar'
 import FormEdit from '../../containers/EditAgent'
 
-class AgentsTable extends Component {
-	constructor(props){
-		super(props);
-		this.state = {
-			modalOpen : false,
-			id_edit: 0
-		}
-	}
-	
-	edit = id => event =>  this.setState({id_edit: id, modalOpen : true});
-	
-	closeModal = event => this.setState({ modalOpen : false });
-	
-	componentWillReceiveProps = (nextProps) => {
-		if(nextProps.search !== "") this.setState({current: 1});
-	};
-	
+class AgentsTable extends Component {	
 	render = () => {
 		let loading = do {
 			if (this.props.data.loading) { <LinearProgress mode="indeterminate" /> }
@@ -79,7 +63,7 @@ class AgentsTable extends Component {
 					<TableBody displayRowCheckbox={false}>
 						{
 							do {
-								if(!this.props.data.loading && agents) {
+								if(!this.props.data.loading && this.props.data.agents) {
 									agents.map((agent, i) => (
 										<TableRow key={i}>
 											<TableRowColumn className="avatar">
@@ -97,7 +81,7 @@ class AgentsTable extends Component {
 											<TableRowColumn>{agent.role}</TableRowColumn>
 											<TableRowColumn>{agent.supplier.name}</TableRowColumn>
 											<TableRowColumn className="center">
-												<Plus onClick={this.edit(agent.id)}
+												<Plus onClick={this.props.edit(agent.id)}
 												      className="edit"
 												      hoverColor="blue"/>
 											</TableRowColumn>
@@ -121,14 +105,6 @@ class AgentsTable extends Component {
 						</TableRow>
 					</TableFooter>
 				</Table>
-				<FormEdit
-					title = "Actualizar datos del agente"
-					open = {this.state.modalOpen}
-					close = {this.closeModal}
-					id = {this.state.id_edit}
-					notificate = {this.props.notificate}
-					limit = {this.props.limit}
-				/>
 			</div>
 		)
 	}

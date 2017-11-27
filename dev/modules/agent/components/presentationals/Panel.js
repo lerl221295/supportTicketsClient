@@ -10,10 +10,6 @@ import PeopleOutline from 'material-ui/svg-icons/social/people-outline'
 import Organization from 'material-ui/svg-icons/communication/business'
 // Common Components
 import {SearchBox, WrappedSpeedDial} from '../../../../common/components'
-// Containers
-import FormCreateAgent from '../containers/CreateAgent'
-import FormCreateSupplier from '../containers/CreateSupplier'
-import FormCreateGroup from '../containers/CreateGroup'
 // Tablas
 import AgentsTable from './single/Table'
 import SuppliersTable from './suppliers/Table'
@@ -24,37 +20,32 @@ class Panel extends Component {
 		super(props);
 		this.state = {
 			agents: {
-				modalOpen : false,
 				table_pag: 1,
 				search_text: ''
 			},
 			suppliers: {
-				modalOpen : false,
 				table_pag: 1,
 				search_text: ''
 			},
 			groups: {
-				modalOpen : false,
 				table_pag: 1,
 				search_text: ''
-			},
-			notificationOpen: false,
-			notificationText: "hola"
+			}
 		};
 		
 		this.speedDialItems = [
 			{
-				itemClick: this.openModal('agents'),
+				itemClick: () => this.props.push('agents/new'),
 				primaryText: 'Agente',
 				rightAvatar: <Avatar backgroundColor={pink400} icon={<Person />} />,
 			},
 			{
-				itemClick: this.openModal('suppliers'),
+				itemClick: () => this.props.push('/agents/suppliers/new'),
 				primaryText: 'Proveedores',
 				rightAvatar: <Avatar backgroundColor={pink400} icon={<People />} />,
 			},
 			{
-				itemClick: this.openModal('groups'),
+				itemClick: () => this.props.push('/agents/groups/new'),
 				primaryText: 'Grupos',
 				rightAvatar: <Avatar backgroundColor={pink400} icon={<PeopleOutline />} />,
 			}
@@ -63,11 +54,6 @@ class Panel extends Component {
 	
 	search = name => search_text => {
 		this.setState({[name]: {...this.state[name], search_text}})
-		/*this.setState({
-			search_text,
-			clients: {...this.state.clients, table_pag: 1},
-			organizations:{...this.state.organizations, table_pag: 1}
-		});*/
 		this.props[name].refetch({search_text, offset: null, limit: this.props.limit});
 	};
 	
@@ -79,18 +65,7 @@ class Panel extends Component {
 			search_text: this.state[name].search_text
 		})
 	};
-	
-	notificate = text => {
-		this.setState({
-			notificationOpen: true,
-			notificationText: text
-		})
-	};
-	
-	openModal = name => event => this.setState({[name]: { modalOpen : true }});
-	
-	closeModal = name => event => this.setState({[name]: { modalOpen : false }});
-	
+		
 	render = () => {
 		// if(this.props.data.error) return <ServiceFail />;
 		return(
@@ -103,11 +78,11 @@ class Panel extends Component {
 						<SearchBox search={this.search("agents")}/>
 						<AgentsTable
 							data={this.props.agents}
-							search={this.props.search}
+							search={this.props.agents.search_text}
 							limit={this.props.limit}
-							current={this.state.table_pag}
-							changePag={this.changePag}
-							notificate={this.notificate}
+							current={this.state.agents.table_pag}
+							changePag={this.changePag("agents")}
+							edit={(id) => event => this.props.push(`agents/${id}`)}
 						/>
 					</Tab>
 					<Tab
@@ -121,7 +96,7 @@ class Panel extends Component {
 							limit={this.props.limit}
 							current={this.state.suppliers.table_pag}
 							changePag={this.changePag("suppliers")}
-							notificate={this.notificate}
+							edit={(id) => event => this.props.push(`agents/suppliers/${id}`)}
 						/>
 					</Tab>
 					<Tab
@@ -135,35 +110,11 @@ class Panel extends Component {
 							limit={this.props.limit}
 							current={this.state.groups.table_pag}
 							changePag={this.changePag("groups")}
-							notificate={this.notificate}
+							edit={(id) => event => this.props.push(`agents/groups/${id}`)}
 						/>
 					</Tab>
 				</Tabs>
 				<WrappedSpeedDial items={this.speedDialItems} />
-				<FormCreateAgent
-					title="Crear un nuevo agente"
-					open={this.state.agents.modalOpen}
-					close={this.closeModal('agents')}
-					notificate={this.notificate}
-				/>
-				<FormCreateSupplier
-					title="Crear un nuevo proveedor"
-					open={this.state.suppliers.modalOpen}
-					close={this.closeModal('suppliers')}
-					notificate={this.notificate}
-				/>
-				<FormCreateGroup
-					title="Crear un nuevo grupo"
-					open={this.state.groups.modalOpen}
-					close={this.closeModal('groups')}
-					notificate={this.notificate}
-				/>
-				<Snackbar
-					open={this.state.notificationOpen}
-					message={this.state.notificationText}
-					autoHideDuration={4000}
-					onRequestClose={() => this.setState({notificationOpen: false})}
-				/>
 			</div>
 		)
 	}

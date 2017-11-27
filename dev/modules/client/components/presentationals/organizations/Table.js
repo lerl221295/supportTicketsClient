@@ -14,27 +14,7 @@ import Plus from 'material-ui/svg-icons/content/create'
 import Avatar from 'material-ui/Avatar';
 import Face from 'material-ui/svg-icons/action/face'
 
-import FormEdit from '../../containers/EditOrganization'
-
-//import filter from '../../../utils/filter'
-
 class OrganizationsTable extends Component {
-	constructor(props){
-		super(props);
-		this.state = {
-			modalOpen : false,
-			editing: null
-		}
-	}
-	
-	edit = organization => event => this.setState({editing: organization, modalOpen : true});
-	
-	closeModal = event => this.setState({ modalOpen : false });
-	
-	componentWillReceiveProps = (nextProps) => {
-		if(nextProps.search !== "") this.setState({current: 1});
-	};
-	
 	render = () => {
 		let loading = do {
 			if (this.props.data.loading) { <LinearProgress mode="indeterminate" /> }
@@ -72,7 +52,7 @@ class OrganizationsTable extends Component {
 											<TableRowColumn>{organization.name}</TableRowColumn>
 										  	<TableRowColumn>{organization.domains.join(', ')}</TableRowColumn>
 											<TableRowColumn>
-												<Plus onClick={this.edit(organization)}
+												<Plus onClick={this.props.edit(organization.id)}
 												  style={{cursor: "pointer"}}
 												  hoverColor="blue"/>
 										  	</TableRowColumn>
@@ -95,14 +75,6 @@ class OrganizationsTable extends Component {
             </TableRow>
           </TableFooter>
         </Table>
-        <FormEdit
-          title="Actualizar datos de la Organizacion"
-          open={this.state.modalOpen}
-          close={this.closeModal}
-          editing={this.state.editing}
-          notificate={this.props.notificate}
-          limit={this.props.limit}
-        />
       </div>
 		)
 	}

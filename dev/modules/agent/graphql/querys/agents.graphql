@@ -3,6 +3,7 @@ query GetAgents($search_text: String, $offset: Int, $limit: Int) {
 	agents(search_text: $search_text, offset: $offset, limit: $limit) {
 		nodes {
             ...agentsFields
+            name: fullName
 		},
 		count
 	}

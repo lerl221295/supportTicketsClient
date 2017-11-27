@@ -17,7 +17,7 @@ const styles = {
 const AvatarImg = ({face_base64, avatar_filename, changeImage}) => (
 	<Row middle={"xs"}>
 		<Col xs={12} sm={12} md={4} lg={4}>
-			<img src={face_base64 || "images/user.png"} style={styles.img}/>
+			<img src={face_base64 || "/images/user.png"} style={styles.img}/>
 		</Col>
 		<Col xs={12} sm={12} md={8} lg={8}>
 			<TextField

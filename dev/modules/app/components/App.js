@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import Snackbar from 'material-ui/Snackbar'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Header from '../../../common/components/Header'
 import LeftDrawer from '../../../common/components/LeftDrawer'
@@ -83,6 +84,12 @@ class App extends Component {
 							newestOnTop={false}
 							closeOnClick
 							pauseOnHover
+						/>
+						<Snackbar
+							open={this.props.alert.open}
+							message={this.props.alert.text}
+							autoHideDuration={4000}
+							onRequestClose={() => this.props.closeAlert()}
 						/>
 						{this.props.children}
 					</div>

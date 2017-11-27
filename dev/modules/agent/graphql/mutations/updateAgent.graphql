@@ -2,6 +2,7 @@
 mutation UpdateAgent($agent: AgentInput!){
 	updateAgent(agent: $agent){
         ...agentsFields
+        name: fullName
 	}
 }
 
