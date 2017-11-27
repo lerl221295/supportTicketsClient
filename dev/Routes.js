@@ -6,6 +6,7 @@ import TicketDetails from './modules/ticket/components/containers/TicketDetails'
 import LoginPage from './modules/login/LoginPage'
 import ClientsContainer from './modules/client/components/containers/ClientsContainer'
 import AgentsContainer from './modules/agent/components/containers/AgentsContainer'
+import DashboardContainer from './modules/dashboard/components/containers/DashboardContainer'
 import Doc from './modules/doc/Doc'
 
 const notFound = () => <h1> not found </h1>
@@ -14,7 +15,7 @@ class Routes extends Component {
 		<Router history={this.props.history}>
 			<Route path="login" component={LoginPage}/>
 			<Route path="/" component={App}>
-				{/*<IndexRoute component={TimeLine} />*/}
+				<IndexRoute component={() => <DashboardContainer limit={10}/>} />
 				<Route path="tickets">
 					<IndexRoute component={Tickets} />
 					{/*<Route path=":id" component={TicketDetails}/>*/}

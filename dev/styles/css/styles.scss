@@ -2,6 +2,7 @@
 @import "material-select";
 @import "create-edit-forms";
 @import "tables";
+@import "infoBox";
 
 html {
   font-family: 'Roboto', sans-serif;
@@ -127,4 +128,8 @@ input[name='undefined_filename']{
 
 .left-align {
   text-align: left;
+}
+
+.max-height {
+  height: 100%;
 }
