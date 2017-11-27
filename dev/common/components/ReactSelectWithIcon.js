@@ -3,7 +3,7 @@ import { Row, Col } from 'react-flexbox-grid'
 import Select from 'react-select'
 
 const ReactSelectWithIcon = ({Icon, label, ...props}) => (
-  <Row bottom={"xs"}>
+  <Row bottom={"xs"} style={{marginTop: "0.8rem"}}>
 	  <Col xs={12}>
 		  <Row>
 			  <Col xs md>
