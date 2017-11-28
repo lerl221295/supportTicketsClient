@@ -1,5 +1,5 @@
 import { ApolloClient } from "apollo-client";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import { InMemoryCache, IntrospectionFragmentMatcher } from "apollo-cache-inmemory";
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { WebSocketLink } from 'apollo-link-ws';
@@ -46,10 +46,45 @@ const link = split( /*ni idea aun de que hace esta pinga!*/
     wsLink,
     httpLink,
 );
-
 const client = new ApolloClient({
     link: link,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+        fragmentMatcher: new IntrospectionFragmentMatcher({
+            introspectionQueryResultData: {
+                __schema: {
+                    types: [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "FieldValue",
+                            "possibleTypes": [{
+                                    "name": "TextValue"
+                                },
+                                {
+                                    "name": "NumberValue"
+                                },
+                                {
+                                    "name": "SelectValue"
+                                },
+                                {
+                                    "name": "CheckValue"
+                                }
+                            ]
+                        },
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Field",
+                            "possibleTypes": [{
+                                    "name": "FreeField"
+                                },
+                                {
+                                    "name": "SelectField"
+                                }
+                            ]
+                        }
+                    ],
+                }
+            }
+        })
+    })
 });
-
 export default client

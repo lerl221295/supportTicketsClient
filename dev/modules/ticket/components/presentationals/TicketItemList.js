@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ListItem, Avatar } from 'material-ui'
+import { Link } from 'react-router'
 import Face from 'material-ui/svg-icons/action/face'
 import { Row, Col } from 'react-flexbox-grid'
 import TimeAgo from '../../../../common/components/TimeAgo'
@@ -23,10 +24,17 @@ class Item extends Component {
 					</Col>
 					<Col xs={8} md={8} sm={8}>
 						<Row>
-							{`${title} #${number}`}
+							<span>
+								{title}
+								<Link to={`/tickets/${number}`}>
+									{`#${number}`}
+								</Link>
+							</span>
 						</Row>
 						<Row>
-							Por:{` ${client.fullName}`}
+							<span>
+								Por: <Link to={`clients/${client.id}`}>{`${client.fullName}`}</Link>
+							</span>
 						</Row>
 						<Row>
 							<span>
@@ -37,7 +45,7 @@ class Item extends Component {
 					<Col xs={3} md={3} sm={3}>
 						<Row>
 							<span>
-								Agente: {agent.fullName}
+								Agente: <Link to={`agents/${agent.id}`}>{`${agent.fullName}`}</Link>
 							</span>
 						</Row>
 						<Row>

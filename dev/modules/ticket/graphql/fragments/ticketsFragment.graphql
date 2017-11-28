@@ -1,6 +1,7 @@
 fragment ticketsFields on Ticket {
     number
     title
+    source
     state {
         key
         label
@@ -13,10 +14,12 @@ fragment ticketsFields on Ticket {
     time
     resolve_by
     client {
+        id
         fullName
         face_base64
     }
     agent {
+        id
         fullName
     }
 }
