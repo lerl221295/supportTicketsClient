@@ -1,0 +1,6 @@
+query getTicketsCountByDay {
+    ticketsCountByDay {
+        day
+        tickets
+    }
+}

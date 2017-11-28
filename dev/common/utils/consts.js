@@ -6,13 +6,13 @@ export const PRIORITIES = [
 	{value: "MEDIUM", text: "Media", color: lightBlue400},
 	{value: "HIGH", text: "Alta", color: amber600},
 	{value: "URGENT", text: "Urgente", color: redA700}
-]
+];
 
 export const DUE_BY = [
 	{value: "OVERDUE", text: "Atrasado"},
 	{value: "TODAY", text: "Hoy"},
 	{value: "TOMORROW", text: "Mañana"}
-]
+];
 
 export const getPriorityText = (priority_value) =>
 	 _.find(PRIORITIES, priority => priority.value === priority_value).text;

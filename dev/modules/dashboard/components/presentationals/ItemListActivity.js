@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 import { ListItem, Avatar } from 'material-ui'
+import { grey500 } from 'material-ui/styles/colors'
+import {typography} from 'material-ui/styles';
 import Face from 'material-ui/svg-icons/action/face'
 import { Row, Col } from 'react-flexbox-grid'
 import TimeAgo from '../../../../common/components/TimeAgo'
@@ -19,7 +22,6 @@ class Item extends Component {
 			else `El sistema `;
 		};
 		
-		console.log("autor--", autor);
 		return (
 			<ListItem>
 				<Row middle={"xs"}>
@@ -34,23 +36,20 @@ class Item extends Component {
 					</Col>
 					<Col xs={11}>
 						<Row>
-							{/*{
-								do {
-									if (type_autor !== 'SYSTEM') (<div>{autor.name} </div>);
-									else (<div>El sistema </div>);
-								}
-							}*/}
 							{
 								do {
-									if (action.type == 'ASSIGNMENT') (<div>{autor_name} asignó el ticket <a href="/">#{ticket.number}</a> a <a href="/">{action.agent.name}</a></div>);
+									if (action.type == 'ASSIGNMENT')
+										(<div>{autor_name} asignó el ticket <a href="/">#{ticket.number}</a> a <Link to={{pathname: `/agents/${action.agent.id}`}}>{action.agent.name}</Link></div>);
 									else
-										if (action.type == 'UPDATE') (<div>{autor_name} cambió {action.prop_name} del ticket <a href="/">#{ticket.number}</a> a {action.new_value}</div>);
-										else (<div>{autor_name} creó el ticket <a href="/">{ticket.title} (#{ticket.number})</a></div>);
+										if (action.type == 'UPDATE')
+											(<div>{autor_name} cambió {action.prop_name} del ticket <a href="/">#{ticket.number}</a> a {action.new_value}</div>);
+										else
+											(<div>{autor_name} creó el ticket <a href="/">{ticket.title} (#{ticket.number})</a></div>);
 								}
 							}
 						</Row>
 						<Row>
-							<TimeAgo date={time}/>
+							<TimeAgo style={{color: grey500, fontSize: '0.8rem', fontWeight: typography.fontWeightMedium}} date={time}/>
 						</Row>
 					</Col>
 				</Row>

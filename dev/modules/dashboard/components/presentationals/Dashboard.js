@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // Material UI
-import {Subheader, Divider, Paper, LinearProgress} from "material-ui";
+import {Subheader, Divider, Paper, LinearProgress, AppBar} from "material-ui";
 import {List, ListItem} from 'material-ui/List'
 import {typography} from 'material-ui/styles';
 // Colores
@@ -15,6 +15,10 @@ import Timer from 'material-ui/svg-icons/image/timer';
 import Avatar from 'material-ui/Avatar'
 // Flexbox Grid
 import { Row, Col } from 'react-flexbox-grid';
+// Recharts
+import {
+	LineChart, Line, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, Legend, BarChart,	Bar
+} from 'recharts';
 // Components
 import InfoBox from './InfoBox';
 import Item from './ItemListActivity'
@@ -35,43 +39,42 @@ const styles = {
 	}
 };
 
-
-const infoBoxs = [
+let infoBoxs = [
 	{
 		icon: Warning,
 		color: grey600,
-		title: 'Sin solucionar',
-		value: '20'
+		key: 'unresolved',
+		title: 'Sin solucionar'
 	},
 	{
 		icon: TimerOff,
 		color: red600,
-		title: 'Atrasado',
-		value: '5'
+		key: 'overdue',
+		title: 'Atrasado'
 	},
 	{
 		icon: Timelapse,
 		color: yellow600,
-		title: 'Vencido hoy',
-		value: '3'
+		key: 'due_today',
+		title: 'Vencido hoy'
 	},
 	{
 		icon: Receipt,
 		color: green600,
-		title: 'Abierto',
-		value: '10'
+		key: 'open',
+		title: 'Abierto'
 	},
 	{
 		icon: Timer,
 		color: blue600,
-		title: 'En espera',
-		value: '7'
+		key: 'on_hold',
+		title: 'En espera'
 	},
 	{
 		icon: Face,
 		color: teal400,
-		title: 'No asignado',
-		value: '5'
+		key: 'unassigned',
+		title: 'No asignado'
 	},
 ];
 
@@ -92,55 +95,46 @@ class Dashboard extends Component {
 	
 	/*constructor (props) {
 		super(props);
-	}
-	
-	componentWillReceiveProps = (nextProps) => {
-		console.log("Props---- ", nextProps)
 	}*/
 	
+	/*componentWillReceiveProps = (nextProps) => {
+		console.log("Props---- ", nextProps)
+	};*/
+	
 	render = () => {
-		let {data: {loading}} = this.props;
+		let {loading} = this.props;
 		if (loading) return <LinearProgress mode="indeterminate"/>;
 		
-		let {activities: {nodes: activities}} = this.props.data;
-		let mappedActivities = [];
-		
-		for (const act of activities) {
-			let {actions, ...activity} = act;
-			mappedActivities = [...mappedActivities, ...actions.map(action => (
-				{
-					...activity,
-					action
-				}
-			))];
-		}
-		console.log("------", mappedActivities);
-		
+		let {ticketsCountByDay, activities, indicators} = this.props;
 		
 		return (
 			<Row>
-				<Col md={12}>
+				{/*<Col md={12}>
 					<h3 style={styles.navigation}>Application / Dashboard</h3>
-				</Col>
+				</Col>*/}
 				<Col md={12}>
 					<Row between={"xs"}>
-						{infoBoxs.map(({icon, color, title, value}, i) => (
-							<Col key={i} md={2}>
-								<InfoBox
-									Icon={icon}
-									color={color}
-									title={title}
-									value={value}
-								/>
-							</Col>
-						))}
+						{
+							infoBoxs.map((props, i) => {
+								let {key, ...properties} = props;
+								return (
+									<Col key={i} md={2}>
+										<InfoBox
+											{...properties}
+											value={indicators[key]}
+										/>
+									</Col>
+								)
+							})
+						}
 					</Row>
 				</Col>
-				<Col md={6}>
-					<Paper>
+				{/*ACTIVIDADES RECIENTES*/}
+				<Col md={6} style={{marginTop: '1rem'}}>
+					<Subheader style={styles.subheader}>Actividades recientes</Subheader>
+					<Paper style={{height: '27rem', overflowY: 'auto'}}>
 						<List>
-							<Subheader style={styles.subheader}>Actividades recientes</Subheader>
-							{mappedActivities.map((activity, i) =>
+							{activities.map((activity, i) =>
 								<div key={i}>
 									<ListItem
 										containerElement={<Item {...activity}/>}
@@ -149,6 +143,21 @@ class Dashboard extends Component {
 								</div>
 							)}
 						</List>
+					</Paper>
+				</Col>
+				{/*GRÁFICO DE NUEVOS TICKETS EN LAS ULTIMOS 10 DIAS*/}
+				<Col md={6} style={{marginTop: '1rem'}}>
+					<Subheader style={styles.subheader}>Tickets creados en los últimos 7 días</Subheader>
+					<Paper style={{height: '27rem'}}>
+						<ResponsiveContainer >
+							<BarChart data={ticketsCountByDay}>
+								<CartesianGrid strokeDasharray="3 3" />
+								<XAxis dataKey="day" />
+								<YAxis />
+								<Tooltip payload={ticketsCountByDay}/>
+								<Bar type="monotone" dataKey="tickets" fill="#8884d8" barSize={10}/>
+							</BarChart>
+						</ResponsiveContainer>
 					</Paper>
 				</Col>
 			</Row>

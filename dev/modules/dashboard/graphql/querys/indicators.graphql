@@ -1,0 +1,10 @@
+query getIndicators {
+    indicators {
+        unresolved
+        overdue
+        due_today
+        open
+        on_hold
+        unassigned
+    }
+}

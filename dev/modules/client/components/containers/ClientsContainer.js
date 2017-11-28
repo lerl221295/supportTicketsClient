@@ -14,4 +14,4 @@ const PanelContainer = compose(
     connect(null, { push })
 )(Panel);
 
-export default props => <PanelContainer {...props} limit={limitForPage}/>
+export default () => <PanelContainer limit={limitForPage}/>
