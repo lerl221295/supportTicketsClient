@@ -25,11 +25,12 @@ export const getFullTime = date => {
 	return `${diaSemana} ${dia} de ${mes} del ${anio} a las ${horaFull}`;
 }
 
-const Time = ({date}) => (
+const Time = ({date, ...props}) => (
 	<TimeAgo 
 		date={date} 
 		formatter={formatter} 
 		title={getFullTime(date)}
+		{...props}
 	/>
 )
 

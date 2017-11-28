@@ -4,7 +4,7 @@ import {white, grey800} from 'material-ui/styles/colors';
 import {typography} from 'material-ui/styles';
 import {Col, Row} from "react-flexbox-grid";
 
-const InfoBox = ({color, title, value, Icon}) => {
+const InfoBox = ({color, title, value, icon: Icon}) => {
 	
 	const styles = {
 		iconFrameColor: {
@@ -21,8 +21,8 @@ const InfoBox = ({color, title, value, Icon}) => {
 	};
 	
 	return (
-		<Row middle={"xs"} center={"xs"} className={"box-height"}>
-			<Paper>
+		<Paper>
+			<Row middle={"xs"} center={"xs"} className={"box-height"}>
 				<Col xs={2} className={"center-align max-height"} style={styles.iconFrameColor}>
 					<Row middle={"xs"} center={"xs"} className={"max-height"}>
 						<Col xs={12}>
@@ -37,8 +37,9 @@ const InfoBox = ({color, title, value, Icon}) => {
 					<h3 className={"indicator-text"} style={styles.text}>{title}</h3>
 					<h2 className={"indicator-number"} style={styles.number}>{value}</h2>
 				</Col>
-			</Paper>
-		</Row>
+			</Row>
+		</Paper>
+	
 	
 	);
 }

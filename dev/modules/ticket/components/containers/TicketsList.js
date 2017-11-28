@@ -43,17 +43,17 @@ const TicketWithApolloData = graphql(GetTickets, {
 				document: MoreTickets,
 				variables: { filter },
 				updateQuery: (prev, {subscriptionData}) => {
-                    if (!subscriptionData.newTicket) return prev;
-
-                    const { newTicket } = subscriptionData;
-
-                    return Object.assign({}, prev, {
+					if (!subscriptionData.newTicket) return prev;
+					
+					const { newTicket } = subscriptionData;
+					
+					return Object.assign({}, prev, {
 						tickets: {
 							__typename: "TicketsResponse",
 							nodes: [newTicket ,...prev.tickets.nodes]
 						}
 					});
-                }
+				}
 			})
 		})
 	}
