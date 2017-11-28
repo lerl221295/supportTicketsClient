@@ -12,7 +12,7 @@ const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
 export const getFullTime = date => {
 	let jsDate = new Date(date);
 	let dia = jsDate.getDate();
-	let diaSemana = dias[jsDate.getDay()];
+	let diaSemana = dias[jsDate.getDay()-1];
 	let mes = meses[jsDate.getMonth()];
 	let anio = jsDate.getFullYear();
 	let {hora, time} = do {

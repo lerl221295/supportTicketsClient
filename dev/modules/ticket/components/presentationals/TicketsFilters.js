@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withApollo } from 'react-apollo'
 import { Field, reduxForm } from 'redux-form'
-import { Paper, Divider, FlatButton } from 'material-ui'
+import { Paper, Divider, FlatButton, Subheader } from 'material-ui'
 import ReactSelectWithIcon from '../../../../common/components/ReactSelectWithIcon'
 import InputWithIcon from '../../../../common/components/InputWithIcon'
 import {
@@ -12,6 +12,8 @@ import {
 	RadioButtonGroup,
 	RadioButton
 } from 'material-ui'
+import {typography} from 'material-ui/styles';
+import {grey400, cyan600, white} from 'material-ui/styles/colors';
 import Person from 'material-ui/svg-icons/action/account-circle'
 import Organization from 'material-ui/svg-icons/communication/business'
 import { Row, Col } from 'react-flexbox-grid'
@@ -23,40 +25,14 @@ import GetClientsNames from '../../graphql/querys/clientsNames.graphql'
 
 import { PRIORITIES, DUE_BY } from '../../../../common/utils/consts'
 
-const renderTextField = (
-	{
-		input,
-		label,
-		meta: { touched, error },
-		...custom
-	}) => (
-		<InputWithIcon
-			Icon={Person}
-			Input={TextField}
-			hintText="Escriba el nombre"
-			floatingLabelText="Nombre"
-			name="name"
-			{...input}
-			{...custom}
-		/>
-)
-
-const renderCheckbox = ({ input, label }) => (
-	<Checkbox
-		label={label}
-		checked={input.value ? true : false}
-		onCheck={input.onChange}
-	/>
-)
-
-const renderRadioGroup = ({ input, ...rest }) => (
-	<RadioButtonGroup
-		{...input}
-		{...rest}
-		valueSelected={input.value}
-		onChange={(event, value) => input.onChange(value)}
-	/>
-)
+const styles = {
+	subheader: {
+		fontSize: 24,
+		fontWeight: typography.fontWeightLight,
+		backgroundColor: grey400,
+		color: white
+	}
+};
 
 const renderSelectField = (
 	{
@@ -86,25 +62,6 @@ const renderSelectField = (
 			}
 		</InputWithIcon>
 	)
-
-	//sin icon:
-	/*<SelectField
-			floatingLabelText={label}
-			{...input}
-			onChange={(event, index, value) => input.onChange(value)}
-			{...custom}
-		>
-			{
-				options.map(({value, text}, i) => (
-					<MenuItem 
-						key={i} 
-						primaryText={text} 
-						value={value}
-						checked={input.value.includes(value)}
-					/>
-				))
-			}
-		</SelectField>*/
 
 const renderSelectReactField = (
 	{
@@ -145,10 +102,9 @@ class FilterForm extends Component {
 	render = () => {
 		const { handleSubmit, pristine, reset, submitting } = this.props;
 		return (
-			<Paper style={{padding: "1rem"}}>
-				<h2 style={{textAlign: "center"}}>Filtrar Propiedades</h2>
-				<Divider />
-				<form onSubmit={handleSubmit}>
+			<Paper>
+				<Subheader style={styles.subheader}>Filtrar Propiedades</Subheader>
+				<form style={{padding: "1rem"}} onSubmit={handleSubmit}>
 					<Field
 						Icon={Person}
 						name="clients"
