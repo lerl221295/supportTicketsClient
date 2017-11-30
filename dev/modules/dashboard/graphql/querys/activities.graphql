@@ -4,5 +4,6 @@ query getActivities ($ticket_number: Int, $offset: Int, $limit: Int) {
         nodes {
             ...activitiesFields
         }
+        count
     }
 }

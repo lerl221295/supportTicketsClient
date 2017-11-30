@@ -12,17 +12,21 @@ const IndicatorBox = ({color, title, value, icon: Icon}) => {
 		},
 		text: {
 			fontWeight: typography.fontWeightLight,
-			color: grey800
+			color: grey800,
+			fontSize: '1.3rem',
+			marginBottom: '0.5rem'
 		},
 		number: {
 			fontWeight: typography.fontWeightMedium,
-			color: grey800
+			color: grey800,
+			fontSize: '2rem'
+		},
+		box: {
+			height: '5rem',
+			paddingLeft: '0.5rem'
 		},
 		colLessPadding: {
 			padding: '0'
-		},
-		rowMorePadding: {
-			paddingLeft: '0.5rem'
 		},
 		iconWidth: {
 			width: '100%'
@@ -31,7 +35,7 @@ const IndicatorBox = ({color, title, value, icon: Icon}) => {
 	
 	return (
 		<Paper>
-			<Row middle={"xs"} center={"xs"} className={"box-height"} style={styles.rowMorePadding}>
+			<Row middle={"xs"} center={"xs"} style={styles.box}>
 				<Col xs={2} className={"center-align max-height"} style={styles.iconFrameColor}>
 					<Row middle={"xs"} center={"xs"} className={"max-height"}>
 						<Col xs={12} style={styles.colLessPadding}>
@@ -43,8 +47,8 @@ const IndicatorBox = ({color, title, value, icon: Icon}) => {
 					</Row>
 				</Col>
 				<Col xs={10}>
-					<h3 className={"indicator-text"} style={styles.text}>{title}</h3>
-					<h2 className={"indicator-number"} style={styles.number}>{value}</h2>
+					<h3 style={styles.text}>{title}</h3>
+					<h2 style={styles.number}>{value}</h2>
 				</Col>
 			</Row>
 		</Paper>
