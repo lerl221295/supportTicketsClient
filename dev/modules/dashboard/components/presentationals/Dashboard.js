@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // Material UI
-import {Subheader, Divider, Paper, LinearProgress, AppBar} from "material-ui";
+import {Subheader, Divider, Paper, LinearProgress, AppBar, FlatButton, CircularProgress} from "material-ui";
 import {List, ListItem} from 'material-ui/List'
 import {typography} from 'material-ui/styles';
 // Colores
@@ -20,7 +20,7 @@ import {
 	LineChart, Line, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, Legend, BarChart,	Bar
 } from 'recharts';
 // Components
-import InfoBox from './InfoBox';
+import IndicatorBox from './IndicatorBox';
 import Item from './ItemListActivity'
 
 const styles = {
@@ -39,7 +39,7 @@ const styles = {
 	}
 };
 
-let infoBoxs = [
+let indicatorsBoxs = [
 	{
 		icon: Warning,
 		color: grey600,
@@ -79,88 +79,103 @@ let infoBoxs = [
 ];
 
 class Dashboard extends Component {
-	/*componentWillMount = () => {
-		let { subscribeToMore } = this.props.data;
-		subscribeToMore({
-			document: newInteracciones,
-			updateQuery: (prev, {subscriptionData}) => {
-				if (!subscriptionData.newInteracciones) return prev;
-				const newInteraccion = subscriptionData.newInteracciones;
-				return Object.assign({}, prev, {
-					ultimasInteracciones: [newInteraccion, ...prev.ultimasInteracciones],
-				});
-			}
-		})
-	};*/
+	componentWillMount = () => {
+		// console.log("subscribiendome a estas actividades: ", this.props.filter_form);
+		this.props.subscribeToMoreActivities();
+	};
 	
-	/*constructor (props) {
-		super(props);
-	}*/
-	
-	/*componentWillReceiveProps = (nextProps) => {
-		console.log("Props---- ", nextProps)
-	};*/
+	componentWillReceiveProps = nextProps => {
+		// console.log("nextProps", nextProps)
+	};
 	
 	render = () => {
-		let {loading} = this.props;
-		if (loading) return <LinearProgress mode="indeterminate"/>;
+		let {
+			ticketsCountByDay: {loading: loadingTicketsCount},
+			activities: {loading: loadingActivities},
+			indicators: {loading: loadingIndicators}
+		} = this.props;
+		if (loadingTicketsCount || (loadingActivities && !this.props.activities.activities)|| loadingIndicators)
+			return <LinearProgress mode="indeterminate"/>;
 		
-		let {ticketsCountByDay, activities, indicators} = this.props;
+		let {
+			ticketsCountByDay: {ticketsCountByDay},
+			activities: {activities: {nodes: activities}},
+			indicators: {indicators}
+		} = this.props;
 		
 		return (
-			<Row>
+			<div>
 				{/*<Col md={12}>
 					<h3 style={styles.navigation}>Application / Dashboard</h3>
 				</Col>*/}
-				<Col md={12}>
-					<Row between={"xs"}>
-						{
-							infoBoxs.map((props, i) => {
-								let {key, ...properties} = props;
-								return (
-									<Col key={i} md={2}>
-										<InfoBox
-											{...properties}
-											value={indicators[key]}
-										/>
-									</Col>
-								)
-							})
-						}
-					</Row>
-				</Col>
-				{/*ACTIVIDADES RECIENTES*/}
-				<Col md={6} style={{marginTop: '1rem'}}>
-					<Subheader style={styles.subheader}>Actividades recientes</Subheader>
-					<Paper style={{height: '27rem', overflowY: 'auto'}}>
-						<List>
-							{activities.map((activity, i) =>
-								<div key={i}>
-									<ListItem
-										containerElement={<Item {...activity}/>}
+				<Row between={"xs"}>
+					{
+						indicatorsBoxs.map((props, i) => {
+							let {key, ...properties} = props;
+							return (
+								<Col key={i} md={2}>
+									<IndicatorBox
+										{...properties}
+										value={indicators[key]}
 									/>
-									<Divider />
-								</div>
-							)}
-						</List>
-					</Paper>
-				</Col>
-				{/*GRÁFICO DE NUEVOS TICKETS EN LAS ULTIMOS 10 DIAS*/}
-				<Col md={6} style={{marginTop: '1rem'}}>
-					<Subheader style={styles.subheader}>Tickets creados en los últimos 7 días</Subheader>
-					<Paper style={{height: '27rem'}}>
-						<ResponsiveContainer >
-							<BarChart data={ticketsCountByDay}>
-								<CartesianGrid strokeDasharray="3 3" />
-								<XAxis dataKey="day" />
-								<YAxis />
-								<Tooltip payload={ticketsCountByDay}/>
-								<Bar type="monotone" dataKey="tickets" fill="#8884d8" barSize={10}/>
-							</BarChart>
-						</ResponsiveContainer>
-					</Paper>
-				</Col>
-			</Row>
+								</Col>
+							)
+						})
+					}
+				</Row>
+				<Row>
+					{/*ACTIVIDADES RECIENTES*/}
+					<Col md={6} style={{marginTop: '1rem'}}>
+						<Subheader style={styles.subheader}>Actividades recientes</Subheader>
+						<Paper style={{height: '27rem', overflowY: 'auto', overflowX: 'hidden'}}>
+							<List>
+								{activities.map((activity, i) =>
+									<div key={i}>
+										<ListItem
+											containerElement={<Item {...activity}/>}
+										/>
+										<Divider />
+									</div>
+								)}
+							</List>
+							<Row middle={"xs"} center={"xs"} style={{padding: '0'}}>
+								<Col xs={12}>
+									{
+										do {
+											if (loadingActivities && activities) <CircularProgress />
+											else ""
+										}
+									}
+								</Col>
+							</Row>
+							<Col xs={12} md={12} sm={12}>
+								<FlatButton
+									label="Cargar mas"
+									style={{width: '100%'}}
+									primary={true}
+									onClick={this.props.loadMoreActivities}
+									disabled={loadingActivities}
+								/>
+							</Col>
+						</Paper>
+					</Col>
+					{/*GRÁFICO DE NUEVOS TICKETS EN LAS ULTIMOS 10 DIAS*/}
+					<Col md={6} style={{marginTop: '1rem'}}>
+						<Subheader style={styles.subheader}>Tickets creados en los últimos 7 días</Subheader>
+						<Paper style={{height: '27rem'}}>
+							<ResponsiveContainer >
+								<BarChart data={ticketsCountByDay}>
+									<CartesianGrid strokeDasharray="3 3" />
+									<XAxis dataKey="day" />
+									<YAxis />
+									<Tooltip payload={ticketsCountByDay}/>
+									<Bar type="monotone" dataKey="tickets" fill="#8884d8" barSize={10}/>
+								</BarChart>
+							</ResponsiveContainer>
+						</Paper>
+					</Col>
+				</Row>
+			</div>
 		)
 	}
 }

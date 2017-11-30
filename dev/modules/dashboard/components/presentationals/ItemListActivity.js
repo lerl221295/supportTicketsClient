@@ -4,23 +4,19 @@ import { ListItem, Avatar } from 'material-ui'
 import { grey500 } from 'material-ui/styles/colors'
 import {typography} from 'material-ui/styles';
 import Face from 'material-ui/svg-icons/action/face'
+import Computer from 'material-ui/svg-icons/hardware/computer'
 import { Row, Col } from 'react-flexbox-grid'
-import TimeAgo from '../../../../common/components/TimeAgo'
-// import { getPriorityText, getPriorityColor } from '../../../../common/utils/consts'
-
-const avatarStyle = {
-	marginLeft: '-0.5rem',
-	marginRight: '0.5rem'
-};
+import { TimeAgo, ActionsList } from '../../../../common/components'
 
 class Item extends Component {
 	render = () => {
-		const { id, ticket, time, type_autor, autor, action,  } = this.props;
-		
-		const autor_name = do {
-			if (type_autor !== 'SYSTEM') `${autor.name} `;
-			else `El sistema `;
-		};
+		const { type, ticket, type_autor, autor, time, actions  } = this.props;
+		let autor_name;
+		if (type_autor)
+			autor_name = do {
+				if (type_autor == 'SYSTEM') `El sistema `;
+				else <Link to={{pathname: `/agents/${autor.id}`}}>{autor.name}</Link>;
+			};
 		
 		return (
 			<ListItem>
@@ -28,28 +24,33 @@ class Item extends Component {
 					<Col xs={1}>
 						{
 							do {
-								// Si el autor viene en false, es el sistema el autor de la actividad
-								if(type_autor == 'SYSTEM') (<Avatar style={avatarStyle} icon={<Face/>} />)
-								else (<Avatar style={avatarStyle} src={autor.face_base64} />)
+								if (type == 'CREATION')
+									if (ticket.client.face_base64) <Avatar src={ticket.client.face_base64} />;
+									else <Avatar icon={<Face/>} />;
+								else
+									if (type_autor == 'AGENT')
+										if (autor.face_base64) <Avatar src={autor.face_base64} />;
+										else <Avatar icon={<Face/>} />;
+									else <Avatar icon={<Computer/>} />;
 							}
 						}
 					</Col>
-					<Col xs={11}>
+					<Col xs={11} style={{paddingLeft: '1.3rem'}}>
 						<Row>
 							{
 								do {
-									if (action.type == 'ASSIGNMENT')
-										(<div>{autor_name} asignó el ticket <a href="/">#{ticket.number}</a> a <Link to={{pathname: `/agents/${action.agent.id}`}}>{action.agent.name}</Link></div>);
+									if (type == 'CREATION')
+										(<div><Link to={{pathname: `/clients/${ticket.client.id}`}}>{ticket.client.name}</Link> creó el ticket <a href="/">{ticket.title} (#{ticket.number})</a></div>)
 									else
-										if (action.type == 'UPDATE')
-											(<div>{autor_name} cambió {action.prop_name} del ticket <a href="/">#{ticket.number}</a> a {action.new_value}</div>);
-										else
-											(<div>{autor_name} creó el ticket <a href="/">{ticket.title} (#{ticket.number})</a></div>);
+										(<div>
+											<div>{autor_name} actualizó el ticket <a href="/">{ticket.title} (#{ticket.number})</a>:</div>
+											<ActionsList actions={actions}/>
+										</div>)
 								}
 							}
 						</Row>
 						<Row>
-							<TimeAgo style={{color: grey500, fontSize: '0.8rem', fontWeight: typography.fontWeightMedium}} date={time}/>
+							<TimeAgo style={{color: grey500, fontSize: '0.8rem', fontWeight: typography.fontWeightMedium}} date={time || ticket.time}/>
 						</Row>
 					</Col>
 				</Row>

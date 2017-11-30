@@ -1,0 +1,51 @@
+fragment activitiesFields on Activity {
+    id
+    type
+    ticket {
+        number
+        title
+    }
+    ...on CreationActivity {
+        ticket {
+            client {
+                id
+                name: fullName
+                face_base64
+            }
+            time
+        }
+    }
+    ...on UpgradeActivity {
+        time
+        type_autor
+        autor {
+            id
+            name: fullName
+            face_base64
+        }
+        actions {
+            ...on UpgradeActivityActionUpdate {
+                type
+                prop_name
+                new_value
+            }
+            ...on UpgradeActivityActionAssignment {
+                type
+                bearer {
+                    ...on Agent {
+                        id
+                        name: fullName
+                    }
+                    ...on Supplier {
+                        id
+                        name
+                    }
+                    ...on Group {
+                        id
+                        name
+                    }
+                }
+            }
+        }
+    }
+}
