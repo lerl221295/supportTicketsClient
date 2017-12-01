@@ -10,9 +10,7 @@ import {
 } from 'material-ui/Table'
 import Pagination from 'material-ui-pagination'
 import LinearProgress from 'material-ui/LinearProgress'
-import Plus from 'material-ui/svg-icons/content/create'
-import Avatar from 'material-ui/Avatar';
-import Face from 'material-ui/svg-icons/action/face'
+import { ImageRemoveRedEye as Eye } from 'material-ui/svg-icons/index'
 
 class OrganizationsTable extends Component {
 	render = () => {
@@ -37,9 +35,9 @@ class OrganizationsTable extends Component {
         <Table>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
-              <TableHeaderColumn>Nombre</TableHeaderColumn>
-              <TableHeaderColumn>Domains</TableHeaderColumn>
-              <TableHeaderColumn>Edit</TableHeaderColumn>
+              <TableHeaderColumn className={"center fullname"}>Nombre</TableHeaderColumn>
+              <TableHeaderColumn className={"center"}>Domains</TableHeaderColumn>
+              <TableHeaderColumn className={"center edit"}>Detalle</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
@@ -49,13 +47,13 @@ class OrganizationsTable extends Component {
 								else {
 									organizations.map((organization, i) => (
 										<TableRow key={i}>
-											<TableRowColumn>{organization.name}</TableRowColumn>
-										  	<TableRowColumn>{organization.domains.join(', ')}</TableRowColumn>
-											<TableRowColumn>
-												<Plus onClick={this.props.edit(organization.id)}
-												  style={{cursor: "pointer"}}
-												  hoverColor="blue"/>
-										  	</TableRowColumn>
+											<TableRowColumn className={"center fullname"}>{organization.name}</TableRowColumn>
+											<TableRowColumn className={"center"}>{organization.domains.join(', ')}</TableRowColumn>
+											<TableRowColumn className={"center edit"}>
+												<Eye onClick={this.props.edit(organization.id)}
+												      style={{cursor: "pointer"}}
+												      hoverColor="blue"/>
+											</TableRowColumn>
 										</TableRow>
 									))
 								}

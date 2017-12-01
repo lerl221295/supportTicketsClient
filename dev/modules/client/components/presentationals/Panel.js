@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Avatar, Snackbar, Tabs, Tab} from "material-ui";
-import { pink400 } from 'material-ui/styles/colors';
 import Person from 'material-ui/svg-icons/social/person'
 import Organization from 'material-ui/svg-icons/communication/business'
 import { WrappedSpeedDial, ServiceFail, SearchBox } from '../../../../common/components'
@@ -25,12 +24,12 @@ class Panel extends Component {
 			{
 				itemClick: () => this.props.push('clients/new'),
 				primaryText: 'Cliente',
-				rightAvatar: <Avatar backgroundColor={pink400} icon={<Person />} />,
+				rightAvatar: <Avatar icon={<Person />} />,
 			},
 			{
 				itemClick: () => this.props.push('/clients/organizations/new'),
 				primaryText: 'Organización',
-				rightAvatar: <Avatar backgroundColor={pink400} icon={<Organization />} />,
+				rightAvatar: <Avatar icon={<Organization />} />,
 			}
 		];
 	}

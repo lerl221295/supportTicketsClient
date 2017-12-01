@@ -6,6 +6,8 @@ import Face from 'material-ui/svg-icons/action/face'
 import { Row, Col } from 'react-flexbox-grid'
 import _ from 'lodash'
 import Item from './TicketItemList'
+// Common Components
+import { WrappedSubheader } from '../../../../common/components'
 
 const styles = {
 	paper: {
@@ -47,7 +49,7 @@ class TicketList extends Component {
 		return(
 				<Row>
 					<Col xs={12}>
-						<Subheader className={"subheader"}>Tickets</Subheader>
+						<WrappedSubheader>Tickets</WrappedSubheader>
 						<Paper style={{...styles.paper, ...styles.paperOverflow}}>
 							<List>
 								{

@@ -11,8 +11,6 @@ import {
 import Pagination from 'material-ui-pagination'
 import LinearProgress from 'material-ui/LinearProgress'
 import Plus from 'material-ui/svg-icons/content/create'
-import Avatar from 'material-ui/Avatar'
-import FormEdit from '../../containers/EditGroup'
 
 class SupplierTable extends Component {
 	render = () => {

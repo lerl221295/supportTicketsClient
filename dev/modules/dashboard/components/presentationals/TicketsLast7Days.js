@@ -7,6 +7,8 @@ import { Row, Col } from 'react-flexbox-grid';
 import {
 	ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, BarChart,	Bar
 } from 'recharts';
+// Common Components
+import { WrappedSubheader } from '../../../../common/components'
 
 const styles = {
 	paper: {
@@ -19,7 +21,7 @@ export default ({ticketsCountByDay}) => {
 	return (
 		<Row>
 			<Col xs={12}>
-				<Subheader className={"subheader"}>Tickets creados en los últimos 7 días</Subheader>
+				<WrappedSubheader>Tickets creados en los últimos 7 días</WrappedSubheader>
 				<Paper style={styles.paper}>
 					<ResponsiveContainer>
 						<BarChart data={ticketsCountByDay}>

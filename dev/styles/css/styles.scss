@@ -17,6 +17,7 @@ body, h1, h2, h3, h4, h5, h6 {
 body {
   margin: 0;
   background-color: #efefef;
+  overflow-x: hidden;
 }
 
 /*body, html, #app, #app > div{
@@ -24,13 +25,12 @@ body {
 }*/
 
 a {
-  color: #ff4081;
   text-decoration: none;
 }
 
-a:hover {
+/*a:hover {
   text-decoration: underline;
-}
+}*/
 
 .m-b-15 {
   margin-bottom: 15px
@@ -135,9 +135,9 @@ input[name='undefined_filename']{
 
 // Subheader
 
-.subheader {
+/*.subheader {
   background-color: #00ACC1;
   font-size: 1.4rem !important;
   font-weight: 300 !important;
   color: #fff !important;
-}
+}*/

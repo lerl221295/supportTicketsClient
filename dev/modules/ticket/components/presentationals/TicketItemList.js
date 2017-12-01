@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { ListItem, Avatar } from 'material-ui'
-import { Link } from 'react-router'
 import Face from 'material-ui/svg-icons/action/face'
 import { Row, Col } from 'react-flexbox-grid'
-import TimeAgo from '../../../../common/components/TimeAgo'
+import { TimeAgo, WrappedLink } from '../../../../common/components'
 import { getPriorityText, getPriorityColor } from '../../../../common/utils/consts'
 
 class Item extends Component {
@@ -26,14 +25,14 @@ class Item extends Component {
 						<Row>
 							<span>
 								{title}
-								<Link to={`/tickets/${number}`}>
+								<WrappedLink to={`/tickets/${number}`}>
 									{`#${number}`}
-								</Link>
+								</WrappedLink>
 							</span>
 						</Row>
 						<Row>
 							<span>
-								Por: <Link to={`clients/${client.id}`}>{`${client.fullName}`}</Link>
+								Por: <WrappedLink to={`clients/${client.id}`}>{`${client.fullName}`}</WrappedLink>
 							</span>
 						</Row>
 						<Row>
@@ -45,7 +44,7 @@ class Item extends Component {
 					<Col xs={3} md={3} sm={3}>
 						<Row>
 							<span>
-								Agente: <Link to={`agents/${agent.id}`}>{`${agent.fullName}`}</Link>
+								Agente: <WrappedLink to={`agents/${agent.id}`}>{`${agent.fullName}`}</WrappedLink>
 							</span>
 						</Row>
 						<Row>

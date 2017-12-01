@@ -1,6 +1,6 @@
 import React from 'react';
 import { capitalize } from '../utils/functions'
-import {Link} from "react-router";
+import WrappedLink from './WrappedLink'
 
 const ActionsList = ({actions}) => {
 	return (
@@ -19,7 +19,7 @@ const ActionsList = ({actions}) => {
 						};
 						return (
 							<li key={i}>
-								Asignó el ticket al {bearer_type.name} <Link to={{pathname: `${bearer_type.route}${bearer.id}`}}>{bearer.name}</Link>
+								Asignó el ticket al {bearer_type.name} <WrappedLink to={{pathname: `${bearer_type.route}${bearer.id}`}}>{bearer.name}</WrappedLink>
 							</li>
 						)
 					}
