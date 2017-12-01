@@ -28,7 +28,7 @@ class Routes extends Component {
 		<Router history={this.props.history}>
 			<Route path="login" component={LoginPage}/>
 			<Route path="/" component={App}>
-				<IndexRoute component={() => <DashboardContainer limit={10}/>} />
+				<IndexRoute component={DashboardContainer} />
 				<Route path="tickets">
 					<IndexRoute component={Tickets} />
 					<Route path=":number" component={TicketDetails}/>

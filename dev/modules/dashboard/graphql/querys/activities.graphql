@@ -1,49 +1,9 @@
+#import "../fragments/activitiesFragment.graphql"
 query getActivities ($ticket_number: Int, $offset: Int, $limit: Int) {
     activities(ticket_number: $ticket_number, offset: $offset, limit: $limit) {
-        count
         nodes {
-            id
-            time
-            ticket {
-                number
-                title
-            }
-            type_autor
-            autor {
-                __typename
-                ...on Agent {
-                    id
-                    name: fullName
-                    face_base64
-                }
-                ...on Client {
-                    id
-                    name: fullName
-                    face_base64
-                }
-            }
-            actions {
-                __typename
-                ...on ActivityActionUpdate {
-                    type
-                    prop_name
-                    new_value
-                }
-                ...on ActivityActionAssignment {
-                    type
-                    agent {
-                        id
-                        name: fullName
-                    }
-                }
-                ...on ActivityActionCeation {
-                    type
-                    client {
-                        id
-                        name
-                    }
-                }
-            }
+            ...activitiesFields
         }
+        count
     }
 }

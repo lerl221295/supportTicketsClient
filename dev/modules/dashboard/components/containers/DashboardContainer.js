@@ -1,66 +1,99 @@
-// import { connect } from 'react-redux'
-// import { push } from 'react-router-redux'
+// React
 import React from 'react'
+// Apollo
 import { graphql, compose } from 'react-apollo'
 import Activities from '../../graphql/querys/activities.graphql'
 import Indicators from '../../graphql/querys/indicators.graphql'
 import TicketsCountLastWeek from '../../graphql/querys/ticketsCountLastWeek.graphql'
-import Dashboard from '../presentationals/Dashboard'
+import MoreActivities from '../../graphql/subscriptions/newActivities.graphql'
+// External Libraries
 import moment from 'moment';
 moment.locale('es');
+// Presentationals Components
+import Dashboard from '../presentationals/Dashboard'
 
-// export default (Dashboard);
-
-// export default connect(null, { push })(TimeLineWithData)
-
-const MapData = (props) => {
-	// Destrucción de las variables loading
-	let {activities: {loading: loadingAct}, ticketsCountByDay: {loading: loadingTic}} = props;
-	if (loadingAct || loadingTic) return <Dashboard loading={true} />;
-	// Si no está cargando, mapeo la data
-	let {
-		activities: {activities: {nodes: activities}},
-		ticketsCountByDay: {ticketsCountByDay},
-		indicators: {indicators}
-	} = props;
-	
-	console.log('indicators---',indicators)
-	
-	let mappedActivities = [];
-	
-	for (const act of activities) {
-		let {actions, ...activity} = act;
-		mappedActivities = [...mappedActivities, ...actions.map(action => (
-			{
-				...activity,
-				action
-			}
-		))];
-	}
-	ticketsCountByDay = ticketsCountByDay.map(({day, tickets}) => (
-		{
-			tickets,
-			day: moment(day).format('dd D').toUpperCase(),
-			// tooltip: moment(day).format('dddd Do YYYY'),
-		}
-	));
-	return (
-		<Dashboard
-			loading={false}
-			ticketsCountByDay={ticketsCountByDay}
-			activities={mappedActivities}
-			indicators={indicators}
-		/>
-	);
-};
-
-const DashboardContainerData = compose(
+/**
+ * Límite de actividades que traerá del servidor
+ * @type {number}
+ */
+const limit = 10;
+/**
+ * Componente contenedor del dashboard
+ */
+const DashboardContainer = compose(
 	graphql(Activities, {
 		name: 'activities',
-		
+		options: () => ({
+			variables: {
+				limit
+			},
+			notifyOnNetworkStatusChange: true
+		}),
+		props: ({ownProps, activities: {fetchMore, refetch, subscribeToMore, activities, loading, error}}) => {
+			return({
+				activities: {
+					...ownProps,
+					activities,
+					loading,
+					error
+				},
+				// refetchActivities: () => refetch({ limit }),
+				loadMoreActivities: () => fetchMore({
+					variables: {
+						limit,
+						offset: activities.nodes.length
+					},
+					updateQuery: (previousResult, { fetchMoreResult }) => {
+						if (!fetchMoreResult) return previousResult;
+						return {
+							...previousResult,
+							activities: {
+								__typename: "ActivitiesResponse",
+								nodes: [...previousResult.activities.nodes, ...fetchMoreResult.activities.nodes]
+							}
+						}
+					}
+				}),
+				subscribeToMoreActivities: (ticket_number) => subscribeToMore({
+					document: MoreActivities,
+					variables: { ticket_number },
+					updateQuery: (prev, {subscriptionData: {newActivity}}) => {
+						console.log(newActivity);
+						if (!newActivity) return prev;
+						return {
+							...prev,
+							activities: {
+								__typename: "ActivitiesResponse",
+								nodes: [newActivity ,...prev.activities.nodes]
+							}
+						}
+					}
+				})
+			})
+		}
 	}),
-	graphql(Indicators, {name: 'indicators'}),
-	graphql(TicketsCountLastWeek, {name: 'ticketsCountByDay'})
-)(MapData);
+	graphql(TicketsCountLastWeek, {
+		name: 'ticketsCountByDay',
+		props: ({ ticketsCountByDay: { ticketsCountByDay, loading, error } }) => {
+			if (ticketsCountByDay) {
+				ticketsCountByDay = ticketsCountByDay.map(({day, tickets}) => (
+					{
+						tickets,
+						day: moment(new Date(day)).format('dd D').toUpperCase(),
+						// tooltip: moment(day).format('dddd Do YYYY'),
+					}
+				));
+			}
+			return({
+				ticketsCountByDay: {
+					ticketsCountByDay,
+					loading,
+					error
+				}
+			})
+		}
+	}),
+	graphql(Indicators, {name: 'indicators'})
+)(Dashboard);
 
-export default DashboardContainerData;
+export default DashboardContainer;

@@ -25,7 +25,7 @@ class TicketList extends Component {
 	componentWillReceiveProps = nextProps => {
 		//console.log(!_.isEqual(nextProps.filter_form, this.props.filter_form))
 		if(nextProps.filter_form && !_.isEqual(nextProps.filter_form, this.props.filter_form)){
-			console.log("REsubscribiendome a estos:", nextProps.filter_form);
+			console.log("Resubscribiendome a estos:", nextProps.filter_form);
 			this.props.subscribeToNewTickets(nextProps.filter_form);
 		}
 	}

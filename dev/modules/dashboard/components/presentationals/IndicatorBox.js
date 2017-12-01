@@ -1,10 +1,10 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import Paper from 'material-ui/Paper';
 import {white, grey800} from 'material-ui/styles/colors';
 import {typography} from 'material-ui/styles';
 import {Col, Row} from "react-flexbox-grid";
 
-const InfoBox = ({color, title, value, icon: Icon}) => {
+const IndicatorBox = ({color, title, value, icon: Icon}) => {
 	
 	const styles = {
 		iconFrameColor: {
@@ -12,43 +12,47 @@ const InfoBox = ({color, title, value, icon: Icon}) => {
 		},
 		text: {
 			fontWeight: typography.fontWeightLight,
-			color: grey800
+			color: grey800,
+			fontSize: '1.3rem',
+			marginBottom: '0.5rem'
 		},
 		number: {
 			fontWeight: typography.fontWeightMedium,
-			color: grey800
+			color: grey800,
+			fontSize: '2rem'
+		},
+		box: {
+			height: '5rem',
+			paddingLeft: '0.5rem'
+		},
+		colLessPadding: {
+			padding: '0'
+		},
+		iconWidth: {
+			width: '100%'
 		}
 	};
 	
 	return (
 		<Paper>
-			<Row middle={"xs"} center={"xs"} className={"box-height"}>
+			<Row middle={"xs"} center={"xs"} style={styles.box}>
 				<Col xs={2} className={"center-align max-height"} style={styles.iconFrameColor}>
 					<Row middle={"xs"} center={"xs"} className={"max-height"}>
-						<Col xs={12}>
+						<Col xs={12} style={styles.colLessPadding}>
 							<Icon
 								color={white}
-								style={{ marginLeft: '-0.3rem'}}
+								style={styles.iconWidth}
 							/>
 						</Col>
 					</Row>
 				</Col>
 				<Col xs={10}>
-					<h3 className={"indicator-text"} style={styles.text}>{title}</h3>
-					<h2 className={"indicator-number"} style={styles.number}>{value}</h2>
+					<h3 style={styles.text}>{title}</h3>
+					<h2 style={styles.number}>{value}</h2>
 				</Col>
 			</Row>
 		</Paper>
-	
-	
 	);
-}
+};
 
-/*InfoBox.propTypes = {
-	Icon: PropTypes.any, // eslint-disable-line
-	color: PropTypes.string,
-	title: PropTypes.string,
-	value: PropTypes.string
-};*/
-
-export default InfoBox;
+export default IndicatorBox;

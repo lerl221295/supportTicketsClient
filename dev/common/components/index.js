@@ -1,3 +1,4 @@
+import ActionsList from './ActionsList'
 import AvatarImg from './AvatarImg'
 import FormButtonGroup from './FormButtonGroup'
 import Header from './Header'
@@ -10,6 +11,7 @@ import ServiceFail from './ServiceFail'
 import TimeAgo from './TimeAgo'
 import WrappedSpeedDial from './WrappedSpeedDial'
 
+export {ActionsList};
 export {AvatarImg};
 export {FormButtonGroup};
 export {Header};

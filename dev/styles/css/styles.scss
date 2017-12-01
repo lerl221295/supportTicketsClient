@@ -1,8 +1,7 @@
-@import "richEditor";
+@import "rich-editor";
 @import "material-select";
 @import "create-edit-forms";
 @import "tables";
-@import "infoBox";
 
 html {
   font-family: 'Roboto', sans-serif;
@@ -132,4 +131,13 @@ input[name='undefined_filename']{
 
 .max-height {
   height: 100%;
+}
+
+// Subheader
+
+.subheader {
+  background-color: #00ACC1;
+  font-size: 1.4rem !important;
+  font-weight: 300 !important;
+  color: #fff !important;
 }

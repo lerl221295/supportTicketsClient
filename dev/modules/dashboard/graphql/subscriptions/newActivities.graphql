@@ -1,0 +1,6 @@
+#import "../fragments/activitiesFragment.graphql"
+subscription newActivity($ticket_number: Int) {
+	newActivity(ticket_number: $ticket_number) {
+		...activitiesFields
+	}
+}
