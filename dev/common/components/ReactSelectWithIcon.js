@@ -29,7 +29,7 @@ const ReactSelectWithIcon = ({Icon, label, ...props}) => (
 		  <Select.Async
 		  	searchPromptText="Escribe para buscar" 
 		  	{...props} 
-		  	style={{ marginBottom: '0.2rem', marginTop: '0.2rem' }} 
+		  	style={{ marginBottom: '0.2rem', marginTop: '0.2rem' }}
 		  />
 	  </Col>
   </Row>

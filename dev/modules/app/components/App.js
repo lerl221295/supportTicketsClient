@@ -1,19 +1,27 @@
 import React, { Component, PropTypes } from 'react'
+// React-Redux
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import Snackbar from 'material-ui/Snackbar'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import Header from '../../../common/components/Header'
-import LeftDrawer from '../../../common/components/LeftDrawer'
+// Material-UI Components
+import {Snackbar} from 'material-ui'
+// Material-UI Utils
 import withWidth, { LARGE, SMALL } from 'material-ui/utils/withWidth'
-import ThemeDefault from '../../../theme-default';
-
-import Doc from 'material-ui/svg-icons/file/cloud-queue'
-import TimeLine from 'material-ui/svg-icons/action/timeline'
-import Llave from 'material-ui/svg-icons/action/build'
-import PermIdentity from 'material-ui/svg-icons/action/perm-identity'
-import Ticket from 'material-ui/svg-icons/notification/confirmation-number'
-
+// Material-UI Theme config
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import ThemeDefault from '../../../theme-default'
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+// Common Components
+import {Header, LeftDrawer} from '../../../common/components'
+// Icons
+import {
+	FileCloudQueue as Doc,
+	ActionTimeline as TimeLine,
+	ActionBuild as Llave,
+	ActionPermIdentity as PermIdentity,
+	NotificationConfirmationNumber as Ticket
+} from 'material-ui/svg-icons/index'
 // import { getUser } from '../../utils/Authenticate'
 import { ToastContainer } from 'react-toastify'
 
@@ -53,27 +61,27 @@ class App extends Component {
 	
 	render() {
 		let { navDrawerOpen } = this.state;
-		const paddingLeftDrawerOpen = 236;
+		const paddingLeftDrawerOpen = '14.75rem';
 		
 		const styles = {
 			header: {
 				paddingLeft: navDrawerOpen ? paddingLeftDrawerOpen : 0
 			},
 			container: {
-				margin: '80px 20px 20px 15px',
+				margin: '0.5rem 0.5rem 0.5rem 0',
 				paddingLeft: navDrawerOpen && this.props.width !== SMALL ? paddingLeftDrawerOpen : 0
 			}
 		};
 		
 		return (
-			<MuiThemeProvider muiTheme={ThemeDefault}>
+			<MuiThemeProvider muiTheme={getMuiTheme(ThemeDefault)}>
 				<div>
 					<Header styles={styles.header}
 					        handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
 					
 					<LeftDrawer navDrawerOpen={navDrawerOpen}
 					            menus={menu}
-					            username="User Admin"/>
+					            username="Tesis SaaS"/>
 					
 					<div style={styles.container}>
 						<ToastContainer

@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
 import { ListItem, Avatar } from 'material-ui'
 import { grey500 } from 'material-ui/styles/colors'
 import {typography} from 'material-ui/styles';
 import Face from 'material-ui/svg-icons/action/face'
 import Computer from 'material-ui/svg-icons/hardware/computer'
 import { Row, Col } from 'react-flexbox-grid'
-import { TimeAgo, ActionsList } from '../../../../common/components'
+import { TimeAgo, ActionsList, WrappedLink } from '../../../../common/components'
 
 class Item extends Component {
 	render = () => {
@@ -15,7 +14,7 @@ class Item extends Component {
 		if (type_autor)
 			autor_name = do {
 				if (type_autor == 'SYSTEM') `El sistema `;
-				else <Link to={{pathname: `/agents/${autor.id}`}}>{autor.name}</Link>;
+				else <WrappedLink to={{pathname: `/agents/${autor.id}`}}>{autor.name}</WrappedLink>;
 			};
 		
 		return (
@@ -40,10 +39,13 @@ class Item extends Component {
 							{
 								do {
 									if (type == 'CREATION')
-										(<div><Link to={{pathname: `/clients/${ticket.client.id}`}}>{ticket.client.name}</Link> creó el ticket <a href="/">{ticket.title} (#{ticket.number})</a></div>)
+										(<div>
+											<WrappedLink to={{pathname: `/clients/${ticket.client.id}`}}>{ticket.client.name} </WrappedLink>
+											creó el ticket <WrappedLink to={{pathname: `/tickets`}}>{ticket.title} (#{ticket.number})</WrappedLink>
+										</div>)
 									else
 										(<div>
-											<div>{autor_name} actualizó el ticket <a href="/">{ticket.title} (#{ticket.number})</a>:</div>
+											<div>{autor_name} actualizó el ticket <WrappedLink to={{pathname: `/tickets`}}>{ticket.title} (#{ticket.number})</WrappedLink>:</div>
 											<ActionsList actions={actions}/>
 										</div>)
 								}

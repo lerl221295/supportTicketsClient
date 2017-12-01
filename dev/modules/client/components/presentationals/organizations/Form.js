@@ -5,65 +5,96 @@ import Domain from 'material-ui/svg-icons/social/location-city'
 import Description from 'material-ui/svg-icons/action/description'
 import Email from 'material-ui/svg-icons/communication/contact-mail'
 
-import { InputWithIcon, FormButtonGroup } from '../../../../../common/components'
+import { InputWithIcon, FormButtonGroup, FormSubheader } from '../../../../../common/components'
 
 class Form extends Component {
+	
+	state = {
+		edit: true
+	};
+	
 	static defaultProps = {
 		name: "",
 		about: "",
 		domains: ""
 	}
+	
+	componentWillReceiveProps = (nextProps) => {
+		if (!this.props.id)
+			this.state = {
+				edit: do {
+					if (nextProps.id) false;
+					else true;
+				}
+			};
+	};
+	
+	onCheckHandler = () => {
+		this.setState({edit: !this.state.edit});
+	};
 
 	render = () => {
 		return (
-      <Row center="xs" middle="xs">
-        <Paper style={{width: "40%"}}>
-          <Row start="xs">
-            <form className="padding">
-              <Row>
-                <Col xs={12} md={12} sm={12}>
-                  <InputWithIcon
-                    Icon={Domain}
-                    Input={TextField}
-                    hintText="Escriba el nombre"
-                    floatingLabelText="Nombre"
-                    name="name"
-                    onChange={this.props.handleChange}
-                    value={this.props.name}
-                  />
-                  <InputWithIcon
-                    Icon={Description}
-                    Input={TextField}
-                    hintText="Escriba la descripcion"
-                    floatingLabelText="Acerca de"
-                    value={this.props.about}
-                    name="about"
-                    onChange={this.props.handleChange}
-                    multiLine={true}
-                    //rows={2}
-                    rowsMax={6}
-                  />
-                  <InputWithIcon
-                    Icon={Email}
-                    Input={TextField}
-                    hintText="Escriba los dominios separados por ,"
-                    floatingLabelText="Dominios"
-                    value={this.props.domains}
-                    name="domains"
-                    onChange={this.props.handleChange}
-                    multiLine={true}
-                    //rows={2}
-                    rowsMax={3}
-                  />
-                </Col>
-                <FormButtonGroup
-                  cancel={this.props.cancel}
-                  send={this.props.send}
-                />
-              </Row>
-            </form>
-          </Row>
-        </Paper>
+      <Row center="xs" middle="xs" style={{marginTop: '3rem'}}>
+        <Col xs={5}>
+	        <Paper>
+		        <Row start="xs">
+			        <Col xs>
+				        <FormSubheader
+					        id={this.props.id} edit={this.state.edit}
+					        back={this.props.cancel} onCheckHandler={this.onCheckHandler}>
+					        Organizaciones
+				        </FormSubheader>
+			        </Col>
+			        <form className="padding">
+				        <Row>
+					        <Col xs={12} md={12} sm={12}>
+						        <InputWithIcon
+							        Icon={Domain}
+							        Input={TextField}
+							        hintText="Escriba el nombre"
+							        floatingLabelText="Nombre"
+							        name="name"
+							        onChange={this.props.handleChange}
+							        value={this.props.name}
+							        disabled={!this.state.edit}
+						        />
+						        <InputWithIcon
+							        Icon={Description}
+							        Input={TextField}
+							        hintText="Escriba la descripcion"
+							        floatingLabelText="Acerca de"
+							        value={this.props.about}
+							        name="about"
+							        onChange={this.props.handleChange}
+							        multiLine={true}
+							        //rows={2}
+							        rowsMax={6}
+							        disabled={!this.state.edit}
+						        />
+						        <InputWithIcon
+							        Icon={Email}
+							        Input={TextField}
+							        hintText="Escriba los dominios separados por ,"
+							        floatingLabelText="Dominios"
+							        value={this.props.domains}
+							        name="domains"
+							        onChange={this.props.handleChange}
+							        multiLine={true}
+							        //rows={2}
+							        rowsMax={3}
+							        disabled={!this.state.edit}
+						        />
+					        </Col>
+					        <FormButtonGroup
+						        cancel={this.props.cancel}
+						        send={this.props.send}
+					        />
+				        </Row>
+			        </form>
+		        </Row>
+	        </Paper>
+        </Col>
       </Row>
 		)
 	}

@@ -10,9 +10,8 @@ import {
 } from 'material-ui/Table'
 import Pagination from 'material-ui-pagination'
 import LinearProgress from 'material-ui/LinearProgress'
-import Plus from 'material-ui/svg-icons/content/create'
+import { ActionFace as Face, ImageRemoveRedEye as Eye } from 'material-ui/svg-icons/index'
 import Avatar from 'material-ui/Avatar';
-import Face from 'material-ui/svg-icons/action/face'
 
 
 class ClientesTable extends Component {
@@ -43,7 +42,7 @@ class ClientesTable extends Component {
               <TableHeaderColumn className="email">Email</TableHeaderColumn>
               <TableHeaderColumn>Telefono</TableHeaderColumn>
               <TableHeaderColumn>Organizacion</TableHeaderColumn>
-              <TableHeaderColumn className="center">Edit</TableHeaderColumn>
+              <TableHeaderColumn className="center">Detalle</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
@@ -67,7 +66,7 @@ class ClientesTable extends Component {
 										  	<TableRowColumn>{client.phones[0]}</TableRowColumn>
 										  	<TableRowColumn>{client.organization.name}</TableRowColumn>
 										  	<TableRowColumn className="center">
-												<Plus onClick={this.props.edit(client.id)}
+												<Eye onClick={this.props.edit(client.id)}
 													  style={{cursor: "pointer"}}
 													  hoverColor="blue"/>
 										  	</TableRowColumn>

@@ -6,6 +6,10 @@ import {List, ListItem} from 'material-ui/List'
 import { Row, Col } from 'react-flexbox-grid';
 // Components
 import Item from './ItemListActivity'
+// Common Components
+import { WrappedSubheader } from '../../../../common/components'
+
+import theme from '../../../../theme-default'
 
 const styles = {
 	paper: {
@@ -24,7 +28,7 @@ export default ({loadingActivities, activities, loadMoreActivities}) => {
 	return (
 		<Row>
 			<Col xs={12}>
-				<Subheader className={"subheader"}>Actividades recientes</Subheader>
+				<WrappedSubheader>Actividades recientes</WrappedSubheader>
 				<Paper style={{...styles.paper, ...styles.paperOverflow}}>
 					<List>
 						{activities.map((activity, i) =>
@@ -46,7 +50,7 @@ export default ({loadingActivities, activities, loadMoreActivities}) => {
 							else ""
 						}
 					}
-					<Col xs={12} md={12} sm={12}>
+					<Col xs={12}>
 						<FlatButton
 							label="Cargar mas"
 							style={styles.buttonFetchMore}

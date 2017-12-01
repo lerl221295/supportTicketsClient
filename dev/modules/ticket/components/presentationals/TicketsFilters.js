@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Paper, Divider, FlatButton, Subheader } from 'material-ui'
-import { 
-	renderSelectField, 
-	renderSelectReactField 
+import {
+	renderSelectField,
+	renderSelectReactField
 } from '../../../../common/components/ReduxFormComponents'
 
 import {typography} from 'material-ui/styles';

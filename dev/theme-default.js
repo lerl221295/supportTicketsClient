@@ -1,5 +1,11 @@
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import {blue600, grey900, grey500, white} from 'material-ui/styles/colors'
+import {fade} from 'material-ui/utils/colorManipulator';
+import {
+	blue600, grey900, grey500, white, cyan500, fullBlack,
+	grey400, pinkA200, grey100, darkBlack, grey300, cyan700,
+	indigo100, indigo500, indigo700, amber100, amber500, amber800, grey600, grey700, black,
+	// toogle
+	orange500, orange100, amber200
+} from 'material-ui/styles/colors'
 
 
 export const LoginStyles = {
@@ -61,20 +67,59 @@ export const LoginStyles = {
     },
 };
 
-const themeDefault = getMuiTheme({
-  palette: {
-  },
-  appBar: {
-    height: 57,
-    color: blue600
-  },
-  drawer: {
-    width: 230,
-    color: grey900
-  },
-  raisedButton: {
-    primaryColor: blue600,
-  }
-});
+const defaultThemeProps = {
+	appBar: {
+		height: 57
+	},
+	drawer: {
+		width: 230,
+			color: grey900
+	},
+};
 
-export default themeDefault;
+const indigo = {
+	palette: {
+		primary1Color: indigo500,
+		primary2Color: indigo700,
+		primary3Color: indigo100,
+		accent1Color: amber800,
+		accent2Color: amber100,
+		// accent3Color: amber500,
+		textColor: grey900,
+		secondaryTextColor: grey600,
+		alternateTextColor: white,
+		pickerHeaderColor: amber500,
+		disabledColor: grey700,
+		canvasColor: white,
+		clockCircleColor: fade(black, 0.07)
+	},
+	avatar: {
+		backgroundColor: amber800
+	}
+};
+
+const cyan = {
+	palette: {
+		primary1Color: cyan500,
+		primary2Color: cyan700,
+		primary3Color: grey400,
+		accent1Color: pinkA200,
+		accent2Color: grey100,
+		accent3Color: grey500,
+		textColor: darkBlack,
+		alternateTextColor: white,
+		canvasColor: white,
+		borderColor: grey300,
+		disabledColor: fade(darkBlack, 0.3),
+		pickerHeaderColor: cyan500,
+		clockCircleColor: fade(darkBlack, 0.07),
+		shadowColor: fullBlack,
+	},
+	avatar: {
+		backgroundColor: pinkA200
+	}
+};
+
+const selectedTheme = indigo;
+
+export default {...selectedTheme, ...defaultThemeProps};

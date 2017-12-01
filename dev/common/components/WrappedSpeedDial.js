@@ -32,7 +32,11 @@ class WrappedSpeedDial extends Component {
 			>
 				<BubbleList>
 					{items.map(({itemClick, ...item}, index) => {
-						return <BubbleListItem onClick={this.handleChangeSpeedDial(itemClick)} key={index} {...item} />;
+						return (
+							<BubbleListItem
+								onClick={this.handleChangeSpeedDial(itemClick)}
+								key={index} {...item} />
+						)
 					})}
 				</BubbleList>
 			</SpeedDial>
