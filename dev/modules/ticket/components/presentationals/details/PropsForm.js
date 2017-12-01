@@ -7,7 +7,10 @@ import {
 	FlatButton, 
 	Subheader,
 	RadioButton,
-	MenuItem
+	MenuItem,
+	Card,
+	CardHeader,
+	CardText
 } from 'material-ui'
 import {
   Checkbox,
@@ -49,6 +52,7 @@ const renderCustomField = custom_field => {
 				component={SelectField}
 				label={label}
 				style={{width: "100%"}}
+				floatingLabelText={label}
 			>
 			{
 				renderMenuItems(orderly.map(({key, label}) => ({value: key, text: label})))
@@ -79,12 +83,17 @@ const renderCustomField = custom_field => {
 			name={key}
 			component={Component}
 			label={label}
+			floatingLabelText={label}
 			{...custom}
 		/>
 	)
 }
 
 class PropsForm extends Component {
+	state = { expanded: true } //para poder tenerlo expandido por defecto!
+
+	handleExpandChange = (expanded) => this.setState({expanded: expanded});
+
 	render = () => {
 		const { 
 			ticket, 
@@ -102,40 +111,49 @@ class PropsForm extends Component {
 		const TYPES = ticketTypes.map(({key, label}) => ({value: key, text: label}));
 		
 		return (
-			<div>
-				<Subheader style={{
-					fontSize: 24,
-					fontWeight: typography.fontWeightLight,
-					backgroundColor: grey400,
-					color: white
-				}}>
-					Propiedades del Ticket
-				</Subheader>
-				<Paper style={{padding: "1rem"}}>
+			<Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+				<CardHeader
+			      	title="Propiedades del Ticket"
+			      	//subtitle="Subtitle"
+			      	actAsExpander={true}
+			      	showExpandableButton={true}
+			    />
+				<CardText expandable style={{padding: "1rem"}}>
 					<form>
-						<Field
-							name="priority"
-							component={SelectField}
-							label="Prioridad"
-							style={{width: "100%"}}
-						>
-						{
-							renderMenuItems(PRIORITIES)
-						}
-						</Field>
-						<Field
-							name="state"
-							component={SelectField}
-							label="Status"
-							style={{width: "100%"}}
-						>
-						{
-							renderMenuItems(STATUS)
-						}
-						</Field>
+						<Row>
+							<Col xs={12} md={6} sm={6}>
+								<Field
+									name="priority"
+									component={SelectField}
+									floatingLabelText="Prioridad"
+									label="Prioridad"
+									style={{width: "100%"}}
+								>
+								{
+									renderMenuItems(PRIORITIES)
+								}
+								</Field>
+							</Col>
+							<Col xs={12} md={6} sm={6}>
+								<Field
+									name="state"
+									component={SelectField}
+									floatingLabelText="Status"
+									label="Status"
+									style={{width: "100%"}}
+								>
+								{
+									renderMenuItems(STATUS)
+								}
+								</Field>
+							</Col>
+						</Row>
+						
+						
 						<Field
 							name="type"
 							component={SelectField}
+							floatingLabelText="Tipo"
 							label="Tipo"
 							style={{width: "100%"}}
 						>
@@ -146,6 +164,7 @@ class PropsForm extends Component {
 						<Field
 							name="source"
 							component={SelectField}
+							floatingLabelText="Canal"
 							label="Canal"
 							style={{width: "100%"}}
 						>
@@ -186,8 +205,8 @@ class PropsForm extends Component {
 							/>
 						</Col>
 					</Row>
-				</Paper>
-			</div>
+				</CardText>
+			</Card>
 		)
 	}
 }
