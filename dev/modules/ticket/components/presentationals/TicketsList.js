@@ -8,11 +8,15 @@ import _ from 'lodash'
 import Item from './TicketItemList'
 
 const styles = {
-	subheader: {
-		fontSize: 24,
-		fontWeight: typography.fontWeightLight,
-		backgroundColor: cyan600,
-		color: white
+	paper: {
+		maxHeight: '33rem'
+	},
+	paperOverflow: {
+		overflowY: 'auto',
+		overflowX: 'hidden'
+	},
+	buttonFetchMore: {
+		width: '100%'
 	}
 };
 
@@ -41,46 +45,34 @@ class TicketList extends Component {
 		const {tickets, loading} = this.props;
 		if(loading && !tickets) return <h1>Cargando...</h1>
 		return(
-			<Paper>
 				<Row>
-					<Col xs={12} md={12} sm={12}>
-						<List>
-							<Subheader style={styles.subheader}>Tickets</Subheader>
-							{
-								tickets.map((ticket, i) =>
-									<div key={i}>
-										<ListItem
-											containerElement={<Item {...ticket}/>}
-											// leftAvatar={
-											// 	do {
-											// 		if(!ticket.client.face_base64) (<Avatar icon={<Face/>} />)
-											// 		else (<Avatar src={ticket.client.face_base64} />)
-											// 	}
-											// }
-											// primaryText={`#${ticket.number}: ${ticket.title}`}
-											// secondaryText={ticket.client.fullName}
-											//rightIconButton={rightIconMenu}
-										/>
-										<Divider inset={true} />
-									</div>
-								)
-							}
-						</List>
-					</Col>
-					
-				</Row>
-				<Row center="xs">
-					<Col xs={12} md={12} sm={12}>
-						<FlatButton
-							style={{width: "100%"}}
-							label="Cargar mas"
-							primary={true}
-							onClick={this.props.loadMoreTickets}
-							disabled={this.props.loading}
-						/>
+					<Col xs={12}>
+						<Subheader className={"subheader"}>Tickets</Subheader>
+						<Paper style={{...styles.paper, ...styles.paperOverflow}}>
+							<List>
+								{
+									tickets.map((ticket, i) =>
+										<div key={i}>
+											<ListItem
+												containerElement={<Item {...ticket}/>}
+											/>
+											<Divider inset={true} />
+										</div>
+									)
+								}
+							</List>
+							<Col xs={12}>
+								<FlatButton
+									label="Cargar mas"
+									style={styles.buttonFetchMore}
+									primary={true}
+									onClick={this.props.loadMoreTickets}
+									disabled={this.props.loading}
+								/>
+							</Col>
+						</Paper>
 					</Col>
 				</Row>
-			</Paper>
 		)
 	}
 }

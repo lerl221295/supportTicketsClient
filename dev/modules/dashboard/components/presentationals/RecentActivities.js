@@ -46,7 +46,7 @@ export default ({loadingActivities, activities, loadMoreActivities}) => {
 							else ""
 						}
 					}
-					<Col xs={12} md={12} sm={12}>
+					<Col xs={12}>
 						<FlatButton
 							label="Cargar mas"
 							style={styles.buttonFetchMore}

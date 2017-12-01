@@ -145,7 +145,7 @@ class FilterForm extends Component {
 	render = () => {
 		const { handleSubmit, pristine, reset, submitting } = this.props;
 		return (
-			<Paper style={{padding: "1rem"}}>
+			<Paper style={{padding: "1rem", maxHeight: '36rem', overflowY: 'auto'}}>
 				<h2 style={{textAlign: "center"}}>Filtrar Propiedades</h2>
 				<Divider />
 				<form onSubmit={handleSubmit}>
