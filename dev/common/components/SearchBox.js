@@ -50,7 +50,7 @@ class SearchBox extends Component {
           </Col>
           <Col md={10}>
               <TextField
-                  hintText="Search..."
+                  //hintText="Search..."
                   underlineShow={false}
                   fullWidth={true}
                   style={styles.textField}

@@ -18,7 +18,7 @@ class TicketDetail extends Component {
 				</Row>
 				<Row>
 					<Col xs={9} md={9} sm={9}>
-						<Interventions {...this.props.data.ticket} />
+						<Interventions {...this.props.data.ticket} showActivities />
 					</Col>
 					<Col xs={3} md={3} sm={3}>
 						<ClientDetails {...this.props.data.ticket.client} />
