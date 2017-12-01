@@ -9,6 +9,7 @@ query GetTicketDetailsAndMetadata($number: Int!) {
 			label
 		}
 		client {
+			name: fullName
 			email
 			phones
 			address
@@ -22,6 +23,7 @@ query GetTicketDetailsAndMetadata($number: Int!) {
 			}
 		}
 		agent {
+			name: fullName
 			face_base64
 			email
 			profession
@@ -40,6 +42,51 @@ query GetTicketDetailsAndMetadata($number: Int!) {
 		tasks {
 			text
 			done
+		}
+		interventions {
+			time
+			text
+			type_autor
+			autor {
+				...on Agent {
+					id
+					fullName
+					face_base64
+				}
+			}
+		}
+		activities {
+			type
+			...on UpgradeActivity {
+				time
+				type_autor
+				autor {
+					id
+					fullName
+					face_base64
+				}
+				actions {
+					...on UpgradeActivityActionUpdate {
+						type
+						prop_name
+						new_value
+					}
+					...on UpgradeActivityActionAssignment {
+						type
+						bearer {
+							...on Agent {
+								name: fullName
+							}
+							...on Supplier {
+								name
+							}
+							...on Group {
+								name
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 	ticketMetadata {

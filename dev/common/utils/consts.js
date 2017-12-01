@@ -14,6 +14,13 @@ export const DUE_BY = [
 	{value: "TOMORROW", text: "Mañana"}
 ];
 
+export const CHANELS = [
+	{value: "PORTAL", text: "Portal"},
+	{value: "EMAIL", text: "Email"},
+	{value: "FACEBOOK", text: "Facebook"},
+	{value: "TWITTER", text: "Twitter"}
+];
+
 export const getPriorityText = (priority_value) =>
 	 _.find(PRIORITIES, priority => priority.value === priority_value).text;
 

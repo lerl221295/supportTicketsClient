@@ -23,13 +23,6 @@ const styles = {
 };
 
 class TicketList extends Component {
-	/*static defaultProps = {
-		filter_form: {
-			firstName: "",
-			lastName: ""
-		}
-	}*/
-
 	componentWillMount = () => {
 		console.log("subscribiendome a estos tickets: ", this.props.filter_form);
 		this.props.subscribeToNewTickets(this.props.filter_form);
@@ -47,10 +40,11 @@ class TicketList extends Component {
 		const {tickets, loading} = this.props;
 		if(loading && !tickets) return <h1>Cargando...</h1>
 		return(
-				<Row>
-					<Col xs={12}>
-						<WrappedSubheader>Tickets</WrappedSubheader>
-						<Paper style={{...styles.paper, ...styles.paperOverflow}}>
+			<div>
+				<Subheader style={styles.subheader}>Tickets</Subheader>
+				<Paper style={{height: '32rem', overflowY: 'auto', overflowX: 'hidden'}}>
+					<Row>
+						<Col xs={12} md={12} sm={12}>
 							<List>
 								{
 									tickets.map((ticket, i) =>
@@ -63,18 +57,22 @@ class TicketList extends Component {
 									)
 								}
 							</List>
-							<Col xs={12}>
-								<FlatButton
-									label="Cargar mas"
-									style={styles.buttonFetchMore}
-									primary={true}
-									onClick={this.props.loadMoreTickets}
-									disabled={this.props.loading}
-								/>
-							</Col>
-						</Paper>
-					</Col>
-				</Row>
+						</Col>
+						
+					</Row>
+					<Row center="xs">
+						<Col xs={12} md={12} sm={12}>
+							<FlatButton
+								style={{width: "100%"}}
+								label="Cargar mas"
+								primary={true}
+								onClick={this.props.loadMoreTickets}
+								disabled={this.props.loading}
+							/>
+						</Col>
+					</Row>
+				</Paper>
+			</div>
 		)
 	}
 }
