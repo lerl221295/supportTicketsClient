@@ -1,5 +1,5 @@
 import { graphql } from 'react-apollo'
-import TicketDetails from '../presentationals/TicketDetails'
+import TicketDetails from '../presentationals/details/TicketDetails'
 import GetTicketDetailsAndMetadata from '../../graphql/querys/ticketDetails.graphql'
 
 export default graphql(GetTicketDetailsAndMetadata, {
