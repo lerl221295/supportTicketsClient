@@ -37,7 +37,7 @@ class SupplierTable extends Component {
 						<TableRow>
 							<TableHeaderColumn className={"center fullname"}>Nombre</TableHeaderColumn>
 							<TableHeaderColumn className={"center"}>Acerca de</TableHeaderColumn>
-							<TableHeaderColumn className={"center edit"}>Edit</TableHeaderColumn>
+							<TableHeaderColumn className={"center edit"}>Detalle</TableHeaderColumn>
 						</TableRow>
 					</TableHeader>
 					<TableBody displayRowCheckbox={false}>

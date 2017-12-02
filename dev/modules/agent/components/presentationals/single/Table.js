@@ -56,7 +56,7 @@ class AgentsTable extends Component {
 							<TableHeaderColumn>Telefono</TableHeaderColumn>
 							<TableHeaderColumn>Role</TableHeaderColumn>
 							<TableHeaderColumn>Proveedor</TableHeaderColumn>
-							<TableHeaderColumn className="center">Edit</TableHeaderColumn>
+							<TableHeaderColumn className="center">Detalle</TableHeaderColumn>
 						</TableRow>
 					</TableHeader>
 					<TableBody displayRowCheckbox={false}>
