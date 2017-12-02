@@ -8,11 +8,10 @@ import {
 	TableRowColumn,
 	TableFooter
 } from 'material-ui/Table'
+import theme from '../../../../../theme-default'
 import Pagination from 'material-ui-pagination'
-import LinearProgress from 'material-ui/LinearProgress'
-import Plus from 'material-ui/svg-icons/content/create'
-import Avatar from 'material-ui/Avatar'
-import FormEdit from '../../containers/EditAgent'
+import { LinearProgress, Avatar } from 'material-ui'
+import { ImageRemoveRedEye as Eye} from 'material-ui/svg-icons'
 
 class AgentsTable extends Component {	
 	render = () => {
@@ -57,7 +56,7 @@ class AgentsTable extends Component {
 							<TableHeaderColumn>Telefono</TableHeaderColumn>
 							<TableHeaderColumn>Role</TableHeaderColumn>
 							<TableHeaderColumn>Proveedor</TableHeaderColumn>
-							<TableHeaderColumn className="center">Edit</TableHeaderColumn>
+							<TableHeaderColumn className="center">Detalle</TableHeaderColumn>
 						</TableRow>
 					</TableHeader>
 					<TableBody displayRowCheckbox={false}>
@@ -81,9 +80,9 @@ class AgentsTable extends Component {
 											<TableRowColumn>{agent.role}</TableRowColumn>
 											<TableRowColumn>{agent.supplier.name}</TableRowColumn>
 											<TableRowColumn className="center">
-												<Plus onClick={this.props.edit(agent.id)}
+												<Eye onClick={this.props.edit(agent.id)}
 												      className="edit"
-												      hoverColor="blue"/>
+												      hoverColor={theme.palette.accent1Color}/>
 											</TableRowColumn>
 										</TableRow>
 									))

@@ -10,6 +10,7 @@ import {
 } from 'material-ui/Table'
 import Pagination from 'material-ui-pagination'
 import LinearProgress from 'material-ui/LinearProgress'
+import theme from '../../../../../theme-default'
 import { ImageRemoveRedEye as Eye } from 'material-ui/svg-icons/index'
 
 class OrganizationsTable extends Component {
@@ -52,7 +53,8 @@ class OrganizationsTable extends Component {
 											<TableRowColumn className={"center edit"}>
 												<Eye onClick={this.props.edit(organization.id)}
 												      style={{cursor: "pointer"}}
-												      hoverColor="blue"/>
+												      hoverColor={theme.palette.accent1Color}
+												/>
 											</TableRowColumn>
 										</TableRow>
 									))

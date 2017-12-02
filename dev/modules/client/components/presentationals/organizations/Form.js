@@ -17,7 +17,7 @@ class Form extends Component {
 		name: "",
 		about: "",
 		domains: ""
-	}
+	};
 	
 	componentWillReceiveProps = (nextProps) => {
 		if (!this.props.id)
@@ -39,59 +39,68 @@ class Form extends Component {
         <Col xs={5}>
 	        <Paper>
 		        <Row start="xs">
-			        <Col xs>
+			        <Col xs={12}>
 				        <FormSubheader
 					        id={this.props.id} edit={this.state.edit}
 					        back={this.props.cancel} onCheckHandler={this.onCheckHandler}>
-					        Organizaciones
+					        Organización
 				        </FormSubheader>
 			        </Col>
-			        <form className="padding">
-				        <Row>
-					        <Col xs={12} md={12} sm={12}>
-						        <InputWithIcon
-							        Icon={Domain}
-							        Input={TextField}
-							        hintText="Escriba el nombre"
-							        floatingLabelText="Nombre"
-							        name="name"
-							        onChange={this.props.handleChange}
-							        value={this.props.name}
-							        disabled={!this.state.edit}
-						        />
-						        <InputWithIcon
-							        Icon={Description}
-							        Input={TextField}
-							        hintText="Escriba la descripcion"
-							        floatingLabelText="Acerca de"
-							        value={this.props.about}
-							        name="about"
-							        onChange={this.props.handleChange}
-							        multiLine={true}
-							        //rows={2}
-							        rowsMax={6}
-							        disabled={!this.state.edit}
-						        />
-						        <InputWithIcon
-							        Icon={Email}
-							        Input={TextField}
-							        hintText="Escriba los dominios separados por ,"
-							        floatingLabelText="Dominios"
-							        value={this.props.domains}
-							        name="domains"
-							        onChange={this.props.handleChange}
-							        multiLine={true}
-							        //rows={2}
-							        rowsMax={3}
-							        disabled={!this.state.edit}
-						        />
-					        </Col>
-					        <FormButtonGroup
-						        cancel={this.props.cancel}
-						        send={this.props.send}
-					        />
-				        </Row>
-			        </form>
+			        <Col xs={12}>
+				        <form className="padding">
+					        <Row>
+						        <Col xs={12} md={12} sm={12}>
+							        <InputWithIcon
+								        Icon={Domain}
+								        Input={TextField}
+								        hintText="Escriba el nombre"
+								        floatingLabelText="Nombre"
+								        name="name"
+								        onChange={this.props.handleChange}
+								        value={this.props.name}
+								        disabled={!this.state.edit}
+							        />
+							        <InputWithIcon
+								        Icon={Description}
+								        Input={TextField}
+								        hintText="Escriba la descripcion"
+								        floatingLabelText="Acerca de"
+								        value={this.props.about}
+								        name="about"
+								        onChange={this.props.handleChange}
+								        multiLine={true}
+								        //rows={2}
+								        rowsMax={6}
+								        disabled={!this.state.edit}
+							        />
+							        <InputWithIcon
+								        Icon={Email}
+								        Input={TextField}
+								        hintText="Escriba los dominios separados por ,"
+								        floatingLabelText="Dominios"
+								        value={this.props.domains}
+								        name="domains"
+								        onChange={this.props.handleChange}
+								        multiLine={true}
+								        //rows={2}
+								        rowsMax={3}
+								        disabled={!this.state.edit}
+							        />
+						        </Col>
+						        {
+							        do {
+								        if (this.state.edit) (
+									        <FormButtonGroup
+										        cancel={this.props.cancel}
+										        send={this.props.send}
+									        />
+								        )
+								        else ""
+							        }
+						        }
+					        </Row>
+				        </form>
+			        </Col>
 		        </Row>
 	        </Paper>
         </Col>

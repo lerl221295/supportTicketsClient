@@ -1,30 +1,42 @@
+// React
 import React, { Component } from 'react'
+// React - Redux
 import { Field, reduxForm } from 'redux-form'
-import { Paper, Divider, FlatButton, Subheader } from 'material-ui'
-import {
-	renderSelectField,
-	renderSelectReactField
-} from '../../../../common/components/ReduxFormComponents'
-
-import {typography} from 'material-ui/styles';
-import {grey400, cyan600, white} from 'material-ui/styles/colors';
-import Person from 'material-ui/svg-icons/action/account-circle'
-import Organization from 'material-ui/svg-icons/communication/business'
+// Flexbox Grid
 import { Row, Col } from 'react-flexbox-grid'
-import GetOrganizationsNames from '../../graphql/querys/organizationsNames.graphql'
-import GetGroupsNames from '../../graphql/querys/groupsNames.graphql'
-import GetSuppliersNames from '../../graphql/querys/suppliersNames.graphql'
-import GetAgentsNames from '../../graphql/querys/agentsNames.graphql'
-import GetClientsNames from '../../graphql/querys/clientsNames.graphql'
-
+// Material-UI
+import { Paper, FlatButton } from 'material-ui'
+// Icons
+import {
+ActionAccountCircle as Person,
+CommunicationBusiness as Organization
+} from 'material-ui/svg-icons'
+// Redux Form Components
+import {
+renderSelectField,
+renderSelectReactField
+} from '../../../../common/components/ReduxFormComponents'
+// Common Components
+import { WrappedSubheader } from '../../../../common/components'
+// Graphql
+import {
+	GetOrganizationsNames,
+	GetGroupsNames,
+	GetSuppliersNames,
+	GetAgentsNames,
+	GetClientsNames
+} from '../../graphql/querys'
+// Utils
 import { PRIORITIES, DUE_BY } from '../../../../common/utils/consts'
 
 const styles = {
-	subheader: {
-		fontSize: 24,
-		fontWeight: typography.fontWeightLight,
-		backgroundColor: grey400,
-		color: white
+	paper: {
+		height: '33rem',
+		overflowY: 'auto',
+		padding: '0rem 1rem'
+	},
+	buttonFetchMore: {
+		width: '100%'
 	}
 };
 
@@ -34,8 +46,8 @@ class FilterForm extends Component {
 		const { handleSubmit, pristine, reset, submitting, searchData } = this.props;
 		return (
 			<div>
-				<Subheader style={styles.subheader}>Filtrar Propiedades</Subheader>
-				<Paper style={{height: '32rem', overflowY: 'auto', padding: "1rem"}}>
+				<WrappedSubheader>Filtrar Propiedades</WrappedSubheader>
+				<Paper style={styles.paper}>
 					<form onSubmit={handleSubmit}>
 						<Field
 							Icon={Person}
@@ -128,6 +140,7 @@ class FilterForm extends Component {
 							<Row center="xs">
 								<Col xs={6} md={6} sm={6}>
 									<FlatButton
+										style={styles.buttonFetchMore}
 										label="Limpiar"
 										primary={true}
 										onClick={reset}
