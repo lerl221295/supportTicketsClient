@@ -2,6 +2,7 @@ fragment ticketsFields on Ticket {
     number
     title
     source
+    description
     state {
         key
         label

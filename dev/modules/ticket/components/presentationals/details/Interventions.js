@@ -4,7 +4,7 @@ import { Paper } from 'material-ui'
 import Intervention from './Intervention'
 import Activity from './Activity'
 
-export default ({interventions, activities, showActivities}) => {
+export default ({interventions, activities, showActivities, ...ticket}) => {
 	
 	let listToShow = [...interventions]; // Array.from(interventions)
 	if(showActivities) listToShow = [...listToShow, ... activities];
@@ -19,8 +19,10 @@ export default ({interventions, activities, showActivities}) => {
 		<div>
 			{
 				listToShow.map((item, i) => {
-					if(item.__typename === "Intervention") return <Intervention key={i} {...item}/>;
-					else return <Activity key={i} {...item}/>
+					if(item.__typename === "Intervention") 
+						return <Intervention key={i} {...item}/>;
+					else 
+						return <Activity key={i} {...item} ticket={ticket}/>
 				})
 			}
 		</div>

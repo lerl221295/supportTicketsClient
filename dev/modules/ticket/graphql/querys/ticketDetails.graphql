@@ -50,7 +50,7 @@ query GetTicketDetailsAndMetadata($number: Int!) {
 			autor {
 				...on Agent {
 					id
-					fullName
+					name: fullName
 					face_base64
 				}
 			}
@@ -62,7 +62,7 @@ query GetTicketDetailsAndMetadata($number: Int!) {
 				type_autor
 				autor {
 					id
-					fullName
+					name: fullName
 					face_base64
 				}
 				actions {
@@ -75,12 +75,15 @@ query GetTicketDetailsAndMetadata($number: Int!) {
 						type
 						bearer {
 							...on Agent {
+								id
 								name: fullName
 							}
 							...on Supplier {
+								id
 								name
 							}
 							...on Group {
+								id
 								name
 							}
 						}
