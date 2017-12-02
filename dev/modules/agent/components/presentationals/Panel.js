@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 // Material Components
-import {Avatar, Snackbar, Tab, Tabs} from "material-ui";
+import {Avatar, Tab, Tabs} from "material-ui";
 // Colores
 import { pink400 } from 'material-ui/styles/colors';
 // Íconos
-import Person from 'material-ui/svg-icons/social/person'
-import People from 'material-ui/svg-icons/social/people'
-import PeopleOutline from 'material-ui/svg-icons/social/people-outline'
-import Organization from 'material-ui/svg-icons/communication/business'
+import { SocialPerson as Person,
+	SocialPeople as People,
+	SocialPeopleOutline as PeopleOutline,
+	CommunicationBusiness as Organization
+} from 'material-ui/svg-icons'
 // Common Components
 import {SearchBox, WrappedSpeedDial} from '../../../../common/components'
 // Tablas
@@ -37,17 +38,17 @@ class Panel extends Component {
 			{
 				itemClick: () => this.props.push('agents/new'),
 				primaryText: 'Agente',
-				rightAvatar: <Avatar backgroundColor={pink400} icon={<Person />} />,
+				rightAvatar: <Avatar icon={<Person />} />,
 			},
 			{
 				itemClick: () => this.props.push('/agents/suppliers/new'),
 				primaryText: 'Proveedores',
-				rightAvatar: <Avatar backgroundColor={pink400} icon={<People />} />,
+				rightAvatar: <Avatar icon={<People />} />,
 			},
 			{
 				itemClick: () => this.props.push('/agents/groups/new'),
 				primaryText: 'Grupos',
-				rightAvatar: <Avatar backgroundColor={pink400} icon={<PeopleOutline />} />,
+				rightAvatar: <Avatar icon={<PeopleOutline />} />,
 			}
 		];
 	}

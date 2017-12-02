@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import {List, ListItem, Paper, Subheader, Divider, Avatar, FlatButton} from "material-ui";
-import {typography} from 'material-ui/styles';
-import {grey400, cyan600, white} from 'material-ui/styles/colors';
-import Face from 'material-ui/svg-icons/action/face'
+import {List, ListItem, Paper, Divider, FlatButton} from "material-ui";
 import { Row, Col } from 'react-flexbox-grid'
 import _ from 'lodash'
 import Item from './TicketItemList'
@@ -26,7 +23,7 @@ class TicketList extends Component {
 	componentWillMount = () => {
 		console.log("subscribiendome a estos tickets: ", this.props.filter_form);
 		this.props.subscribeToNewTickets(this.props.filter_form);
-	}
+	};
 
 	componentWillReceiveProps = nextProps => {
 		//console.log(!_.isEqual(nextProps.filter_form, this.props.filter_form))
@@ -34,15 +31,15 @@ class TicketList extends Component {
 			console.log("Resubscribiendome a estos:", nextProps.filter_form);
 			this.props.subscribeToNewTickets(nextProps.filter_form);
 		}
-	}
+	};
 
 	render = () => {
 		const {tickets, loading} = this.props;
 		if(loading && !tickets) return <h1>Cargando...</h1>
 		return(
 			<div>
-				<Subheader style={styles.subheader}>Tickets</Subheader>
-				<Paper style={{height: '32rem', overflowY: 'auto', overflowX: 'hidden'}}>
+				<WrappedSubheader>Tickets</WrappedSubheader>
+				<Paper style={{...styles.paper, ...styles.paperOverflow}}>
 					<Row>
 						<Col xs={12} md={12} sm={12}>
 							<List>
@@ -63,7 +60,7 @@ class TicketList extends Component {
 					<Row center="xs">
 						<Col xs={12} md={12} sm={12}>
 							<FlatButton
-								style={{width: "100%"}}
+								style={styles.buttonFetchMore}
 								label="Cargar mas"
 								primary={true}
 								onClick={this.props.loadMoreTickets}

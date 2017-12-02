@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { MenuItem, TextField, SelectField,	Divider, FlatButton, Paper } from 'material-ui'
+import { MenuItem, TextField, SelectField,Paper } from 'material-ui'
 import { Row, Col } from 'react-flexbox-grid'
 // Íconos
 import Person from 'material-ui/svg-icons/action/account-circle'
@@ -11,13 +11,44 @@ import Phone from 'material-ui/svg-icons/communication/phone'
 import Email from 'material-ui/svg-icons/communication/contact-mail'
 import People from 'material-ui/svg-icons/social/people'
 // Componentes comunes
-import { InputWithIcon, ReactSelectWithIcon, AvatarImg, FormButtonGroup } from '../../../../../common/components'
+import {
+	InputWithIcon, ReactSelectWithIcon,
+	AvatarImg, FormButtonGroup, FormSubheader
+} from '../../../../../common/components'
 
 
 class Form extends Component {
+	
+	state = {
+		edit: true
+	};
+	
+	componentWillReceiveProps = (nextProps) => {
+		if (!this.props.id)
+			this.state = {
+				edit: do {
+					if (nextProps.id) false;
+					else true;
+				}
+			};
+	};
+	
+	onCheckHandler = () => {
+		this.setState({edit: !this.state.edit});
+	};
+	
 	render = () => {
 		return (
 			<Paper>
+				<Row>
+					<Col xs>
+						<FormSubheader
+							id={this.props.id} edit={this.state.edit}
+							back={this.props.cancel} onCheckHandler={this.onCheckHandler}>
+							Agente
+						</FormSubheader>
+					</Col>
+				</Row>
 				<form className="padding">
 					<Row>
 						{/*COLUMNA DE LA IZQUIERDA*/}
@@ -25,7 +56,9 @@ class Form extends Component {
 							<AvatarImg
 								face_base64={this.props.face_base64}
 								avatar_filename={this.props.avatar_filename}
-								changeImage={this.props.changeImage}/>
+								changeImage={this.props.changeImage}
+								disabled={!this.state.edit}
+							/>
 							<InputWithIcon
 								Icon={Person}
 								Input={TextField}
@@ -34,6 +67,7 @@ class Form extends Component {
 								name="name"
 								onChange={this.props.handleChange}
 								value={this.props.name}
+								disabled={!this.state.edit}
 							/>
 							<InputWithIcon
 								Icon={Person}
@@ -41,6 +75,7 @@ class Form extends Component {
 								hintText="Escriba el apellido"
 								floatingLabelText="Apellido"
 								value={this.props.lastname}
+								disabled={!this.state.edit}
 								name="lastname"
 								onChange={this.props.handleChange}
 							/>
@@ -49,6 +84,7 @@ class Form extends Component {
 								Input={SelectField}
 								floatingLabelText="Sexo"
 								value={this.props.sex}
+								disabled={!this.state.edit}
 								onChange={this.props.handleSelectChange('sex')}
 							>
 								<MenuItem value={"MALE"} primaryText="Hombre" />
@@ -60,6 +96,7 @@ class Form extends Component {
 								hintText="Escriba el email"
 								floatingLabelText="Email"
 								value={this.props.email}
+								disabled={!this.state.edit}
 								name="email"
 								onChange={this.props.handleChange}
 							/>
@@ -69,6 +106,7 @@ class Form extends Component {
 								hintText="Escriba los telefonos"
 								floatingLabelText="Telefonos"
 								value={this.props.phones}
+								disabled={!this.state.edit}
 								name="phones"
 								onChange={this.props.handleChange}
 							/>
@@ -81,6 +119,7 @@ class Form extends Component {
 								hintText="Acerca del agente"
 								floatingLabelText="Acerca de"
 								value={this.props.about}
+								disabled={!this.state.edit}
 								name="about"
 								onChange={this.props.handleChange}
 								multiLine={true}
@@ -92,6 +131,7 @@ class Form extends Component {
 								hintText="Escriba la profesión"
 								floatingLabelText="Profesión"
 								value={this.props.profession}
+								disabled={!this.state.edit}
 								name="profession"
 								onChange={this.props.handleChange}
 							/>
@@ -100,6 +140,7 @@ class Form extends Component {
 								Input={SelectField}
 								floatingLabelText="Role de usuario"
 								value={this.props.role}
+								disabled={!this.state.edit}
 								onChange={this.props.handleSelectChange('role')}
 							>
 								<MenuItem value={"AGENT"} primaryText="Agente" />
@@ -110,6 +151,7 @@ class Form extends Component {
 								Icon={People}
 								label={"Proveedor"}
 								value={this.props.supplier}
+								disabled={!this.state.edit}
 								onChange={this.props.handleReactSelectChange("supplier")}
 								valueKey="id" labelKey="name"
 								loadOptions={this.props.searchSuppliers}
@@ -123,6 +165,7 @@ class Form extends Component {
 								label={"Grupos"}
 								multi={true}
 								value={this.props.groups}
+								disabled={!this.state.edit}
 								onChange={this.props.handleReactSelectChange("groups")}
 								valueKey="id" labelKey="name"
 								loadOptions={this.props.searchGroups}
@@ -132,10 +175,17 @@ class Form extends Component {
 								filterOption={() => (true)}
 							/>
 						</Col>
-						<FormButtonGroup
-							cancel={this.props.cancel}
-							send={this.props.send}
-						/>
+						{
+							do {
+								if (this.state.edit) (
+									<FormButtonGroup
+										cancel={this.props.cancel}
+										send={this.props.send}
+									/>
+								)
+								else ""
+							}
+						}
 					</Row>
 				</form>
 			</Paper>

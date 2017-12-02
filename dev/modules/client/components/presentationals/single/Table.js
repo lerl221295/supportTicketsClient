@@ -10,8 +10,9 @@ import {
 } from 'material-ui/Table'
 import Pagination from 'material-ui-pagination'
 import LinearProgress from 'material-ui/LinearProgress'
-import { ActionFace as Face, ImageRemoveRedEye as Eye } from 'material-ui/svg-icons/index'
-import Avatar from 'material-ui/Avatar';
+import Avatar from 'material-ui/Avatar'
+import theme from '../../../../../theme-default'
+import { ActionFace as Face, ImageRemoveRedEye as Eye } from 'material-ui/svg-icons'
 
 
 class ClientesTable extends Component {
@@ -68,7 +69,8 @@ class ClientesTable extends Component {
 										  	<TableRowColumn className="center">
 												<Eye onClick={this.props.edit(client.id)}
 													  style={{cursor: "pointer"}}
-													  hoverColor="blue"/>
+													  hoverColor={theme.palette.accent1Color}
+												/>
 										  	</TableRowColumn>
 										</TableRow>
 									))

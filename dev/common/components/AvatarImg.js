@@ -14,7 +14,7 @@ const styles = {
 	}
 };
 
-const AvatarImg = ({face_base64, avatar_filename, changeImage}) => (
+const AvatarImg = ({face_base64, avatar_filename, changeImage, disabled}) => (
 	<Row middle={"xs"}>
 		<Col xs={12} sm={12} md={4} lg={4}>
 			<img src={face_base64 || "/images/user.png"} style={styles.img}/>
@@ -32,8 +32,9 @@ const AvatarImg = ({face_base64, avatar_filename, changeImage}) => (
 				containerElement='label'
 				label='Imagen de Perfil'
 				icon={<Image />}
+				disabled={disabled}
 			>
-				<input accept="image/*" type="file" style={{ display: 'none' }} onChange={changeImage}/>
+				<input disabled={disabled} accept="image/*" type="file" style={{ display: 'none' }} onChange={changeImage}/>
 			</RaisedButton>
 		</Col>
 	</Row>

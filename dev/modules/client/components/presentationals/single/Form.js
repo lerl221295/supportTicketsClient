@@ -58,7 +58,7 @@ class Form extends Component {
 						<FormSubheader
 							id={this.props.id} edit={this.state.edit}
 							back={this.props.cancel} onCheckHandler={this.onCheckHandler}>
-							Clientes
+							Cliente
 						</FormSubheader>
 					</Col>
         </Row>
@@ -69,6 +69,7 @@ class Form extends Component {
 								face_base64={this.props.face_base64}
 								avatar_filename={this.props.avatar_filename}
 								changeImage={this.props.changeImage}
+								disabled={!this.state.edit}
 							/>
 							<InputWithIcon
 								Icon={Person}

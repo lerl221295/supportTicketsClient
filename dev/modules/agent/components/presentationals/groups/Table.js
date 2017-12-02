@@ -10,7 +10,8 @@ import {
 } from 'material-ui/Table'
 import Pagination from 'material-ui-pagination'
 import LinearProgress from 'material-ui/LinearProgress'
-import Plus from 'material-ui/svg-icons/content/create'
+import theme from '../../../../../theme-default'
+import { ImageRemoveRedEye as Eye } from 'material-ui/svg-icons'
 
 class SupplierTable extends Component {
 	render = () => {
@@ -46,9 +47,9 @@ class SupplierTable extends Component {
 									<TableRowColumn className={"center fullname"}>{group.name}</TableRowColumn>
 									<TableRowColumn>{group.about}</TableRowColumn>
 									<TableRowColumn className={"center edit"}>
-										<Plus onClick={this.props.edit(group.id)}
+										<Eye onClick={this.props.edit(group.id)}
 										      className="edit"
-										      hoverColor="blue"/>
+										      hoverColor={theme.palette.accent1Color}/>
 									</TableRowColumn>
 								</TableRow>
 							))
