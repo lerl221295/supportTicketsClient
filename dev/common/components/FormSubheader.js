@@ -4,9 +4,9 @@ import {
 	NavigationArrowBack as ArrowBack,
 	EditorModeEdit as Edit,
 	ImageRemoveRedEye as Eye
-} from "material-ui/svg-icons/index";
+} from "material-ui/svg-icons";
 import WrappedSubheader from './WrappedSubheader'
-import {Row, Col} from "react-flexbox-grid";
+import {Row, Col} from "react-flexbox-grid"
 
 export default ({id, edit, back, onCheckHandler, children}) => (
 	<WrappedSubheader>
@@ -26,13 +26,13 @@ export default ({id, edit, back, onCheckHandler, children}) => (
 							<FloatingActionButton onClick={onCheckHandler} mini={true} zDepth={0} style={{marginBottom:'0.5rem'}}>
 								{
 									do {
-										if (edit) <Eye />
-										else <Edit />
+										if (edit) (<Eye />);
+										else (<Edit />);
 									}
 								}
 							</FloatingActionButton>
-						)
-						else ""
+						);
+						else null;
 					}
 				}
 			</Col>
