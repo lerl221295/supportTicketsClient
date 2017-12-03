@@ -12,7 +12,8 @@ import { WrappedSubheader } from '../../../../common/components'
 
 const styles = {
 	paper: {
-		height: '27rem',
+		// height: '27rem',
+		height: window.innerHeight - 218,
 		padding: '0.7rem'
 	}
 };

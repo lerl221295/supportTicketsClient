@@ -13,7 +13,8 @@ import theme from '../../../../theme-default'
 
 const styles = {
 	paper: {
-		height: '27rem'
+		// height: '27rem'
+		height: window.innerHeight - 218,
 	},
 	paperOverflow: {
 		overflowY: 'auto',
