@@ -118,7 +118,7 @@ class PropsForm extends Component {
 			      	actAsExpander={true}
 			      	showExpandableButton={true}
 			    />
-				<CardText expandable style={{padding: "1rem"}}>
+				<CardText expandable style={{padding: "0 1rem 0 1rem"}}>
 					<form>
 						<Row>
 							<Col xs={12} md={6} sm={6}>

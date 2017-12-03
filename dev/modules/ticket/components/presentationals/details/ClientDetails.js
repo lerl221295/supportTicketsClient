@@ -17,7 +17,7 @@ export default ({name, email, address, phones, face_base64, organization }) => (
 	      	actAsExpander={true}
 	      	showExpandableButton={true}
 	    />
-	    <CardText expandable style={{padding: "1rem"}}>
+	    <CardText expandable style={{padding: "0 1rem 0 1rem"}}>
 	    	<span>
 	    		Email: {email}
 	    	</span>
@@ -39,7 +39,7 @@ export default ({name, email, address, phones, face_base64, organization }) => (
 	    		do {
 	    			if(phones.length)
 	    				<span>
-				    		Phones: <ul>
+				    		Phones: <ul style={{margin: "0"}}>
 				    			{
 				    				phones.map(phone => <li key={phone}> {phone} </li>)
 				    			}
