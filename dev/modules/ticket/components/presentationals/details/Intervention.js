@@ -8,7 +8,7 @@ import {
 	Avatar 
 } from 'material-ui'
 import Face from 'material-ui/svg-icons/action/face'
-import { lightBlue50, blueGrey800 } from 'material-ui/styles/colors'
+import { lightBlue50, lightGreen50, blueGrey800 } from 'material-ui/styles/colors'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 
 import TimeAgo, { getFullTime } from '../../../../../common/components/TimeAgo'
@@ -20,12 +20,15 @@ const styles = {
 		fontSize:12,
 		fontWeight: "bold"
 	},
-	header: {
-		backgroundColor: lightBlue50,
+	header: (agent) => ({
+		backgroundColor: do {
+			if(agent) lightGreen50;
+			else lightBlue50;
+		},
 	 	margin:"-1rem",
 	 	marginBottom: "0",
 	  	padding: "1rem"
-	}
+	})
 }
 
 const renderAvatar = ({face_base64}) => {
@@ -33,12 +36,12 @@ const renderAvatar = ({face_base64}) => {
 	return <Avatar src={face_base64} />;
 }
 
-export default ({ autor, time, text }) => {
+export default ({ autor, time, text, type_autor }) => {
 	
 	return (
 		
 		<Paper style={{margin: "0.6rem", padding: "1rem"}}>
-			<Row between="xs" style={styles.header}>
+			<Row between="xs" style={styles.header(type_autor === "AGENT")}>
 				<Col xs={3} md={3} sm={3}>
 					<Row middle="xs">
 						<Col xs={3} md={3} sm={3}>
