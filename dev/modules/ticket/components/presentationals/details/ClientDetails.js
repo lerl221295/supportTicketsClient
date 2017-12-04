@@ -9,7 +9,7 @@ import {
 import Face from 'material-ui/svg-icons/action/face'
 
 export default ({name, email, address, phones, face_base64, organization }) => (
-	<Card>
+	<Card style={{marginTop: "0.6rem"}}>
 		<CardHeader
 	      	title={name}
 	      	//subtitle={email}
