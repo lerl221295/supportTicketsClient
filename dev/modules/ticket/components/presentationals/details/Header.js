@@ -7,15 +7,16 @@ import {
 	RaisedButton,
 	IconButton,
 	MenuItem,
-	IconMenu
+	IconMenu,
+	Toggle
 } from 'material-ui'
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more'
 
-export default props => (
+export default ({showActivities, toggleActivities}) => (
 	<Toolbar style={{marginLeft: "0.6rem"}}>
         <ToolbarGroup>
           	<ToolbarSeparator />
-          	<RaisedButton label="Mostrar actividades" primary={true} />
+          	<Toggle label="Actividades" toggled={showActivities} onToggle={() => toggleActivities()} />
           	<IconMenu
             	iconButtonElement={
               		<IconButton touch={true}>

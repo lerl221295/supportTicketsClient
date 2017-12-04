@@ -3,8 +3,8 @@ import { Grid, Row, Col } from 'react-flexbox-grid'
 import { Divider } from 'material-ui'
 import ClientDetails from './ClientDetails'
 import Tasks from './Tasks'
-import Interventions from './InterventionList'
-import Header from './Header'
+import Interventions from '../../containers/InterventionList'
+import Header from '../../containers/Header'
 import Reply from './Reply'
 import PropsForm from '../../containers/TicketPropsForm'
 
@@ -22,7 +22,7 @@ class TicketDetail extends Component {
 				</Row>
 				<Row>
 					<Col xs={9} md={9} sm={9}>
-						<Interventions {...this.props.data.ticket} showActivities />
+						<Interventions {...this.props.data.ticket} />
 						<Reply client={this.props.data.ticket.client}/>
 					</Col>
 					<Col xs={3} md={3} sm={3}>
