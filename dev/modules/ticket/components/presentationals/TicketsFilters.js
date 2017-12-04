@@ -31,12 +31,10 @@ import { PRIORITIES, DUE_BY } from '../../../../common/utils/consts'
 
 const styles = {
 	paper: {
-		height: '33rem',
+		// maxHeight: '33rem',
+		maxHeight: window.innerHeight - 124,
 		overflowY: 'auto',
 		padding: '0rem 1rem'
-	},
-	buttonFetchMore: {
-		width: '100%'
 	}
 };
 
@@ -140,10 +138,10 @@ class FilterForm extends Component {
 							<Row center="xs">
 								<Col xs={6} md={6} sm={6}>
 									<FlatButton
-										style={styles.buttonFetchMore}
 										label="Limpiar"
 										primary={true}
 										onClick={reset}
+										fullWidth={true}
 									/>
 								</Col>
 							</Row>

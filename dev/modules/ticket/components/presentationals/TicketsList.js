@@ -8,14 +8,12 @@ import { WrappedSubheader } from '../../../../common/components'
 
 const styles = {
 	paper: {
-		maxHeight: '33rem'
+		// maxHeight: '33rem'
+		maxHeight: window.innerHeight - 124
 	},
 	paperOverflow: {
 		overflowY: 'auto',
 		overflowX: 'hidden'
-	},
-	buttonFetchMore: {
-		width: '100%'
 	}
 };
 
@@ -60,10 +58,10 @@ class TicketList extends Component {
 					<Row center="xs">
 						<Col xs={12} md={12} sm={12}>
 							<FlatButton
-								style={styles.buttonFetchMore}
 								label="Cargar mas"
 								primary={true}
 								onClick={this.props.loadMoreTickets}
+								fullWidth={true}
 								disabled={this.props.loading}
 							/>
 						</Col>
