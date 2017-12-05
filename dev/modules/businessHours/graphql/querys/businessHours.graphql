@@ -1,0 +1,6 @@
+#import "../fragments/businessHoursFragment.graphql"
+query GetBusinessHours {
+	businessHours{
+		...businessHoursFields
+	}
+}

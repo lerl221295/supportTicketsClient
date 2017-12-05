@@ -6,8 +6,9 @@ import Activity from './Activity'
 
 export default ({interventions, activities, showActivities, ...ticket}) => {
 	
-	let listToShow = [...interventions]; // Array.from(interventions)
-	if(showActivities) listToShow = [...listToShow, ... activities];
+	let listToShow; // Array.from(interventions)
+	if(showActivities) listToShow = [...interventions, ... activities];
+	else listToShow = [activities[0], ...interventions]; //siempre la primera actividad
 
 	listToShow.sort((a, b) => {
 		if(a.__typename === "CreationActivity") return -1;

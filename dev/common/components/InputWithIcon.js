@@ -1,8 +1,8 @@
 import React from 'react'
 import { Row, Col } from 'react-flexbox-grid'
 
-const InputWithIcon = ({Icon, Input, ...props, children}) => (
-		<Row bottom="xs">
+const InputWithIcon = ({Icon, Input, style, ...props, children}) => (
+		<Row bottom="xs" style={style}>
 			{
 				  do {
 					  if (Icon) (

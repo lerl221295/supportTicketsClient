@@ -30,8 +30,9 @@ const menu = [
 	{ text: 'Tickets', icon: <Ticket/>, link: '/tickets' },
 	{ text: 'Tecnicos', icon: <Llave/>, link: '/agents' },
 	{ text: 'Clientes', icon: <PermIdentity/>, link: '/clients' },
-	{ text: 'Doc', icon: <Doc/>, link: '/doc' },
 	{ text: 'Políticas SLA', icon: <Doc/>, link: '/sla' }
+	{ text: 'Horario habil', icon: <PermIdentity/>, link: '/admin/businessHours' },
+	{ text: 'Doc', icon: <Doc/>, link: '/doc' }
 ];
 
 @connect(null, { push })

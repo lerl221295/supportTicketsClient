@@ -5,14 +5,14 @@ import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 
 const formatter = buildFormatter(espStrings);
 
-const dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']
+const dias = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']
 const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
 export const getFullTime = date => {
 	let jsDate = new Date(date);
 	let dia = jsDate.getDate();
-	let diaSemana = dias[jsDate.getDay()-1];
+	let diaSemana = dias[jsDate.getDay()];
 	let mes = meses[jsDate.getMonth()];
 	let anio = jsDate.getFullYear();
 	let {hora, time} = do {

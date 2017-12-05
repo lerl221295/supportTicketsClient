@@ -4,8 +4,11 @@ import {
 	Card,
 	CardHeader,
 	CardText,
-	Checkbox
+	Checkbox,
+	TextField
 } from 'material-ui'
+import { ActionNoteAdd } from 'material-ui/svg-icons'
+import { InputWithIcon } from '../../../../../common/components'
 
 export default ({tasks}) => (
 	<Card>
@@ -16,15 +19,26 @@ export default ({tasks}) => (
 	      	showExpandableButton={true}
 	    />
 	    <CardText expandable style={{padding: "1rem"}}>
-	    	{
-	    		tasks.map( ({text, done}, i) => (
-	    			<Checkbox 
-	    				key={i}
-	    				label={text}
-	    				checked={done}
-	    			/>
-	    		))	
-	    	}
+	    	
+		    	<InputWithIcon
+					Icon={ActionNoteAdd}
+					Input={TextField}
+					style={{marginTop: "-2rem", marginBottom: "1rem"}}
+					hintText="Agregar Tarea"
+					floatingLabelText="Nueva Tarea"
+					name="task"
+					//value={this.props.name}
+				/>
+	    		{
+		    		tasks.map( ({text, done}, i) => (
+		    			<Checkbox 
+		    				key={i}
+		    				label={text}
+		    				checked={done}
+		    			/>
+		    		))	
+		    	}
+	    	
 	    </CardText>
 	</Card>
 )

@@ -7,44 +7,49 @@ import {
 	Avatar
 } from 'material-ui'
 import Face from 'material-ui/svg-icons/action/face'
+import { grey800, blueGrey800 } from 'material-ui/styles/colors'
+
+const styles = {
+	key: {
+		color: blueGrey800,
+		fontSize:12
+	},
+	value: {
+		color: blueGrey800,
+		fontSize:12,
+		fontWeight: 600
+	}
+}
 
 export default ({name, email, address, phones, face_base64, organization }) => (
-	<Card>
+	<Card style={{marginTop: "0.6rem"}}>
 		<CardHeader
 	      	title={name}
-	      	//subtitle={email}
+	      	subtitle={
+	      		do {
+	      			if(organization) organization.name;
+	      			else "Particular";
+	      		}
+	      	}
 	      	avatar={face_base64 || (<Avatar icon={<Face/>} />)}
 	      	actAsExpander={true}
 	      	showExpandableButton={true}
 	    />
 	    <CardText expandable style={{padding: "0 1rem 0 1rem"}}>
-	    	<span>
-	    		Email: {email}
-	    	</span>
+	    	<span style={styles.key}> Email: </span> <span style={styles.value}> {email} </span>
 	    	<Divider />
-	    	{
-	    		do {
-	    			if(organization)
-	    				<span>
-				    		Organizacion: {organization.name}
-				    		<Divider />
-				    	</span>
-	    		}
-	    	}
-	    	<span>
-	    		Direccion: {address || "Desconocida"}
-	    	</span>
+	    	<span style={styles.key}> Direccion: </span> <span style={styles.value}>{address || "Desconocida"} </span>
 	    	<Divider />
 	    	{
 	    		do {
 	    			if(phones.length)
-	    				<span>
-				    		Phones: <ul style={{margin: "0"}}>
+	    				<div>
+				    		<span style={styles.key}> Phones </span>: <ul style={{margin: "0"}}>
 				    			{
-				    				phones.map(phone => <li key={phone}> {phone} </li>)
+				    				phones.map(phone => <li style={styles.value} key={phone}> {phone} </li>)
 				    			}
 				    		</ul>
-				    	</span>
+				    	</div>
 	    		}
 	    	}
 	    </CardText>

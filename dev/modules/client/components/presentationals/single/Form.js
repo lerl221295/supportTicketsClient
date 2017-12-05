@@ -8,7 +8,7 @@ import {
 	ActionDescription as Description,
 	CommunicationPhone as Phone,
 	CommunicationContactMail as Email
-} from "material-ui/svg-icons/index";
+} from "material-ui/svg-icons";
 import {
 	InputWithIcon, ReactSelectWithIcon, AvatarImg, FormButtonGroup, FormSubheader
 } from '../../../../../common/components'
