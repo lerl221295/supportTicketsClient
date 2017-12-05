@@ -19,6 +19,8 @@ import EditSupplier from './modules/agent/components/containers/EditSupplier'
 import EditGroup from './modules/agent/components/containers/EditGroup'
 import CreateGroup from './modules/agent/components/containers/CreateGroup'
 
+import BusinessHours from './modules/businessHours/components/containers/EditBusinessHours'
+
 import DashboardContainer from './modules/dashboard/components/containers/DashboardContainer'
 import Doc from './modules/doc/Doc'
 
@@ -48,6 +50,9 @@ class Routes extends Component {
 					<Route path="groups/new" component={CreateGroup}/>
 					<Route path="groups/:id" component={EditGroup}/>
 					<Route path=":id" component={EditAgent}/>
+				</Route>
+				<Route path="admin">
+					<Route path="businessHours" component={BusinessHours}/>
 				</Route>
 				<Route path="doc" component={Doc} />
 				<Route path="*" component={notFound}/>

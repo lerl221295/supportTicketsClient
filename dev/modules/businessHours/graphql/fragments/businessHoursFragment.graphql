@@ -1,0 +1,22 @@
+fragment businessHoursFields on BusinessHours {
+    twentyfour_seven
+    working_days {
+    	day
+        workeable
+    	horary {
+    		start {
+                hour
+                minutes
+            }
+    		end {
+                hour
+                minutes
+            }
+    	}
+    }
+    holidays {
+    	name
+    	day
+    	month
+    }
+}

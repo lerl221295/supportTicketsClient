@@ -14,8 +14,7 @@ import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-mo
 
 export default ({showActivities, toggleActivities}) => (
 	<Toolbar style={{marginLeft: "0.6rem"}}>
-        <ToolbarGroup>
-          	<ToolbarSeparator />
+        <ToolbarGroup lastChild>
           	<Toggle label="Actividades" toggled={showActivities} onToggle={() => toggleActivities()} />
           	<IconMenu
             	iconButtonElement={

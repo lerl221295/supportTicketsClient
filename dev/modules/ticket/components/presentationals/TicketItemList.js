@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ListItem, Avatar } from 'material-ui'
+import { ListItem, Avatar, ToolbarSeparator } from 'material-ui'
 import Face from 'material-ui/svg-icons/action/face'
 import { Row, Col } from 'react-flexbox-grid'
 import { TimeAgo, WrappedLink } from '../../../../common/components'
@@ -10,7 +10,7 @@ class Item extends Component {
 		const { client, agent, state, type, title, number, priority, time, resolve_by } = this.props;
 		return (
 			<ListItem>
-				<Row>
+				<Row middle="xs">
 					<Col xs={1} md={1} sm={1} style={{
 						borderLeft: `thick solid ${getPriorityColor(priority)}`
 					}}>
@@ -21,7 +21,7 @@ class Item extends Component {
 							}
 						}
 					</Col>
-					<Col xs={8} md={8} sm={8}>
+					<Col xs={7}>
 						<Row>
 							<span>
 								{title}
@@ -40,6 +40,9 @@ class Item extends Component {
 								Creado: <TimeAgo date={time}/>, Plazo de entrega: <TimeAgo date={resolve_by}/>
 							</span>
 						</Row>
+					</Col>
+					<Col xs={1}>
+						<ToolbarSeparator style={{height: '3rem'}}/>
 					</Col>
 					<Col xs={3} md={3} sm={3}>
 						<Row>
