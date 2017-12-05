@@ -8,4 +8,4 @@ export const closeAlert = () => ({
 export const openAlert = (text) => ({
 	type: OPEN_ALERT,
 	payload: { text }
-})
+});

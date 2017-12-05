@@ -1,0 +1,8 @@
+fragment slaPoliciesFields on SLAPolicy {
+    id
+    by_default
+    name
+    description
+    active
+    position
+}

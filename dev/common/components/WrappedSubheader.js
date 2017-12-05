@@ -2,8 +2,8 @@ import React from 'react'
 import theme from '../../theme-default'
 import {Subheader} from "material-ui";
 
-export default ({children}) => (
-	<Subheader style={{
+export default ({children, ...props}) => (
+	<Subheader {...props} style={{
 		backgroundColor: theme.palette.primary2Color,
 		fontSize: '1.4rem',
 		fontWeight: '300',
