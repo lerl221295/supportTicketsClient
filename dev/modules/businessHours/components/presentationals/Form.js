@@ -1,5 +1,6 @@
 import React from 'react'
-import { Paper, List, ListItem, Divider, RaisedButton } from 'material-ui'
+import { Paper, List, ListItem, Divider, RaisedButton, Subheader } from 'material-ui'
+import { grey600, blueGrey800 } from 'material-ui/styles/colors'
 import { Field, reduxForm } from 'redux-form'
 import {
   Toggle,
@@ -10,16 +11,16 @@ import {
 } from 'redux-form-material-ui'
 import moment from 'moment'
 import { Row, Col } from 'react-flexbox-grid'
-import { InputWithIcon } from '../../../../common/components'
+import { InputWithIcon, WrappedSubheader, FormButtonGroup } from '../../../../common/components'
 
 const renderWorkingDays = (props) => {
 	const days = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"];
-	const hide = do {
-		if(props.twentyfour_seven) ({display: "none"});
-		else ({});
-	}
 	return(
-		<List style={{padding: "1rem", ...hide}}>
+		<List style={{padding: "1rem", display: do {
+			if(props.twentyfour_seven) "none";
+			else null;
+		}}}>
+			<Subheader>Dias Laborables</Subheader>
 			{
 				days.map(day => {
 					let diffHours = moment(props[`${day}_end`]).diff(moment(props[`${day}_start`]), 'hours');
@@ -78,6 +79,7 @@ const renderWorkingDays = (props) => {
 const renderHolidays = (holidays) => {
 	return(
 		<List>
+			<Subheader>Dias Festivos</Subheader>
 			{
 				holidays.map(({name, day, month}, i) => (
 					<div key={i}>
@@ -92,39 +94,9 @@ const renderHolidays = (holidays) => {
 	)
 }
 
-export default ({data, ...props}) => {
-	//console.log(data);
-	if(data.loading) return <h1> Cargando </h1>
-	//console.log(twentyfour_seven);
-	return(
-		<Row center="xs" middle="xs" style={{marginTop: '3rem'}}>
-			<Col xs={8}>
-				<Paper style={{padding: "2rem"}}>
-					<Col xs={3}>
-						<Field 
-							name="twentyfour_seven" 
-							component={Toggle} 
-							label="24 x 7"
-						/>
-					</Col>
-					<Row start="xs">
-						<Col xs={12}>
-							{ renderWorkingDays(props) }
-						</Col>
-						<Col xs={12}>
-							{ renderHolidays(data.businessHours.holidays) }
-							<NewHolidayWithReduxForm />
-						</Col>
-					</Row>
-				</Paper>
-			</Col>
-		</Row>
-	)
-}
-
 const NewHoliday = () => (
 	<Row bottom="xs">
-		<Col xs={7}>
+		<Col xs={6}>
 			<Field 
 				name="newHolidayName" 
 				component={TextField} 
@@ -146,10 +118,53 @@ const NewHoliday = () => (
 				formatDate={date => `${date.getDate()}/${date.getMonth()+1}`}
 			/>
 		</Col>
-		<Col xs={3}>
-			<RaisedButton label="Agregar Holiday" primary={true} />
+		<Col xs={4}>
+			<RaisedButton label="Agregar Festivo" primary={true} />
 		</Col>
 	</Row>
 )
 
 const NewHolidayWithReduxForm = reduxForm({form: 'newHoliday'})(NewHoliday);
+
+export default ({data, ...props}) => {
+	//console.log(data);
+	if(data.loading) return <h1> Cargando </h1>
+	//console.log(twentyfour_seven);
+	return(
+		<Row center="xs" style={{marginTop: '3rem'}}>
+			<Col xs={8}>
+				<WrappedSubheader>
+					Horario Habil
+				</WrappedSubheader>
+				<Paper style={{padding: "2rem"}}>
+					<Col xs={8}>
+						<Field 
+							name="twentyfour_seven" 
+							component={Toggle} 
+							label="Laborar 24 horas, los 7 dias de la semana"
+							labelStyle={{color: grey600, 'fontWeight': 'bold'}}
+						/>
+					</Col>
+					<Row middle="xs" start="xs">
+						<Col xs={12}>
+							{ renderWorkingDays(props) }
+						</Col>
+					</Row>
+					<Row start="xs">
+						<Col xs={12}>
+							{ renderHolidays(data.businessHours.holidays) }		
+						</Col>
+					</Row>
+					<Row>
+						<Col xs={12}>
+							<NewHolidayWithReduxForm />
+						</Col>
+					</Row>	
+					<Row>
+						<FormButtonGroup cancel={() => alert("cancelar")} send={() => alert("send")}/>
+					</Row>
+				</Paper>
+			</Col>
+		</Row>
+	)
+}
