@@ -7,11 +7,11 @@ import Interventions from '../../containers/InterventionList'
 import Header from '../../containers/Header'
 import Reply from './Reply'
 import PropsForm from '../../containers/TicketPropsForm'
+import { Loading } from '../../../../../common/components'
 
 class TicketDetail extends Component {
 	render = () => {
-		if(this.props.data.loading) return(<h1> cargando </h1>);
-		//else return(<h1>{JSON.stringify(this.props.data.ticket)}</h1>);
+		if(this.props.data.loading) return <Loading />;
 
 		return(
 			<div>
