@@ -1,3 +1,0 @@
-mutation AsignTecnico($tecnico_id: Int!, $ticket_id: Int!){
-	asignTecnico(tecnico_id: $tecnico_id, ticket_id: $ticket_id)
-}

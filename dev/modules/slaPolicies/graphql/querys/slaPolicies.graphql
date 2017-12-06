@@ -1,0 +1,6 @@
+#import "../fragments/slaPoliciesFragment.graphql"
+query GetSLAPolicies {
+    SLAPolicies {
+        ...slaPoliciesFields
+    }
+}

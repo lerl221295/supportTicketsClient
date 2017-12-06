@@ -88,13 +88,16 @@ const indigo = {
 		textColor: grey900,
 		secondaryTextColor: grey600,
 		alternateTextColor: white,
-		pickerHeaderColor: amber500,
+		pickerHeaderColor: indigo500,
 		disabledColor: grey700,
 		canvasColor: white,
 		clockCircleColor: fade(black, 0.07)
 	},
 	avatar: {
 		backgroundColor: amber800
+	},
+	toolbar: {
+		backgroundColor: indigo700
 	}
 };
 

@@ -44,14 +44,14 @@ class FormContainer extends Component {
 	};
 	
 	cleanAndBack = () => {
-    	this.setState(initialState);
-    	this.props.goBack();
-    };
-
-    cancel = event => {
-    	event.preventDefault();
-    	this.cleanAndBack();
-    };
+		this.setState(initialState);
+		this.props.goBack();
+	};
+	
+	cancel = event => {
+		event.preventDefault();
+		this.cleanAndBack();
+	};
 	
 	send = event => {
 		event.preventDefault();
@@ -84,7 +84,7 @@ class FormContainer extends Component {
 			query: Query,
 			variables: {search_text}
 		})
-		.then( ({data}) => ({options: data[entity].nodes}))
+			.then( ({data}) => ({options: data[entity].nodes}))
 	);
 	
 	handleChange = e => this.setState({[e.target.name]: e.target.value});
@@ -94,17 +94,17 @@ class FormContainer extends Component {
 	handleReactSelectChange = (name) => (selectValue) => this.setState({[name] : selectValue});
 	
 	render = () => (
-	    <Form 
-        	{...this.state}
-            handleChange={this.handleChange}
-            handleSelectChange={this.handleSelectChange}
-            handleReactSelectChange={this.handleReactSelectChange}
-            changeImage={this.changeImage}
-            searchSuppliers={this.searchEntity(GetSuppliersNames, 'suppliers')}
-            searchGroups={this.searchEntity(GetGroupsNames, 'groups')}
-            send={this.send}
-      		cancel={this.cancel}
-        />
+		<Form
+			{...this.state}
+			handleChange={this.handleChange}
+			handleSelectChange={this.handleSelectChange}
+			handleReactSelectChange={this.handleReactSelectChange}
+			changeImage={this.changeImage}
+			searchSuppliers={this.searchEntity(GetSuppliersNames, 'suppliers')}
+			searchGroups={this.searchEntity(GetGroupsNames, 'groups')}
+			send={this.send}
+			cancel={this.cancel}
+		/>
 	)
 }
 

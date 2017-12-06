@@ -1,0 +1,32 @@
+#import "../fragments/slaPoliciesFragment.graphql"
+query GetSLAPolicies($id: ID!) {
+    SLAPolicy(id: $id) {
+        ...slaPoliciesFields
+        clients {
+            id
+            name: fullName
+        }
+        organizations {
+            id
+            name
+        }
+        alerts {
+            type
+            motive
+            time
+            message
+        }
+        policies {
+            priority
+            operational_hours
+            first_response {
+                value
+                unity
+            }
+            solved {
+                value
+                unity
+            }
+        }
+    }
+}
