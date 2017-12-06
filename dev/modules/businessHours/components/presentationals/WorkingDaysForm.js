@@ -1,9 +1,7 @@
 import React from 'react'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
 import { List, ListItem, Divider, Subheader } from 'material-ui'
 import { grey600, blueGrey800 } from 'material-ui/styles/colors'
-import { Field, reduxForm } from 'redux-form'
+import { Field } from 'redux-form'
 import {
   TimePicker,
   Checkbox
@@ -74,8 +72,4 @@ const WorkingDays = (props) => {
 	)
 }
 
-export default compose(
-	connect( ({form}) => ({twentyfour_seven: form.businessHours.values.twentyfour_seven})),
-	reduxForm({form: 'workingDays'}),
-	connect( ({form}) => form.workingDays.values )
-)(WorkingDays);
+export default WorkingDays

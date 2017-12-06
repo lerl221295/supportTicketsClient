@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
+import { reduxForm, getFormValues } from 'redux-form'
 import { graphql, compose } from 'react-apollo'
 import { push } from 'react-router-redux'
 import BusinessHoursForm from '../presentationals/BusinessHours'
@@ -18,13 +18,14 @@ const BusinessHoursWithReduxForm = reduxForm({ form: 'businessHours' })(Business
 
 @compose(
 	graphql(BusinessHours),
-	connect(null, {setHolidays})
+	connect(null, { setHolidays })
 )
 class BusinessHoursContainer extends Component {
 
-	componentWillReceiveProps = ({data}) => {
-		if(data.businessHours)
+	componentWillReceiveProps = ({data, ...rest}) => {
+		if(data.businessHours){
 			this.props.setHolidays(data.businessHours.holidays);
+		}
 	}
 
 	render = () => {

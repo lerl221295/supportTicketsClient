@@ -6,11 +6,12 @@ import {
 } from 'redux-form-material-ui'
 import moment from 'moment'
 import { Row, Col } from 'react-flexbox-grid'
-import { WrappedSubheader, FormButtonGroup, Loading } from '../../../../common/components'
+import { WrappedSubheader, Loading } from '../../../../common/components'
 
 import Theme from '../../../../theme-default'
 
-import WorkingDaysForm from './WorkingDaysForm'
+import WorkingDaysForm from '../containers/WorkingDays'
+import SenderContainer from '../containers/SenderContainer'
 import Holidays from './Holidays'
 import NewHoliday from './NewHoliday'
 
@@ -47,7 +48,7 @@ export default ({loading, workingDays, ...props}) => {
 						</Col>
 					</Row>	
 					<Row>
-						<FormButtonGroup cancel={() => alert("cancelar")} send={() => alert("send")}/>
+						<SenderContainer />
 					</Row>
 				</Paper>
 			</Col>
