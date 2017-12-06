@@ -30,7 +30,7 @@ const menu = [
 	{ text: 'Tickets', icon: <Ticket/>, link: '/tickets' },
 	{ text: 'Tecnicos', icon: <Llave/>, link: '/agents' },
 	{ text: 'Clientes', icon: <PermIdentity/>, link: '/clients' },
-	{ text: 'Políticas SLA', icon: <Doc/>, link: '/sla' }
+	{ text: 'Políticas SLA', icon: <Doc/>, link: '/sla' },
 	{ text: 'Horario habil', icon: <PermIdentity/>, link: '/admin/businessHours' },
 	{ text: 'Doc', icon: <Doc/>, link: '/doc' }
 ];
@@ -43,11 +43,6 @@ class App extends Component {
 			navDrawerOpen: true
 		};
 	}
-	
-	/*componentWillMount = () => {
-			//validar que el usuario este autenticado
-			if(!getUser()) this.props.push("login");
-	}*/
 	
 	componentWillReceiveProps(nextProps) {
 		if (this.props.width !== nextProps.width) {
