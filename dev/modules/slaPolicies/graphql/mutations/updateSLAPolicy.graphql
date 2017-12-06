@@ -1,0 +1,6 @@
+#import "../fragments/slaPoliciesFragment.graphql"
+mutation updateSLAPolicy($slapolicy: SlapolicyInput!){
+    updateSLAPolicy(slapolicy: $slapolicy){
+        ...slaPoliciesFields
+    }
+}

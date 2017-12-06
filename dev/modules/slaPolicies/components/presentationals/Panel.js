@@ -1,24 +1,25 @@
 import React, { Component } from 'react'
 import { Col, Row } from "react-flexbox-grid";
 import {
-	FlatButton, FloatingActionButton, LinearProgress, List, Paper, RaisedButton
+	FlatButton, FloatingActionButton, LinearProgress, List, Paper
 } from "material-ui";
 import { AvPlaylistAdd as New } from "material-ui/svg-icons"
 import { WrappedSubheader, FormButtonGroup } from '../../../../common/components'
 import PolicyItemList from './PolicyItemList'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import theme from '../../../../theme-default'
+import _ from 'lodash'
+
 class Panel extends Component {
 	
 	render = () => {
-		// console.log('props--', this.props);
-		let { loading } = this.props;
+		let { loading, SLAPolicies } = this.props;
 		
 		if (loading) return <LinearProgress mode="indeterminate" />;
 		
 		let {customSLAPolicies, defaultSLAPolicy} = {
-			customSLAPolicies: [...this.props.SLAPolicies.slice(0, this.props.SLAPolicies.length - 1)],
-			defaultSLAPolicy: {...this.props.SLAPolicies[this.props.SLAPolicies.length - 1]}
+			customSLAPolicies: _.slice(SLAPolicies, 0, -1),
+			defaultSLAPolicy: _.last(SLAPolicies)
 		};
 		
 		return (
@@ -36,7 +37,12 @@ class Panel extends Component {
 											<Row center={"xs"}>
 												{
 													do {
-														if (!this.props.reorder) <FlatButton label="Reordenar" style={{color: theme.palette.alternateTextColor}} onClick={this.props.handleReorderAction}/>
+														if (!this.props.reorder)
+															<FlatButton
+																label="Reordenar"
+																style={{color: theme.palette.alternateTextColor}}
+																onClick={this.props.handleReorderAction}
+															/>
 													}
 												}
 											</Row>
@@ -69,7 +75,12 @@ class Panel extends Component {
 																		)}
 																		{...provided.dragHandleProps}
 																	>
-																		<PolicyItemList key={i} {...policy} reorder={this.props.reorder} />
+																		<PolicyItemList
+																			{...policy}
+																			handleToggleChange={this.props.handleToggleChange}
+																			deletePolicy={this.props.deletePolicy}
+																			reorder={this.props.reorder}
+																		/>
 																	</div>
 																	{provided.placeholder}
 																</div>

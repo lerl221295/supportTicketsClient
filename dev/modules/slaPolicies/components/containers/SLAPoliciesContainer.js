@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import theme from '../../../../theme-default'
 import PanelPolicies from '../presentationals/Panel'
+import { orderPoliciesByPosition } from '../../utils'
 
 const hexToRgbA = (hex, opacity = 1) => {
 	let c;
@@ -39,11 +40,6 @@ class Panel extends Component {
 	};
 	
 	componentWillReceiveProps = ({data: { SLAPolicies }}) => {
-		/*if (!this.state.SLAPolicies.length) {
-			this.setState({
-				SLAPolicies
-			});
-		}*/
 		this.setState({
 			SLAPolicies
 		});
@@ -53,15 +49,7 @@ class Panel extends Component {
 		const result = [...list];
 		const [removed] = result.splice(startIndex, 1);
 		result.splice(endIndex, 0, removed);
-		let startLoopIndex = startIndex, endLoopIndex = endIndex;
-		if (startIndex > endIndex) {
-			startLoopIndex = endIndex;
-			endLoopIndex = startIndex;
-		}
-		for (let i = startLoopIndex; i <= endLoopIndex; i++) {
-			result[i] = {...result[i], position: i};
-		}
-		return result;
+		return orderPoliciesByPosition(result, startIndex, endIndex);
 	};
 	
 	onDragEnd = ({source, destination}) => {
@@ -75,6 +63,8 @@ class Panel extends Component {
 			source.index,
 			destination.index
 		);
+		
+		console.log('SLAOrdered---', SLAPolicies)
 		
 		this.setState({
 			SLAPolicies
@@ -116,6 +106,24 @@ class Panel extends Component {
 		this.handleReorderAction();
 	};
 	
+	handleToggleChange = (id) => (e, active) => {
+		this.props.updatePolicy({id, active})
+			.then(response => {
+				let change = do {
+					if (active) 'activada';
+					else 'desactivada';
+				};
+				this.props.openAlert(`Política SLA ${change} con éxito`);
+			})
+	};
+	
+	deletePolicy = (id) => (e) => {
+		this.props.deletePolicy({id})
+			.then(({data: {deleteSLAPolicy}}) => {
+				this.props.openAlert(`${deleteSLAPolicy}`);
+			})
+	};
+	
 	render = () => (
 		<PanelPolicies
 			{...this.state}
@@ -126,6 +134,8 @@ class Panel extends Component {
 			getItemStyle={getItemStyle}
 			saveReorder={this.saveReorder}
 			cancelReorder={this.cancelReorder}
+			deletePolicy={this.deletePolicy}
+			handleToggleChange={this.handleToggleChange}
 		/>
 	)
 }

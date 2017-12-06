@@ -1,0 +1,3 @@
+mutation deleteSLAPolicy($id: ID!){
+    deleteSLAPolicy(id: $id)
+}

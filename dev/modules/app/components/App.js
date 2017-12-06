@@ -44,11 +44,6 @@ class App extends Component {
 		};
 	}
 	
-	/*componentWillMount = () => {
-			//validar que el usuario este autenticado
-			if(!getUser()) this.props.push("login");
-	}*/
-	
 	componentWillReceiveProps(nextProps) {
 		if (this.props.width !== nextProps.width) {
 			this.setState({ navDrawerOpen: nextProps.width === LARGE });

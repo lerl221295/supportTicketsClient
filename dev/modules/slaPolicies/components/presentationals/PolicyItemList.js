@@ -3,7 +3,8 @@ import {Divider, IconButton, ListItem, Toggle} from "material-ui";
 import { ActionDelete as Delete, ActionOpenWith as Order } from "material-ui/svg-icons";
 
 export default (props) => {
-	let { name, description, active, by_default, reorder } = props;
+	let { id, name, description, active, by_default, reorder, handleToggleChange, deletePolicy } = props;
+	// console.log('props---', props)
 	return (
 		<div>
 			<ListItem
@@ -11,7 +12,16 @@ export default (props) => {
 				secondaryText={description}
 				leftCheckbox={
 					do {
-						if (!reorder) <Toggle defaultToggled={active} disabled={by_default} />;
+						if (!reorder)
+							<Toggle defaultToggled={active}
+							        disabled={by_default}
+							        onToggle={
+							        	do {
+							        		if (handleToggleChange) handleToggleChange(id);
+									        else null;
+								        }
+							        }
+							/>;
 						else null
 					}
 				}
@@ -24,7 +34,16 @@ export default (props) => {
 				rightIconButton={
 					do {
 						if (!by_default && !reorder) (
-							<IconButton tooltip="Eliminar política" disabled={by_default}>
+							<IconButton
+								tooltip="Eliminar política"
+								disabled={by_default}
+								onClick={
+									do {
+										if (deletePolicy) deletePolicy(id);
+										else null;
+									}
+								}
+							>
 								<Delete />
 							</IconButton>
 						)
