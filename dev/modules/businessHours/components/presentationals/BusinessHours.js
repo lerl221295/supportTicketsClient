@@ -28,17 +28,11 @@ export default ({loading, workingDays, ...props}) => {
 				<Paper style={{padding: "2rem"}}>
 					<Row start="xs">
 						<Col xs={8}>
-							{/*<Field 
-								name="twentyfour_seven" 
-								component={Toggle} 
-								label="Laborar 24 horas, los 7 dias de la semana"
-								labelStyle={{color: Theme.palette.accent1Color, 'fontWeight': 'bold'}}
-							/>
-							*/}
 							<Field name="mode" component={RadioButtonGroup}>
 								<RadioButton 
 									value="TWENTYFOUR_SEVEN" 
 									label="Laborar 24 horas, los 7 dias de la semana"
+									labelStyle={{color: Theme.palette.accent1Color, 'fontWeight': 'bold'}}
 								/>
 						        <RadioButton 
 						        	value="SAME_FOR_DAYS" 

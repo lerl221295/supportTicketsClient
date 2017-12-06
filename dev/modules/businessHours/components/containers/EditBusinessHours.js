@@ -33,10 +33,18 @@ class BusinessHoursContainer extends Component {
 		if(data.businessHours){
 			const { businessHours } = data;
 			initialValues.mode = businessHours.mode;
-			for(let working_day of businessHours.working_days){
-				workingDays[working_day.day] = working_day.workeable;
-				workingDays[`${working_day.day}_start`] = generateHour(working_day.horary.start);
-				workingDays[`${working_day.day}_end`] = generateHour(working_day.horary.end);
+			
+			if(businessHours.mode === "CUSTOMIZED"){
+				for(let working_day of businessHours.working_days){
+					workingDays[working_day.day] = working_day.workeable;
+					workingDays[`${working_day.day}_start`] = generateHour(working_day.horary.start);
+					workingDays[`${working_day.day}_end`] = generateHour(working_day.horary.end);
+				}
+			}
+			else if(businessHours.mode === "SAME_FOR_DAYS") {
+				workingDays.days = businessHours.week_days;
+				workingDays.horary_start = generateHour(businessHours.horary.start);
+				workingDays.horary_end = generateHour(businessHours.horary.end);
 			}
 		}
 
