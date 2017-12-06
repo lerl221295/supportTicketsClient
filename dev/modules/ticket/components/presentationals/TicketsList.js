@@ -4,8 +4,7 @@ import { Row, Col } from 'react-flexbox-grid'
 import _ from 'lodash'
 import Item from './TicketItemList'
 // Common Components
-import { WrappedSubheader } from '../../../../common/components'
-
+import { WrappedSubheader, Loading } from '../../../../common/components'
 const styles = {
 	paper: {
 		// maxHeight: '33rem'
@@ -33,7 +32,7 @@ class TicketList extends Component {
 
 	render = () => {
 		const {tickets, loading} = this.props;
-		if(loading && !tickets) return <h1>Cargando...</h1>
+		if(loading && !tickets) return <Loading size={60} thickness={3}/>
 		return(
 			<div>
 				<WrappedSubheader>Tickets</WrappedSubheader>
