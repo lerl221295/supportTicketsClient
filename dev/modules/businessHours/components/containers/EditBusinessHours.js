@@ -13,8 +13,6 @@ const generateHour = ({hour, minutes}) => {
 	date.setMinutes(minutes);
 	return date;
 }
-		
-const BusinessHoursWithReduxForm = reduxForm({ form: 'businessHours' })(BusinessHoursForm);
 
 @compose(
 	graphql(BusinessHours),
@@ -34,7 +32,7 @@ class BusinessHoursContainer extends Component {
 		let workingDays = {};
 		if(data.businessHours){
 			const { businessHours } = data;
-			initialValues.twentyfour_seven = businessHours.twentyfour_seven
+			initialValues.mode = businessHours.mode;
 			for(let working_day of businessHours.working_days){
 				workingDays[working_day.day] = working_day.workeable;
 				workingDays[`${working_day.day}_start`] = generateHour(working_day.horary.start);
@@ -42,8 +40,9 @@ class BusinessHoursContainer extends Component {
 			}
 		}
 
+		const BusinessHoursWithReduxForm = reduxForm({ form: 'businessHours' })(BusinessHoursForm);
 		/*no le paso data.businessHours porque los working_days los envio mapeados,
-		los holidays los seteo en el store de redux y el twentyfour_seven es un initialValue*/
+		los holidays los seteo en el store de redux y el mode es un initialValue*/
 
 		return( 
 			<BusinessHoursWithReduxForm 

@@ -1,8 +1,10 @@
 import React from 'react'
-import { Paper } from 'material-ui'
+import { Paper, RadioButton } from 'material-ui'
 import { Field } from 'redux-form'
 import {
-  Toggle
+  Toggle,
+  RadioButtonGroup,
+  TextField
 } from 'redux-form-material-ui'
 import moment from 'moment'
 import { Row, Col } from 'react-flexbox-grid'
@@ -24,14 +26,31 @@ export default ({loading, workingDays, ...props}) => {
 					Horario Habil
 				</WrappedSubheader>
 				<Paper style={{padding: "2rem"}}>
-					<Col xs={8}>
-						<Field 
-							name="twentyfour_seven" 
-							component={Toggle} 
-							label="Laborar 24 horas, los 7 dias de la semana"
-							labelStyle={{color: Theme.palette.accent1Color, 'fontWeight': 'bold'}}
-						/>
-					</Col>
+					<Row start="xs">
+						<Col xs={8}>
+							{/*<Field 
+								name="twentyfour_seven" 
+								component={Toggle} 
+								label="Laborar 24 horas, los 7 dias de la semana"
+								labelStyle={{color: Theme.palette.accent1Color, 'fontWeight': 'bold'}}
+							/>
+							*/}
+							<Field name="mode" component={RadioButtonGroup}>
+								<RadioButton 
+									value="TWENTYFOUR_SEVEN" 
+									label="Laborar 24 horas, los 7 dias de la semana"
+								/>
+						        <RadioButton 
+						        	value="SAME_FOR_DAYS" 
+						        	label="Mismo horario para conjunto de dias"
+						        />
+						        <RadioButton 
+						        	value="CUSTOMIZED" 
+						        	label="Personalizado"
+						        />
+							</Field>
+						</Col>
+					</Row>
 					<Row middle="xs" start="xs">
 						<Col xs={12}>
 							<WorkingDaysForm initialValues={workingDays} />

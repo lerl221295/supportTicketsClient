@@ -6,7 +6,7 @@ import { graphql, compose, withApollo } from 'react-apollo'
 import { FormButtonGroup} from '../../../../common/components'
 
 @connect( (state) => ({
-	twentyfour_seven: getFormValues('businessHours')(state).twentyfour_seven,
+	mode: getFormValues('businessHours')(state).mode,
 	working_days: getFormValues('workingDays')(state),
 	holidays: state.businessHours.holidays
 }))

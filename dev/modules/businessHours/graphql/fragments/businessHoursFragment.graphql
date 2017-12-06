@@ -1,5 +1,5 @@
 fragment businessHoursFields on BusinessHours {
-    twentyfour_seven
+    mode
     working_days {
     	day
         workeable
