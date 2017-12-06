@@ -21,6 +21,16 @@ export const CHANELS = [
 	{value: "TWITTER", text: "Twitter"}
 ];
 
+export const WEEK_DAYS = [
+	{value: "MONDAY", text: "Lunes"},
+	{value: "TUESDAY", text: "Martes"},
+	{value: "WEDNESDAY", text: "Miercoles"},
+	{value: "THURSDAY", text: "Jueves"},
+	{value: "FRIDAY", text: "Viernes"},
+	{value: "SATURDAY", text: "Sabado"},
+	{value: "SUNDAY", text: "Domingo"}
+]
+
 export const getPriorityText = (priority_value) =>
 	 _.find(PRIORITIES, priority => priority.value === priority_value).text;
 

@@ -36,7 +36,7 @@ export default ({loading, workingDays, ...props}) => {
 								/>
 						        <RadioButton 
 						        	value="SAME_FOR_DAYS" 
-						        	label="Mismo horario para conjunto de dias"
+						        	label="Mismo horario para un conjunto de dias"
 						        />
 						        <RadioButton 
 						        	value="CUSTOMIZED" 

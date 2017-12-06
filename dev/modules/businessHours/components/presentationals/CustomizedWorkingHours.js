@@ -8,19 +8,25 @@ import {
 import moment from 'moment'
 import { Row, Col } from 'react-flexbox-grid'
 
+import { WEEK_DAYS } from '../../../../common/utils/consts'
+
 export default (props) => {
-	const days = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"];
 	return(
 		<List>
 			<Subheader>Dias Laborables</Subheader>
 			{
-				days.map(day => {
-					let diffHours = moment(props[`${day}_end`]).diff(moment(props[`${day}_start`]), 'hours');
-					let diffMinutes = moment(props[`${day}_end`]).diff(moment(props[`${day}_start`]).add(diffHours, 'hours'), 'minutes');
-					if(diffHours && props[day]) diffHours = `${diffHours} hrs`;
-					else diffHours = "";
-					if(diffMinutes && props[day]) diffMinutes = `${diffMinutes} mns`;
-					else diffMinutes = "";
+				WEEK_DAYS.map(({value: day, text}) => {
+					let diffHours = '';
+					let diffMinutes = '';
+					if(props[`${day}_start`] && props[`${day}_end`]){
+						diffHours = moment(props[`${day}_end`]).diff(moment(props[`${day}_start`]), 'hours');
+						diffMinutes = moment(props[`${day}_end`]).diff(moment(props[`${day}_start`]).add(diffHours, 'hours'), 'minutes');
+						if(diffHours && props[day]) diffHours = `${diffHours} hrs`;
+						else diffHours = "";
+						if(diffMinutes && props[day]) diffMinutes = `${diffMinutes} mns`;
+						else diffMinutes = "";
+					}
+					
 					return(
 						<div key={day}>
 							<ListItem>
@@ -28,7 +34,7 @@ export default (props) => {
 									<Col xs={3}>
 										<Field name={day} 
 											component={Checkbox} 
-											label={day}
+											label={text}
 										/>
 									</Col>
 									<Col xs={2}>
