@@ -8,7 +8,9 @@ import {
 	Avatar 
 } from 'material-ui'
 import Face from 'material-ui/svg-icons/action/face'
-import { lightBlue50, lightGreen50, blueGrey800 } from 'material-ui/styles/colors'
+import {  blueGrey800 } from 'material-ui/styles/colors'
+import Theme from '../../../../../theme-default'
+
 import { Grid, Row, Col } from 'react-flexbox-grid'
 
 import TimeAgo, { getFullTime } from '../../../../../common/components/TimeAgo'
@@ -22,8 +24,8 @@ const styles = {
 	},
 	header: (agent) => ({
 		backgroundColor: do {
-			if(agent) lightGreen50;
-			else lightBlue50;
+			if(agent) Theme.palette.agentIntervention;
+			else Theme.palette.clientIntervention;
 		},
 	 	margin:"-1rem",
 	 	marginBottom: "0",
