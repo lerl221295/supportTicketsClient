@@ -22,7 +22,14 @@ class BusinessHoursContainer extends Component {
 
 	componentWillReceiveProps = ({data, ...rest}) => {
 		if(data.businessHours){
-			this.props.setHolidays(data.businessHours.holidays);
+			/*mapeo para luego poder enviar esa misma data*/
+			this.props.setHolidays(
+				data.businessHours.holidays.map(({name, day, month}) => ({
+					name,
+					day,
+					month
+				}))
+			);
 		}
 	}
 
@@ -42,7 +49,7 @@ class BusinessHoursContainer extends Component {
 				}
 			}
 			else if(businessHours.mode === "SAME_FOR_DAYS") {
-				workingDays.days = businessHours.week_days;
+				workingDays.week_days = businessHours.week_days;
 				workingDays.horary_start = generateHour(businessHours.horary.start);
 				workingDays.horary_end = generateHour(businessHours.horary.end);
 			}

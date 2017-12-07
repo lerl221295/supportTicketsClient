@@ -1,0 +1,8 @@
+#import "../fragments/businessHoursFragment.graphql"
+mutation UpdateBusinessHours($businessHours: BusinessHoursInput!){
+	updateBusinessHours(business_hours: $businessHours){
+		...businessHoursFields
+	}
+}
+
+

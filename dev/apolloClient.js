@@ -95,6 +95,8 @@ const client = new ApolloClient({
                             "kind": "INTERFACE",
                             "name": "BusinessHours",
                             "possibleTypes": [{
+                                    "name": "TwentyFourSeven"
+                                },{
                                     "name": "Customized"
                                 },
                                 {

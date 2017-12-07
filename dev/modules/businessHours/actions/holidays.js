@@ -7,7 +7,7 @@ export const addHoliday = (holiday) => ({
 		holiday: {
 			name: holiday.newHolidayName,
 			day: holiday.newHolidayDate.getDate(),
-			month: holiday.newHolidayDate.getMonth()
+			month: holiday.newHolidayDate.getMonth()+1
 		}
 	}
 });
