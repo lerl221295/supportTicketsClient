@@ -44,8 +44,10 @@ class BusinessHoursContainer extends Component {
 			if(businessHours.mode === "CUSTOMIZED"){
 				for(let working_day of businessHours.working_days){
 					workingDays[working_day.day] = working_day.workeable;
-					workingDays[`${working_day.day}_start`] = generateHour(working_day.horary.start);
-					workingDays[`${working_day.day}_end`] = generateHour(working_day.horary.end);
+					if(working_day.workeable){
+						workingDays[`${working_day.day}_start`] = generateHour(working_day.horary.start);
+						workingDays[`${working_day.day}_end`] = generateHour(working_day.horary.end);
+					}
 				}
 			}
 			else if(businessHours.mode === "SAME_FOR_DAYS") {

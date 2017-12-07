@@ -26,20 +26,24 @@ const updateApolloCache = ({ mode, holidays, working_days, week_days, horary }) 
 	    	delete newData.businessHours.week_days;
 	    	delete newData.businessHours.horary;
 	    	newData.businessHours.__typename = 'Customized';
+	    	//console.log(working_days);
 	    	newData.businessHours.working_days = working_days.map(day => ({
 	    		__typename: 'WorkingDay',
 	    		...day, //{day, workeable}
-	    		horary: {
-	    			__typename: 'Horary',
-	    			start: {
-						__typename: 'HourAndMinutes',
-						...day.horary//{hour, minutes}
-	    			},
-	    			end: {
-	    				__typename: 'HourAndMinutes',
-	    				...day.horary//{hour, minutes}
-	    			}
-	    		}
+	    		horary: do {
+	    			if(!day.workeable) null;
+	    			else ({
+		    			__typename: 'Horary',
+		    			start: {
+							__typename: 'HourAndMinutes',
+							...day.horary.start//{hour, minutes}
+		    			},
+		    			end: {
+		    				__typename: 'HourAndMinutes',
+		    				...day.horary.end//{hour, minutes}
+		    			}
+		    		})
+	    		}//
 	    	}));
 	    }
 	    else if(mode === "SAME_FOR_DAYS"){
@@ -65,12 +69,12 @@ const updateApolloCache = ({ mode, holidays, working_days, week_days, horary }) 
 			delete newData.businessHours.working_days;
 	    }
 
-	    /*con el response*/
+	    /*con el response (usar en produccion)*/
 	    //const newData = { businessHours: updateBusinessHours }
 
-	    console.log('new data', newData);
+	    //console.log('new data', newData); 
 	    proxy.writeQuery({ query: GetBusinessHours, data: {...newData} });
-	    console.log("leyendola:", proxy.readQuery({ query: GetBusinessHours }));
+	    //console.log("leyendola:", proxy.readQuery({ query: GetBusinessHours }));
 	}
 	catch(e){
 		console.log(e);
@@ -105,7 +109,7 @@ const apolloContainer = graphql(UpdateBusinessHours, {
 				/*workingDayInput*/
 				businessHours.working_days = WEEK_DAYS.map(day => ({
 					day: day.value,
-					...calculateHorary(day.value)
+					...calculateHorary(day.value, working_days)
 				}))
 			}
 			else if(mode === "SAME_FOR_DAYS"){

@@ -14,13 +14,13 @@ import Theme from '../../../../theme-default'
 
 import WorkingDaysForm from '../containers/WorkingDays'
 import SenderContainer from '../containers/SenderContainer'
-import Holidays from './Holidays'
+import Holidays from '../containers/Holidays'
 import NewHoliday from './NewHoliday'
 
 export default ({loading, workingDays, ...props}) => {
 	if(loading) return <Loading />;
 	return(
-		<Row center="xs" style={{marginTop: '3rem'}}>
+		<Row center="xs">
 			<Col xs={8}>
 				<WrappedSubheader>
 					Horario Habil
