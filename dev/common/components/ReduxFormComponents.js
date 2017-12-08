@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
 	TextField,
 	SelectField,
@@ -10,6 +10,8 @@ import {
 } from 'material-ui'
 import InputWithIcon from './InputWithIcon'
 import ReactSelectWithIcon from './ReactSelectWithIcon'
+import { convertToRaw, EditorState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
 
 /*wrapper de los componentes de material ui para que funcionen con redux form*/
 
@@ -105,9 +107,7 @@ export const renderDatePicker = ({
 		label,
 		meta,
 		...custom
-	}) => {
-	console.log(input.value);
-	return(
+	}) => (
 		<DatePicker 
 			mode="landscape"
 			hintText={label} 
@@ -117,4 +117,34 @@ export const renderDatePicker = ({
 			{...custom}
 		/>
 	)
+
+export class EditorWrapper extends Component {
+
+    constructor() {
+        super();
+        this.handleEditorStateChange = this.handleEditorStateChange.bind(this);
+        this.state = {
+            editorState: EditorState.createEmpty()
+        }
+    }
+
+    convertToString = (editorState) => /*JSON.stringify(*/convertToRaw(editorState.getCurrentContent())/*)*/;
+
+    handleEditorStateChange = (editorState) => {
+        const { onChange } = this.props.input;
+        const stringValue = this.convertToString(editorState);
+
+        this.setState({ editorState });
+        onChange(stringValue);
+    }
+
+    render = () => (
+    	 <Editor
+            editorState={this.state.editorState}
+            onEditorStateChange={this.handleEditorStateChange}
+            toolbar={this.props.toolbar}
+			editorClassName={this.props.editorClassName}
+			mention={this.props.mention}
+        />
+    )
 }

@@ -5,7 +5,7 @@ import ClientDetails from './ClientDetails'
 import Tasks from './Tasks'
 import Interventions from '../../containers/InterventionList'
 import Header from '../../containers/Header'
-import Reply from './Reply'
+import Reply from '../../containers/Reply'
 import PropsForm from '../../containers/TicketPropsForm'
 import { Loading } from '../../../../../common/components'
 

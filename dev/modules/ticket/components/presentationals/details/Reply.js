@@ -8,9 +8,15 @@ import {
 	Divider
 } from 'material-ui'
 import { Row, Col } from 'react-flexbox-grid'
-import { Editor } from 'react-draft-wysiwyg';
+import { Field } from 'redux-form'
+import { EditorWrapper as Editor } from '../../../../../common/components/ReduxFormComponents'
 
-export default ({client}) => (
+const TicketProperties = [
+	{text: "Nombre del grupo", value: "Grupo tal", val: "113"}
+]
+
+
+export default ({client, reply}) => (
 	<Card style={{margin: "0.6rem"}}>
 		<CardHeader
 	      	title={`Responder a ${client.email}`}
@@ -18,17 +24,22 @@ export default ({client}) => (
 	      	showExpandableButton={true}
 	    />
 	    <CardText expandable>
-		    <Editor
-				toolbar={{
+		    <Field 
+		    	name="body"
+		    	component={Editor}
+		    	toolbar={{
 					options: [
 						'inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'emoji', 'image', 'remove', 'history']
 				}}
-				//editorState={this.props.editorState}
 				editorClassName="rich-editor"
-				//onEditorStateChange={this.props.handleEditorChange}
-			/>
+				mention={{
+					separator: ' ',
+      				trigger: '@',
+      				suggestions: TicketProperties
+				}}
+		   	/>
 			<Row end="xs">
-				<FlatButton label="Responder" onClick={() => alert("responder")} />
+				<FlatButton label="Responder" onClick={() => console.log(reply)} />
 			</Row>
 	    </CardText>
 	</Card>
