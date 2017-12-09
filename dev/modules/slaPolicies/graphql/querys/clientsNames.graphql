@@ -1,0 +1,8 @@
+query GetClientsNames($search_text: String) {
+	clients(search_text: $search_text) {
+		nodes {
+			id
+			name: fullName
+		}
+	}
+}

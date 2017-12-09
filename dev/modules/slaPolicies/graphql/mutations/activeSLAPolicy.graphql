@@ -1,0 +1,6 @@
+mutation updateSLAPolicy($slapolicy: SlapolicyInput!){
+    updateSLAPolicy(slapolicy: $slapolicy){
+        id
+        active
+    }
+}

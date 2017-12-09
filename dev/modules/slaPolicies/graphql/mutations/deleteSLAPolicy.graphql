@@ -1,3 +1,6 @@
 mutation deleteSLAPolicy($id: ID!){
-    deleteSLAPolicy(id: $id)
+    deleteSLAPolicy(id: $id) {
+        id
+        name
+    }
 }

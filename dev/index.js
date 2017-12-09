@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, compose} from 'redux';
 import logger from 'redux-logger';
-import createReducers from './common/reducers/index';
+import createReducers from './common/reducers';
 import Routes from './Routes'
 import {routerMiddleware, syncHistoryWithStore} from 'react-router-redux'
 import {browserHistory} from 'react-router'
@@ -25,7 +25,6 @@ injectTapEventPlugin();
 
 export const store = createStore(
     createReducers(),
-    //{},//initial state (asi esta en la doc de apollo)
     compose(
         applyMiddleware(
             routerMiddleware(browserHistory)/*,

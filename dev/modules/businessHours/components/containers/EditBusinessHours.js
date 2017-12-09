@@ -12,7 +12,7 @@ const generateHour = ({hour, minutes}) => {
 	date.setHours(hour);
 	date.setMinutes(minutes);
 	return date;
-}
+};
 		
 const BusinessHoursWithReduxForm = reduxForm({ form: 'businessHours' })(BusinessHoursForm);
 
@@ -23,18 +23,19 @@ const BusinessHoursWithReduxForm = reduxForm({ form: 'businessHours' })(Business
 class BusinessHoursContainer extends Component {
 
 	componentWillReceiveProps = ({data, ...rest}) => {
-		if(data.businessHours){
+		if(data.businessHours) {
+			// console.log('businessHours---', data.businessHours);
 			this.props.setHolidays(data.businessHours.holidays);
 		}
-	}
+	};
 
 	render = () => {
-		const { data } = this.props
+		const { data } = this.props;
 		let initialValues = {};
 		let workingDays = {};
 		if(data.businessHours){
 			const { businessHours } = data;
-			initialValues.twentyfour_seven = businessHours.twentyfour_seven
+			initialValues.twentyfour_seven = businessHours.twentyfour_seven;
 			for(let working_day of businessHours.working_days){
 				workingDays[working_day.day] = working_day.workeable;
 				workingDays[`${working_day.day}_start`] = generateHour(working_day.horary.start);

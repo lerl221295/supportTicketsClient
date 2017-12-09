@@ -1,7 +1,7 @@
 fragment slaPoliciesFields on SLAPolicy {
     id
-    by_default
     name
+    by_default
     description
     active
     position

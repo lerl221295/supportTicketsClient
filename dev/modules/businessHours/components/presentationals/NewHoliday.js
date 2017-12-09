@@ -40,17 +40,17 @@ const NewHoliday = ({handleSubmit, reset}) => (
 			<RaisedButton 
 				label="Agregar Festivo" 
 				primary={true} 
-				onClick={holiday => {
-					handleSubmit(holiday);
+				onClick={e => {
+					handleSubmit();
 					reset();
 				}} 
 			/>
 		</Col>
 	</Row>
-)
+);
 
 /*mude este mapeo para el actioncreator, no estoy seguro de donde debe ir, pero asi evito el dispatch*/
-/*const mapDispatch = dispatch => ({ 
+/*const mapDispatch = dispatch => ({
 	onSubmit: holiday => {
 		dispatch(
 			addHoliday({

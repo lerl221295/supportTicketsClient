@@ -8,10 +8,10 @@ import businessHours from '../../modules/businessHours/reducers'
 
 const createReducers = () => (
 	combineReducers({
-	    alert,
-	    ticketDetail,
-	    businessHours,
-	    routing: routerReducer,
+		alert,
+		ticketDetail,
+		businessHours,
+		routing: routerReducer,
 		form: formReducer
 	})
 );

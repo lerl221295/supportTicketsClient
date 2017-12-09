@@ -1,6 +1,6 @@
-#import "../fragments/slaPoliciesFragment.graphql"
 mutation updateSLAPoliciesOrder($slapolicies: [SlapoliciesOrderInput]!){
     updateSLAPoliciesOrder(slapolicies: $slapolicies){
-        ...slaPoliciesFields
+        id
+        position
     }
 }

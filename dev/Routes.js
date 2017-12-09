@@ -20,6 +20,7 @@ import EditGroup from './modules/agent/components/containers/EditGroup'
 import CreateGroup from './modules/agent/components/containers/CreateGroup'
 
 import SlaPolicies from './modules/slaPolicies/components/containers/SLAPoliciesApolloContainer'
+import CreateSLAPolicy from './modules/slaPolicies/components/containers/CreateSLAPolicy'
 
 import BusinessHours from './modules/businessHours/components/containers/EditBusinessHours'
 
@@ -53,11 +54,12 @@ class Routes extends Component {
 					<Route path="groups/:id" component={EditGroup}/>
 					<Route path=":id" component={EditAgent}/>
 				</Route>
-				<Route path="sla">
-					<IndexRoute component={SlaPolicies} />
-				</Route>
 				<Route path="admin">
 					<Route path="businessHours" component={BusinessHours}/>
+					<Route path="sla">
+						<IndexRoute component={SlaPolicies} />
+						<Route path="new" component={CreateSLAPolicy}/>
+					</Route>
 				</Route>
 				<Route path="doc" component={Doc} />
 				<Route path="*" component={notFound}/>

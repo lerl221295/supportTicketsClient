@@ -7,7 +7,7 @@ const hexToRgbA = (hex, opacity = 1) => {
 	let c;
 	if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
 		c= hex.substring(1).split('');
-		if(c.length== 3){
+		if(c.length === 3){
 			c= [c[0], c[0], c[1], c[1], c[2], c[2]];
 		}
 		c= '0x'+c.join('');
@@ -26,7 +26,7 @@ const getItemStyle = (draggableStyle, isDragging) => {
 			if (isDragging) hexToRgbA(theme.palette.primary1Color, 0.5);
 			else ''
 		},
-		// styles we need to apply on draggables
+		// styles we need to apply on draggable
 		...draggableStyle,
 	});
 };
@@ -63,8 +63,6 @@ class Panel extends Component {
 			source.index,
 			destination.index
 		);
-		
-		console.log('SLAOrdered---', SLAPolicies)
 		
 		this.setState({
 			SLAPolicies
@@ -118,9 +116,9 @@ class Panel extends Component {
 	};
 	
 	deletePolicy = (id) => (e) => {
-		this.props.deletePolicy({id})
-			.then(({data: {deleteSLAPolicy}}) => {
-				this.props.openAlert(`${deleteSLAPolicy}`);
+		this.props.deletePolicy(id)
+			.then(({data: {deleteSLAPolicy: {name}}}) => {
+				this.props.openAlert(`Política SLA ${name} eliminada con éxito`);
 			})
 	};
 	

@@ -49,7 +49,7 @@ class Panel extends Component {
 										</Col>
 										<Col xs>
 											<Row end={"xs"}>
-												<FloatingActionButton mini={true} zDepth={0} style={{marginBottom:'0.5rem'}}>
+												<FloatingActionButton mini={true} zDepth={0} style={{marginBottom:'0.5rem'}} href={"sla/new"}>
 													<New />
 												</FloatingActionButton>
 											</Row>
