@@ -13,7 +13,7 @@ import { openAlert } from '../../../../common/actions/alert'
 const updateApolloCache = ({ mode, holidays, working_days, week_days, horary }) => (proxy, {data: {updateBusinessHours} }) => {
 	try {
 		const data = proxy.readQuery({ query: GetBusinessHours });
-	    console.log('old data', data);
+	    //console.log('old data', data);
 	    
 	    /*sin necesitar el response*/
 	    let newData = {...data};

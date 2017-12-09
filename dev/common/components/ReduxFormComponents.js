@@ -10,7 +10,8 @@ import {
 } from 'material-ui'
 import InputWithIcon from './InputWithIcon'
 import ReactSelectWithIcon from './ReactSelectWithIcon'
-import { convertToRaw, EditorState } from 'draft-js';
+import { convertToRaw, EditorState } from 'draft-js'
+import draftToHtml from 'draftjs-to-html'
 import { Editor } from 'react-draft-wysiwyg';
 
 /*wrapper de los componentes de material ui para que funcionen con redux form*/
@@ -128,7 +129,7 @@ export class EditorWrapper extends Component {
         }
     }
 
-    convertToString = (editorState) => /*JSON.stringify(*/convertToRaw(editorState.getCurrentContent())/*)*/;
+    convertToString = (editorState) => draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
     handleEditorStateChange = (editorState) => {
         const { onChange } = this.props.input;

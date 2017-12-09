@@ -23,7 +23,10 @@ class TicketDetail extends Component {
 				<Row>
 					<Col xs={9} md={9} sm={9}>
 						<Interventions {...this.props.data.ticket} />
-						<Reply client={this.props.data.ticket.client}/>
+						<Reply 
+							ticket_number={this.props.routeParams.number}
+							client={this.props.data.ticket.client}
+						/>
 					</Col>
 					<Col xs={3} md={3} sm={3}>
 						<ClientDetails {...this.props.data.ticket.client} />

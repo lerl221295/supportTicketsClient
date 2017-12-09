@@ -21,7 +21,7 @@ const ReactSelectWithIcon = ({Icon, label, ...props}) => (
 		  do {
 			  if (Icon) (
 				  <Col xs={2} md={1}>
-					  <Icon color={Theme.palette.inputIcon}/>
+					  <Icon color={Theme.palette.accent2Color}/>
 				  </Col>
 			  )
 		  }

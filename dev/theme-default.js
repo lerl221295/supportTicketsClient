@@ -83,7 +83,7 @@ const indigo = {
 		primary2Color: indigo700,
 		primary3Color: indigo100,
 		accent1Color: amber800,
-		accent2Color: amber100,
+		accent2Color: amber500,
 		// accent3Color: amber500,
 		textColor: grey900,
 		secondaryTextColor: grey600,
@@ -92,7 +92,6 @@ const indigo = {
 		disabledColor: grey700,
 		canvasColor: white,
 		clockCircleColor: fade(black, 0.07),
-        inputIcon: cyan500,
         clientIntervention: lightBlue50,//agregar en todas las paletas
         agentIntervention: lightGreen50//agregar en todas las paletas
 	},

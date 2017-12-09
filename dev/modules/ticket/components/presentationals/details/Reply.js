@@ -15,32 +15,53 @@ const TicketProperties = [
 	{text: "Nombre del grupo", value: "Grupo tal", val: "113"}
 ]
 
+export default (props) => {
+	const {
+		client,
+	 	reply,
+	 	generateSource,
+	 	sendIntervention,
+	 	ticket_number,
+	 	reset
+	} = props;
 
-export default ({client, reply}) => (
-	<Card style={{margin: "0.6rem"}}>
-		<CardHeader
-	      	title={`Responder a ${client.email}`}
-	      	actAsExpander={true}
-	      	showExpandableButton={true}
-	    />
-	    <CardText expandable>
-		    <Field 
-		    	name="body"
-		    	component={Editor}
-		    	toolbar={{
-					options: [
-						'inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'emoji', 'image', 'remove', 'history']
-				}}
-				editorClassName="rich-editor"
-				mention={{
-					separator: ' ',
-      				trigger: '@',
-      				suggestions: TicketProperties
-				}}
-		   	/>
-			<Row end="xs">
-				<FlatButton label="Responder" onClick={() => console.log(reply)} />
-			</Row>
-	    </CardText>
-	</Card>
-)
+	return(
+		<Card style={{margin: "0.6rem"}}>
+			<CardHeader
+		      	title={`Responder a ${client.email}`}
+		      	actAsExpander={true}
+		      	showExpandableButton={true}
+		    />
+		    <CardText expandable>
+			    <Field 
+			    	name="body"
+			    	component={Editor}
+			    	toolbar={{
+						options: [
+							'inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'emoji', 'image', 'remove', 'history'
+						],
+						image: {
+							uploadEnabled: true,
+							defaultSize:{ height: 400, width: 400 },
+							uploadCallback: generateSource
+						}
+					}}
+					editorClassName="rich-editor"
+					mention={{
+						separator: ' ',
+	      				trigger: '@',
+	      				suggestions: TicketProperties
+					}}
+			   	/>
+				<Row end="xs">
+					<FlatButton label="Responder" onClick={
+						() => {
+							sendIntervention({ticket_number, text: reply.body});
+							/*falta reiniciar el campo de texto enriquecido*/
+						}
+					} />
+				</Row>
+		    </CardText>
+		</Card>
+	)
+}
