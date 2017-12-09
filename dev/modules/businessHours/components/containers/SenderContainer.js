@@ -82,19 +82,19 @@ const updateApolloCache = ({ mode, holidays, working_days, week_days, horary }) 
 }
 
 const calculateHorary = (week_day, working_days) => {
-	const workeable = working_days[week_day] || false;
+	const workeable = Boolean(working_days[week_day] && working_days[week_day].workeable);
 	return({
 		workeable,
 		horary: do {
 			if(!workeable) null;
 			else ({
 				start: {
-					hour: working_days[`${week_day}_start`].getHours(),
-					minutes: working_days[`${week_day}_start`].getMinutes()
+					hour: working_days[week_day].start.getHours(),
+					minutes: working_days[week_day].start.getMinutes()
 				},
 				end: {
-					hour: working_days[`${week_day}_end`].getHours(),
-					minutes: working_days[`${week_day}_end`].getMinutes()
+					hour: working_days[week_day].end.getHours(),
+					minutes: working_days[week_day].end.getMinutes()
 				}
 			})
 		}

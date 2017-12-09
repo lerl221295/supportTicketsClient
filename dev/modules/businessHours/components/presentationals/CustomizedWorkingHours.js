@@ -18,9 +18,9 @@ export default (props) => {
 				WEEK_DAYS.map(({value: day, text}) => {
 					let diffHours = '';
 					let diffMinutes = '';
-					if(props[`${day}_start`] && props[`${day}_end`]){
-						diffHours = moment(props[`${day}_end`]).diff(moment(props[`${day}_start`]), 'hours');
-						diffMinutes = moment(props[`${day}_end`]).diff(moment(props[`${day}_start`]).add(diffHours, 'hours'), 'minutes');
+					if(props[day] && props[day].start && props[day].end){
+						diffHours = moment(props[day].end).diff(moment(props[day].start), 'hours');
+						diffMinutes = moment(props[day].end).diff(moment(props[day].start).add(diffHours, 'hours'), 'minutes');
 						if(diffHours && props[day]) diffHours = `${diffHours} hrs`;
 						else diffHours = "";
 						if(diffMinutes && props[day]) diffMinutes = `${diffMinutes} mns`;
@@ -32,7 +32,7 @@ export default (props) => {
 							<ListItem>
 								<Row middle="xs">
 									<Col xs={3}>
-										<Field name={day} 
+										<Field name={`${day}.workeable`} 
 											component={Checkbox} 
 											label={text}
 										/>
@@ -42,7 +42,7 @@ export default (props) => {
 											textFieldStyle={{width: "100%"}}
 											component={TimePicker}
 											format={null}
-											name={`${day}_start`}
+											name={`${day}.start`}
 								          	hintText="Comienza"
 								          	disabled={!props[day]}
 								        />
@@ -55,7 +55,7 @@ export default (props) => {
 											textFieldStyle={{width: "100%"}}
 											component={TimePicker}
 											format={null}
-											name={`${day}_end`}
+											name={`${day}.end`}
 								          	hintText="Termina"
 								          	disabled={!props[day]}
 								        />
