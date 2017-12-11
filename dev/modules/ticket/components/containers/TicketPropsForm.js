@@ -88,6 +88,7 @@ const TicketPropsWithApollo = withApollo((prop) => {
 	 	mutate,
 	 	ticket_number,
 	 	openAlert,
+	 	ticket,
 	 	...props
 	} = prop;
 
@@ -101,13 +102,14 @@ const TicketPropsWithApollo = withApollo((prop) => {
 
 
 	let initialValues = {
-		state_key: props.ticket.state.key,
-		priority: props.ticket.priority,
-		type_key: props.ticket.type.key,
-		source: props.ticket.source,
-		agent: props.ticket.agent,
-		group: props.ticket.group,
-		supplier: props.ticket.supplier
+		state_key: ticket.state.key,
+		priority: ticket.priority,
+		type_key: ticket.type.key,
+		source: ticket.source,
+		agent: ticket.agent,
+		group: ticket.group,
+		supplier: ticket.supplier,
+		device_id: ticket.device.id
 	}
 
 	if(props.custom_fields && props.custom_fields.length) 
@@ -169,7 +171,8 @@ const TicketPropsWithApollo = withApollo((prop) => {
 
 	return(
 		<FormWithRedux 
-			onSubmit={update} 
+			onSubmit={update}
+			ticket={ticket} 
 			{...props} 
 			custom_fields={orderly}
 			searchData={searchData}

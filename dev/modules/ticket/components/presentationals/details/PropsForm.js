@@ -10,8 +10,12 @@ import {
 	MenuItem,
 	Card,
 	CardHeader,
-	CardText
+	CardText,
+	FloatingActionButton
 } from 'material-ui'
+import {
+	ContentSave as Save
+} from 'material-ui/svg-icons'
 import {
   Checkbox,
   DatePicker,
@@ -106,17 +110,37 @@ class PropsForm extends Component {
 		
 		const STATUS = [
 			{ value: ticket.state.key, text: ticket.state.label },
-			...ticket.next_states.map(({key, label}) => ({value: key, text: label}))
+			...ticket.next_states.map(({key: value, label: text}) => ({value, text}))
 		];
 
-		const TYPES = ticketTypes.map(({key, label}) => ({value: key, text: label}));
+		const TYPES = ticketTypes.map(({key: value, label: text}) => ({value, text}));
 		
+		let DEVICES = ticket.client.devices.map(({id: value, code, name}) => ({
+			value,
+			text: `${name} - ${code}`
+		}))
+
+		/*solo por la data mock*/
+		DEVICES = [
+			{value: ticket.device.id, text: ticket.device.name},
+			...DEVICES
+		]
+
 		return (
 			<Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
 				<CardHeader
 			      	title="Propiedades del Ticket"
-			      	//subtitle="Subtitle"
-			      	actAsExpander={true}
+			      	avatar={
+			      		<FloatingActionButton 
+	      					mini
+	      					zDepth={0}
+	      					onClick={this.props.handleSubmit}
+							disabled={!dirty}
+	      				>
+		      				<Save/>
+		      			</FloatingActionButton>
+			      	}
+			      	//actAsExpander={true}
 			      	showExpandableButton={true}
 			    />
 				<CardText expandable style={{padding: "0 1rem 0 1rem"}}>
@@ -174,6 +198,17 @@ class PropsForm extends Component {
 						}
 						</Field>
 						<Field
+							name="device_id"
+							component={SelectField}
+							floatingLabelText="Dispositivo"
+							label="Dispositivo"
+							style={{width: "100%"}}
+						>
+						{
+							renderMenuItems(DEVICES)
+						}
+						</Field>
+						<Field
 							name="agent"
 							component={renderSelectReactField}
 							label="Agente"
@@ -195,7 +230,6 @@ class PropsForm extends Component {
 							custom_fields.map(custom_field => renderCustomField(custom_field))
 						}
 					</form>
-				
 					<Row center="xs">
 						<Col xs={6} md={6} sm={6}>
 							<FlatButton
@@ -205,7 +239,7 @@ class PropsForm extends Component {
 								disabled={!dirty}
 							/>
 						</Col>
-					</Row>
+					</Row>					
 				</CardText>
 			</Card>
 		)

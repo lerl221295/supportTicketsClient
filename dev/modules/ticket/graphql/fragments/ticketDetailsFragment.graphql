@@ -2,15 +2,18 @@
 fragment ticketsFields on Ticket {
     ...ticketsBasicFields
     response_by
+    device {
+        id
+        code
+        name
+    }
     next_states {
         key
         label
     }
     agent {
+        id
         name: fullName
-        face_base64
-        email
-        profession
     }
     group {
         id
