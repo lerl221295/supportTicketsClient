@@ -22,6 +22,7 @@ import CreateGroup from './modules/agent/components/containers/CreateGroup'
 import SlaPolicies from './modules/slaPolicies/components/containers/SLAPoliciesApolloContainer'
 
 import BusinessHours from './modules/businessHours/components/containers/EditBusinessHours'
+import TicketFields from './modules/ticketFields/components/containers/TicketFieldsPanel'
 
 import DashboardContainer from './modules/dashboard/components/containers/DashboardContainer'
 import Doc from './modules/doc/Doc'
@@ -58,6 +59,7 @@ class Routes extends Component {
 				</Route>
 				<Route path="admin">
 					<Route path="businessHours" component={BusinessHours}/>
+					<Route path="ticketFields" component={TicketFields}/>
 				</Route>
 				<Route path="doc" component={Doc} />
 				<Route path="*" component={notFound}/>

@@ -1,9 +1,9 @@
 fragment statusAndTypes on TicketMetadata {
-	ticketTypes: types_values {
+	ticketTypes: types {
         key
         label
     }
-    ticketStatus: status_values {
+    ticketStatus: status {
         key
         label
     }

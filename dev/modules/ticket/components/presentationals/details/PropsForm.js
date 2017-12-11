@@ -66,20 +66,45 @@ const renderCustomField = custom_field => {
 	}
 
 	let { Component, custom } = do {
-		if(type === "TEXT" || type === "TEXTAREA" || type === "NUMBER") 
+		if(type === "TEXT") 
 			({Component: TextField, custom: {style: {width: "100%"} } });
+		else if(type === "NUMBER") 
+			({
+				Component: TextField, 
+				custom: {
+					style: {width: "100%"},
+					type: 'number',
+					floatingLabelText: label
+				}
+			});
+		else if(type === "TEXTAREA")
+			({
+				Component: TextField, 
+				custom: {
+					style: {width: "100%"},
+					multiLine: true,
+					rowsMax: 6,
+					floatingLabelText: label
+				} 
+			});
 		else if(type === "DATE") 
 			({
 				Component: DatePicker, 
 				custom: {
 					textFieldStyle: {width: "100%"},
 					mode: "landscape",
-					container: "inline"/*,
+					container: "inline",
+					floatingLabelText: label/*,
 					format: null*/
 				}
 			});
 		else if(type === "CHECKBOX") 
-			({Component: Checkbox, custom: {style: {width: "100%"} } });
+			({
+				Component: Checkbox, 
+				custom: {
+					style: {width: "100%", marginTop: "0.6rem"} 
+				} 
+			});
 	};
 
 	return(
@@ -88,7 +113,6 @@ const renderCustomField = custom_field => {
 			name={`custom.${key}`}
 			component={Component}
 			label={label}
-			floatingLabelText={label}
 			{...custom}
 		/>
 	)
