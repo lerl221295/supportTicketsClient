@@ -1,0 +1,23 @@
+#import "../fragments/ticketDetailsFragment.graphql"
+mutation UpdateTicket($ticketUpdate: TicketUpdateInput!){
+	updateTicket(ticket: $ticketUpdate){
+		...ticketsFields
+		custom_fields {
+			metadata {
+				key
+			}
+			...on TextValue {
+				text
+			}
+			...on NumberValue {
+				number
+			}
+			...on CheckValue {
+				check
+			}
+			...on SelectValue {
+				key
+			}
+		}
+	}
+}

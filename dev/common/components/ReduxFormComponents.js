@@ -89,10 +89,10 @@ export const renderSelectReactField = (
 		<ReactSelectWithIcon
 			label={label}
 			{...input}
-			onChange={(value) => input.onChange(value)}
+			//onChange={(value) => input.onChange(value)}
 			onBlur={(e) => {
-				e.preventDefault();
-				//input.onBlur(input.value);
+				//e.preventDefault();
+				input.onBlur(input.value);
 			}}
 			valueKey="id" labelKey="name"
 			backspaceRemoves={true}

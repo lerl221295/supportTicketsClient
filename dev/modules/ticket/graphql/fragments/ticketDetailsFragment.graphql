@@ -1,0 +1,26 @@
+#import "../fragments/ticketsBasicFragment.graphql"
+fragment ticketsFields on Ticket {
+    ...ticketsBasicFields
+    response_by
+    next_states {
+        key
+        label
+    }
+    agent {
+        name: fullName
+        face_base64
+        email
+        profession
+    }
+    group {
+        id
+        name
+        group_scale {
+            name
+        }
+    }
+    supplier {
+        id
+        name
+    }
+}

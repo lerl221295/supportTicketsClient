@@ -48,7 +48,7 @@ const renderCustomField = custom_field => {
 		return(
 			<Field
 				key={key}
-				name={key}
+				name={`custom.${key}`}
 				component={SelectField}
 				label={label}
 				style={{width: "100%"}}
@@ -70,7 +70,8 @@ const renderCustomField = custom_field => {
 				custom: {
 					textFieldStyle: {width: "100%"},
 					mode: "landscape",
-					container: "inline"
+					container: "inline"/*,
+					format: null*/
 				}
 			});
 		else if(type === "CHECKBOX") 
@@ -80,7 +81,7 @@ const renderCustomField = custom_field => {
 	return(
 		<Field
 			key={key}
-			name={key}
+			name={`custom.${key}`}
 			component={Component}
 			label={label}
 			floatingLabelText={label}
@@ -136,7 +137,7 @@ class PropsForm extends Component {
 							</Col>
 							<Col xs={12} md={6} sm={6}>
 								<Field
-									name="state"
+									name="state_key"
 									component={SelectField}
 									floatingLabelText="Status"
 									label="Status"
@@ -151,7 +152,7 @@ class PropsForm extends Component {
 						
 						
 						<Field
-							name="type"
+							name="type_key"
 							component={SelectField}
 							floatingLabelText="Tipo"
 							label="Tipo"
