@@ -1,0 +1,6 @@
+mutation UpdateTicketTypes($types: [TicketTypeInput!]){
+	updateTicketTypes(types: $types){
+		label
+		key
+	}
+}
