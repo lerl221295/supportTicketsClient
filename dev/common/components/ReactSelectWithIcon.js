@@ -4,7 +4,7 @@ import Select from 'react-select'
 import Theme from '../../theme-default'
 
 const ReactSelectWithIcon = ({Icon, label, ...props}) => (
-  <Row bottom={"xs"} style={{marginTop: "0.8rem"}}>
+  <Row bottom={"xs"} style={{marginBottom: "1.2rem"}}>
 	  <Col xs={12}>
 		  <Row>
 			  <Col xs md>

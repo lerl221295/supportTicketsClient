@@ -5,7 +5,7 @@ import App from './App';
 
 const mapStateToProps = (state) => ({
 	isAuthenticate : state.user != null,
-	alert: state.alert
+	alert: state.toast
 });
 
 const mapDispatchToProps = {

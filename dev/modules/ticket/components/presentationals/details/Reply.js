@@ -33,26 +33,26 @@ export default (props) => {
 		      	showExpandableButton={true}
 		    />
 		    <CardText expandable>
-			    <Field 
-			    	name="body"
-			    	component={Editor}
-			    	toolbar={{
-						options: [
-							'inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'emoji', 'image', 'remove', 'history'
-						],
-						image: {
-							uploadEnabled: true,
-							defaultSize:{ height: 400, width: 400 },
-							uploadCallback: generateSource
-						}
-					}}
-					editorClassName="rich-editor"
-					mention={{
-						separator: ' ',
-	      				trigger: '@',
-	      				suggestions: TicketProperties
-					}}
-			   	/>
+			    <Field
+				    name="body"
+				    component={Editor}
+				    toolbar={{
+					    options: [
+						    'inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'emoji', 'image', 'remove', 'history'
+					    ],
+					    image: {
+						    uploadEnabled: true,
+						    defaultSize:{ height: 400, width: 400 },
+						    uploadCallback: generateSource
+					    }
+				    }}
+				    editorClassName="rich-editor"
+				    mention={{
+					    separator: ' ',
+					    trigger: '@',
+					    suggestions: TicketProperties
+				    }}
+			    />
 				<Row end="xs">
 					<FlatButton label="Responder" onClick={
 						() => {

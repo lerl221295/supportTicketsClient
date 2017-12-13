@@ -1,28 +1,18 @@
 import React, { Component } from 'react'
 import {
-	Paper, IconButton, Subheader, FlatButton, FloatingActionButton, Toggle, Checkbox,
-	TableHeader, Table, TableRow, TableHeaderColumn, TableRowColumn, TableBody, MenuItem,
-	Step, Stepper, StepButton, StepContent
+	Paper, TableHeader, Table, TableRow, TableHeaderColumn, TableRowColumn, TableBody,
 } from 'material-ui'
 // Icons
-import {
-	ActionAccountCircle as Person
-} from 'material-ui/svg-icons'
+import { ActionAccountCircle as Person } from 'material-ui/svg-icons'
 import { Row, Col } from 'react-flexbox-grid'
-import {
-	WrappedSubheader
-} from '../../../../common/components'
-import {
-	TextField,
-	SelectField
-} from 'redux-form-material-ui'
+import { WrappedSubheader } from '../../../../common/components'
+import RenderAlerts from './RenderAlerts'
+import { TextField, SelectField } from 'redux-form-material-ui'
 // Redux Form Components
 import { renderSelectReactField } from '../../../../common/components/ReduxFormComponents'
-import {
-	GetOrganizationsNames,
-	GetClientsNames
-} from '../../graphql/querys'
-import {Field} from "redux-form";
+import { menuItemOptions } from '../../../../common/utils/generators'
+import { GetOrganizationsNames, GetClientsNames } from '../../graphql/querys'
+import { Field, FieldArray } from "redux-form";
 import { PRIORITIES } from '../../../../common/utils/consts'
 
 const UNITY_TIME = [
@@ -55,36 +45,16 @@ const OPERATIONALS_HOURS = [
 	}
 ];
 
-const menuItemOptions = ( array ) => (array.map( (unity, i) => (
+/*const menuItemOptions = ( options ) => (options.map( (unity, i) => (
 	<MenuItem key={i} value={unity.value} primaryText={unity.label} />
-)));
+)));*/
 
 class Form extends Component {
 	
-	state = {
-		stepIndex: 0,
-	};
-	
-	handleNext = () => {
-		const {stepIndex} = this.state;
-		if (stepIndex < 2) {
-			this.setState({stepIndex: stepIndex + 1});
-		}
-	};
-	
-	handlePrev = () => {
-		const {stepIndex} = this.state;
-		if (stepIndex > 0) {
-			this.setState({stepIndex: stepIndex - 1});
-		}
-	};
-	
 	render = () => {
-		const {stepIndex} = this.state;
 		
 		return (
 			<Paper>
-				{/*HOLA MUNDO*/}
 				<Row>
 					<Col xs>
 						{/*<FormSubheader
@@ -199,61 +169,34 @@ class Form extends Component {
 							</TableBody>
 						</Table>
 					</Row>
-					<Row>
+					<Row bottom={"xs"} >
 						<Col xs={12}>
-							<h1>Configurar alertas:</h1>
+							<h1>Aplicar política SLA a:</h1>
 						</Col>
-						<Col xs={12}>
-							<Stepper linear={false} activeStep={stepIndex}>
-								<Step>
-									<StepButton onClick={() => this.setState({stepIndex: 0})}>
-										Aplicar política a
-									</StepButton>
-								</Step>
-								<Step>
-									<StepButton onClick={() => this.setState({stepIndex: 1})}>
-										Recordatorio vencimiento cercano del SLA
-									</StepButton>
-								</Step>
-								<Step>
-									<StepButton onClick={() => this.setState({stepIndex: 2})}>
-										Alerta para incumplimiento de SLA
-									</StepButton>
-								</Step>
-							</Stepper>
+						<Col xs={6}>
+							<Field
+								Icon={Person}
+								name="clients"
+								component={renderSelectReactField}
+								label="Clientes"
+								placeholder="Seleccione los clientes"
+								loadOptions={this.props.searchData("clients", GetClientsNames)}
+								multi
+							/>
+						</Col>
+						<Col xs={6}>
+							<Field
+								Icon={Person}
+								name="organizations"
+								component={renderSelectReactField}
+								label="Organizaciones"
+								placeholder="Seleccione las organizaciones"
+								loadOptions={this.props.searchData("organizations", GetOrganizationsNames)}
+								multi
+							/>
 						</Col>
 					</Row>
-					{
-						do {
-							if (stepIndex === 0) (
-								<Row bottom={"xs"} between={"xs"}>
-									<Col xs={5}>
-										<Field
-											Icon={Person}
-											name="clients"
-											component={renderSelectReactField}
-											label="Clientes"
-											placeholder="Seleccione los clientes"
-											loadOptions={this.props.searchData("clients", GetClientsNames)}
-											multi
-										/>
-									</Col>
-									<Col xs={5}>
-										<Field
-											Icon={Person}
-											name="organizations"
-											component={renderSelectReactField}
-											label="Organizaciones"
-											placeholder="Seleccione las organizaciones"
-											loadOptions={this.props.searchData("organizations", GetOrganizationsNames)}
-											multi
-										/>
-									</Col>
-								</Row>
-							)
-							else null
-						}
-					}
+					<FieldArray name="alerts" searchData={this.props.searchData} component={RenderAlerts} />
 				</form>
 			</Paper>
 		)

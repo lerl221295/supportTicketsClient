@@ -1,24 +1,18 @@
-export const ADD_HOLIDAY = 'ADD_HOLIDAY';
-export const SET_HOLIDAYS = 'SET_HOLIDAYS';
-export const DELETE_HOLIDAY = 'DELETE_HOLIDAY';
+export const ADD_ALERT = 'ADD_ALERT';
+export const SET_ALERTS = 'SET_ALERTS';
+export const DELETE_ALERT = 'DELETE_ALERT';
 
-export const addHoliday = (holiday) => ({
-	type: ADD_HOLIDAY,
-	payload: {
-		holiday: {
-			name: holiday.newHolidayName,
-			day: holiday.newHolidayDate.getDate(),
-			month: holiday.newHolidayDate.getMonth()+1
-		}
-	}
+export const addAlert = (alert) => ({
+	type: ADD_ALERT,
+	payload: { ...alert }
 });
 
-export const deleteHoliday = (holiday) => ({
-	type: DELETE_HOLIDAY,
-	payload: { holiday }
+export const deleteAlert = (alert) => ({
+	type: DELETE_ALERT,
+	payload: { ...alert }
 });
 
-export const setHolidays = (holidays) => ({
-	type: SET_HOLIDAYS,
-	payload: { holidays }
+export const setAlerts = (alerts) => ({
+	type: SET_ALERTS,
+	payload: [ ...alerts ]
 });
