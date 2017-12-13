@@ -1,17 +1,27 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { List, ListItem, Divider, Subheader } from 'material-ui'
+import { ContentDeleteSweep as Delete } from "material-ui/svg-icons";
+import Theme from '../../../../theme-default'
 
-const Holidays = ({holidays}) => {
+const Holidays = ({holidays, deleteHoliday}) => {
 	return(
-		<List>
+		<List style={{display: do {
+			if(holidays.length) null;
+			else "none";
+		}}}>
 			<Subheader>Dias Festivos</Subheader>
 			{
 				holidays.map(({name, day, month}, i) => (
 					<div key={i}>
-						<ListItem>
-							{`${name} ${day}/${month}`}
-						</ListItem>
+						<ListItem 
+							primaryText={`${name} ${day}/${month}`}
+							rightIcon={
+								<Delete 
+									hoverColor={Theme.palette.accent1Color}
+									onClick={() => deleteHoliday({day, month})} 
+								/>
+							}
+						/>			
 						<Divider/>
 					</div>
 				))
@@ -20,4 +30,4 @@ const Holidays = ({holidays}) => {
 	)
 }
 
-export default connect( ({businessHours: {holidays} }) => ({holidays}))(Holidays)
+export default Holidays

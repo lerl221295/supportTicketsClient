@@ -4,7 +4,7 @@ import {
 	grey400, pinkA200, grey100, darkBlack, grey300, cyan700,
 	indigo100, indigo500, indigo700, amber100, amber500, amber800, grey600, grey700, black,
 	// toogle
-	orange500, orange100, amber200
+	orange500, orange100, amber200, lightBlue50, lightGreen50
 } from 'material-ui/styles/colors'
 
 
@@ -83,7 +83,7 @@ const indigo = {
 		primary2Color: indigo700,
 		primary3Color: indigo100,
 		accent1Color: amber800,
-		accent2Color: amber100,
+		accent2Color: amber500,
 		// accent3Color: amber500,
 		textColor: grey900,
 		secondaryTextColor: grey600,
@@ -91,7 +91,9 @@ const indigo = {
 		pickerHeaderColor: indigo500,
 		disabledColor: grey700,
 		canvasColor: white,
-		clockCircleColor: fade(black, 0.07)
+		clockCircleColor: fade(black, 0.07),
+        clientIntervention: lightBlue50,//agregar en todas las paletas
+        agentIntervention: lightGreen50//agregar en todas las paletas
 	},
 	avatar: {
 		backgroundColor: amber800

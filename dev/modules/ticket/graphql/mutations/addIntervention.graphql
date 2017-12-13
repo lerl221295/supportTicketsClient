@@ -1,0 +1,14 @@
+mutation AddIntervention($intervention: InterventionInput!){
+	addIntervention(intervention: $intervention){
+		time
+		text
+		type_autor
+		autor {
+			...on Agent {
+				id
+				name: fullName
+				face_base64
+			}
+		}
+	}
+}

@@ -58,14 +58,14 @@ class App extends Component {
 	
 	render() {
 		let { navDrawerOpen } = this.state;
-		const paddingLeftDrawerOpen = '14.75rem';
+		const paddingLeftDrawerOpen = '14.4rem';
 		
 		const styles = {
 			header: {
 				paddingLeft: navDrawerOpen ? paddingLeftDrawerOpen : 0
 			},
 			container: {
-				margin: '0.5rem 0.5rem 0.5rem 0',
+				margin: '0.5rem',
 				paddingLeft: navDrawerOpen && this.props.width !== SMALL ? paddingLeftDrawerOpen : 0
 			}
 		};

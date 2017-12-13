@@ -11,6 +11,7 @@ import {
 } from 'material-ui'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import { grey100, blueGrey800 } from 'material-ui/styles/colors'
+import Theme from '../../../../../theme-default'
 
 import Face from 'material-ui/svg-icons/action/face'
 import Computer from 'material-ui/svg-icons/hardware/computer'
@@ -26,7 +27,7 @@ const styles = {
 		fontWeight: "bold"
 	},
 	header: {
-		backgroundColor: grey100,
+		backgroundColor: Theme.palette.primary3Color,
 	 	margin:"-1rem",
 	 	marginBottom: "0",
 	  	padding: "1rem"
@@ -42,7 +43,7 @@ const styles = {
 const FirstActivity = ({ticket}) => {
 	return(
 		<Paper style={{margin: "0.6rem", padding: "1rem"}}>
-			<Row style={styles.header}>
+			<Row style={{...styles.header, backgroundColor: grey100}}>
 				<Col xs={12} md={12} sm={12}>
 					<Row middle="xs">
 						<Col xs={1} md={1} sm={1}>

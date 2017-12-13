@@ -1,5 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'react-flexbox-grid'
+import Theme from '../../theme-default'
 
 const InputWithIcon = ({Icon, Input, style, ...props, children}) => (
 		<Row bottom="xs" style={style}>
@@ -7,7 +8,7 @@ const InputWithIcon = ({Icon, Input, style, ...props, children}) => (
 				  do {
 					  if (Icon) (
 						  <Col xs={2} md={1}>
-							  <Icon color="skyBlue"/>
+							  <Icon color={Theme.palette.accent2Color} />
 						  </Col>
 					  )
 				  }

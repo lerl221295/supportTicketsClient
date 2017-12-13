@@ -1,22 +1,37 @@
 fragment businessHoursFields on BusinessHours {
-    twentyfour_seven
-    working_days {
-    	day
-        workeable
-    	horary {
-    		start {
-                hour
-                minutes
-            }
-    		end {
-                hour
-                minutes
-            }
-    	}
-    }
+    mode
     holidays {
     	name
     	day
     	month
+    }
+    ...on Customized {
+            working_days {
+            day
+            workeable
+            horary {
+                start {
+                    hour
+                    minutes
+                }
+                end {
+                    hour
+                    minutes
+                }
+            }
+        }
+    }
+    ...on SameForDays {
+        week_days
+        horary {
+            start {
+                hour
+                minutes
+            }
+            end {
+                hour
+                minutes
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Row, Col } from 'react-flexbox-grid'
 import Select from 'react-select'
+import Theme from '../../theme-default'
 
 const ReactSelectWithIcon = ({Icon, label, ...props}) => (
   <Row bottom={"xs"} style={{marginTop: "0.8rem"}}>
@@ -20,7 +21,7 @@ const ReactSelectWithIcon = ({Icon, label, ...props}) => (
 		  do {
 			  if (Icon) (
 				  <Col xs={2} md={1}>
-					  <Icon color="skyBlue"/>
+					  <Icon color={Theme.palette.accent2Color}/>
 				  </Col>
 			  )
 		  }

@@ -18,85 +18,96 @@ let host = window.location.host.split(".")[0];
 export const API_URL = `${host}.localhost:3000`;
 
 const wsLink = new WebSocketLink({
-	uri: `ws://${API_URL}/subscriptions`,
-	options: {
-		reconnect: true,
-		connectionParams: {
-			token: "falta colocar aca el token",
-			subdomain : host
-		}
-	}
+    uri: `ws://${API_URL}/subscriptions`,
+    options: {
+        reconnect: true,
+        connectionParams: {
+            token: "falta colocar aca el token",
+            subdomain: host
+        }
+    }
 });
 
 const httpLink = setContext(() => {
-	const user = getUser();
-	return ({
-		headers: {
-			authorization: user ? `Bearer ${user.token}` : null,
-		}
-	})
+    const user = getUser();
+    return ({
+        headers: {
+            authorization: user ? `Bearer ${user.token}` : null,
+        }
+    })
 }).concat(createHttpLink({ uri: `http://${API_URL}/graphql` }));
 
 const link = split( /*ni idea aun de que hace esta pinga!*/
-	// split based on operation type
-	({ query }) => {
-		const { kind, operation } = getMainDefinition(query);
-		return kind === 'OperationDefinition' && operation === 'subscription';
-	},
-	wsLink,
-	httpLink,
+    // split based on operation type
+    ({ query }) => {
+        const { kind, operation } = getMainDefinition(query);
+        return kind === 'OperationDefinition' && operation === 'subscription';
+    },
+    wsLink,
+    httpLink,
 );
 const client = new ApolloClient({
-	link: link,
-	cache: new InMemoryCache({
-		fragmentMatcher: new IntrospectionFragmentMatcher({
-			introspectionQueryResultData: {
-				__schema: {
-					types: [
-						{
-							"kind": "INTERFACE",
-							"name": "Activity",
-							"possibleTypes": [
-								{
-									"name": "UpgradeActivity"
-								},
-								{
-									"name": "CreationActivity"
-								}
-							]
-						},
-						{
-							"kind": "INTERFACE",
-							"name": "FieldValue",
-							"possibleTypes": [{
-								"name": "TextValue"
-							},
-								{
-									"name": "NumberValue"
-								},
-								{
-									"name": "SelectValue"
-								},
-								{
-									"name": "CheckValue"
-								}
-							]
-						},
-						{
-							"kind": "INTERFACE",
-							"name": "Field",
-							"possibleTypes": [{
-								"name": "FreeField"
-							},
-								{
-									"name": "SelectField"
-								}
-							]
-						}
-					],
-				}
-			}
-		})
-	})
+    link: link,
+    cache: new InMemoryCache({
+        fragmentMatcher: new IntrospectionFragmentMatcher({
+            introspectionQueryResultData: {
+                __schema: {
+                    types: [{
+                            "kind": "INTERFACE",
+                            "name": "Activity",
+                            "possibleTypes": [{
+                                    "name": "UpgradeActivity"
+                                },
+                                {
+                                    "name": "CreationActivity"
+                                }
+                            ]
+                        },
+                        {
+                            "kind": "INTERFACE",
+                            "name": "FieldValue",
+                            "possibleTypes": [{
+                                    "name": "TextValue"
+                                },
+                                {
+                                    "name": "NumberValue"
+                                },
+                                {
+                                    "name": "SelectValue"
+                                },
+                                {
+                                    "name": "CheckValue"
+                                }
+                            ]
+                        },
+                        {
+                            "kind": "INTERFACE",
+                            "name": "Field",
+                            "possibleTypes": [{
+                                    "name": "FreeField"
+                                },
+                                {
+                                    "name": "SelectField"
+                                }
+                            ]
+                        },
+                        {
+                            "kind": "INTERFACE",
+                            "name": "BusinessHours",
+                            "possibleTypes": [{
+                                    "name": "TwentyFourSeven"
+                                },{
+                                    "name": "Customized"
+                                },
+                                {
+                                    "name": "SameForDays"
+                                }
+                            ]
+                        }
+                    ],
+                }
+            }
+        })
+    })
 });
 export default client

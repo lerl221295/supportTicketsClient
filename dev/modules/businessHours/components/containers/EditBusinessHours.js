@@ -12,9 +12,7 @@ const generateHour = ({hour, minutes}) => {
 	date.setHours(hour);
 	date.setMinutes(minutes);
 	return date;
-};
-		
-const BusinessHoursWithReduxForm = reduxForm({ form: 'businessHours' })(BusinessHoursForm);
+}
 
 @compose(
 	graphql(BusinessHours),
@@ -23,28 +21,45 @@ const BusinessHoursWithReduxForm = reduxForm({ form: 'businessHours' })(Business
 class BusinessHoursContainer extends Component {
 
 	componentWillReceiveProps = ({data, ...rest}) => {
-		if(data.businessHours) {
-			// console.log('businessHours---', data.businessHours);
-			this.props.setHolidays(data.businessHours.holidays);
+		if(data.businessHours){
+			/*mapeo para luego poder enviar esa misma data*/
+			this.props.setHolidays(
+				data.businessHours.holidays.map(({name, day, month}) => ({
+					name,
+					day,
+					month
+				}))
+			);
 		}
-	};
+	}
 
 	render = () => {
-		const { data } = this.props;
+		const { data } = this.props
 		let initialValues = {};
 		let workingDays = {};
 		if(data.businessHours){
 			const { businessHours } = data;
-			initialValues.twentyfour_seven = businessHours.twentyfour_seven;
-			for(let working_day of businessHours.working_days){
-				workingDays[working_day.day] = working_day.workeable;
-				workingDays[`${working_day.day}_start`] = generateHour(working_day.horary.start);
-				workingDays[`${working_day.day}_end`] = generateHour(working_day.horary.end);
+			initialValues.mode = businessHours.mode;
+			
+			if(businessHours.mode === "CUSTOMIZED"){
+				for(let working_day of businessHours.working_days){
+					workingDays[working_day.day] = working_day.workeable;
+					if(working_day.workeable){
+						workingDays[`${working_day.day}_start`] = generateHour(working_day.horary.start);
+						workingDays[`${working_day.day}_end`] = generateHour(working_day.horary.end);
+					}
+				}
+			}
+			else if(businessHours.mode === "SAME_FOR_DAYS") {
+				workingDays.week_days = businessHours.week_days;
+				workingDays.horary_start = generateHour(businessHours.horary.start);
+				workingDays.horary_end = generateHour(businessHours.horary.end);
 			}
 		}
 
+		const BusinessHoursWithReduxForm = reduxForm({ form: 'businessHours' })(BusinessHoursForm);
 		/*no le paso data.businessHours porque los working_days los envio mapeados,
-		los holidays los seteo en el store de redux y el twentyfour_seven es un initialValue*/
+		los holidays los seteo en el store de redux y el mode es un initialValue*/
 
 		return( 
 			<BusinessHoursWithReduxForm 
