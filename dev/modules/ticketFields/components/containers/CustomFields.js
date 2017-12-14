@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { graphql, compose } from 'react-apollo'
-import { deleteField, setFields } from '../../actions/customFields'
+import { deleteField, setFields, closeModal } from '../../actions/customFields'
 import TicketMetadata from '../../graphql/querys/ticketMetadata.graphql'
 import UpdateCustomFields from '../../graphql/mutations/updateCustomFields.graphql'
 import CustomFields from '../presentationals/customFields/CustomFields' 
@@ -10,8 +10,11 @@ import hexToRgbA from '../../../../common/utils/hexToRgbA'
 import Theme from '../../../../theme-default'
 
 const ReduxContainer = connect(
-	({ticketFields: {customFields} }) => ({custom_fields: customFields.fields}),
-	{ deleteField, setFields, openAlert }
+	({ticketFields: {customFields, modals} }) => ({
+		custom_fields: customFields.fields,
+		modals: customFields.modals
+	}),
+	{ deleteField, setFields, openAlert, closeModal }
 );
 
 const CustomContainer = WrappedComponent => class FieldsDrawable extends Component {

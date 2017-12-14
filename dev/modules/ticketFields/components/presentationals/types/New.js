@@ -15,7 +15,7 @@ const NewType = ({handleSubmit, dirty, reset}) => (
 			<Field 
 				name="key" 
 				component={TextField} 
-				//placeholder="Nombre de la Fecha Festiva"
+				hintText="Nombre de la Fecha Festiva"
 				floatingLabelText="Codigo del tipo de ticket"
 				style={{width: "100%"}}
 			/>
@@ -24,7 +24,7 @@ const NewType = ({handleSubmit, dirty, reset}) => (
 			<Field 
 				name="label" 
 				component={TextField} 
-				//placeholder="Nombre de la Fecha Festiva"
+				hintText="Nombre de la Fecha Festiva"
 				floatingLabelText="Label de muestra"
 				style={{width: "100%"}}
 			/>

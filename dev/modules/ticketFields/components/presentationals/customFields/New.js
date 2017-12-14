@@ -1,7 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Row, Col } from 'react-flexbox-grid'
 import { IconButton, Subheader } from 'material-ui'
 import FieldTypeIcon from './FieldIcon'
+import { openModal } from '../../../actions/customFields'
 
 const styles = {
     mediumIcon: {
@@ -24,62 +26,36 @@ const styles = {
     },
 };
 
-export default () => (
-	<Row center="xs">
-		<Subheader>Nuevo Campo del Ticket</Subheader>
-		<Col xs={6}>
-			<IconButton 
-				iconStyle={styles.largeIcon}
-				style={styles.large}
-				tooltip="Campo de texto"
-			>
-				<FieldTypeIcon type="TEXT" />
-			</IconButton>
-		</Col>
-		<Col xs={6}>
-			<IconButton 
-				iconStyle={styles.largeIcon}
-				style={styles.large}
-				tooltip="Area de texto"
-			>
-				<FieldTypeIcon type="TEXTAREA"/>
-			</IconButton>
-		</Col>
-		<Col xs={6}>
-			<IconButton 
-				iconStyle={styles.largeIcon}
-				style={styles.large}
-				tooltip="Campo numerico"
-			>
-				<FieldTypeIcon type="NUMBER"/>
-			</IconButton>
-		</Col>
-		<Col xs={6}>
-			<IconButton 
-				iconStyle={styles.largeIcon}
-				style={styles.large}
-				tooltip="Campo de checkeo"
-			>
-				<FieldTypeIcon type="CHECKBOX"/>
-			</IconButton>
-		</Col>
-		<Col xs={6}>
-			<IconButton 
-				iconStyle={styles.largeIcon}
-				style={styles.large}
-				tooltip="Campo de seleccion"
-			>
-				<FieldTypeIcon type="SELECT"/>
-			</IconButton>
-		</Col>
-		<Col xs={6}>
-			<IconButton 
-				iconStyle={styles.largeIcon}
-				style={styles.large}
-				tooltip="Campo de fecha"
-			>
-				<FieldTypeIcon type="DATE"/>
-			</IconButton>
-		</Col>
-	</Row>
-)
+const getTooltip = type => do {
+	if(type === "SELECT") "Seleccionable";
+	else if(type === "TEXT") "Texto";
+	else if(type === "TEXTAREA") "Texto Multi-linea";
+	else if(type === "DATE") "Fecha";
+	else if(type === "CHECKBOX") "CheckBox";
+	else if(type === "NUMBER") "Numerico";
+}
+
+const NewField = ({openModal}) => {
+	const TYPES = ["TEXT", "TEXTAREA", "NUMBER", "DATE", "CHECKBOX", "SELECT"];
+	return(
+		<Row center="xs">
+			<Subheader>Nuevo Campo del Ticket</Subheader>
+			{
+				TYPES.map(type => (
+					<Col xs={6} key={type}>
+						<IconButton 
+							iconStyle={styles.largeIcon}
+							style={styles.large}
+							tooltip={getTooltip(type)}
+							onClick={ e => openModal(type)}
+						>
+							<FieldTypeIcon type={type} />
+						</IconButton>
+					</Col>
+				))
+			}
+		</Row>	
+	)
+}
+
+export default connect(null, { openModal })(NewField)

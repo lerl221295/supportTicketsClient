@@ -7,6 +7,8 @@ import Types from '../containers/Types'
 import Status from '../containers/Status'
 import CustomFields from '../containers/CustomFields'
 
+const sortByposition = (a, b) => (a.position - b.position)
+
 class Panel extends Component {
 	componentWillReceiveProps = ({data}) => {
 		if(data.ticketMetadata){
@@ -19,8 +21,9 @@ class Panel extends Component {
 					return ({
 						...rest,
 						options: rest.options.map(({__typename, ...rest}) => rest)
+							.sort(sortByposition)
 					})
-				})
+				}).sort(sortByposition)
 			);
 		}
 	}
