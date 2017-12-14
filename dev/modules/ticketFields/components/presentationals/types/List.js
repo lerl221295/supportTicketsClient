@@ -9,7 +9,7 @@ const TypesList = ({types, deleteType}) => {
 			if(types.length) null;
 			else "none";
 		}}}>
-			<Subheader>Items</Subheader>
+			<Subheader>Tipos de Ticket</Subheader>
 			{
 				types.map(({key, label}, i) => (
 					<div key={i}>

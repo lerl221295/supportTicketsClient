@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { RaisedButton} from 'material-ui'
+import { RaisedButton, Subheader } from 'material-ui'
 import { Row, Col } from 'react-flexbox-grid'
 import { TextField } from 'redux-form-material-ui'
 import { Field, reduxForm } from 'redux-form'
@@ -9,8 +9,9 @@ import { Field, reduxForm } from 'redux-form'
 import { addType } from '../../../actions/types'
 
 const NewType = ({handleSubmit, dirty, reset}) => (
-	<Row bottom="xs">
-		<Col xs={4}>
+	<Row >
+		<Subheader>Nuevo Tipo de Ticket</Subheader>
+		<Col xs={12}>
 			<Field 
 				name="key" 
 				component={TextField} 
@@ -19,7 +20,7 @@ const NewType = ({handleSubmit, dirty, reset}) => (
 				style={{width: "100%"}}
 			/>
 		</Col>
-		<Col xs={4}>
+		<Col xs={12}>
 			<Field 
 				name="label" 
 				component={TextField} 
@@ -28,17 +29,16 @@ const NewType = ({handleSubmit, dirty, reset}) => (
 				style={{width: "100%"}}
 			/>
 		</Col>
-		<Col xs={4}>
-			<RaisedButton 
-				disabled={!dirty}
-				label="Agregar Tipo" 
-				primary={true} 
-				onClick={e => {
-					handleSubmit();
-					reset();
-				}} 
-			/>
-		</Col>
+		<RaisedButton 
+			disabled={!dirty}
+			label="Agregar Tipo" 
+			primary
+			fullWidth
+			onClick={e => {
+				handleSubmit();
+				reset();
+			}} 
+		/>
 	</Row>
 )
 

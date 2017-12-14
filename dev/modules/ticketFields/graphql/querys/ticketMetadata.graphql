@@ -18,6 +18,13 @@ query GetTicketMetadata {
 			position
 			label
 			type
+			...on SelectField {
+				options {
+					key
+					label
+					position
+				}
+			}
 		}
 	}
 }

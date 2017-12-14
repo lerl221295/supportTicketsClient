@@ -1,0 +1,15 @@
+mutation UpdateCustomFields($custom_fields: [CustomFieldInput!]){
+	updateCustomFields(custom_fields: $custom_fields){
+		key
+		position
+		label
+		type
+		...on SelectField {
+			options {
+				key
+				label
+				position
+			}
+		}
+	}
+}

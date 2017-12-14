@@ -9,10 +9,20 @@ import CustomFields from '../containers/CustomFields'
 
 class Panel extends Component {
 	componentWillReceiveProps = ({data}) => {
-		if(data.ticketMetadata)
+		if(data.ticketMetadata){
 			this.props.setTypes(
-				data.ticketMetadata.types.map(({key, label}) => ({key, label}))
+				data.ticketMetadata.types.map(({__typename, ...rest}) => rest)
 			);		
+			this.props.setFields(
+				data.ticketMetadata.custom_fields.map(({__typename, ...rest}) => {
+					if(rest.type !== "SELECT") return rest;
+					return ({
+						...rest,
+						options: rest.options.map(({__typename, ...rest}) => rest)
+					})
+				})
+			);
+		}
 	}
 
 	render = () => {
@@ -39,9 +49,7 @@ class Panel extends Component {
 						label={"Campos Personalizables"}
 						icon={<Organization/>}
 					>
-						<CustomFields
-							custom_fields={custom_fields}
-						/>
+						<CustomFields/>
 					</Tab>
 				</Tabs>
 			</div>

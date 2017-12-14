@@ -11,6 +11,7 @@ const createReducers = () => (
 	combineReducers({
 	    alert,
 	    ticketDetail,
+	    businessHours,
 	    ticketFields,
 	    routing: routerReducer,
 		form: formReducer
