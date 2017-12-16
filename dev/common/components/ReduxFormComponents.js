@@ -23,14 +23,14 @@ export const renderTextField = (
 		meta: { touched, error },
 		...custom
 	}) => (
-	<InputWithIcon
-		Input={TextField}
-		hintText={label}
-		label={label}
-		floatingLabelText={label}
-		{...input}
-		{...custom}
-	/>
+		<InputWithIcon
+			Input={TextField}
+			hintText={label}
+			label={label}
+			floatingLabelText={label}
+			{...input}
+			{...custom}
+		/>
 )
 
 export const renderCheckbox = ({ input, label }) => (
@@ -60,25 +60,25 @@ export const renderSelectField = (
 		value,
 		...custom
 	}) => (
-	<InputWithIcon
-		Input={SelectField}
-		{...input}
-		onChange={(event, index, value) => input.onChange(value)}
-		floatingLabelText={label}
-		{...custom}
-	>
-		{
-			options.map(({value, text}, i) => (
-				<MenuItem
-					key={i}
-					primaryText={text}
-					value={value}
-					checked={input.value.includes(value)}
-				/>
-			))
-		}
-	</InputWithIcon>
-)
+		<InputWithIcon
+			Input={SelectField}
+			{...input}
+			onChange={(event, index, value) => input.onChange(value)}
+			floatingLabelText={label}
+			{...custom}
+		>
+			{
+				options.map(({value, text}, i) => (
+					<MenuItem 
+						key={i} 
+						primaryText={text} 
+						value={value}
+						checked={input.value.includes(value)}
+					/>
+				))
+			}
+		</InputWithIcon>
+	)
 
 export const renderSelectReactField = (
 	{
@@ -86,66 +86,66 @@ export const renderSelectReactField = (
 		label,
 		...custom
 	}) => (
-	<ReactSelectWithIcon
-		label={label}
-		{...input}
-		onChange={(value) => input.onChange(value)}
-		onBlur={(e) => {
-			e.preventDefault();
-			//input.onBlur(input.value);
-		}}
-		valueKey="id" labelKey="name"
-		backspaceRemoves={true}
-		autoload={false}
-		filterOption={() => (true)}
-		//value={input.value}
-		{...custom}
-	/>
-)
-
-export const renderDatePicker = ({
-	                                 input,
-	                                 label,
-	                                 meta,
-	                                 ...custom
-                                 }) => (
-	<DatePicker
-		mode="landscape"
-		hintText={label}
-		container="inline"
-		value={new Date(input.value)}
-		onChange={(_, date) => input.onChange(new Date(date))}
-		{...custom}
-	/>
-)
-
-export class EditorWrapper extends Component {
-	
-	constructor() {
-		super();
-		this.handleEditorStateChange = this.handleEditorStateChange.bind(this);
-		this.state = {
-			editorState: EditorState.createEmpty()
-		}
-	}
-	
-	convertToString = (editorState) => draftToHtml(convertToRaw(editorState.getCurrentContent()));
-	
-	handleEditorStateChange = (editorState) => {
-		const { onChange } = this.props.input;
-		const stringValue = this.convertToString(editorState);
-		
-		this.setState({ editorState });
-		onChange(stringValue);
-	}
-	
-	render = () => (
-		<Editor
-			editorState={this.state.editorState}
-			onEditorStateChange={this.handleEditorStateChange}
-			toolbar={this.props.toolbar}
-			editorClassName={this.props.editorClassName}
-			mention={this.props.mention}
+		<ReactSelectWithIcon
+			label={label}
+			{...input}
+			//onChange={(value) => input.onChange(value)}
+			onBlur={(e) => {
+				//e.preventDefault();
+				input.onBlur(input.value);
+			}}
+			valueKey="id" labelKey="name"
+			backspaceRemoves={true}
+			autoload={false}
+			filterOption={() => (true)}
+			//value={input.value}
+			{...custom}
 		/>
 	)
+
+export const renderDatePicker = ({
+		input,
+		label,
+		meta,
+		...custom
+	}) => (
+		<DatePicker
+			mode="landscape"
+			hintText={label}
+			container="inline"
+			value={new Date(input.value)}
+			onChange={(_, date) => input.onChange(new Date(date))}
+			{...custom}
+		/>
+	)
+
+export class EditorWrapper extends Component {
+
+    constructor() {
+        super();
+        this.handleEditorStateChange = this.handleEditorStateChange.bind(this);
+        this.state = {
+            editorState: EditorState.createEmpty()
+        }
+    }
+
+    convertToString = (editorState) => draftToHtml(convertToRaw(editorState.getCurrentContent()));
+
+    handleEditorStateChange = (editorState) => {
+        const { onChange } = this.props.input;
+        const stringValue = this.convertToString(editorState);
+
+        this.setState({ editorState });
+        onChange(stringValue);
+    }
+
+    render = () => (
+    	 <Editor
+            editorState={this.state.editorState}
+            onEditorStateChange={this.handleEditorStateChange}
+            toolbar={this.props.toolbar}
+			editorClassName={this.props.editorClassName}
+			mention={this.props.mention}
+        />
+    )
 }

@@ -10,8 +10,12 @@ import {
 	MenuItem,
 	Card,
 	CardHeader,
-	CardText
+	CardText,
+	FloatingActionButton
 } from 'material-ui'
+import {
+	ContentSave as Save
+} from 'material-ui/svg-icons'
 import {
   Checkbox,
   DatePicker,
@@ -48,7 +52,7 @@ const renderCustomField = custom_field => {
 		return(
 			<Field
 				key={key}
-				name={key}
+				name={`custom.${key}`}
 				component={SelectField}
 				label={label}
 				style={{width: "100%"}}
@@ -62,28 +66,53 @@ const renderCustomField = custom_field => {
 	}
 
 	let { Component, custom } = do {
-		if(type === "TEXT" || type === "TEXTAREA" || type === "NUMBER") 
+		if(type === "TEXT") 
 			({Component: TextField, custom: {style: {width: "100%"} } });
+		else if(type === "NUMBER") 
+			({
+				Component: TextField, 
+				custom: {
+					style: {width: "100%"},
+					type: 'number',
+					floatingLabelText: label
+				}
+			});
+		else if(type === "TEXTAREA")
+			({
+				Component: TextField, 
+				custom: {
+					style: {width: "100%"},
+					multiLine: true,
+					rowsMax: 6,
+					floatingLabelText: label
+				} 
+			});
 		else if(type === "DATE") 
 			({
 				Component: DatePicker, 
 				custom: {
 					textFieldStyle: {width: "100%"},
 					mode: "landscape",
-					container: "inline"
+					container: "inline",
+					floatingLabelText: label/*,
+					format: null*/
 				}
 			});
 		else if(type === "CHECKBOX") 
-			({Component: Checkbox, custom: {style: {width: "100%"} } });
+			({
+				Component: Checkbox, 
+				custom: {
+					style: {width: "100%", marginTop: "0.6rem"} 
+				} 
+			});
 	};
 
 	return(
 		<Field
 			key={key}
-			name={key}
+			name={`custom.${key}`}
 			component={Component}
 			label={label}
-			floatingLabelText={label}
 			{...custom}
 		/>
 	)
@@ -105,17 +134,37 @@ class PropsForm extends Component {
 		
 		const STATUS = [
 			{ value: ticket.state.key, text: ticket.state.label },
-			...ticket.next_states.map(({key, label}) => ({value: key, text: label}))
+			...ticket.next_states.map(({key: value, label: text}) => ({value, text}))
 		];
 
-		const TYPES = ticketTypes.map(({key, label}) => ({value: key, text: label}));
+		const TYPES = ticketTypes.map(({key: value, label: text}) => ({value, text}));
 		
+		let DEVICES = ticket.client.devices.map(({id: value, code, name}) => ({
+			value,
+			text: `${name} - ${code}`
+		}))
+
+		/*solo por la data mock*/
+		DEVICES = [
+			{value: ticket.device.id, text: ticket.device.name},
+			...DEVICES
+		]
+
 		return (
 			<Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
 				<CardHeader
 			      	title="Propiedades del Ticket"
-			      	//subtitle="Subtitle"
-			      	actAsExpander={true}
+			      	avatar={
+			      		<FloatingActionButton 
+	      					mini
+	      					zDepth={0}
+	      					onClick={this.props.handleSubmit}
+							disabled={!dirty}
+	      				>
+		      				<Save/>
+		      			</FloatingActionButton>
+			      	}
+			      	//actAsExpander={true}
 			      	showExpandableButton={true}
 			    />
 				<CardText expandable style={{padding: "0 1rem 0 1rem"}}>
@@ -136,7 +185,7 @@ class PropsForm extends Component {
 							</Col>
 							<Col xs={12} md={6} sm={6}>
 								<Field
-									name="state"
+									name="state_key"
 									component={SelectField}
 									floatingLabelText="Status"
 									label="Status"
@@ -151,7 +200,7 @@ class PropsForm extends Component {
 						
 						
 						<Field
-							name="type"
+							name="type_key"
 							component={SelectField}
 							floatingLabelText="Tipo"
 							label="Tipo"
@@ -170,6 +219,17 @@ class PropsForm extends Component {
 						>
 						{
 							renderMenuItems(CHANELS)
+						}
+						</Field>
+						<Field
+							name="device_id"
+							component={SelectField}
+							floatingLabelText="Dispositivo"
+							label="Dispositivo"
+							style={{width: "100%"}}
+						>
+						{
+							renderMenuItems(DEVICES)
 						}
 						</Field>
 						<Field
@@ -194,7 +254,6 @@ class PropsForm extends Component {
 							custom_fields.map(custom_field => renderCustomField(custom_field))
 						}
 					</form>
-				
 					<Row center="xs">
 						<Col xs={6} md={6} sm={6}>
 							<FlatButton
@@ -204,7 +263,7 @@ class PropsForm extends Component {
 								disabled={!dirty}
 							/>
 						</Col>
-					</Row>
+					</Row>					
 				</CardText>
 			</Card>
 		)

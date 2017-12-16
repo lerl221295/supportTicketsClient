@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import theme from '../../../../theme-default'
-import PanelPolicies from '../presentationals/Panel'
+import PanelPolicies from '../presentationals/List/PoliciesPanelList'
 import { orderPoliciesByPosition } from '../../utils'
+import { push } from 'react-router-redux'
+import { connect } from 'react-redux'
 
 const hexToRgbA = (hex, opacity = 1) => {
 	let c;
@@ -31,6 +33,7 @@ const getItemStyle = (draggableStyle, isDragging) => {
 	});
 };
 
+@connect(null, { push })
 class Panel extends Component {
 	
 	state = {
@@ -57,13 +60,11 @@ class Panel extends Component {
 		if (!destination) {
 			return;
 		}
-		
 		const SLAPolicies = this.reorderPolicies(
 			this.state.SLAPolicies,
 			source.index,
 			destination.index
 		);
-		
 		this.setState({
 			SLAPolicies
 		});
@@ -134,6 +135,7 @@ class Panel extends Component {
 			cancelReorder={this.cancelReorder}
 			deletePolicy={this.deletePolicy}
 			handleToggleChange={this.handleToggleChange}
+			push={this.props.push}
 		/>
 	)
 }

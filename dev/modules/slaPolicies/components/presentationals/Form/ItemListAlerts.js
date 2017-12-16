@@ -1,15 +1,10 @@
 import React from 'react'
 import { Row, Col } from 'react-flexbox-grid'
 import { Field } from 'redux-form'
-import { ContentDeleteSweep as Delete } from 'material-ui/svg-icons'
 import { renderSelectReactField } from '../../../../common/components/ReduxFormComponents'
 import { menuItemOptions } from '../../../../common/utils/generators'
-import {
-	TextField,
-	SelectField
-} from 'redux-form-material-ui'
+import { SelectField } from 'redux-form-material-ui'
 import { GetAgentsNames } from '../../graphql/querys'
-import {FlatButton} from "material-ui";
 
 const TIMES_BEFORE = [
 	{
@@ -81,7 +76,7 @@ const TIMES_AFTER = [
 	},
 ];
 
-export default ({ type, motive, time, message, searchData, index, remove }) => (
+export default ({ type, motive, time, message, searchData, index }) => (
 	<Row bottom={'xs'}>
 		<Col xs={4}>
 			<Field
@@ -99,7 +94,7 @@ export default ({ type, motive, time, message, searchData, index, remove }) => (
 				}
 			</Field>
 		</Col>
-		<Col xs={6}>
+		<Col xs={8}>
 			<Field
 				name={`alerts[${index}].to`}
 				component={renderSelectReactField}
@@ -107,16 +102,6 @@ export default ({ type, motive, time, message, searchData, index, remove }) => (
 				placeholder="Seleccione los agentes"
 				loadOptions={searchData("agents", GetAgentsNames)}
 				multi
-			/>
-		</Col>
-		<Col xs={2}>
-			<FlatButton
-				label="Eliminar"
-				labelPosition="before"
-				secondary={true}
-				icon={<Delete />}
-				onClick={() => remove(index)}
-				style={{marginBottom: '1.2rem'}}
 			/>
 		</Col>
 	</Row>

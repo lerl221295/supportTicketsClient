@@ -1,0 +1,13 @@
+#import "../fragments/ticketsBasicFragment.graphql"
+fragment ticketsListFields on Ticket {
+    ...ticketsBasicFields
+    client {
+        id
+        fullName
+        face_base64
+    }
+    agent {
+        id
+        fullName
+    }
+}

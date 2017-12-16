@@ -1,4 +1,4 @@
-fragment ticketsFields on Ticket {
+fragment ticketsBasicFields on Ticket {
     number
     title
     source
@@ -14,13 +14,4 @@ fragment ticketsFields on Ticket {
     priority
     time
     resolve_by
-    client {
-        id
-        fullName
-        face_base64
-    }
-    agent {
-        id
-        fullName
-    }
 }

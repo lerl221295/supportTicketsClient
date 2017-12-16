@@ -1,23 +1,24 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 import { Col, Row } from "react-flexbox-grid";
 import {
 	FlatButton, FloatingActionButton, LinearProgress, List, Paper
 } from "material-ui";
 import { AvPlaylistAdd as New } from "material-ui/svg-icons"
-import { WrappedSubheader, FormButtonGroup } from '../../../../common/components'
+import { WrappedSubheader, FormButtonGroup } from '../../../../../common/components'
 import PolicyItemList from './PolicyItemList'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import theme from '../../../../theme-default'
+import theme from '../../../../../theme-default'
 import _ from 'lodash'
 
 class Panel extends Component {
 	
 	render = () => {
-		let { loading, SLAPolicies } = this.props;
+		let { loading, SLAPolicies, push } = this.props;
 		
 		if (loading) return <LinearProgress mode="indeterminate" />;
 		
-		let {customSLAPolicies, defaultSLAPolicy} = {
+		let { customSLAPolicies, defaultSLAPolicy } = {
 			customSLAPolicies: _.slice(SLAPolicies, 0, -1),
 			defaultSLAPolicy: _.last(SLAPolicies)
 		};
@@ -49,7 +50,13 @@ class Panel extends Component {
 										</Col>
 										<Col xs>
 											<Row end={"xs"}>
-												<FloatingActionButton mini={true} zDepth={0} style={{marginBottom:'0.5rem'}} href={"sla/new"}>
+												<FloatingActionButton
+													mini={true}
+													zDepth={0}
+													style={{marginBottom:'0.5rem'}}
+													iconStyle={{color: '#fff'}}
+													onClick={() => push("/admin/sla/new")}
+												>
 													<New />
 												</FloatingActionButton>
 											</Row>

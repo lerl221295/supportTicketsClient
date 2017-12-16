@@ -1,15 +1,12 @@
 #import "../fragments/ticketStatusAndTypes.graphql"
-#import "../fragments/ticketsFragment.graphql"
+#import "../fragments/ticketDetailsFragment.graphql"
 query GetTicketDetailsAndMetadata($number: Int!) {
 	ticket(number: $number) {
 		...ticketsFields
-		response_by
-		next_states {
-			key
-			label
-		}
 		client {
+			id
 			name: fullName
+			face_base64
 			email
 			phones
 			address
@@ -18,26 +15,10 @@ query GetTicketDetailsAndMetadata($number: Int!) {
 				name
 			}
 			devices {
+				id
 				code
 				name
 			}
-		}
-		agent {
-			name: fullName
-			face_base64
-			email
-			profession
-		}
-		group {
-			id
-			name
-			group_scale {
-				name
-			}
-		}
-		supplier {
-			id
-			name
 		}
 		tasks {
 			text

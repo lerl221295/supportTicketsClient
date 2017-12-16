@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
-import SLAPoliciesContainer from './SLAPoliciesContainer'
+import SLAPoliciesContainer from './List/SLAPoliciesContainer'
 import getSLAPolicies from '../../graphql/querys/slaPolicies.graphql'
 import UpdateSLAPoliciesOrder from '../../graphql/mutations/updateSLAPoliciesOrder.graphql'
 import ActiveSLAPolicy from '../../graphql/mutations/activeSLAPolicy.graphql'
@@ -52,7 +52,7 @@ const ApolloPoliciesContainer = compose(
 						const data2 = proxy.readQuery({
 							query: getSLAPolicies
 						});
-						console.log('data2', data2);
+						// console.log('data2', data2);
 					}
 					catch(e){
 						// console.log(e);

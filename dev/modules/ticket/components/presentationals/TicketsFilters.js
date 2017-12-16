@@ -8,13 +8,13 @@ import { Row, Col } from 'react-flexbox-grid'
 import { Paper, FlatButton } from 'material-ui'
 // Icons
 import {
-ActionAccountCircle as Person,
-CommunicationBusiness as Organization
+	ActionAccountCircle as Person,
+	CommunicationBusiness as Organization
 } from 'material-ui/svg-icons'
 // Redux Form Components
 import {
-renderSelectField,
-renderSelectReactField
+	renderSelectField,
+	renderSelectReactField
 } from '../../../../common/components/ReduxFormComponents'
 // Common Components
 import { WrappedSubheader } from '../../../../common/components'

@@ -1,6 +1,6 @@
-#import "../fragments/ticketsFragment.graphql"
+#import "../fragments/ticketsListFragment.graphql"
 subscription NewTicket($filter: FilterTicketInput) {
 	newTicket(filter: $filter) {
-		...ticketsFields
+		...ticketsListFields
 	}
 }

@@ -23,6 +23,7 @@ import SlaPolicies from './modules/slaPolicies/components/containers/SLAPolicies
 import CreateSLAPolicy from './modules/slaPolicies/components/containers/CreateSLAPolicy'
 
 import BusinessHours from './modules/businessHours/components/containers/EditBusinessHours'
+import TicketFields from './modules/ticketFields/components/containers/TicketFieldsPanel'
 
 import DashboardContainer from './modules/dashboard/components/containers/DashboardContainer'
 import Doc from './modules/doc/Doc'

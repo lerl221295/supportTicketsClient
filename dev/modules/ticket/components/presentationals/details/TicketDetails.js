@@ -32,6 +32,7 @@ class TicketDetail extends Component {
 						<ClientDetails {...this.props.data.ticket.client} />
 						<br/>
 						<PropsForm
+							ticket_number={this.props.routeParams.number}//solo por la data mock
 							{...this.props.data.ticketMetadata} 
 							ticket={this.props.data.ticket} 
 						/>

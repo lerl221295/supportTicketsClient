@@ -1,0 +1,23 @@
+query GetTicketMetadata {
+	ticketMetadata {
+		types {
+			key
+			label
+		}
+		status {
+			stage
+			key
+			label
+			came_from {
+				key
+				label
+			}
+		}
+		custom_fields {
+			key
+			position
+			label
+			type
+		}
+	}
+}
