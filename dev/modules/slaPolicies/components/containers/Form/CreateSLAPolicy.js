@@ -1,10 +1,10 @@
 import { graphql } from 'react-apollo'
 import { connect } from 'react-redux'
 import { goBack, push } from 'react-router-redux'
-import { openAlert } from '../../../../common/actions/alert'
+import { openAlert } from '../../../../../common/actions/alert'
 import FormContainer from './SLAFormContainer'
-import CreateSLAPolicy from '../../graphql/mutations/createSLAPolicy.graphql'
-import GetSLAPolicies from '../../graphql/querys/slaPolicies.graphql'
+import CreateSLAPolicy from '../../../graphql/mutations/createSLAPolicy.graphql'
+import GetSLAPolicies from '../../../graphql/querys/slaPolicies.graphql'
 
 const formWithRedux = connect(null, { goBack, openAlert, push })(FormContainer);
 

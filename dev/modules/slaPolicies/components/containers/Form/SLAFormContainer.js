@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
+// React Apollo
 import { withApollo } from 'react-apollo'
-import Form from '../presentationals/Form/Form'
-import { GetSLAPolicy } from '../../graphql/querys'
+// Presentationals Components
+import Form from '../../presentationals/Form/Form'
+// Graphql Querys
+import { GetSLAPolicy } from '../../../graphql/querys'
+// ReduxForm
 import { reduxForm } from 'redux-form'
 
-let initialValues = {};
+const SLAPoliciesWithReduxForm = reduxForm({ form: 'slaPolicies', enableReinitialize: true  })(Form);
 
 @withApollo
-class FormContainer extends Component {
-	state = {initialValues};
+export default class FormContainer extends Component {
+	state = {};
 	
 	componentWillMount = () => {
 		let { id, client } = this.props;
@@ -25,9 +29,7 @@ class FormContainer extends Component {
 					let { __typename: typename_solved, ...solved } = policy.solved;
 					return ({...policy, first_response, solved})
 				});
-				// console.log(SLAPolicy);
 				this.setState({initialValues: {...SLAPolicy}});
-				// console.log('el estado---', this.state)
 			});
 		}
 	};
@@ -40,7 +42,6 @@ class FormContainer extends Component {
 			slapolicy.organizations = slapolicy.organizations.map(organization => organization.id);
 		if (slapolicy.alerts && slapolicy.alerts.length)
 			slapolicy.alerts = slapolicy.alerts.map(alert => ({...alert, to: alert.to.map(agent => agent.id)}));
-		// console.log('lista para guardar---', slapolicy);
 		this.props.submit({ ...slapolicy, id: this.props.id })
 			.then(() => {
 				if (id) openAlert("Política SLA actualizada con éxito!");
@@ -58,7 +59,6 @@ class FormContainer extends Component {
 	);
 	
 	render = () => {
-		const SLAPoliciesWithReduxForm = reduxForm({ form: 'slaPolicies' })(Form);
 		return (
 			<SLAPoliciesWithReduxForm
 				searchData={this.searchData}
@@ -69,5 +69,3 @@ class FormContainer extends Component {
 		)
 	}
 }
-
-export default FormContainer

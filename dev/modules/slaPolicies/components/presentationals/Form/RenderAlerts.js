@@ -1,16 +1,20 @@
 import React from 'react'
+// React Flexbox Grid
 import {Row, Col} from "react-flexbox-grid"
+// Material UI
 import {Card, CardHeader, CardText, Divider, FlatButton, List, ListItem, Paper, Toggle} from "material-ui"
+// Redux Form
 import { Field } from 'redux-form'
-import { EditorWrapper as Editor } from '../../../../common/components/ReduxFormComponents'
+import { EditorWrapper as Editor } from '../../../../../common/components/ReduxFormComponents'
 import { TextField, SelectField } from 'redux-form-material-ui'
+// Material Icons
 import { ContentAddCircle as Add } from 'material-ui/svg-icons'
+// Presentationals Components
 import Item from './ItemListAlerts'
+// Lodash
 import _ from 'lodash'
 
 export default ({ fields, searchData }) => {
-	// console.log('fieldsObject-----', fields);
-	// console.log('fieldsValues-----', fields.getAll());
 	let alerts = fields.getAll();
 	let mappedAlerts = [
 		{
@@ -108,7 +112,6 @@ export default ({ fields, searchData }) => {
 									<br/>
 								</Col>
 							)
-							else null
 						}
 					}
 				</Row>

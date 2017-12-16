@@ -1,57 +1,58 @@
 import React from 'react'
 // Material UI
-import { FloatingActionButton } from 'material-ui'
-// Icons
-import { ContentSave as Save,	NavigationArrowBack as Back } from 'material-ui/svg-icons'
+import { Paper } from 'material-ui'
+// Material Icons
+import { ActionAccountCircle as Person } from 'material-ui/svg-icons'
 // React Flexbox Grid
 import { Row, Col } from 'react-flexbox-grid'
+// Redux Form
+import { Field } from "redux-form"
 // Common Components
-import { WrappedSubheader } from '../../../../../common/components'
-// Theme
-import theme from '../../../../../theme-default'
+import { renderSelectReactField } from '../../../../../common/components/ReduxFormComponents'
+// Graphql Querys
+import { GetOrganizationsNames, GetClientsNames } from '../../../graphql/querys'
 
 const styles = {
-	icon: {
-		color: theme.palette.alternateTextColor
+	paper: {
+		padding: '1rem'
 	},
-	floatingButton: {
-		marginBottom:'0.5rem'
-	}
+	title: {
+		fontSize: '1.3rem',
+		fontWeight: '500',
+		marginBottom: '1.5rem'
+	},
 };
 
-export default ({ goBack, dirty, handleSubmit }) => (
-	<Row>
-		<Col xs>
-			<WrappedSubheader>
-				<Row center={'xs'} middle={'xs'}>
-					<Col xs={1}>
-						<FloatingActionButton
-							iconStyle={styles.icon}
-							style={styles.floatingButton}
-							onClick={goBack}
-							zDepth={0}
-							mini
-						>
-							<Back />
-						</FloatingActionButton>
-					</Col>
-					<Col xs={10}>
-						Política SLA
-					</Col>
-					<Col xs={1}>
-						<FloatingActionButton
-							iconStyle={styles.icon}
-							style={styles.floatingButton}
-							zDepth={0}
-							disabled={!dirty}
-							onClick={() => {handleSubmit()}}
-							mini
-						>
-							<Save />
-						</FloatingActionButton>
-					</Col>
+export default ({ searchData }) => (
+	<Paper style={styles.paper}>
+		<Row bottom={"xs"}>
+			<Col xs={12}>
+				<Row center={'xs'}>
+					<h1 style={styles.title}>Política SLA aplicada a</h1>
 				</Row>
-			</WrappedSubheader>
-		</Col>
-	</Row>
+			</Col>
+			<Col xs={6}>
+				<Field
+					Icon={Person}
+					name="clients"
+					component={renderSelectReactField}
+					label="Clientes"
+					placeholder="Seleccione los clientes"
+					loadOptions={searchData("clients", GetClientsNames)}
+					multi
+				/>
+			</Col>
+			<Col xs={6}>
+				<Field
+					Icon={Person}
+					name="organizations"
+					component={renderSelectReactField}
+					label="Organizaciones"
+					placeholder="Seleccione las organizaciones"
+					loadOptions={searchData("organizations", GetOrganizationsNames)}
+					multi
+				/>
+			</Col>
+		</Row>
+	</Paper>
 )

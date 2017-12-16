@@ -10,7 +10,7 @@ export const orderPoliciesByPosition = ([...policies], startIndex, endIndex) => 
 	for (let i = startLoopIndex; i <= endLoopIndex; i++) {
 		policies[i] = {...policies[i], position: i};
 	}
-	console.log('policiesOrdered---', policies);
-	console.log('startIndex---', startIndex, 'endIndex---', endIndex);
+	// console.log('policiesOrdered---', policies);
+	// console.log('startIndex---', startIndex, 'endIndex---', endIndex);
 	return policies;
 };

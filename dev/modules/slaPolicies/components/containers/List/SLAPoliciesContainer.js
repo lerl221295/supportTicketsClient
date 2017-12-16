@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
-import theme from '../../../../theme-default'
-import PanelPolicies from '../presentationals/List/PoliciesPanelList'
-import { orderPoliciesByPosition } from '../../utils'
+//React Router Redux
 import { push } from 'react-router-redux'
+// React Redux
 import { connect } from 'react-redux'
+// Presentationals Components
+import PanelPolicies from '../../presentationals/List/PoliciesPanelList'
+// Default Theme
+import theme from '../../../../../theme-default'
+// Common Utils
+import { orderPoliciesByPosition } from '../../../utils'
 
 const hexToRgbA = (hex, opacity = 1) => {
 	let c;
@@ -17,7 +22,6 @@ const hexToRgbA = (hex, opacity = 1) => {
 	}
 	throw new Error('Bad Hex');
 };
-
 const getItemStyle = (draggableStyle, isDragging) => {
 	// console.log('draggableStyle', draggableStyle);
 	return ({

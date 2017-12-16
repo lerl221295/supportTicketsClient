@@ -5,14 +5,12 @@ import { alert } from './alert'
 
 import ticketDetail from '../../modules/ticket/reducers'
 import businessHours from '../../modules/businessHours/reducers'
-import alerts from '../../modules/slaPolicies/reducers'
 
 const createReducers = () => (
 	combineReducers({
 		toast: alert,
 		ticketDetail,
 		businessHours,
-		alerts,
 		routing: routerReducer,
 		form: formReducer
 	})

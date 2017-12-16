@@ -1,17 +1,23 @@
 import React from 'react'
+// React Apollo
 import { graphql, compose } from 'react-apollo'
-import SLAPoliciesContainer from './List/SLAPoliciesContainer'
-import getSLAPolicies from '../../graphql/querys/slaPolicies.graphql'
-import UpdateSLAPoliciesOrder from '../../graphql/mutations/updateSLAPoliciesOrder.graphql'
-import ActiveSLAPolicy from '../../graphql/mutations/activeSLAPolicy.graphql'
-import DeleteSLAPolicy from '../../graphql/mutations/deleteSLAPolicy.graphql'
-import {connect} from "react-redux"
-import { openAlert } from '../../../../common/actions/alert'
+// Containers
+import SLAPoliciesContainer from './../List/SLAPoliciesContainer'
+// Graphql Querys
+import { GetSLAPolicies } from '../../../graphql/querys'
+// Graphql Mutations
+import { UpdateSLAPoliciesOrder, ActiveSLAPolicy, DeleteSLAPolicy } from '../../../graphql/mutations'
+// React Redux
+import {connect} from 'react-redux'
+// Redux Actions
+import { openAlert } from '../../../../../common/actions/alert'
+// Lodash
 import _ from 'lodash'
-import {orderPoliciesByPosition} from "../../utils";
+// Custom Util
+import { orderPoliciesByPosition } from '../../../utils';
 
-const ApolloPoliciesContainer = compose(
-	graphql(getSLAPolicies),
+export default compose(
+	graphql(GetSLAPolicies),
 	graphql(UpdateSLAPoliciesOrder, {
 		props: ({ mutate }) => ({
 			saveNewOrder: (slapolicies) => mutate({
@@ -19,7 +25,7 @@ const ApolloPoliciesContainer = compose(
 				update: (proxy, {data: { updateSLAPoliciesOrder } }) => {
 					try {
 						const data = proxy.readQuery({
-							query: getSLAPolicies
+							query: GetSLAPolicies
 						});
 						data.SLAPolicies = data.SLAPolicies.map(policy => {
 							const updatedPolicyIndex = _.findIndex(updateSLAPoliciesOrder, ['id', policy.id]);
@@ -28,7 +34,7 @@ const ApolloPoliciesContainer = compose(
 							})
 						});
 						data.SLAPolicies = _.orderBy(data.SLAPolicies, ['position'], ['asc']);
-						proxy.writeQuery({ query: getSLAPolicies,  data });
+						proxy.writeQuery({ query: GetSLAPolicies,  data });
 					}
 					catch(e){
 						// console.log(e);
@@ -44,15 +50,11 @@ const ApolloPoliciesContainer = compose(
 				update: (proxy, {data: { updateSLAPolicy } }) => {
 					try {
 						const data = proxy.readQuery({
-							query: getSLAPolicies
+							query: GetSLAPolicies
 						});
 						let updatedPolicyIndex = _.findIndex(data.SLAPolicies, { 'id': updateSLAPolicy.id });
 						data.SLAPolicies[updatedPolicyIndex] = {...data.SLAPolicies[updatedPolicyIndex], ...updateSLAPolicy};
-						proxy.writeQuery({ query: getSLAPolicies, data });
-						const data2 = proxy.readQuery({
-							query: getSLAPolicies
-						});
-						// console.log('data2', data2);
+						proxy.writeQuery({ query: GetSLAPolicies, data });
 					}
 					catch(e){
 						// console.log(e);
@@ -68,11 +70,11 @@ const ApolloPoliciesContainer = compose(
 				update: (proxy, {data: { deleteSLAPolicy } }) => {
 					try {
 						const data = proxy.readQuery({
-							query: getSLAPolicies
+							query: GetSLAPolicies
 						});
 						let deletedPolicyIndex = _.findIndex(data.SLAPolicies, { 'id': deleteSLAPolicy.id });
 						data.SLAPolicies.splice(deletedPolicyIndex, 1);
-						proxy.writeQuery({ query: getSLAPolicies, data: { SLAPolicies: orderPoliciesByPosition(data.SLAPolicies, deletedPolicyIndex)} });
+						proxy.writeQuery({ query: GetSLAPolicies, data: { SLAPolicies: orderPoliciesByPosition(data.SLAPolicies, deletedPolicyIndex)} });
 					}
 					catch(e){
 						// console.log(e);
@@ -83,5 +85,3 @@ const ApolloPoliciesContainer = compose(
 	}),
 	connect(null, { openAlert })
 )(SLAPoliciesContainer);
-
-export default () => <ApolloPoliciesContainer/>

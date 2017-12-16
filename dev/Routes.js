@@ -19,8 +19,9 @@ import EditSupplier from './modules/agent/components/containers/EditSupplier'
 import EditGroup from './modules/agent/components/containers/EditGroup'
 import CreateGroup from './modules/agent/components/containers/CreateGroup'
 
-import SlaPolicies from './modules/slaPolicies/components/containers/SLAPoliciesApolloContainer'
-import CreateSLAPolicy from './modules/slaPolicies/components/containers/CreateSLAPolicy'
+import SlaPolicies from './modules/slaPolicies/components/containers/List/SLAPoliciesApolloContainer'
+import CreateSLAPolicy from './modules/slaPolicies/components/containers/Form/CreateSLAPolicy'
+import UpdateSLAPolicy from './modules/slaPolicies/components/containers/Form/UpdateSLAPolicy'
 
 import BusinessHours from './modules/businessHours/components/containers/EditBusinessHours'
 import TicketFields from './modules/ticketFields/components/containers/TicketFieldsPanel'
@@ -57,9 +58,11 @@ class Routes extends Component {
 				</Route>
 				<Route path="admin">
 					<Route path="businessHours" component={BusinessHours}/>
+					<Route path="ticketFields" component={TicketFields}/>
 					<Route path="sla">
 						<IndexRoute component={SlaPolicies} />
 						<Route path="new" component={CreateSLAPolicy}/>
+						<Route path=":id" component={UpdateSLAPolicy}/>
 					</Route>
 				</Route>
 				<Route path="doc" component={Doc} />

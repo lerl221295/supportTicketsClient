@@ -25,7 +25,6 @@ class FormContainer extends Component {
     state = initialState;
     
     componentWillMount = async () => {
-        //cuando el modal de edicion se presenta en pantalla
         if(this.props.id){ //si es el formulario en edicion
             let group = await this.props.client.query({
                 query: GetGroup,

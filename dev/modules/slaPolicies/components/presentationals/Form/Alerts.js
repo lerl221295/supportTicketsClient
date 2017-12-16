@@ -1,36 +1,31 @@
 import React from 'react'
-// Redux Form
-import { Field } from 'redux-form'
-import { TextField } from 'redux-form-material-ui'
+// Material UI
+import { Paper } from 'material-ui'
 // React Flexbox Grid
-import { Row, Col } from "react-flexbox-grid";
+import { Row } from "react-flexbox-grid";
+// Presentationals Components
+import RenderAlerts from './RenderAlerts'
+// Redux Form
+import { FieldArray } from "redux-form"
 
 const styles = {
-	field: {
-		width: "100%"
+	paper: {
+		padding: '1rem'
+	},
+	title: {
+		fontSize: '1.3rem',
+		fontWeight: '500',
+		marginBottom: '1.5rem'
 	}
 };
 
-export default () => (
-	<Row>
-		<Col xs={12}>
-			<Field
-				name="name"
-				component={TextField}
-				floatingLabelText="Nombre de política SLA"
-				style={styles.field}
-			/>
-		</Col>
-		<Col xs={12}>
-			<Field
-				name="description"
-				component={TextField}
-				floatingLabelText="Descripción de la política SLA"
-				multiLine={true}
-				rows={3}
-				rowsMax={5}
-				style={styles.field}
-			/>
-		</Col>
-	</Row>
+export default ({ searchData }) => (
+	<Paper style={styles.paper}>
+		<Row center={'xs'}>
+			<h1 style={styles.title}>Alertas para cuando se venza o se acerque el vencimiento de una política SLA </h1>
+		</Row>
+		<Row bottom={"xs"}>
+			<FieldArray name="alerts" searchData={searchData} component={RenderAlerts} />
+		</Row>
+	</Paper>
 );

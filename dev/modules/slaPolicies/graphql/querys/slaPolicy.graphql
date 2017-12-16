@@ -17,7 +17,7 @@ query GetSLAPolicies($id: ID!) {
             message
             to {
                 id
-                name
+                name: fullName
             }
         }
         policies {
