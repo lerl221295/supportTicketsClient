@@ -17,7 +17,15 @@ query GetTicketMetadata {
 			key
 			position
 			label
+			clientVisible
 			type
+			...on SelectField {
+				options {
+					key
+					label
+					position
+				}
+			}
 		}
 	}
 }
