@@ -1,7 +1,7 @@
 import React from 'react'
 // Material UI
 import { List } from 'material-ui'
-// React Beautiful DnD
+//
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 // Presentationals Components
 import PolicyItemList from './PolicyItemList'

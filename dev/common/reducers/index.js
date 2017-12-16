@@ -9,15 +9,11 @@ import ticketFields from '../../modules/ticketFields/reducers'
 
 const createReducers = () => (
 	combineReducers({
-		toast: alert,
+		alert,
 		ticketDetail,
 		businessHours,
 		routing: routerReducer,
-	    alert,
-	    ticketDetail,
-	    businessHours,
-	    ticketFields,
-	    routing: routerReducer,
+		ticketFields,
 		form: formReducer
 	})
 );

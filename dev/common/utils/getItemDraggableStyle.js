@@ -1,12 +1,17 @@
-export default (hex, opacity = 1) => {
-	let c;
-	if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
-		c= hex.substring(1).split('');
-		if(c.length== 3){
-			c= [c[0], c[0], c[1], c[1], c[2], c[2]];
-		}
-		c= '0x'+c.join('');
-		return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+`,${opacity})`;
-	}
-	throw new Error('Bad Hex');
-}
+import hexToRgbA from './hexToRgbA'
+import theme from '../../theme-default'
+
+export default (draggableStyle, isDragging) => {
+	// console.log('draggableStyle', draggableStyle);
+	return ({
+		// some basic styles to make the items look a bit nicer
+		userSelect: 'none',
+		// change background colour if dragging
+		backgroundColor: do {
+			if (isDragging) hexToRgbA(theme.palette.primary1Color, 0.5);
+			else ''
+		},
+		// styles we need to apply on draggable
+		...draggableStyle,
+	});
+};

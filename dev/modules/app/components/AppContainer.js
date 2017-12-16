@@ -3,9 +3,9 @@ import { closeAlert } from '../../../common/actions/alert'
 import { push } from 'react-router-redux';
 import App from './App';
 
-const mapStateToProps = (state) => ({
-	isAuthenticate : state.user != null,
-	alert: state.toast
+const mapStateToProps = ({user, alert}) => ({
+	isAuthenticate : user != null,
+	alert
 });
 
 const mapDispatchToProps = {

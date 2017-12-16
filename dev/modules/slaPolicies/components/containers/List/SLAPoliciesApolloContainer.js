@@ -13,8 +13,8 @@ import {connect} from 'react-redux'
 import { openAlert } from '../../../../../common/actions/alert'
 // Lodash
 import _ from 'lodash'
-// Custom Util
-import { orderPoliciesByPosition } from '../../../utils';
+// Utils
+import orderPoliciesByPosition from '../../../../../common/utils/orderArrayByProp'
 
 export default compose(
 	graphql(GetSLAPolicies),

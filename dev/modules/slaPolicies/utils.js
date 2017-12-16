@@ -1,16 +1,14 @@
 import _ from 'lodash';
-export const orderPoliciesByPosition = ([...policies], startIndex, endIndex) => {
+export default ([...array], startIndex, endIndex, orderAttr = 'position') => {
 	if (_.isUndefined(endIndex))
-		endIndex = policies.length - 1;
+		endIndex = array.length - 1;
 	let startLoopIndex = startIndex, endLoopIndex = endIndex;
 	if (startIndex > endIndex) {
 		startLoopIndex = endIndex;
 		endLoopIndex = startIndex;
 	}
 	for (let i = startLoopIndex; i <= endLoopIndex; i++) {
-		policies[i] = {...policies[i], position: i};
+		array[i] = {...array[i], [orderAttr]: i};
 	}
-	// console.log('policiesOrdered---', policies);
-	// console.log('startIndex---', startIndex, 'endIndex---', endIndex);
-	return policies;
+	return array;
 };
