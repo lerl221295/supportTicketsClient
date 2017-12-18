@@ -45,7 +45,7 @@ export default compose(
 	}),
 	graphql(ActiveSLAPolicy, {
 		props: ({ mutate }) => ({
-			updatePolicy: (slapolicy) => mutate({
+			activePolicy: (slapolicy) => mutate({
 				variables: { slapolicy },
 				update: (proxy, {data: { updateSLAPolicy } }) => {
 					try {
