@@ -1,46 +1,79 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { Row, Col } from 'react-flexbox-grid'
 import { List, ListItem, Subheader, Divider } from 'material-ui'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { ContentDeleteSweep as Delete } from "material-ui/svg-icons"
-import { deleteOption } from '../../../actions/customFields'
+import { deleteOption, setOptions } from '../../../actions/customFields'
 import Theme from '../../../../../theme-default'
+import Drawable from '../../../../../common/components/Drawable'
 
-const SelectOptionsList = ({options, deleteOption}) => {
+const SelectOptionsList = (props) => {
+	const {
+		options,
+		deleteOption,
+		onDragEnd,
+		getItemStyle
+	} = props;
+
 	return(
-		<Row top="xs">
-			<Col xs={12}>
-				<List style={{display: do {
+		<List style={{display: do {
 					if(options.length) null;
 					else "none";
 				}}}>
 					<Subheader>Opciones</Subheader>
-					{
-						options.map(({key, label}, i) => (
-							<div key={i}>
-								<ListItem 
-									primaryText={label}
-									secondaryText={`key: ${key}`}
-									rightIcon={
-										<Delete 
-											hoverColor={Theme.palette.accent1Color}
-											onClick={() => deleteOption({ key })} 
-										/>
-									}
-								/>			
-								<Divider/>
-							</div>
-						))
-					}
+					<DragDropContext onDragEnd={onDragEnd}>
+						<Droppable droppableId="droppableOptions">
+							{(provided, snapshot) => (
+								<div
+									ref={provided.innerRef}
+								>
+									{options.map(({key, label}, i) => (
+										<Draggable key={key} draggableId={key}>
+											{(provided, snapshot) => (
+												<div>
+													<div
+														ref={provided.innerRef}
+														style={getItemStyle(
+															provided.draggableStyle,
+															snapshot.isDragging
+														)}
+														{...provided.dragHandleProps}
+													>
+														<ListItem 
+															primaryText={label}
+															secondaryText={`key: ${key}`}
+															rightIcon={
+																<Delete 
+																	hoverColor={Theme.palette.accent1Color}
+																	onClick={() => deleteOption({ key })} 
+																/>
+															}
+														/>			
+														<Divider/>
+													</div>
+													{provided.placeholder}
+												</div>
+											)}
+										</Draggable>
+									))}
+									{provided.placeholder}
+								</div>
+							)}	
+						</Droppable>
+					</DragDropContext>
 				</List>
-			</Col>
-		</Row>
 	)
 };
 
-export default connect(
-	({ticketFields: {customFields: {modals: {selectField: {options}}} } }) => ({
-		options
-	}),
-	{ deleteOption }
+export default compose(
+	connect(
+		({ticketFields: {customFields: {modals: {selectField: {options}}} } }) => ({
+			options,
+			itemsName: 'options'
+		}),
+		{ deleteOption, setItems: setOptions }
+	),
+	Drawable	
 )(SelectOptionsList)

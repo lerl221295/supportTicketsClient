@@ -4,6 +4,7 @@ import { Row, Col } from 'react-flexbox-grid'
 import { IconButton, Subheader } from 'material-ui'
 import FieldTypeIcon from './FieldIcon'
 import { openModal } from '../../../actions/customFields'
+import Theme from '../../../../../theme-default'
 
 const styles = {
     mediumIcon: {
@@ -49,7 +50,7 @@ const NewField = ({openModal}) => {
 							tooltip={getTooltip(type)}
 							onClick={ e => openModal(type)}
 						>
-							<FieldTypeIcon type={type} />
+							<FieldTypeIcon type={type} hoverColor={Theme.palette.accent1Color}/>
 						</IconButton>
 					</Col>
 				))
