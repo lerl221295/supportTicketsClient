@@ -1,0 +1,11 @@
+mutation UpdateTicketStates($states: [TicketStateInput!]){
+	updateTicketStates(states: $states){
+		stage
+		key
+		label
+		came_from {
+			key
+			label
+		}
+	}
+}

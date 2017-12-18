@@ -4,7 +4,7 @@ import Person from 'material-ui/svg-icons/social/person'
 import Organization from 'material-ui/svg-icons/communication/business'
 import { ServiceFail, Loading } from '../../../../common/components'
 import Types from '../containers/Types'
-import Status from '../containers/Status'
+import States from '../containers/States'
 import CustomFields from '../containers/CustomFields'
 
 const sortByposition = (a, b) => (a.position - b.position)
@@ -25,12 +25,21 @@ class Panel extends Component {
 					})
 				}).sort(sortByposition)
 			);
+			this.props.setStates(
+				data.ticketMetadata.states.map(({__typename, ...rest}) => ({
+					...rest,
+					came_from: do {
+						if(rest.came_from && rest.came_from.length)
+							rest.came_from.map(({__typename, ...rest}) => rest)
+						else null
+					}
+				}))
+			)
 		}
 	}
 
 	render = () => {
 		if(this.props.data.loading) return <Loading/>;
-		const { status, custom_fields } = this.props.data.ticketMetadata;
 		return(
 			<div>
 				<Tabs>
@@ -41,12 +50,10 @@ class Panel extends Component {
 						<Types/>
 					</Tab>
 					<Tab
-						label={"Status"}
+						label={"Estados"}
 						icon={<Organization/>}
 					>
-						<Status
-							status={status}
-						/>
+						<States/>
 					</Tab>
 					<Tab
 						label={"Campos Personalizables"}

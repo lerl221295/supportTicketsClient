@@ -4,7 +4,7 @@ query GetTicketMetadata {
 			key
 			label
 		}
-		status {
+		states {
 			stage
 			key
 			label
