@@ -1,9 +1,13 @@
 import React from 'react'
 import { List, ListItem, Divider, Subheader } from 'material-ui'
-import { ContentDeleteSweep as Delete } from "material-ui/svg-icons";
+import { 
+	ContentDeleteSweep as Delete,
+	ImageTimer as Timer,
+	ImageTimerOff as TimerOff
+} from "material-ui/svg-icons";
 import Theme from '../../../../../theme-default'
 
-const StatesList = ({states, deleteState}) => {
+const StatesList = ({states, deleteState, openModal}) => {
 	return(
 		<List style={{display: do {
 			if(states.length) null;
@@ -11,15 +15,23 @@ const StatesList = ({states, deleteState}) => {
 		}}}>
 			<Subheader>Estados del Ticket</Subheader>
 			{
-				states.map(({key, label}, i) => (
+				states.map((state, i) => (
 					<div key={i}>
 						<ListItem 
-							primaryText={label}
-							secondaryText={`key: ${key}`}
+							primaryText={
+								<strong onClick={() => openModal(state)}>
+									{state.label}
+								</strong>
+							}
+							secondaryText={`key: ${state.key}`}
+							leftIcon={do {
+								if(state.sla_paused) (<TimerOff/>);
+								else (<Timer/>);
+							}}
 							rightIcon={
 								<Delete 
 									hoverColor={Theme.palette.accent1Color}
-									onClick={() => deleteState({ key })} 
+									onClick={() => deleteState(state)} 
 								/>
 							}
 						/>			

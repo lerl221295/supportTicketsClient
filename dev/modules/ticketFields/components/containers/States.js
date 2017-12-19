@@ -1,14 +1,17 @@
 import { connect } from 'react-redux'
 import { graphql, compose } from 'react-apollo'
-import { deleteState } from '../../actions/states'
+import { deleteState, openModal, closeModal } from '../../actions/states'
 import TicketMetadata from '../../graphql/querys/ticketMetadata.graphql'
 import UpdateTicketStates from '../../graphql/mutations/updateTicketStates.graphql'
 import States from '../presentationals/states/States'
 import { openAlert } from '../../../../common/actions/alert'
 
 const ReduxContainer = connect(
-	({ticketFields: {states} }) => ({states}),
-	{ deleteState, openAlert }
+	({ticketFields: {states} }) => ({
+		states: states.nodes, 
+		modal: states.modal
+	}),
+	{ deleteState, openAlert, openModal, closeModal }
 );
 
 const ApolloContainer = graphql(UpdateTicketStates, {

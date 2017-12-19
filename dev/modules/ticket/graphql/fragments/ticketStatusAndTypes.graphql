@@ -3,7 +3,7 @@ fragment statusAndTypes on TicketMetadata {
         key
         label
     }
-    ticketStatus: status {
+    ticketStatus: states {
         key
         label
     }

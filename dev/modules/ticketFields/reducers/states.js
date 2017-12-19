@@ -1,13 +1,66 @@
-import { ADD_STATE, SET_STATES, DELETE_STATE } from '../actions/states'
+import { 
+    ADD_STATE,
+    UPDATE_STATE,
+    SET_STATES,
+    DELETE_STATE,
+    OPEN_STATE_MODAL,
+    CLOSE_STATE_MODAL
+} from '../actions/states'
 
-const initialState = [];
+const initialState = {
+    nodes: [],
+    modal: {
+        open: false,
+        editing: null
+    }
+};
 
-export default (reduxState = initialState, {type, payload}) => do {
-    if(type === SET_STATES) payload.states;
-    else if(type === ADD_STATE) ([payload.state, ...reduxState]);
-    else if(type === DELETE_STATE)
-        Array.from(reduxState).filter(state => (
-            state.key !== payload.state.key 
-        ));
-    else reduxState;
+const mapState = (states, {came_from, ...state}) => ({
+    ...state,
+    came_from: came_from.map(key => {
+        let status = states.find(state => state.key === key);
+        const {came_from, ...state} = status;
+        return state;
+    })    
+})
+
+const statesReducer = (reduxState = [], {type, payload}) => {
+    switch(type){
+        case SET_STATES:
+            return payload.states;
+        case ADD_STATE:
+            return([...reduxState, mapState(reduxState, payload.state)]);
+        case UPDATE_STATE: 
+            return(
+                Array.from(reduxState).map((state) => {
+                    if(state.key !== payload.state.key) return state;
+                    return mapState(reduxState, payload.state);
+                })
+            )
+        case DELETE_STATE:
+            return(
+                Array.from(reduxState).filter(state => (
+                    state.key !== payload.state.key 
+                )).map(({came_from, ...rest}) => {
+                    if(!came_from) return rest;
+                    const new_came_from = came_from.filter(state => ( state.key !== payload.state.key))
+                    return({
+                        ...rest,
+                        came_from: new_came_from
+                    })
+                })
+            )
+    }
+    return reduxState;
 }
+
+const modalReducer = (state, {type, payload}) => do {
+    if(type === OPEN_STATE_MODAL) ({ open: true, editing: payload.state });
+    else if(type === CLOSE_STATE_MODAL) ({ open: false, editing: null });
+    else state;
+}
+
+export default (state = initialState, action) => ({
+    nodes: statesReducer(state.nodes, action),
+    modal: modalReducer(state.modal, action)
+})
