@@ -57,15 +57,15 @@ class Routes extends Component {
 						<Route path="groups/:id" component={EditGroup}/>
 						<Route path=":id" component={EditAgent}/>
 					</Route>
-					<Route path="businessHours" component={BusinessHours}/>
-					<Route path="ticketFields" component={TicketFields}/>
 					<Route path="sla">
 						<IndexRoute component={SlaPolicies} />
 						<Route path="new" component={CreateSLAPolicy}/>
 						<Route path=":id" component={UpdateSLAPolicy}/>
 					</Route>
+					<Route path="businessHours" component={BusinessHours}/>
+					<Route path="ticketFields" component={TicketFields}/>
+					<Route path="doc" component={Doc} />
 				</Route>
-				<Route path="doc" component={Doc} />
 				<Route path="*" component={notFound}/>
 			</Route>
 		</Router>

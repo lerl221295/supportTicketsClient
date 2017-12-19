@@ -36,17 +36,17 @@ class Panel extends Component {
 		
 		this.speedDialItems = [
 			{
-				itemClick: () => this.props.push('agents/new'),
+				itemClick: () => this.props.push('/admin/agents/new'),
 				primaryText: 'Agente',
 				rightAvatar: <Avatar icon={<Person />} />,
 			},
 			{
-				itemClick: () => this.props.push('/agents/suppliers/new'),
+				itemClick: () => this.props.push('/admin/agents/suppliers/new'),
 				primaryText: 'Proveedores',
 				rightAvatar: <Avatar icon={<People />} />,
 			},
 			{
-				itemClick: () => this.props.push('/agents/groups/new'),
+				itemClick: () => this.props.push('/admin/agents/groups/new'),
 				primaryText: 'Grupos',
 				rightAvatar: <Avatar icon={<PeopleOutline />} />,
 			}
@@ -83,7 +83,7 @@ class Panel extends Component {
 							limit={this.props.limit}
 							current={this.state.agents.table_pag}
 							changePag={this.changePag("agents")}
-							edit={(id) => event => this.props.push(`agents/${id}`)}
+							edit={(id) => event => this.props.push(`/admin/agents/${id}`)}
 						/>
 					</Tab>
 					<Tab
@@ -97,7 +97,7 @@ class Panel extends Component {
 							limit={this.props.limit}
 							current={this.state.suppliers.table_pag}
 							changePag={this.changePag("suppliers")}
-							edit={(id) => event => this.props.push(`agents/suppliers/${id}`)}
+							edit={(id) => event => this.props.push(`/admin/agents/suppliers/${id}`)}
 						/>
 					</Tab>
 					<Tab
@@ -111,7 +111,7 @@ class Panel extends Component {
 							limit={this.props.limit}
 							current={this.state.groups.table_pag}
 							changePag={this.changePag("groups")}
-							edit={(id) => event => this.props.push(`agents/groups/${id}`)}
+							edit={(id) => event => this.props.push(`/admin/agents/groups/${id}`)}
 						/>
 					</Tab>
 				</Tabs>
