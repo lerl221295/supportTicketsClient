@@ -4,6 +4,7 @@ import { compose } from 'redux'
 import { getFormValues } from 'redux-form'
 import { RaisedButton } from 'material-ui'
 import { setOptions, addField, closeModal } from '../../actions/customFields'
+import { FormButtonGroup } from '../../../../common/components'
 
 const reduxContainer = connect(
 	(state) => ({
@@ -21,17 +22,16 @@ class Buttons extends Component {
 	/*recibe props pero jamas re-renderiza el component por las nuevas props*/
 	//shouldComponentUpdate = nextProps => false;
 
+	// disabled={!this.props.valid || !this.props.field.options.length}
 	render = () => (
-		<RaisedButton 
-			disabled={!this.props.valid || !this.props.field.options.length}
-			label="Agregar Campo Personalizado" 
-			primary
-			onClick={e => {
+		<FormButtonGroup
+			cancel={() => this.props.closeModal("SELECT")}
+			send={e => {
 				this.props.addField({...this.props.field});
 				this.props.reset();
 				this.props.setOptions([]);
 				this.props.closeModal("SELECT");
-			}} 
+			}}
 		/>
 	)
 }

@@ -62,7 +62,7 @@ class Panel extends Component {
 						label={"Tipos de Ticket"}
 						icon={<TypesIcon/>}
 					>
-						<Types/>
+						<Types resetData={() => this.setTypes(this.props.data)}/>
 					</Tab>
 					<Tab
 						label={"Estados"}
@@ -74,7 +74,7 @@ class Panel extends Component {
 						label={"Campos Personalizables"}
 						icon={<CustomFieldsIcon/>}
 					>
-						<CustomFields/>
+						<CustomFields resetData={() => this.setFields(this.props.data)}/>
 					</Tab>
 				</Tabs>
 			</div>

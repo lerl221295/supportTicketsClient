@@ -5,6 +5,7 @@ import { RaisedButton, MenuItem } from 'material-ui'
 import { Row, Col } from 'react-flexbox-grid'
 import { TextField, SelectField, Toggle } from 'redux-form-material-ui'
 import { Field } from 'redux-form'
+import { FormButtonGroup } from '../../../../../common/components'
 
 const renderOptions = states => Array.from(states).filter(state => state.stage !== "END")
 	.map(({key, label}) => (
@@ -79,7 +80,16 @@ export default ({handleSubmit, dirty, reset, closeModal, states, editing, stage}
 				}}
 			</Field>
 		</Col>
-		<RaisedButton 
+		<FormButtonGroup
+			cancel={closeModal}
+			send={e => {
+				handleSubmit();
+				reset();
+				closeModal();
+			}}
+			//style={{marginTop: "-1rem"}}
+		/>
+		{/*<RaisedButton 
 			disabled={!dirty}
 			label="Guardar" 
 			primary
@@ -89,6 +99,6 @@ export default ({handleSubmit, dirty, reset, closeModal, states, editing, stage}
 				reset();
 				closeModal();
 			}} 
-		/>
+		/>*/}
 	</Row>
 )
