@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {Avatar, Snackbar, Tabs, Tab} from "material-ui";
-import Person from 'material-ui/svg-icons/social/person'
-import Organization from 'material-ui/svg-icons/communication/business'
+import { SocialPerson as Person, CommunicationBusiness as Organization } from 'material-ui/svg-icons'
 import { WrappedSpeedDial, ServiceFail, SearchBox } from '../../../../common/components'
 import ClientsTable from './single/Table'
 import OrganizationsTable from './organizations/Table'
@@ -22,7 +21,7 @@ class Panel extends Component {
 		
 		this.speedDialItems = [
 			{
-				itemClick: () => this.props.push('clients/new'),
+				itemClick: () => this.props.push('/clients/new'),
 				primaryText: 'Cliente',
 				rightAvatar: <Avatar icon={<Person />} />,
 			},
@@ -64,7 +63,7 @@ class Panel extends Component {
 							limit={this.props.limit}
 							current={this.state.clients.table_pag}
 							changePag={this.changePag("clients")}
-							edit={(id) => event => this.props.push(`clients/${id}`)}
+							edit={(id) => event => this.props.push(`/clients/${id}`)}
 						/>
 					</Tab>
 					<Tab
@@ -78,7 +77,7 @@ class Panel extends Component {
 							limit={this.props.limit}
 							current={this.state.organizations.table_pag}
 							changePag={this.changePag("organizations")}
-							edit={(id) => event => this.props.push(`clients/organizations/${id}`)}
+							edit={(id) => event => this.props.push(`/clients/organizations/${id}`)}
 						/>
 					</Tab>
 				</Tabs>

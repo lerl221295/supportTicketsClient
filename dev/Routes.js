@@ -47,25 +47,25 @@ class Routes extends Component {
 					<Route path="organizations/:id" component={EditOrganization}/>
 					<Route path=":id" component={EditClient}/>
 				</Route>
-				<Route path="agents">
-					<IndexRoute component={AgentsContainer} />
-					<Route path="new" component={CreateAgent}/>
-					<Route path="suppliers/new" component={CreateSupplier}/>
-					<Route path="suppliers/:id" component={EditSupplier}/>
-					<Route path="groups/new" component={CreateGroup}/>
-					<Route path="groups/:id" component={EditGroup}/>
-					<Route path=":id" component={EditAgent}/>
-				</Route>
 				<Route path="admin">
-					<Route path="businessHours" component={BusinessHours}/>
-					<Route path="ticketFields" component={TicketFields}/>
+					<Route path="agents">
+						<IndexRoute component={AgentsContainer} />
+						<Route path="new" component={CreateAgent}/>
+						<Route path="suppliers/new" component={CreateSupplier}/>
+						<Route path="suppliers/:id" component={EditSupplier}/>
+						<Route path="groups/new" component={CreateGroup}/>
+						<Route path="groups/:id" component={EditGroup}/>
+						<Route path=":id" component={EditAgent}/>
+					</Route>
 					<Route path="sla">
 						<IndexRoute component={SlaPolicies} />
 						<Route path="new" component={CreateSLAPolicy}/>
 						<Route path=":id" component={UpdateSLAPolicy}/>
 					</Route>
+					<Route path="businessHours" component={BusinessHours}/>
+					<Route path="ticketFields" component={TicketFields}/>
+					<Route path="doc" component={Doc} />
 				</Route>
-				<Route path="doc" component={Doc} />
 				<Route path="*" component={notFound}/>
 			</Route>
 		</Router>

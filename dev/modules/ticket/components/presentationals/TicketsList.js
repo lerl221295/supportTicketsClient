@@ -18,14 +18,14 @@ const styles = {
 
 class TicketList extends Component {
 	componentWillMount = () => {
-		console.log("subscribiendome a estos tickets: ", this.props.filter_form);
+		// console.log("subscribiendome a estos tickets: ", this.props.filter_form);
 		this.props.subscribeToNewTickets(this.props.filter_form);
 	};
 
 	componentWillReceiveProps = nextProps => {
 		//console.log(!_.isEqual(nextProps.filter_form, this.props.filter_form))
 		if(nextProps.filter_form && !_.isEqual(nextProps.filter_form, this.props.filter_form)){
-			console.log("Resubscribiendome a estos:", nextProps.filter_form);
+			// console.log("Resubscribiendome a estos:", nextProps.filter_form);
 			this.props.subscribeToNewTickets(nextProps.filter_form);
 		}
 	};

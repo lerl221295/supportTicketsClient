@@ -15,7 +15,7 @@ const TicketWithApolloData = graphql(GetTickets, {
 		notifyOnNetworkStatusChange: true
 	}),
 	props: ({ ownProps, data: { fetchMore, refetch, subscribeToMore, tickets, loading, error } }) => {
-		console.log("tickets",tickets)
+		// console.log("tickets",tickets)
 		let ticketsArray;
 		if(tickets) ticketsArray = tickets.nodes;
 		return({

@@ -9,40 +9,55 @@ import withWidth, { LARGE, SMALL } from 'material-ui/utils/withWidth'
 // Material-UI Theme config
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import ThemeDefault from '../../../theme-default'
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // Common Components
 import {Header, LeftDrawer} from '../../../common/components'
 // Icons
 import {
-	FileCloudQueue as Doc,
-	ActionTimeline as TimeLine,
-	ActionBuild as Llave,
+	ActionDashboard as Dashboard,
+	ActionDateRange as Date,
+	ActionHourglassEmpty as Hourglass,
 	ActionPermIdentity as PermIdentity,
-	NotificationConfirmationNumber as Ticket
-} from 'material-ui/svg-icons/index'
+	ActionSettingsApplications as Settings,
+	ActionVisibility as Eye,
+	FileCloudQueue as Doc,
+	HardwareLaptop as Laptop,
+	ImageLinkedCamera as Camera,
+	MapsLocalShipping as Truck,
+	NotificationConfirmationNumber as Ticket,
+	SocialPerson as Person,
+	} from 'material-ui/svg-icons/index'
 // import { getUser } from '../../utils/Authenticate'
 import { ToastContainer } from 'react-toastify'
 
 const menu = [
-	{ text: 'TimeLine', icon: <TimeLine/>, link: '/' },
-	{ text: 'Tickets', icon: <Ticket/>, link: '/tickets' },
-	{ text: 'Tecnicos', icon: <Llave/>, link: '/agents' },
-	{ text: 'Clientes', icon: <PermIdentity/>, link: '/clients' },
-	{ text: 'Políticas SLA', icon: <Doc/>, link: '/admin/sla' },
-	{ text: 'Horario habil', icon: <PermIdentity/>, link: '/admin/businessHours' },
-	{ text: 'Doc', icon: <Doc/>, link: '/doc' }
+	{ text: 'Dashboard', icon: Dashboard, link: '/' },
+	{ text: 'Tickets', icon: Ticket, link: '/tickets' },
+	{ text: 'Clientes', icon: Person, link: '/clients' },
+	{
+		text: 'Admin', icon: Settings,
+		menuItems: [
+			{ text: 'Agentes', icon: <PermIdentity/>, link: '/admin/agents' },
+			{ text: 'Políticas SLA', icon: <Hourglass/>, link: '/admin/sla' },
+			{ text: 'Horario habil', icon: <Date/>, link: '/admin/businessHours' },
+			{ text: 'Automatizaciones', icon: <Laptop/>,
+				menuItems: [
+					{ text: 'Despachador', icon: <Truck/>, link: '/admin/agents' },
+					{ text: 'Supervisor', icon: <Camera/>, link: '/admin/sla' },
+					{ text: 'Observador', icon: <Eye/>, link: '/admin/businessHours' },
+					{ text: 'Escenario', icon: <Doc/>, link: '/admin/doc' }
+				]
+			},
+			{ text: 'Documentación', icon: <Doc/>, link: '/admin/doc' },
+		]
+	}
 ];
 
 @connect(null, { push })
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			navDrawerOpen: true
-		};
-	}
+	state = {
+		navDrawerOpen: true
+	};
 	
 	componentWillReceiveProps(nextProps) {
 		if (this.props.width !== nextProps.width) {
@@ -50,7 +65,7 @@ class App extends Component {
 		}
 	}
 	
-	handleChangeRequestNavDrawer() {
+	handleChangeRequestNavDrawer = () => {
 		this.setState({
 			navDrawerOpen: !this.state.navDrawerOpen
 		});
@@ -58,7 +73,7 @@ class App extends Component {
 	
 	render() {
 		let { navDrawerOpen } = this.state;
-		const paddingLeftDrawerOpen = '14.4rem';
+		const paddingLeftDrawerOpen = 65;
 		
 		const styles = {
 			header: {
@@ -73,12 +88,16 @@ class App extends Component {
 		return (
 			<MuiThemeProvider muiTheme={getMuiTheme(ThemeDefault)}>
 				<div>
-					<Header styles={styles.header}
-					        handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
+					<Header headerStyles={styles.header}
+					        handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer}
+					        location={this.props.location}
+					/>
 					
-					<LeftDrawer navDrawerOpen={navDrawerOpen}
-					            menus={menu}
-					            username="Tesis SaaS"/>
+					<LeftDrawer
+						navDrawerOpen={navDrawerOpen}
+						menus={menu}
+						location={this.props.location}
+					/>
 					
 					<div style={styles.container}>
 						<ToastContainer

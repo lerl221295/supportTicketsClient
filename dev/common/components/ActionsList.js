@@ -12,10 +12,10 @@ const ActionsList = ({actions}) => {
 					);
 					else {
 						let bearer_type = do {
-							if (bearer == 'Agent') ({name: 'agente', route: '/agents/'})
+							if (bearer.__typename == 'Agent') ({name: 'agente', route: '/admin/agents/'})
 							else
-							if (bearer == 'Supplier') ({name: 'proveedor', route: '/agents/suppliers/'})
-							else ({name: 'grupo', route: '/agents/groups/'})
+							if (bearer.__typename == 'Supplier') ({name: 'proveedor', route: '/admin/agents/suppliers/'})
+							else ({name: 'grupo', route: '/admin/agents/groups/'})
 						};
 						return (
 							<li key={i}>

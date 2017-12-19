@@ -21,7 +21,6 @@ class Panel extends Component {
 	};
 	
 	componentWillReceiveProps = ({data: { SLAPolicies }}) => {
-		console.log('entré aquí...', SLAPolicies)
 		this.setState({
 			SLAPolicies
 		});
