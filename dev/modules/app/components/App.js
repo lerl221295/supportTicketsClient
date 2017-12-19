@@ -41,8 +41,8 @@ const menu = [
 	{
 		text: 'Admin', icon: Settings,
 		menuItems: [
-			{ text: 'Campos del Ticket', icon: <TicketFields/>, link: '/admin/ticketFields' },
 			{ text: 'Agentes', icon: <PermIdentity/>, link: '/admin/agents' },
+			{ text: 'Campos del Ticket', icon: <TicketFields/>, link: '/admin/ticketFields' },
 			{ text: 'Políticas SLA', icon: <Hourglass/>, link: '/admin/sla' },
 			{ text: 'Horario habil', icon: <Date/>, link: '/admin/businessHours' },
 			{ text: 'Automatizaciones', icon: <Laptop/>,

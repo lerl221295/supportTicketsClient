@@ -3,7 +3,8 @@ import { Tabs, Tab } from "material-ui";
 import {
 	ActionBookmarkBorder as TypesIcon,
 	ActionChromeReaderMode as CustomFieldsIcon,
-	EditorLinearScale as StatesIcon
+	//EditorLinearScale as StatesIcon
+	ActionTimeline as StatesIcon
 } from 'material-ui/svg-icons'
 import { ServiceFail, Loading } from '../../../../common/components'
 import Types from '../containers/Types'
