@@ -20,18 +20,24 @@ import {
 	ActionTimeline as TimeLine,
 	ActionBuild as Llave,
 	ActionPermIdentity as PermIdentity,
-	NotificationConfirmationNumber as Ticket
+	NotificationConfirmationNumber as Ticket,
+	ActionHourglassEmpty as Hourglass
 } from 'material-ui/svg-icons/index'
 // import { getUser } from '../../utils/Authenticate'
 import { ToastContainer } from 'react-toastify'
 
 const menu = [
-	{ text: 'TimeLine', icon: <TimeLine/>, link: '/' },
+	{ text: 'Dashboard', icon: <TimeLine/>, link: '/' },
 	{ text: 'Tickets', icon: <Ticket/>, link: '/tickets' },
-	{ text: 'Tecnicos', icon: <Llave/>, link: '/agents' },
 	{ text: 'Clientes', icon: <PermIdentity/>, link: '/clients' },
-	{ text: 'Políticas SLA', icon: <Doc/>, link: '/admin/sla' },
-	{ text: 'Horario habil', icon: <PermIdentity/>, link: '/admin/businessHours' },
+	{
+		text: 'Administración', icon: <Llave/>,
+		menuItems: [
+			{ text: 'Agentes', icon: <Llave/>, link: '/admin/agents' },
+			{ text: 'Políticas SLA', icon: <Hourglass/>, link: '/admin/sla' },
+			{ text: 'Horario habil', icon: <PermIdentity/>, link: '/admin/businessHours' },
+		]
+	},
 	{ text: 'Doc', icon: <Doc/>, link: '/doc' }
 ];
 
@@ -74,11 +80,14 @@ class App extends Component {
 			<MuiThemeProvider muiTheme={getMuiTheme(ThemeDefault)}>
 				<div>
 					<Header styles={styles.header}
-					        handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
+					        handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}
+					/>
 					
 					<LeftDrawer navDrawerOpen={navDrawerOpen}
 					            menus={menu}
-					            username="Tesis SaaS"/>
+					            username="Tesis SaaS"
+											location={this.props.location}
+					/>
 					
 					<div style={styles.container}>
 						<ToastContainer

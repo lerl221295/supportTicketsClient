@@ -14,7 +14,7 @@ class Item extends Component {
 		if (type_autor)
 			autor_name = do {
 				if (type_autor == 'SYSTEM') `El sistema `;
-				else <WrappedLink to={{pathname: `/agents/${autor.id}`}}>{autor.name}</WrappedLink>;
+				else <WrappedLink to={{pathname: `/admin/agents/${autor.id}`}}>{autor.name}</WrappedLink>;
 			};
 		
 		return (

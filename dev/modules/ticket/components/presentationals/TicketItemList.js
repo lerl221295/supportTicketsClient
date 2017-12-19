@@ -47,7 +47,7 @@ class Item extends Component {
 					<Col xs={3} md={3} sm={3}>
 						<Row>
 							<span>
-								Agente: <WrappedLink to={`agents/${agent.id}`}>{`${agent.fullName}`}</WrappedLink>
+								Agente: <WrappedLink to={`/admin/agents/${agent.id}`}>{`${agent.fullName}`}</WrappedLink>
 							</span>
 						</Row>
 						<Row>

@@ -47,16 +47,16 @@ class Routes extends Component {
 					<Route path="organizations/:id" component={EditOrganization}/>
 					<Route path=":id" component={EditClient}/>
 				</Route>
-				<Route path="agents">
-					<IndexRoute component={AgentsContainer} />
-					<Route path="new" component={CreateAgent}/>
-					<Route path="suppliers/new" component={CreateSupplier}/>
-					<Route path="suppliers/:id" component={EditSupplier}/>
-					<Route path="groups/new" component={CreateGroup}/>
-					<Route path="groups/:id" component={EditGroup}/>
-					<Route path=":id" component={EditAgent}/>
-				</Route>
 				<Route path="admin">
+					<Route path="agents">
+						<IndexRoute component={AgentsContainer} />
+						<Route path="new" component={CreateAgent}/>
+						<Route path="suppliers/new" component={CreateSupplier}/>
+						<Route path="suppliers/:id" component={EditSupplier}/>
+						<Route path="groups/new" component={CreateGroup}/>
+						<Route path="groups/:id" component={EditGroup}/>
+						<Route path=":id" component={EditAgent}/>
+					</Route>
 					<Route path="businessHours" component={BusinessHours}/>
 					<Route path="ticketFields" component={TicketFields}/>
 					<Route path="sla">
