@@ -2,8 +2,8 @@ import React from 'react'
 import { Row, Col } from 'react-flexbox-grid'
 import {FlatButton, RaisedButton} from "material-ui";
 
-const FormButtonGroup = ({cancel, send, disabled}) => (
-	<Col className={'button-group'} xs={12}>
+const FormButtonGroup = ({cancel, send, disabled, ...rest}) => (
+	<Col className={'button-group'} xs={12} {...rest}>
 		<Row center={"xs"}>
 			<Col xs={3}>
 				<RaisedButton

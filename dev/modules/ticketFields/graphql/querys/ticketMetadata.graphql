@@ -4,10 +4,11 @@ query GetTicketMetadata {
 			key
 			label
 		}
-		status {
+		states {
 			stage
 			key
 			label
+			sla_paused
 			came_from {
 				key
 				label
