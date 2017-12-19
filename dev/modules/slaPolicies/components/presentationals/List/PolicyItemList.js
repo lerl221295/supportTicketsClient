@@ -27,7 +27,7 @@ export default class PolicyItemList extends React.Component {
 					leftCheckbox={
 						do {
 							if (!reorder) {
-								<Toggle defaultToggled={active}
+								<Toggle toggled={active}
 								        disabled={by_default}
 								        onToggle={
 									        do {

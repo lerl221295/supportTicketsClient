@@ -21,6 +21,7 @@ class Panel extends Component {
 	};
 	
 	componentWillReceiveProps = ({data: { SLAPolicies }}) => {
+		console.log('entré aquí...', SLAPolicies)
 		this.setState({
 			SLAPolicies
 		});
@@ -83,7 +84,7 @@ class Panel extends Component {
 	};
 	
 	handleToggleChange = (id) => (e, active) => {
-		this.props.updatePolicy({id, active})
+		this.props.activePolicy({id, active})
 			.then(response => {
 				let change = do {
 					if (active) 'activada';
