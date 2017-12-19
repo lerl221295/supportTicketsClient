@@ -19,11 +19,8 @@ const StatesList = ({states, deleteState, openModal}) => {
 				states.map((state, i) => (
 					<div key={i}>
 						<ListItem 
-							primaryText={
-								<strong onClick={() => openModal(state)}>
-									{state.label}
-								</strong>
-							}
+							primaryText={state.label}
+							onClick={() => openModal(state)}
 							secondaryText={`key: ${state.key}`}
 							leftIcon={do {
 								if(state.stage === "END") (<Archive/>);
@@ -36,7 +33,10 @@ const StatesList = ({states, deleteState, openModal}) => {
 								else (
 									<Delete 
 										hoverColor={Theme.palette.accent1Color}
-										onClick={() => deleteState(state)}
+										onClick={(e) => {
+											e.stopPropagation();
+											deleteState(state);
+										}}
 									/>
 								)
 							}}
