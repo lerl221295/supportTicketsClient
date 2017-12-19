@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect }  from 'react-redux'
 import { compose } from 'redux'
-import { reduxForm } from 'redux-form'
+import { reduxForm, getFormValues } from 'redux-form'
 import { updateState, addState, closeModal } from '../../actions/states'
 
 import Form from '../presentationals/states/Form'
 
 const CustomContainer = Component => ({updateState, addState, editing, ...rest}) => {
-	return <Component {...rest} onSubmit={ do {
+	return <Component editing={editing} {...rest} onSubmit={ do {
 		if(editing) updateState;
 		else addState;
 	}}/>
@@ -19,5 +19,6 @@ export default compose(
 		editing: states.modal.editing
 	}), {updateState, addState, closeModal}),
 	CustomContainer,
-	reduxForm({form: 'stateForm', enableReinitialize: true})
+	reduxForm({form: 'stateForm', enableReinitialize: true}),
+	connect(state => ({stage: getFormValues('stateForm')(state).stage}))
 )(Form)

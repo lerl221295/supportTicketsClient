@@ -17,11 +17,15 @@ const initialState = {
 
 const mapState = (states, {came_from, ...state}) => ({
     ...state,
-    came_from: came_from.map(key => {
-        let status = states.find(state => state.key === key);
-        const {came_from, ...state} = status;
-        return state;
-    })    
+    came_from: do {
+        if(came_from)
+            came_from.map(key => {
+                let status = states.find(state => state.key === key);
+                const {came_from, ...state} = status;
+                return state;
+            })
+        else null;    
+    }
 })
 
 const statesReducer = (reduxState = [], {type, payload}) => {
@@ -33,7 +37,20 @@ const statesReducer = (reduxState = [], {type, payload}) => {
         case UPDATE_STATE: 
             return(
                 Array.from(reduxState).map((state) => {
-                    if(state.key !== payload.state.key) return state;
+                    if(state.key !== payload.state.key) return ({
+                        ...state,
+                        came_from: do {
+                            if(state.came_from && state.came_from.length)
+                                state.came_from.map(came => {
+                                    if(came.key !== payload.state.key) return came;
+                                    return({
+                                        key: payload.state.key,
+                                        label: payload.state.label
+                                    })
+                                });
+                            else null
+                        }
+                    });
                     return mapState(reduxState, payload.state);
                 })
             )

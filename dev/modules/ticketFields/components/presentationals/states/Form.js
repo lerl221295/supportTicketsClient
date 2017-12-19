@@ -6,11 +6,12 @@ import { Row, Col } from 'react-flexbox-grid'
 import { TextField, SelectField, Toggle } from 'redux-form-material-ui'
 import { Field } from 'redux-form'
 
-const renderOptions = states => states.map(({key, label}) => (
-	<MenuItem key={key} value={key} primaryText={label}/>
-))
+const renderOptions = states => Array.from(states).filter(state => state.stage !== "END")
+	.map(({key, label}) => (
+		<MenuItem key={key} value={key} primaryText={label}/>
+	))
 
-export default ({handleSubmit, dirty, reset, closeModal, states}) => (
+export default ({handleSubmit, dirty, reset, closeModal, states, editing, stage}) => (
 	<Row bottom="xs">
 		<Col xs={6}>
 			<Field 
@@ -19,6 +20,11 @@ export default ({handleSubmit, dirty, reset, closeModal, states}) => (
 				hintText="Clave del Estado"
 				floatingLabelText="Key"
 				style={{width: "100%"}}
+				disabled={
+					editing && 
+					(editing.key === "new" ||
+					editing.key === "resolved")
+				}
 			/>
 		</Col>
 		<Col xs={6}>
@@ -27,6 +33,7 @@ export default ({handleSubmit, dirty, reset, closeModal, states}) => (
 				component={Toggle} 
 				label="Pausa el SLA"
 				style={{padding: "1rem", width: "80%"}}
+				disabled={stage === "END"}
 			/>
 		</Col>
 		<Col xs={12}>
@@ -44,6 +51,11 @@ export default ({handleSubmit, dirty, reset, closeModal, states}) => (
 				component={SelectField} 
 				floatingLabelText="Etapa"
 				style={{padding: "1rem", width: "80%"}}
+				disabled={
+					editing && 
+					(editing.key === "new" ||
+					editing.key === "resolved")
+				}
 			>
 				<MenuItem value="PREPARATION" primaryText="Preparacion"/>
 				<MenuItem value="PROGRESS" primaryText="Progreso"/>
@@ -57,8 +69,14 @@ export default ({handleSubmit, dirty, reset, closeModal, states}) => (
 				multiple
 				floatingLabelText="Estados de donde viene"
 				style={{padding: "1rem", width: "80%"}}
+				// comentada la validacion de abajo, ya que cualquier estado, SI puede ir a nuevo
+				//disabled={ editing &&  editing.key === "new" }
 			>
-				{renderOptions(states)}
+				{do {
+					if(!editing) renderOptions(states);
+					else
+						renderOptions(states.filter(({key}) => key !== editing.key))
+				}}
 			</Field>
 		</Col>
 		<RaisedButton 

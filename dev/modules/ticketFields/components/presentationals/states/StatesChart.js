@@ -12,8 +12,14 @@ class Status extends Component {
 	state = { loading: false, diagram: "" }
 
 	mapStates = states => {
+		let template = `initial,\n`;
+		for(let i = 0; i < states.length; i++){
+			if(i === states.length-1) template += `"${states[i].label}";\n`;
+			else template += `"${states[i].label}",\n`;
+		}
+
 		const new_state = states.find(state => state.key === "new");
-		let template = `initial => ${new_state.label}; \n`
+		template += `initial => ${new_state.label}: Creacion del Ticket; \n`
 		for(let state of states){
 			if(state.came_from && state.came_from.length)
 				for(let came_from of state.came_from){
@@ -46,7 +52,7 @@ class Status extends Component {
 		if(this.state.loading) return <Loading/>;
 		return(
 			<Row center="xs">
-				<Col xs={12}>
+				<Col xs={12} style={{overflowX: 'auto'}}>
 					<Subheader>Ciclo de vida del Ticket</Subheader>
 					<div dangerouslySetInnerHTML={{__html: this.state.diagram}}/>
 				</Col>

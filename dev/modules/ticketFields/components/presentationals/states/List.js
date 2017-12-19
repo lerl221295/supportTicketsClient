@@ -3,7 +3,8 @@ import { List, ListItem, Divider, Subheader } from 'material-ui'
 import { 
 	ContentDeleteSweep as Delete,
 	ImageTimer as Timer,
-	ImageTimerOff as TimerOff
+	ImageTimerOff as TimerOff,
+	ContentArchive as Archive
 } from "material-ui/svg-icons";
 import Theme from '../../../../../theme-default'
 
@@ -25,15 +26,20 @@ const StatesList = ({states, deleteState, openModal}) => {
 							}
 							secondaryText={`key: ${state.key}`}
 							leftIcon={do {
-								if(state.sla_paused) (<TimerOff/>);
+								if(state.stage === "END") (<Archive/>);
+								else if(state.sla_paused) (<TimerOff/>);
 								else (<Timer/>);
 							}}
-							rightIcon={
-								<Delete 
-									hoverColor={Theme.palette.accent1Color}
-									onClick={() => deleteState(state)} 
-								/>
-							}
+							rightIcon={do {
+								if(state.key === "new" || state.key === "resolved")
+									null;
+								else (
+									<Delete 
+										hoverColor={Theme.palette.accent1Color}
+										onClick={() => deleteState(state)}
+									/>
+								)
+							}}
 						/>			
 						<Divider/>
 					</div>

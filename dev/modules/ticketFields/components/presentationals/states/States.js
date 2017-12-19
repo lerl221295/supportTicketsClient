@@ -6,8 +6,10 @@ import StateForm from '../../containers/StateForm'
 import StatesList from './List'
 import StatesChart from './StatesChart'
 
+import { FormButtonGroup } from '../../../../../common/components'
+
 export default (props) => {
-	const {states, deleteState, update, modal, closeModal, openModal} = props;
+	const {states, deleteState, update, modal, closeModal, openModal, goBack, resetData} = props;
 	let initialValues = {};
 	if(modal.editing) initialValues = {
 		...modal.editing,
@@ -20,13 +22,23 @@ export default (props) => {
 		<Paper style={{padding: "2rem"}}>
 			<Row middle="xs">
 				<Col xs={7}>
-					<StatesList states={states} openModal={openModal} deleteState={deleteState}/>
-					<FlatButton
-				    	label="Aregar"
-				    	fullWidth
-				    	onClick={() => openModal()}
-				    	primary
-				    />
+					<StatesList 
+						states={states} 
+						openModal={openModal} 
+						deleteState={deleteState}
+					/>
+					<Row center="xs">
+					    <FlatButton
+					    	label="Restablecer Estados"
+					    	onClick={() => resetData()}
+					    	secondary
+					    />
+						<FlatButton
+					    	label="Aregar Estado"
+					    	onClick={() => openModal()}
+					    	primary
+					    />
+					</Row>
 				</Col>
 				<Col xs={1}>
 					<ToolbarSeparator style={{height: '36vh'}}/>
@@ -37,13 +49,21 @@ export default (props) => {
 			</Row>
 			{/*<FloatingActionButton className="fab" > 
 		    	<Save />
-		    </FloatingActionButton>*/}
+		    </FloatingActionButton>
 		    <FlatButton
 		    	label="Guardar"
 		    	fullWidth
 		    	onClick={update}
 		    	primary
-		    />
+		    />*/}
+		    <FormButtonGroup
+				cancel={() => {
+					resetData();
+					goBack()
+				}}
+				send={update}
+				//style={{marginTop: "-1rem"}}
+			/>
 		    <Dialog
 		        title={getTitle(modal.editing)}
 		        open={modal.open}
