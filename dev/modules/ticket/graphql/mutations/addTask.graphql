@@ -1,0 +1,5 @@
+mutation AddTask($ticket_number: Int!, $text: String!){
+	addTask(ticket_number: $ticket_number, text: $text){
+		done
+	}
+}

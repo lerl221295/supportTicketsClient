@@ -10,6 +10,7 @@ import {
 	EditorModeEdit as Edit
 } from "material-ui/svg-icons";
 import Theme from '../../../../../theme-default'
+import { grey600 } from 'material-ui/styles/colors'
 
 const StatesCards = ({states, deleteState, openModal}) => {
 	return(
@@ -45,8 +46,14 @@ const StatesCards = ({states, deleteState, openModal}) => {
 								</Col>
 								<Col xs={3}>
 									{do {
-										if(state.key === "new" || state.key === "resolved")
-											"";
+										if(state.key === "new" || state.key === "resolved") (
+											<IconButton tooltip="Estado Escencial" style={{cursor: "not-allowed"}}>
+												<Delete 
+													color={grey600}
+													onClick={(e) => e.stopPropagation()}
+												/>
+											</IconButton>
+										)
 										else (
 											<IconButton tooltip="Eliminar Estado">
 												<Delete 

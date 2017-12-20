@@ -158,13 +158,16 @@ class PropsForm extends Component {
 			      		<FloatingActionButton 
 	      					mini
 	      					zDepth={0}
-	      					onClick={this.props.handleSubmit}
+	      					onClick={e => {
+	      						e.stopPropagation();
+	      						this.props.handleSubmit();
+	      					}}
 							disabled={!dirty}
 	      				>
 		      				<Save/>
 		      			</FloatingActionButton>
 			      	}
-			      	//actAsExpander={true}
+			      	actAsExpander={true}
 			      	showExpandableButton={true}
 			    />
 				<CardText expandable style={{padding: "0 1rem 0 1rem"}}>

@@ -37,7 +37,11 @@ class TicketDetail extends Component {
 							ticket={this.props.data.ticket} 
 						/>
 						<br/>
-						<Tasks tasks={this.props.data.ticket.tasks}/>
+						<Tasks 
+							tasks={this.props.data.ticket.tasks}
+							addTask={this.props.addTask}
+							checkTask={this.props.checkTask}
+						/>
 					</Col>
 				</Row>
 			</div>

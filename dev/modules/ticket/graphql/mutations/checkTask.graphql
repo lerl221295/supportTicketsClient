@@ -1,0 +1,5 @@
+mutation ChechTask($ticket_number: Int!, $text: String!){
+	checkTask(ticket_number: $ticket_number, text: $text){
+		done
+	}
+}

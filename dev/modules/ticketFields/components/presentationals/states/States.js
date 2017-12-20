@@ -1,12 +1,15 @@
 import React from 'react'
 import { Row, Col } from 'react-flexbox-grid'
-import { Paper, FlatButton, FloatingActionButton, ToolbarSeparator, Dialog } from 'material-ui'
-import { ContentSave as Save } from 'material-ui/svg-icons'
+import { Paper, FlatButton, FloatingActionButton, ToolbarSeparator, Dialog, IconButton } from 'material-ui'
+import { 
+	ContentSave as Save,
+	ActionSettingsBackupRestore as Restore
+} from 'material-ui/svg-icons'
 import StateForm from '../../containers/StateForm'
 //import StatesList from './List'
 import StatesCards from './Cards'
 import StatesChart from './StatesChart'
-
+import Theme from '../../../../../theme-default'
 import { FormButtonGroup } from '../../../../../common/components'
 
 export default (props) => {
@@ -60,11 +63,22 @@ export default (props) => {
 					/>
 				</Col>
 			</Row>
-		    <FormButtonGroup
-				cancel={resetData}
-				send={update}
-				//style={{marginTop: "-1rem"}}
-			/>
+			<Row end="xs">
+				<Col xs={3}>
+					<IconButton tooltip="Restablecer" tooltipPosition="top-center">
+						<Restore 
+							hoverColor={Theme.palette.accent1Color}
+							onClick={(e) => resetData()}
+						/>
+					</IconButton>
+					<IconButton tooltip="Guardar" tooltipPosition="top-center">
+						<Save 
+							hoverColor={Theme.palette.accent1Color}
+							onClick={(e) => update()}
+						/>
+					</IconButton>
+				</Col>
+			</Row>
 		    <Dialog
 		        title={getTitle(modal.editing)}
 		        open={modal.open}
