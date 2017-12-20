@@ -36,7 +36,7 @@ class Status extends Component {
 		smcat.render(template,
 		    {
 		        outputType: "svg",
-		        direction: "top-down"
+		        direction: "left-right"//top-down
 		    },
 		    (pError, pSuccess) => {
 		    	if(pError) console.log(pError);

@@ -1,6 +1,7 @@
 import React from 'react'
 import { 
-	EditorTextFields as TextAreaIcon,
+	//EditorTextFields as TextAreaIcon,
+	ActionSubject as TextAreaIcon,
 	EditorShortText as TextIcon,
 	ToggleCheckBox as CheckBoxIcon,
 	ActionEvent as DateIcon,

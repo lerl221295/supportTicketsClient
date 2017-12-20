@@ -22,12 +22,16 @@ import {
 	ActionPermIdentity as PermIdentity,
 	ActionSettingsApplications as Settings,
 	ActionVisibility as Eye,
-	FileCloudQueue as Doc,
+	//FileCloudQueue as Doc,
+	//ImageLinkedCamera as Camera,
+	ActionAssignment as Tasks,
 	HardwareLaptop as Laptop,
-	ImageLinkedCamera as Camera,
+	HardwareWatch as Watch,
 	MapsLocalShipping as Truck,
 	NotificationConfirmationNumber as Ticket,
 	SocialPerson as Person,
+	AvLibraryBooks as TicketFields,
+	MapsLocalLibrary as Library
 	} from 'material-ui/svg-icons/index'
 // import { getUser } from '../../utils/Authenticate'
 import { ToastContainer } from 'react-toastify'
@@ -40,17 +44,18 @@ const menu = [
 		text: 'Admin', icon: Settings,
 		menuItems: [
 			{ text: 'Agentes', icon: <PermIdentity/>, link: '/admin/agents' },
+			{ text: 'Campos del Ticket', icon: <TicketFields/>, link: '/admin/ticketFields' },
 			{ text: 'Políticas SLA', icon: <Hourglass/>, link: '/admin/sla' },
 			{ text: 'Horario habil', icon: <Date/>, link: '/admin/businessHours' },
 			{ text: 'Automatizaciones', icon: <Laptop/>,
 				menuItems: [
 					{ text: 'Despachador', icon: <Truck/>, link: '/admin/agents' },
-					{ text: 'Supervisor', icon: <Camera/>, link: '/admin/sla' },
 					{ text: 'Observador', icon: <Eye/>, link: '/admin/businessHours' },
-					{ text: 'Escenario', icon: <Doc/>, link: '/admin/doc' }
+					{ text: 'Supervisor', icon: <Watch/>, link: '/admin/sla' },
+					{ text: 'Escenario', icon: <Tasks/>, link: '/admin/doc' }
 				]
 			},
-			{ text: 'Documentación', icon: <Doc/>, link: '/admin/doc' },
+			{ text: 'Documentación del API', icon: <Library/>, link: '/admin/doc' },
 		]
 	}
 ];

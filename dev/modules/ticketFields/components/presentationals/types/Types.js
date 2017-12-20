@@ -4,8 +4,9 @@ import { Paper, FlatButton, FloatingActionButton, ToolbarSeparator } from 'mater
 import { ContentSave as Save } from 'material-ui/svg-icons'
 import TypeList from './List'
 import NewType from './New'
+import { FormButtonGroup } from '../../../../../common/components'
 
-export default ({types, deleteType, update}) => (
+export default ({types, deleteType, update, resetData}) => (
 	<Paper style={{padding: "2rem"}}>
 		<Row middle="xs">
 			<Col xs={7}>
@@ -21,11 +22,9 @@ export default ({types, deleteType, update}) => (
 		{/*<FloatingActionButton className="fab" onClick={update}> 
 	    	<Save />
 	    </FloatingActionButton>*/}
-	    <FlatButton
-	    	label="Guardar"
-	    	fullWidth
-	    	onClick={update}
-	    	primary
-	    />
+	    <FormButtonGroup
+			cancel={resetData}
+			send={update}
+		/>		    
 	</Paper>
 )

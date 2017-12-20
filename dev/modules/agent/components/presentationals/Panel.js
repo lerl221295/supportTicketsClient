@@ -88,7 +88,7 @@ class Panel extends Component {
 					</Tab>
 					<Tab
 						label={"Proveedores"}
-						icon={<People/>}
+						icon={<Organization/>}
 					>
 						<SearchBox search={this.search("suppliers")}/>
 						<SuppliersTable
@@ -102,7 +102,7 @@ class Panel extends Component {
 					</Tab>
 					<Tab
 						label={"Grupos"}
-						icon={<Organization/>}
+						icon={<People/>}
 					>
 						<SearchBox search={this.search("groups")}/>
 						<GroupsTable

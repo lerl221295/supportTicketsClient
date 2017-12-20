@@ -5,6 +5,7 @@ import CustomFieldsList from './List'
 import NewCustomFields from './New'
 import SelectForm from './SelectFieldForm'
 import NormalForm from './NormalFieldForm'
+import { FormButtonGroup } from '../../../../../common/components'
 
 const getTitle = type => do {
 	if(type === "SELECT") "Nuevo campo Seleccionable";
@@ -24,7 +25,8 @@ class CustomFields extends Component {
 			deleteField,
 			update,
 			onDragEnd,
-			getItemStyle
+			getItemStyle,
+			resetData
 		} = this.props;
 
 		return(
@@ -45,12 +47,10 @@ class CustomFields extends Component {
 						<NewCustomFields/>
 					</Col>
 				</Row>
-			    <FlatButton
-			    	label="Guardar"
-			    	fullWidth
-			    	onClick={update}
-			    	primary
-			    />
+			    <FormButtonGroup
+					cancel={resetData}
+					send={update}
+				/>
 			    <Dialog
 			        title={getTitle(modals["selectField"].type)}
 			        open={modals["selectField"].open}

@@ -3,7 +3,8 @@ import { Row, Col } from 'react-flexbox-grid'
 import { Paper, FlatButton, FloatingActionButton, ToolbarSeparator, Dialog } from 'material-ui'
 import { ContentSave as Save } from 'material-ui/svg-icons'
 import StateForm from '../../containers/StateForm'
-import StatesList from './List'
+//import StatesList from './List'
+import StatesCards from './Cards'
 import StatesChart from './StatesChart'
 
 import { FormButtonGroup } from '../../../../../common/components'
@@ -20,7 +21,7 @@ export default (props) => {
 	};
 	return(
 		<Paper style={{padding: "2rem"}}>
-			<Row middle="xs">
+			{/*<Row middle="xs">
 				<Col xs={7}>
 					<StatesList 
 						states={states} 
@@ -46,21 +47,21 @@ export default (props) => {
 				<Col xs={4}>
 					<StatesChart/>
 				</Col>
+			</Row>*/}
+			<Row>
+				<Col xs={12}>
+					<StatesChart/>
+				</Col>
+				<Col xs={12}>
+					<StatesCards
+						states={states} 
+						openModal={openModal} 
+						deleteState={deleteState}
+					/>
+				</Col>
 			</Row>
-			{/*<FloatingActionButton className="fab" > 
-		    	<Save />
-		    </FloatingActionButton>
-		    <FlatButton
-		    	label="Guardar"
-		    	fullWidth
-		    	onClick={update}
-		    	primary
-		    />*/}
 		    <FormButtonGroup
-				cancel={() => {
-					resetData();
-					goBack()
-				}}
+				cancel={resetData}
 				send={update}
 				//style={{marginTop: "-1rem"}}
 			/>

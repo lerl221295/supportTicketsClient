@@ -187,7 +187,7 @@ class PropsForm extends Component {
 								<Field
 									name="state_key"
 									component={SelectField}
-									floatingLabelText="Status"
+									floatingLabelText="Estado"
 									label="Status"
 									style={{width: "100%"}}
 								>

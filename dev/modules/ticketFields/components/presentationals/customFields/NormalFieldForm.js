@@ -5,7 +5,7 @@ import { RaisedButton } from 'material-ui'
 import { Row, Col } from 'react-flexbox-grid'
 import { TextField, Toggle } from 'redux-form-material-ui'
 import { Field, reduxForm } from 'redux-form'
-
+import { FormButtonGroup } from '../../../../../common/components'
 import { addField, closeModal } from '../../../actions/customFields'
 
 const NewType = ({handleSubmit, dirty, reset, closeModal}) => (
@@ -36,18 +36,15 @@ const NewType = ({handleSubmit, dirty, reset, closeModal}) => (
 				style={{padding: "1rem", width: "80%"}}
 			/>
 		</Col>
-		<RaisedButton 
-			disabled={!dirty}
-			label="Agregar Campo Personalizado" 
-			primary
-			fullWidth
-			onClick={e => {
+		<FormButtonGroup
+			cancel={closeModal}
+			send={e => {
 				handleSubmit();
 				reset();
 				closeModal();
-			}} 
+			}}
 		/>
-	</Row>
+</Row>
 )
 
 export default compose(
