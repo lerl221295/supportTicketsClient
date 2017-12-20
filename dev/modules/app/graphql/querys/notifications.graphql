@@ -1,0 +1,9 @@
+#import "../fragments/notificationsFragment.graphql"
+query getNotifications ($limit: Int) {
+    notifications(limit: $limit) {
+        nodes {
+            ...notificationsFields
+        }
+        unread_count
+    }
+}

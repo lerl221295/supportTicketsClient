@@ -2,9 +2,7 @@ import ActionsList from './ActionsList'
 import AvatarImg from './AvatarImg'
 import FormButtonGroup from './FormButtonGroup'
 import FormSubheader from './FormSubheader'
-import Header from './Header'
 import InputWithIcon from './InputWithIcon'
-import LeftDrawer from './LeftDrawer'
 import MultiSelectChips from './MultiSelectChips'
 import ReactSelectWithIcon from './ReactSelectWithIcon'
 import SearchBox from './SearchBox'
@@ -19,9 +17,7 @@ export {ActionsList};
 export {AvatarImg};
 export {FormButtonGroup};
 export {FormSubheader};
-export {Header};
 export {InputWithIcon};
-export {LeftDrawer};
 export {MultiSelectChips};
 export {ReactSelectWithIcon};
 export {SearchBox};

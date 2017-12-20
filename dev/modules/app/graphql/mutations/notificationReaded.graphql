@@ -1,0 +1,6 @@
+mutation notificationReaded ($id: ID!) {
+    notificationReaded(id: $id) {
+        id
+        readed
+    }
+}

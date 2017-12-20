@@ -29,18 +29,14 @@ export default class PolicyItemList extends React.Component {
 							if (!reorder) {
 								<Toggle toggled={active}
 								        disabled={by_default}
-								        onToggle={
-									        do {
-										        if (handleToggleChange) handleToggleChange(id);
-									        }
-								        }
+								        onToggle={ do { if (handleToggleChange) handleToggleChange(id) } }
 								/>;
 							}
 						}
 					}
 					leftIcon={
 						do {
-							if (reorder) {<Order style={{cursor: 'move'}}/>;}
+							if (reorder) {<Order />;}
 						}
 					}
 					rightIconButton={
@@ -50,10 +46,7 @@ export default class PolicyItemList extends React.Component {
 									tooltip="Eliminar política"
 									disabled={by_default}
 									onClick={
-										do {
-											if (deletePolicy) deletePolicy(id);
-											else null;
-										}
+										do { if (deletePolicy) deletePolicy(id) }
 									}
 								>
 									<Delete />
@@ -62,7 +55,10 @@ export default class PolicyItemList extends React.Component {
 						}
 					}
 					disabled={by_default}
-					style={{opacity: do { if(by_default && reorder) '0.4'; else ''; }}}
+					style={{
+						opacity: do { if (by_default && reorder) '0.4' },
+						cursor: do { if (reorder && !by_default) '-webkit-grab' }
+					}}
 				/>
 				<Divider />
 			</div>

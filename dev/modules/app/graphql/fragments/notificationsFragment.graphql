@@ -1,0 +1,10 @@
+fragment notificationsFields on Notification {
+    id
+    text
+    time
+    readed
+    ticket {
+        number
+        title
+    }
+}

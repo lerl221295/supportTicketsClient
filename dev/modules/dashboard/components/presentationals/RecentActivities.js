@@ -41,14 +41,13 @@ export default ({loadingActivities, activities, loadMoreActivities}) => {
 					</List>
 					{
 						do {
-							if (loadingActivities && activities) (
+							if (loadingActivities && activities) {
 								<Row middle={"xs"} center={"xs"}>
 									<Col xs={12}>
 										<CircularProgress />
 									</Col>
 								</Row>
-							);
-							else ""
+							}
 						}
 					}
 					<Col xs={12}>

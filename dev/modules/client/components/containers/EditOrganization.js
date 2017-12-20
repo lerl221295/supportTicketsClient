@@ -13,29 +13,11 @@ export default graphql(UpdateOrganization, {
     edit: id,
     submit: (organization) => mutate({ 
     	variables: { organization },
-    	//refetchQueries: ['GetClients'] //ya no te necesito xD
     	optimisticResponse: {
     		__typename: 'Mutation',
     		updateOrganization : {
     			__typename: 'Organization',
     			...organization
-    		}
-    	},
-    	update: (proxy, {data: {updateOrganization} }) => {
-    		/*sin el try catch esto se va a la puta x( (no entiendo aun porque)
-    		https://github.com/apollographql/apollo-client/issues/2051*/
-		    try {
-			    const data = proxy.readQuery({
-				    query: Organizations
-			    });
-			    data.organizations.nodes.map(organization => {
-				    if(organization.id !== updateOrganization.id) return organization;
-				    return updateOrganization;
-			    });
-			    proxy.writeQuery({ query: Organizations, data });
-		    }
-    		catch(e){
-    			//console.log(e);
     		}
     	}
     })

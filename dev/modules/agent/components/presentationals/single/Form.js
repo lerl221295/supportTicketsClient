@@ -177,12 +177,12 @@ class Form extends Component {
 						</Col>
 						{
 							do {
-								if (this.state.edit) (
+								if (this.state.edit) {
 									<FormButtonGroup
 										cancel={this.props.cancel}
 										send={this.props.send}
 									/>
-								)
+								}
 								else ""
 							}
 						}
