@@ -13,7 +13,6 @@ export default graphql(UpdateOrganization, {
     edit: id,
     submit: (organization) => mutate({ 
     	variables: { organization },
-    	//refetchQueries: ['GetClients'] //ya no te necesito xD
     	optimisticResponse: {
     		__typename: 'Mutation',
     		updateOrganization : {

@@ -11,7 +11,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import ThemeDefault from '../../../theme-default'
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // Common Components
-import {Header, LeftDrawer} from '../../../common/components'
+import Header from './Header/HeaderContainer'
+import LeftDrawer from './Drawer/LeftDrawer'
+
 // Icons
 import {
 	ActionDashboard as Dashboard,
