@@ -1,11 +1,13 @@
 export default (pathname) => do {
 	if (pathname === '/') {'Dashboard'} else
 	if (pathname === '/tickets') {'Tickets'} else
+	if (pathname.includes('/tickets')) {'Detalle del Ticket'} else
 	if (pathname === '/clients') {'Clientes y Organizaciones'} else
 	if (pathname === '/clients/new') {'Creación de nuevo cliente'} else
 	if (pathname === '/clients/organizations/new') {'Creación de nueva organización'} else
 	if (pathname.includes('/clients/organizations/')) {'Detalle y edición de organización'} else
 	if (pathname.includes('/clients/')) {'Detalle y edición de cliente'} else
+	if (pathname === '/admin/ticketFields') {'Configuraciones del Ticket'} else
 	if (pathname === '/admin/agents') {'Agentes, Proveedores y Grupos'} else
 	if (pathname === '/admin/agents/new') {'Creación de nuevo agente'} else
 	if (pathname === '/admin/agents/suppliers/new') {'Creación de nuevo proveedor'} else

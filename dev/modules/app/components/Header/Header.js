@@ -14,7 +14,7 @@ import {white} from 'material-ui/styles/colors'
 import { SearchBox, TimeAgo } from '../../../../common/components'
 import hexToRgbA from '../../../../common/utils/hexToRgbA'
 import { logout } from '../../../../common/utils/Authenticate'
-import {Col, Row} from "react-flexbox-grid"
+import {Col, Row} from 'react-flexbox-grid'
 import theme from '../../../../theme-default'
 import GetHeaderTitle from '../../utils/GetHeaderTitle'
 
