@@ -6,11 +6,8 @@ import { Row, Col } from 'react-flexbox-grid'
 import { TextField, SelectField, Toggle } from 'redux-form-material-ui'
 import { Field } from 'redux-form'
 import { FormButtonGroup } from '../../../../../common/components'
-
-const renderOptions = states => Array.from(states).filter(state => state.stage !== "END")
-	.map(({key, label}) => (
-		<MenuItem key={key} value={key} primaryText={label}/>
-	))
+import { renderSelectField } from '../../../../../common/components/ReduxFormComponents'
+import { STAGES } from '../../../../../common/utils/consts'
 
 export default ({handleSubmit, dirty, reset, closeModal, states, editing, stage}) => (
 	<Row bottom="xs">
@@ -49,36 +46,32 @@ export default ({handleSubmit, dirty, reset, closeModal, states, editing, stage}
 		<Col xs={12}>
 			<Field 
 				name="stage" 
-				component={SelectField} 
+				component={renderSelectField} 
 				floatingLabelText="Etapa"
-				style={{padding: "1rem", width: "80%"}}
 				disabled={
 					editing && 
 					(editing.key === "new" ||
 					editing.key === "resolved")
 				}
-			>
-				<MenuItem value="PREPARATION" primaryText="Preparacion"/>
-				<MenuItem value="PROGRESS" primaryText="Progreso"/>
-				<MenuItem value="END" primaryText="Final"/>
-			</Field>
+				options={STAGES}
+			/>
 		</Col>
 		<Col xs={12}>
 			<Field 
 				name="came_from" 
-				component={SelectField} 
+				component={renderSelectField} 
 				multiple
 				floatingLabelText="Estados de donde viene"
-				style={{padding: "1rem", width: "80%"}}
 				// comentada la validacion de abajo, ya que cualquier estado, SI puede ir a nuevo
 				//disabled={ editing &&  editing.key === "new" }
-			>
-				{do {
-					if(!editing) renderOptions(states);
+				options={do {
+					if(!editing) Array.from(states).filter(state => state.stage !== "END")
+						.map(({key: value, label: text}) => ({value, text}));
 					else
-						renderOptions(states.filter(({key}) => key !== editing.key))
+						Array.from(states).filter(state => (state.stage !== "END" && state.key !== editing.key))
+						.map(({key: value, label: text}) => ({value, text}));
 				}}
-			</Field>
+			/>
 		</Col>
 		<FormButtonGroup
 			cancel={closeModal}

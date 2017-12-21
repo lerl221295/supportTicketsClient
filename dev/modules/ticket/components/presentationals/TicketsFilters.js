@@ -8,14 +8,26 @@ import { Row, Col } from 'react-flexbox-grid'
 import { Paper, FlatButton } from 'material-ui'
 // Icons
 import {
+	ActionFace as ClientIcon,
 	ActionAccountCircle as Person,
-	CommunicationBusiness as Organization
+	CommunicationBusiness as Organization,
+	ActionBookmarkBorder as TypesIcon,
+	ActionChromeReaderMode as CustomFieldsIcon,
+	//EditorLinearScale as StatesIcon
+	NotificationPriorityHigh as PriorityIcon,
+	SocialPeople as People,
+	SocialPeopleOutline as PeopleOutline,
+	ActionTimeline as StatesIcon,
+	ActionAlarm as Alarm,
+	ActionTrendingDown as CameFromIcon
 } from 'material-ui/svg-icons'
+import { grey600 } from 'material-ui/styles/colors'
 // Redux Form Components
 import {
 	renderSelectField,
 	renderSelectReactField
 } from '../../../../common/components/ReduxFormComponents'
+import { Toggle } from 'redux-form-material-ui'
 // Common Components
 import { WrappedSubheader } from '../../../../common/components'
 // Graphql
@@ -38,7 +50,7 @@ const styles = {
 	}
 };
 
-@reduxForm({ form: 'FilterForm' })
+@reduxForm({ form: 'FilterForm', enableReinitialize: true })
 class FilterForm extends Component {
 	render = () => {
 		const { handleSubmit, pristine, reset, submitting, searchData } = this.props;
@@ -48,7 +60,7 @@ class FilterForm extends Component {
 				<Paper style={styles.paper}>
 					<form onSubmit={handleSubmit}>
 						<Field
-							Icon={Person}
+							Icon={ClientIcon}
 							name="clients"
 							component={renderSelectReactField}
 							label="Clientes"
@@ -57,10 +69,18 @@ class FilterForm extends Component {
 							multi
 						/>
 						<Field
+							name="unassigned"
+							component={Toggle}
+							label="No Asignado"
+							labelStyle={{fontWeight: 600, color: grey600, margin: "0 0 1rem 1rem"}}
+							style={{display: 'table-cell'}}
+						/>
+						<Field
 							Icon={Person}
 							name="agents"
 							component={renderSelectReactField}
 							label="Agentes"
+							disabled={this.props.unassigned}
 							placeholder="Seleccione los agentes"
 							loadOptions={searchData("agents", GetAgentsNames)}
 							multi
@@ -75,7 +95,7 @@ class FilterForm extends Component {
 							multi
 						/>
 						<Field
-							Icon={Organization}
+							Icon={PeopleOutline}
 							name="suppliers"
 							component={renderSelectReactField}
 							label="Proveedores"
@@ -84,7 +104,7 @@ class FilterForm extends Component {
 							multi
 						/>
 						<Field
-							Icon={Organization}
+							Icon={People}
 							name="groups"
 							component={renderSelectReactField}
 							label="Grupos"
@@ -93,7 +113,7 @@ class FilterForm extends Component {
 							multi
 						/>
 						<Field
-							Icon={Person}
+							Icon={PriorityIcon}
 							name="priorities"
 							component={renderSelectField}
 							label="Prioridades"
@@ -104,7 +124,7 @@ class FilterForm extends Component {
 							do {
 								if(!this.props.data.loading && !this.props.data.error)
 									<Field
-										Icon={Person}
+										Icon={TypesIcon}
 										name="types_keys"
 										component={renderSelectField}
 										label="Tipos"
@@ -117,7 +137,7 @@ class FilterForm extends Component {
 							do {
 								if(!this.props.data.loading && !this.props.data.error)
 									<Field
-										Icon={Person}
+										Icon={StatesIcon}
 										name="states_keys"
 										component={renderSelectField}
 										label="Estatus"
@@ -127,7 +147,7 @@ class FilterForm extends Component {
 							}
 						}
 						<Field
-							Icon={Person}
+							Icon={Alarm}
 							name="due_by"
 							component={renderSelectField}
 							label="Hecho en"
@@ -138,7 +158,7 @@ class FilterForm extends Component {
 							<Row center="xs">
 								<Col xs={6} md={6} sm={6}>
 									<FlatButton
-										label="Limpiar"
+										label="Reestablecer"
 										primary={true}
 										onClick={reset}
 										fullWidth={true}

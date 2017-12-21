@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { graphql } from "react-apollo"
+import { getFormValues } from 'redux-form'
 import GetTickets from '../../graphql/querys/tickets.graphql'
 import MoreTickets from '../../graphql/subscriptions/newTickets.graphql'
 import TicketList from '../presentationals/TicketsList'
@@ -63,7 +64,8 @@ const TicketWithApolloData = graphql(GetTickets, {
 * todos los campos del formulario de filtrado, pero pasarlos a TicketWithApolloData como props solo cuando se
 * desea hacer refetch de los tickets en base al nuevo estado del form (y no siempre como funciona ahorita)*/
 
-const mapStateToProps = ({form: {FilterForm: {values}}}) => {
+const mapStateToProps = (state) => {
+	const values = getFormValues('FilterForm')(state);
 	if(values){
 		let filterMapedObject = {};
 		const keysForMap = ["agents", "clients", "organizations", "suppliers", "groups"];
@@ -74,7 +76,8 @@ const mapStateToProps = ({form: {FilterForm: {values}}}) => {
 		for(let key of keysForValidatedEmpty){
 			if(values[key] && values[key].length) filterMapedObject[key] = values[key];
 		}
-		if(_.isEmpty(filterMapedObject)) return undefined;
+		if(values.unassigned) filterMapedObject.unassigned = true;
+		if(_.isEmpty(filterMapedObject)) return {};
 		return({
 			filter_form: {
 				...filterMapedObject

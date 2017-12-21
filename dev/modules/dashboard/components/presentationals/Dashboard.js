@@ -29,37 +29,43 @@ let indicatorsBoxs = [
 		icon: Warning,
 		color: grey600,
 		key: 'unresolved',
-		title: 'Sin solucionar'
+		title: 'Sin solucionar',
+		criteria: "state=unresolved"
 	},
 	{
 		icon: TimerOff,
 		color: red600,
 		key: 'overdue',
-		title: 'Atrasado'
+		title: 'Atrasado',
+		criteria: "due_by=OVERDUE"
 	},
 	{
 		icon: Timelapse,
 		color: yellow600,
 		key: 'due_today',
-		title: 'Vencido hoy'
+		title: 'Vencido hoy',
+		criteria: "due_by=TODAY"
 	},
 	{
 		icon: Receipt,
 		color: green600,
 		key: 'open',
-		title: 'Abierto'
+		title: 'Nuevo',
+		criteria: "state=new"
 	},
 	{
 		icon: Timer,
 		color: blue600,
 		key: 'on_hold',
-		title: 'En espera'
+		title: 'En espera',
+		criteria: "state=pending"
 	},
 	{
 		icon: Face,
 		color: teal400,
 		key: 'unassigned',
-		title: 'No asignado'
+		title: 'No asignado',
+		criteria: "unassigned"
 	},
 ];
 
@@ -85,12 +91,13 @@ class Dashboard extends Component {
 				<Row between={"xs"} style={styles.indicatorsBar}>
 					{
 						indicatorsBoxs.map((props, i) => {
-							let {key, ...properties} = props;
+							let {key, criteria, ...properties} = props;
 							return (
 								<Col key={i} md={2}>
 									<IndicatorBox
 										{...properties}
 										value={indicators[key]}
+										goToTickets={() => this.props.push(`tickets?${criteria}`)}
 									/>
 								</Col>
 							)

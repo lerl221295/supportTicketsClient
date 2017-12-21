@@ -6,5 +6,6 @@ fragment statusAndTypes on TicketMetadata {
     ticketStatus: states {
         key
         label
+        sla_paused
     }
 }

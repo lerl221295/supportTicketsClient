@@ -4,9 +4,10 @@ import {white, grey800} from 'material-ui/styles/colors';
 import {typography} from 'material-ui/styles';
 import {Col, Row} from "react-flexbox-grid";
 
-const IndicatorBox = ({color, title, value, icon: Icon}) => {
+const IndicatorBox = ({goToTickets, color, title, value, icon: Icon}) => {
 	
 	const styles = {
+		paper: {cursor: "pointer"},
 		iconFrameColor: {
 			backgroundColor: color
 		},
@@ -34,7 +35,7 @@ const IndicatorBox = ({color, title, value, icon: Icon}) => {
 	};
 	
 	return (
-		<Paper>
+		<Paper style={styles.paper} onClick={goToTickets}>
 			<Row middle={"xs"} center={"xs"} style={styles.box}>
 				<Col xs={2} className={"center-align max-height"} style={styles.iconFrameColor}>
 					<Row middle={"xs"} center={"xs"} className={"max-height"}>

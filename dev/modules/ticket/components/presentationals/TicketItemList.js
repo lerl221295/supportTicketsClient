@@ -47,7 +47,12 @@ class Item extends Component {
 					<Col xs={3} md={3} sm={3}>
 						<Row>
 							<span>
-								Agente: <WrappedLink to={`/admin/agents/${agent.id}`}>{`${agent.fullName}`}</WrappedLink>
+								Agente: {do {
+									if(agent)
+										<WrappedLink to={`/admin/agents/${agent.id}`}>{`${agent.fullName}`}</WrappedLink>;
+									else
+										"No Asignado";
+								}}
 							</span>
 						</Row>
 						<Row>
