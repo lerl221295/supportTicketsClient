@@ -1,13 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { graphql, withApollo, compose } from 'react-apollo'
-import { reduxForm } from 'redux-form'
+import { reduxForm, getFormValues } from 'redux-form'
 import diff from 'object-diff'
 import _ from 'lodash'
 import { openAlert } from '../../../../common/actions/alert'
 import TicketPropsForm from '../presentationals/details/PropsForm'
 import Ticket from '../../graphql/querys/ticketDetails.graphql'
 import UpdateTicket from '../../graphql/mutations/updateTicket.graphql'
+import GetAgentsNames from '../../graphql/querys/agentsNames.graphql'
+
+const FormWithRedux = reduxForm({ 
+		form: 'TicketDetailsForm',
+		enableReinitialize: true
+})(TicketPropsForm)
 
 const getValueKey = (type) => do {
 	if(
@@ -89,6 +95,8 @@ const TicketPropsWithApollo = withApollo((prop) => {
 	 	ticket_number,
 	 	openAlert,
 	 	ticket,
+	 	supplierForm,
+	 	groupForm,
 	 	...props
 	} = prop;
 
@@ -98,6 +106,24 @@ const TicketPropsWithApollo = withApollo((prop) => {
 			variables: {search_text}
 		})
 		.then( ({data} ) => ({options: data[key].nodes}))
+	);
+
+	const searchAgents = (search_text) => (
+		apolloClient.query({
+			query: GetAgentsNames,
+			variables: {
+				search_text, 
+				supliers: do {
+					if(supplierForm) ([supplierForm]);
+					else null;
+				},
+				groups: do {
+					if(groupForm) ([groupForm]);
+					else null;
+				}
+			}
+		})
+		.then( ({data} ) => ({options: data.agents.nodes}))
 	);
 
 
@@ -165,10 +191,6 @@ const TicketPropsWithApollo = withApollo((prop) => {
 	let orderly = Array.from(props.custom_fields)
 		.sort((a, b) => a.position - b.position);	
 
-	const FormWithRedux = reduxForm({ 
-		form: 'TicketDetailsForm'
-	})(TicketPropsForm)
-
 	return(
 		<FormWithRedux 
 			onSubmit={update}
@@ -176,13 +198,17 @@ const TicketPropsWithApollo = withApollo((prop) => {
 			{...props} 
 			custom_fields={orderly}
 			searchData={searchData}
+			searchAgents={searchAgents}
 			initialValues={initialValues}
 		/>
 	)
 })
 
 export default compose(
-	connect(null, { openAlert }),
+	connect( state => ({
+		supplierForm: getFormValues('TicketDetailsForm')(state) && getFormValues('TicketDetailsForm')(state).supplier,
+		groupForm: getFormValues('TicketDetailsForm')(state) && getFormValues('TicketDetailsForm')(state).group
+	}), { openAlert }),
 	graphql(UpdateTicket)
 )(TicketPropsWithApollo)
 

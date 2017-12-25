@@ -239,7 +239,7 @@ class PropsForm extends Component {
 							name="agent"
 							component={renderSelectReactField}
 							label="Agente"
-							loadOptions={searchData("agents", GetAgentsNames)}
+							loadOptions={searchAgents}
 						/>
 						<Field
 							name="supplier"
