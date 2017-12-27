@@ -5,8 +5,16 @@ import {
 	CardTitle, 
 	CardText,
 	FlatButton,
-	Divider
+	Divider,
+	IconMenu,
+	IconButton,
+	MenuItem
 } from 'material-ui'
+import { 
+	ContentSend as Send,
+	AvNote as Note,
+	CommunicationMessage as Message
+} from 'material-ui/svg-icons'
 import { Row, Col } from 'react-flexbox-grid'
 import { Field } from 'redux-form'
 import { EditorWrapper as Editor } from '../../../../../common/components/ReduxFormComponents'
@@ -67,12 +75,36 @@ class Reply extends Component {
 						}}
 				   	/>
 					<Row end="xs">
-						<FlatButton label="Responder" onClick={
-							() => {
-								sendIntervention({ticket_number, text: reply.body});
-								this.handleExpandChange(false);
-							}
-						} />
+						<IconMenu
+							iconButtonElement={
+					    		<IconButton tooltip="Enviar">
+					    			<Send />
+					    		</IconButton>
+					    	}
+					    	targetOrigin={{horizontal: 'left', vertical: 'top'}}
+					    	anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+					    >
+					      	<MenuItem 
+					      		onClick={() => {
+									sendIntervention({ticket_number, text: reply.body});
+									this.handleExpandChange(false);
+									reset();
+								}}
+					      		leftIcon={
+						      		<Message/>
+						      	}  
+						      	primaryText="Responder" 
+						    />
+					      	<MenuItem 
+					      		onClick={() => {
+									sendIntervention({ticket_number, text: reply.body, private: true});
+									this.handleExpandChange(false);
+									reset();
+								}}
+					      		leftIcon={<Note/>}  
+					      		primaryText="Nota Privada" 
+					      	/>
+					    </IconMenu>
 					</Row>
 			    </CardText>
 			</Card>

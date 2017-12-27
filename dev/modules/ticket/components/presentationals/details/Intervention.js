@@ -22,9 +22,10 @@ const styles = {
 		fontSize:12,
 		fontWeight: "bold"
 	},
-	header: (agent) => ({
+	header: (agent, note) => ({
 		backgroundColor: do {
-			if(agent) Theme.palette.agentIntervention;
+			if(note) Theme.palette.primary3Color;
+			else if(agent) Theme.palette.agentIntervention;
 			else Theme.palette.clientIntervention;
 		},
 	 	margin:"-1rem",
@@ -38,12 +39,12 @@ const renderAvatar = ({face_base64}) => {
 	return <Avatar src={face_base64} />;
 }
 
-export default ({ autor, time, text, type_autor }) => {
+export default ({ autor, time, text, type_autor, private: note }) => {
 	
 	return (
 		
 		<Paper style={{margin: "0.6rem", padding: "1rem"}}>
-			<Row between="xs" style={styles.header(type_autor === "AGENT")}>
+			<Row between="xs" style={styles.header(type_autor === "AGENT", note)}>
 				<Col xs={3} md={3} sm={3}>
 					<Row middle="xs">
 						<Col xs={3} md={3} sm={3}>

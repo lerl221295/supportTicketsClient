@@ -12,7 +12,7 @@ const generateSource = file => new Promise((resolve) => {
 	reader.onload = () => resolve({ data: { link: reader.result } });
 })
 
-const updateApolloCache = ({ticket_number, text}) => (proxy, {data: {addIntervention} }) => {
+const updateApolloCache = ({ticket_number, text, private: note}) => (proxy, {data: {addIntervention} }) => {
 	try {
 		const data = proxy.readQuery({ 
 			query: TicketDetails,
@@ -22,7 +22,8 @@ const updateApolloCache = ({ticket_number, text}) => (proxy, {data: {addInterven
 		let newIntervention = {
 			...addIntervention,
 			text,
-			time: new Date().toString()
+			time: new Date().toString(),
+			private: note || false
 		}
 		newData.ticket.interventions = [...data.ticket.interventions, newIntervention]
 		proxy.writeQuery({ 
