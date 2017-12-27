@@ -4,10 +4,10 @@ import { push } from 'react-router-redux';
 import { closeModal } from '../../ticket/actions/newTicket'
 import App from './App';
 
-const mapStateToProps = ({user, alert, ticketDetail}) => ({
+const mapStateToProps = ({user, alert, ticket}) => ({
 	isAuthenticate : user != null,
 	alert,
-	modalOpen: ticketDetail.newTicketModalOpen
+	modalOpen: ticket.newTicketModalOpen
 });
 
 const mapDispatchToProps = {

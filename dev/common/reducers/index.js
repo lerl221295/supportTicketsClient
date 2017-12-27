@@ -3,17 +3,17 @@ import {routerReducer} from 'react-router-redux'
 import { reducer as formReducer } from 'redux-form'
 import { alert } from './alert'
 
-import ticketDetail from '../../modules/ticket/reducers'
+import ticket from '../../modules/ticket/reducers'
 import businessHours from '../../modules/businessHours/reducers'
 import ticketFields from '../../modules/ticketFields/reducers'
 
 const createReducers = () => (
 	combineReducers({
 		alert,
-		ticketDetail,
+		ticket,
 		businessHours,
-		routing: routerReducer,
 		ticketFields,
+		routing: routerReducer,
 		form: formReducer
 	})
 );

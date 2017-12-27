@@ -1,6 +1,6 @@
 #import "../fragments/ticketsListFragment.graphql"
-query GetTickets($filter: FilterTicketInput, $offset: Int, $limit: Int) {
-    tickets(filter: $filter, offset: $offset, limit: $limit){
+query GetTickets($filter: FilterTicketInput, $order: Order, $offset: Int, $limit: Int) {
+    tickets(filter: $filter, order: $order, offset: $offset, limit: $limit){
         nodes {
             ...ticketsListFields
         }

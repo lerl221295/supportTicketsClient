@@ -4,13 +4,15 @@ import { getFormValues } from 'redux-form'
 import GetTickets from '../../graphql/querys/tickets.graphql'
 import MoreTickets from '../../graphql/subscriptions/newTickets.graphql'
 import TicketList from '../presentationals/TicketsList'
+import { changeOrder } from '../../actions/order'
 import _ from 'lodash'
 
 const limit = 10;
 const TicketWithApolloData = graphql(GetTickets, {
-	options: ({filter_form}) => ({
+	options: ({filter_form, order}) => ({
 		variables: {
 			filter: filter_form,
+			order,
 			limit
 		},
 		notifyOnNetworkStatusChange: true
@@ -84,8 +86,8 @@ const mapStateToProps = (state) => {
 			}
 		});
 	}
-	return({filter_form: values})
+	return({filter_form: values, order: state.ticket.order})
 };
-const TicketWithFilters = connect(mapStateToProps)(TicketWithApolloData);
+const TicketWithFilters = connect(mapStateToProps, { changeOrder })(TicketWithApolloData);
 
 export default TicketWithFilters
