@@ -1,0 +1,5 @@
+mutation CreateTicket($ticket: TicketInput!){
+	createTicket(ticket: $ticket){
+		title
+	}
+}

@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 // Material-UI Components
-import {Snackbar} from 'material-ui'
+import {Snackbar, Dialog} from 'material-ui'
 // Material-UI Utils
 import withWidth, { LARGE, SMALL } from 'material-ui/utils/withWidth'
 // Material-UI Theme config
@@ -35,6 +35,7 @@ import {
 	} from 'material-ui/svg-icons/index'
 // import { getUser } from '../../utils/Authenticate'
 import { ToastContainer } from 'react-toastify'
+import TicketForm from '../../../modules/ticket/components/containers/NewTicket'
 
 const menu = [
 	{ text: 'Dashboard', icon: Dashboard, link: '/' },
@@ -122,6 +123,14 @@ class App extends Component {
 							autoHideDuration={4000}
 							onRequestClose={() => this.props.closeAlert()}
 						/>
+						<Dialog
+					        title="Nuevo Ticket"
+					        open={this.props.modalOpen}
+					        onRequestClose={this.props.closeModal}
+					        autoScrollBodyContent={true}
+					    >
+					    	<TicketForm />
+					    </Dialog>
 						{this.props.children}
 					</div>
 				</div>

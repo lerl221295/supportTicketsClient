@@ -1,14 +1,13 @@
 import React, {PropTypes} from 'react'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import {Link} from 'react-router'
-import { Badge, AppBar,	IconButton,	IconMenu,	MenuItem, Divider } from 'material-ui'
+import { Badge, AppBar,	IconButton,	IconMenu, MenuItem, Divider } from 'material-ui'
 import {
 	NavigationMoreVert as MoreVertIcon,
 	NavigationMenu as Menu,
 	SocialNotifications as Notification,
 	ImagePanoramaFishEye as Readed,
-	ImageLens as Unread
+	ImageLens as Unread,
+	NotificationConfirmationNumber as NewTicket
 } from 'material-ui/svg-icons'
 import {white} from 'material-ui/styles/colors'
 import { SearchBox, TimeAgo } from '../../../../common/components'
@@ -58,7 +57,6 @@ const styles = {
 	}
 };
 
-@connect(null, { push })
 class Header extends React.Component {
 	
 	logout = () => {
@@ -94,6 +92,12 @@ class Header extends React.Component {
 						title={this.actualSectionTitle}
 						iconElementRight={
 							<Row middle={'xs'} style={styles.notification.row}>
+								<IconButton 
+									tooltip="Nuevo Ticket"
+									onClick={this.props.openModal}
+								>
+									<NewTicket color={white} />
+								</IconButton>
 								{
 									!loading &&
 									<Badge

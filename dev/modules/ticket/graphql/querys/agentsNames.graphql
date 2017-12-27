@@ -1,5 +1,5 @@
-query GetAgentsNames($search_text: String) {
-	agents(search_text: $search_text) {
+query GetAgentsNames($search_text: String, $suppliers: [ID], $groups: [ID]) {
+	agents(search_text: $search_text, suppliers: $suppliers, groups: $groups) {
 		nodes {
 			id
 			name: fullName

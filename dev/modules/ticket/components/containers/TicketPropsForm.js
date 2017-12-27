@@ -108,23 +108,16 @@ const TicketPropsWithApollo = withApollo((prop) => {
 		.then( ({data} ) => ({options: data[key].nodes}))
 	);
 
-	const searchAgents = (search_text) => (
-		apolloClient.query({
+	const searchAgents = (search_text) => {
+		let variables = { search_text };
+		if(supplierForm) variables.supliers = [supplierForm.id];
+		if(groupForm) variables.groups = [groupForm.id];
+		return apolloClient.query({
 			query: GetAgentsNames,
-			variables: {
-				search_text, 
-				supliers: do {
-					if(supplierForm) ([supplierForm]);
-					else null;
-				},
-				groups: do {
-					if(groupForm) ([groupForm]);
-					else null;
-				}
-			}
+			variables
 		})
 		.then( ({data} ) => ({options: data.agents.nodes}))
-	);
+	}
 
 
 	let initialValues = {

@@ -129,7 +129,8 @@ class PropsForm extends Component {
 			dirty, 
 			ticketTypes, 
 			custom_fields,
-			searchData
+			searchData,
+			searchAgents
 		} = this.props;
 		
 		const STATUS = [
