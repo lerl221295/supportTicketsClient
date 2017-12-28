@@ -19,5 +19,7 @@ export default (pathname) => do {
 	if (pathname === '/admin/sla/new') {'Creación de nueva política SLA'} else
 	if (pathname.includes('/admin/sla/')) {'Detalle y edición de política SLA'} else
 	if (pathname === '/admin/businessHours') {'Horario operativo de la empresa'} else
-	if (pathname === '/admin/doc') {'Documentación interactiva GraphiQL'}
+	if (pathname === '/admin/doc') {'Documentación interactiva GraphiQL'} else
+	if (pathname === '/admin/email') {'Configuracion del Soporte via Email'} else
+	if (pathname === '/admin/palette') {'Paleta de Colores'}
 }

@@ -25,6 +25,8 @@ import UpdateSLAPolicy from './modules/slaPolicies/components/containers/Form/Up
 
 import BusinessHours from './modules/businessHours/components/containers/EditBusinessHours'
 import TicketFields from './modules/ticketFields/components/containers/TicketFieldsPanel'
+import Palette from './modules/palette/components/containers/Palette'
+import EmailConfig from './modules/email/components/containers/Email'
 
 import DashboardContainer from './modules/dashboard/components/containers/DashboardContainer'
 import Doc from './modules/doc/Doc'
@@ -65,6 +67,8 @@ class Routes extends Component {
 					<Route path="businessHours" component={BusinessHours}/>
 					<Route path="ticketFields" component={TicketFields}/>
 					<Route path="doc" component={Doc} />
+					{/*<Route path="palette" component={Palette}/>*/}
+					<Route path="email" component={EmailConfig}/>
 				</Route>
 				<Route path="*" component={notFound}/>
 			</Route>

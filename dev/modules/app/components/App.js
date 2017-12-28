@@ -31,7 +31,9 @@ import {
 	NotificationConfirmationNumber as Ticket,
 	SocialPerson as Person,
 	AvLibraryBooks as TicketFields,
-	MapsLocalLibrary as Library
+	MapsLocalLibrary as Library,
+	CommunicationEmail as Email,
+	ImagePalette as Palette
 	} from 'material-ui/svg-icons/index'
 // import { getUser } from '../../utils/Authenticate'
 import { ToastContainer } from 'react-toastify'
@@ -45,6 +47,7 @@ const menu = [
 		text: 'Admin', icon: Settings,
 		menuItems: [
 			{ text: 'Agentes', icon: <PermIdentity/>, link: '/admin/agents' },
+			{ text: 'Email Support', icon: <Email/>, link: '/admin/email' },
 			{ text: 'Campos del Ticket', icon: <TicketFields/>, link: '/admin/ticketFields' },
 			{ text: 'Políticas SLA', icon: <Hourglass/>, link: '/admin/sla' },
 			{ text: 'Horario habil', icon: <Date/>, link: '/admin/businessHours' },
@@ -56,6 +59,7 @@ const menu = [
 					{ text: 'Escenario', icon: <Tasks/>, link: '/admin/doc' }
 				]
 			},
+			{ text: 'Colores', icon: <Palette/>, link: '/admin/palette' },
 			{ text: 'Documentación del API', icon: <Library/>, link: '/admin/doc' },
 		]
 	}
