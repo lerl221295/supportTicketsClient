@@ -37,14 +37,14 @@ const styles = {
 	}
 };
 
-const LeftDrawer = ({ navDrawerOpen, menus, location: {pathname} }) => {
+const LeftDrawer = ({ userImage, navDrawerOpen, menus, location: {pathname} }) => {
 	return (
 		<Drawer
 			open={navDrawerOpen}
 		>
 			<Row center={'xs'}>
 				<Col xs={12}>
-					<Avatar src="/images/user.png"
+					<Avatar src={userImage || "/images/user.png"}
 					        size={50}
 					        style={styles.avatar.icon}
 					/>

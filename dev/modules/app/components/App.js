@@ -36,7 +36,7 @@ import {
 	ImagePalette as Palette,
 	EditorInsertChart as Chart
 	} from 'material-ui/svg-icons/index'
-// import { getUser } from '../../utils/Authenticate'
+import { getUser } from '../../../common/utils/Authenticate'
 import { ToastContainer } from 'react-toastify'
 import TicketForm from '../../../modules/ticket/components/containers/NewTicket'
 
@@ -78,6 +78,11 @@ class App extends Component {
 	state = {
 		navDrawerOpen: true
 	};
+
+	componentWillMount = () => {
+		//validar que el usuario este autenticado
+		if(!getUser()) this.props.push("login");
+	}
 	
 	componentWillReceiveProps(nextProps) {
 		if (this.props.width !== nextProps.width) {
@@ -104,16 +109,22 @@ class App extends Component {
 				paddingLeft: navDrawerOpen && this.props.width !== SMALL ? paddingLeftDrawerOpen : 0
 			}
 		};
-		
+
+		const userImage = getUser() && getUser().user.entity.face_base64;
+		const userFullName= getUser() && getUser().user.entity.fullName;
+
 		return (
 			<MuiThemeProvider muiTheme={getMuiTheme(ThemeDefault)}>
 				<div>
-					<Header headerStyles={styles.header}
-					        handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer}
-					        location={this.props.location}
+					<Header 
+						userFullName={userFullName}
+						headerStyles={styles.header}
+					    handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer}
+					    location={this.props.location}
 					/>
 					
 					<LeftDrawer
+						userImage={userImage}
 						navDrawerOpen={navDrawerOpen}
 						menus={menu}
 						location={this.props.location}

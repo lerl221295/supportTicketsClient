@@ -4,7 +4,7 @@ import { graphql, compose } from 'react-apollo'
 import { getFormValues } from 'redux-form'
 import TicketsReports from '../presentationals/tickets/Reports'
 import GetTicketsReport from '../../graphql/querys/getTicketsReport.graphql'
-import { getPriorityText } from '../../../../common/utils/consts'
+import { getPriorityText, getSourceText } from '../../../../common/utils/consts'
 
 const ReduxContainer = connect(state => ({
 	from: getFormValues('reportRange')(state) && getFormValues('reportRange')(state).from.toString(),
@@ -34,6 +34,11 @@ const ApolloContainer = graphql(GetTicketsReport, {
 			data.ticketsByPriority = data.ticketsByPriority.map(({priority, tickets}) => ({
 				tickets,
 				priority: getPriorityText(priority)
+			}));
+		if(data.ticketsBySource) 
+			data.ticketsBySource = data.ticketsBySource.map(({source, tickets}) => ({
+				tickets,
+				source: getSourceText(source)
 			}));
 		return ({data});
 	}

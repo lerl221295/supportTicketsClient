@@ -21,10 +21,10 @@ export const DUE_BY = [
 ];
 
 export const CHANELS = [
-	{value: "PORTAL", text: "Portal"},
-	{value: "EMAIL", text: "Email"},
-	{value: "FACEBOOK", text: "Facebook"},
-	{value: "TWITTER", text: "Twitter"}
+	{value: "PORTAL", text: "Portal", src: "/images/sources/PORTAL"},
+	{value: "EMAIL", text: "Email", src: "/images/sources/EMAIL"},
+	{value: "FACEBOOK", text: "Facebook", src: "/images/sources/FACEBOOK"},
+	{value: "TWITTER", text: "Twitter", src: "/images/sources/TWITTER"}
 ];
 
 export const WEEK_DAYS = [
@@ -144,3 +144,6 @@ export const getPriorityColor = (priority_value) =>
 
 export const getDueByText = (due_value) =>
 	 _.find(DUE_BY, due => due.value === due_value).text;
+
+export const getSourceText = (source_value) =>
+	 _.find(CHANELS, ({value}) => value === source_value).text;
