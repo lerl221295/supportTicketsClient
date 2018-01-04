@@ -7,11 +7,11 @@ import { TextField, SelectField, Toggle } from 'redux-form-material-ui'
 import { Field } from 'redux-form'
 import { FormButtonGroup } from '../../../../common/components'
 import { renderSelectField, renderSelectReactField } from '../../../../common/components/ReduxFormComponents'
-import { PRIORITIES } from '../../../../common/utils/consts'
+import { PRIORITIES, TYPES } from '../../../../common/utils/consts'
 import GetAgentsNames from '../../graphql/querys/agentsNames.graphql'
 import GetClientsNames from '../../graphql/querys/clientsNames.graphql'
 
-export default ({handleSubmit, dirty, reset, closeModal, searchData}) => (
+export default ({handleSubmit, dirty, reset, closeModal, searchData, types}) => (
 	<Row >
 		<Col xs={6}>
 			<Field
@@ -48,13 +48,22 @@ export default ({handleSubmit, dirty, reset, closeModal, searchData}) => (
 				loadOptions={searchData('agents', GetAgentsNames)}
 			/>
 		</Col>
-		<Col xs={6}>
+		<Col xs={3}>
 			<Field
 				name="priority"
 				component={renderSelectField}
 				label="Prioridad"
 				floatingLabelText="Prioridad"
 				options={PRIORITIES}
+			/>
+		</Col>
+		<Col xs={3}>
+			<Field
+				name="type_key"
+				component={renderSelectField}
+				label="Tipo"
+				floatingLabelText="Tipo"
+				options={types || []}
 			/>
 		</Col>
 		<FormButtonGroup

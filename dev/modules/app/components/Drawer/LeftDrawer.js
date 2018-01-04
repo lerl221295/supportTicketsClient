@@ -54,7 +54,7 @@ const LeftDrawer = ({ navDrawerOpen, menus, location: {pathname} }) => {
 				<MenuItem
 					key={index}
 					style={{...styles.menuItem, backgroundColor: do {
-						if (pathname === link || (_.isUndefined(link) && pathname.includes('/admin/')))
+						if (pathname === link || (_.isUndefined(link) && pathname.includes('/admin/') && text === "Admin" ) || (_.isUndefined(link) && pathname.includes('/reports/') && text === "Reportes" ) )
 							theme.palette.primary1Color
 					}}}
 					menuItems={do {

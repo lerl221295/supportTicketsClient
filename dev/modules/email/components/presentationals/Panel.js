@@ -167,6 +167,7 @@ class HorizontalTransition extends React.Component {
           <RaisedButton
             label={stepIndex === 3 ? 'Finalizar' : 'Siguiente'}
             primary
+            disabled={stepIndex === 2 && (this.props.pristine || this.props.invalid)}
             onClick={this.handleNext}
           />
         </div>
@@ -181,31 +182,33 @@ class HorizontalTransition extends React.Component {
     const {loading, stepIndex} = this.state;
 
     return (
-      <Paper style={{width: '80%', margin: 'auto'}}>
-      	<WrappedSubheader>
-			{ do {
-				if(data.emailSupport) `Email actual: ${data.emailSupport}`;
-				else "Email Support Inactivo";
-			}}
-		</WrappedSubheader>
-        <Stepper activeStep={stepIndex}>
-          <Step>
-            <StepLabel>Crea o Dedica un Correo</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Configura tu Correo</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Indicanos las Credenciales</StepLabel>
-          </Step>
-          <Step>
-            <StepLabel>Recibe Tickets Via Email</StepLabel>
-          </Step>
-        </Stepper>
-        <ExpandTransition loading={loading} open={true}>
-          {this.renderContent()}
-        </ExpandTransition>
-      </Paper>
+    	<Paper style={{width: '80%', margin: 'auto'}}>
+	      	<WrappedSubheader>
+				{ do {
+					if(data.emailSupport) `Email actual: ${data.emailSupport}`;
+					else "Email Support Inactivo";
+				}}
+			</WrappedSubheader>
+			<div style={{padding: "1rem"}}>
+		        <Stepper activeStep={stepIndex}>
+		          <Step>
+		            <StepLabel>Crea o Dedica un Correo</StepLabel>
+		          </Step>
+		          <Step>
+		            <StepLabel>Configura tu Correo</StepLabel>
+		          </Step>
+		          <Step>
+		            <StepLabel>Indicanos las Credenciales</StepLabel>
+		          </Step>
+		          <Step>
+		            <StepLabel>Recibe Tickets Via Email</StepLabel>
+		          </Step>
+		        </Stepper>
+		        <ExpandTransition loading={loading} open={true}>
+		          {this.renderContent()}
+		        </ExpandTransition>
+		    </div>
+      	</Paper>
     );
   }
 }

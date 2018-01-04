@@ -1,0 +1,28 @@
+query GetSlaReport($from: String, $to: String, $organizations_id: [ID!]){
+	complianceByType(from: $from, to: $to, organizations_id: $organizations_id){
+	    compliance{
+	      	first_response
+	      	solved
+	      	solved_after_fr
+	    }
+	    type{
+	      	label
+	    }
+	}
+	complianceBySource(from: $from, to: $to, organizations_id: $organizations_id){
+	    compliance{
+	      	first_response
+	      	solved
+	      	solved_after_fr
+	    }
+	    source
+	}
+	complianceByPriority(from: $from, to: $to, organizations_id: $organizations_id){
+	    compliance{
+	      	first_response
+	      	solved
+	      	solved_after_fr
+	    }
+	    priority
+	}
+}

@@ -1,0 +1,20 @@
+query GetTicketsReport($from: String, $to: String){
+	ticketsBySource(from: $from, to: $to) {
+		tickets
+		source
+	}
+	ticketsByPriority(from: $from, to: $to) {
+		tickets
+		priority
+	}
+	ticketsByInterventionCount(from: $from, to: $to) {
+		tickets
+		interventions
+	}
+	ticketsByType(from: $from, to: $to) {
+		tickets
+		type {
+			label
+		}
+	}
+}

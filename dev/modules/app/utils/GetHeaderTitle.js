@@ -1,5 +1,7 @@
 export default (pathname) => do {
 	if (pathname === '/') {'Dashboard'} else
+	if(pathname === '/reports/tickets') {'Reporte de Tickets'} else
+	if(pathname === '/reports/sla') {'Reporte de Cumplimiento del SLA'} else
 	if (pathname === '/tickets') {'Tickets'} else
 	if (pathname.includes('/tickets')) {'Detalle del Ticket'} else
 	if (pathname === '/clients') {'Clientes y Organizaciones'} else

@@ -33,7 +33,8 @@ import {
 	AvLibraryBooks as TicketFields,
 	MapsLocalLibrary as Library,
 	CommunicationEmail as Email,
-	ImagePalette as Palette
+	ImagePalette as Palette,
+	EditorInsertChart as Chart
 	} from 'material-ui/svg-icons/index'
 // import { getUser } from '../../utils/Authenticate'
 import { ToastContainer } from 'react-toastify'
@@ -61,6 +62,13 @@ const menu = [
 			},
 			{ text: 'Colores', icon: <Palette/>, link: '/admin/palette' },
 			{ text: 'Documentación del API', icon: <Library/>, link: '/admin/doc' },
+		]
+	},
+	{
+		text: 'Reportes', icon: Chart,
+		menuItems: [
+			{ text: 'Tickets', icon: <Ticket/>, link: '/reports/tickets' },
+			{ text: 'Cumplimiento SLA', icon: <Hourglass/>, link: '/reports/sla' }
 		]
 	}
 ];

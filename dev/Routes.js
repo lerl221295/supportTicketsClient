@@ -28,6 +28,9 @@ import TicketFields from './modules/ticketFields/components/containers/TicketFie
 import Palette from './modules/palette/components/containers/Palette'
 import EmailConfig from './modules/email/components/containers/Email'
 
+import TicketsReport from './modules/reports/components/presentationals/tickets/Panel'
+import SlaReport from './modules/reports/components/presentationals/sla/Panel'
+
 import DashboardContainer from './modules/dashboard/components/containers/DashboardContainer'
 import Doc from './modules/doc/Doc'
 
@@ -69,6 +72,10 @@ class Routes extends Component {
 					<Route path="doc" component={Doc} />
 					{/*<Route path="palette" component={Palette}/>*/}
 					<Route path="email" component={EmailConfig}/>
+				</Route>
+				<Route path="reports">
+					<Route path="tickets" component={TicketsReport}/>
+					<Route path="sla" component={SlaReport}/>
 				</Route>
 				<Route path="*" component={notFound}/>
 			</Route>
