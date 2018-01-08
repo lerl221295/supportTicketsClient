@@ -1,0 +1,73 @@
+fragment dispatcherFields on Dispatcher {
+    comparator
+    conditions {
+        condition_operator
+        conditioned_field {
+            key
+            label
+            type
+        }
+        ...on ConditionSingleValue {
+            value {
+                ...on TextValue {
+                    text
+                }
+                ...on NumberValue {
+                    number
+                }
+                ...on CheckValue {
+                    check
+                }
+            }
+        }
+        ...on ConditionMultiValue {
+            values {
+                ...on SelectValue {
+                    key
+                    label
+                }
+            }
+        }
+    }
+    actions {
+        ...on ActionField {
+            field {
+                key
+            }
+            new_value {
+                ...on TextValue {
+                    text
+                }
+                ...on NumberValue {
+                    number
+                }
+                ...on SelectValue {
+                    key
+                    label
+                }
+                ...on CheckValue {
+                    check
+                }
+            }
+        }
+        ...on ActionEmail {
+            subject
+            body
+            receiver_type
+            to {
+                ...on Agent {
+                    id
+                    name: fullName
+                }
+                ...on Client {
+                    id
+                    name: fullName
+                }
+                ...on Group {
+                    id
+                    name
+                }
+            }
+        }
+    }
+}

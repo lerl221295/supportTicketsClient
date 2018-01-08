@@ -1,0 +1,6 @@
+mutation deleteDispatcher($id: ID!) {
+    deleteDispatcher(id: $id) {
+        id
+        name
+    }
+}

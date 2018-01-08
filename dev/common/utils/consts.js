@@ -130,6 +130,91 @@ export const TIMES_AFTER = [
 	},
 ];
 
+export const CONDITIONS_OPERATORS = {
+	TEXT: [
+		{
+			value: 'IS',
+			label: 'Es'
+		},
+		{
+			value: 'NOT',
+			label: 'No es'
+		},
+		{
+			value: 'CONTAINS',
+			label: 'Contiene'
+		},
+		{
+			value: 'NOT_CONTAINS',
+			label: 'No contiene'
+		},
+		{
+			value: 'STARTS',
+			label: 'Empieza con'
+		},
+		{
+			value: 'ENDS',
+			label: 'Termina con'
+		}
+	],
+	DATE: [
+		{
+			value: 'IS',
+			label: 'Es'
+		},
+		{
+			value: 'NOT',
+			label: 'No es'
+		},
+		{
+			value: 'HIGHER',
+			label: 'Mayor a'
+		},
+		{
+			value: 'LESS',
+			label: 'Menor a'
+		}
+	],
+	NUMBER: [
+		{
+			value: 'HIGHER',
+			label: 'Mayor a'
+		},
+		{
+			value: 'HIGHER_OR_EQUAL',
+			label: 'Mayor o igual a'
+		},
+		{
+			value: 'LESS',
+			label: 'Menor a'
+		},
+		{
+			value: 'LESS_OR_EQUAL',
+			label: 'Menor o igual a'
+		}
+	],
+	SELECT: [
+		{
+			value: 'IS',
+			label: 'Es'
+		},
+		{
+			value: 'NOT',
+			label: 'No es'
+		}
+	],
+	CHECKBOX: [
+		{
+			value: 'IS',
+			label: 'Es'
+		},
+		{
+			value: 'NOT',
+			label: 'No es'
+		}
+	]
+};
+
 export const getPriorityText = (priority_value) =>
 	 _.find(PRIORITIES, priority => priority.value === priority_value).text;
 

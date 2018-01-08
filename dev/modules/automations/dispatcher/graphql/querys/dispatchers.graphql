@@ -1,0 +1,6 @@
+#import "../fragments/dispatchersFragment.graphql"
+query GetDispatchers {
+	dispatchers {
+		...dispatchersFields
+	}
+}

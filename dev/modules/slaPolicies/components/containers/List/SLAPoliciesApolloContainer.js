@@ -2,7 +2,7 @@ import React from 'react'
 // React Apollo
 import { graphql, compose } from 'react-apollo'
 // Containers
-import SLAPoliciesContainer from './../List/SLAPoliciesContainer'
+import SLAPoliciesContainer from './SLAPoliciesContainer'
 // Graphql Querys
 import { GetSLAPolicies } from '../../../graphql/querys'
 // Graphql Mutations

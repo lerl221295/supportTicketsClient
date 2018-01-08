@@ -23,6 +23,10 @@ import SlaPolicies from './modules/slaPolicies/components/containers/List/SLAPol
 import CreateSLAPolicy from './modules/slaPolicies/components/containers/Form/CreateSLAPolicy'
 import UpdateSLAPolicy from './modules/slaPolicies/components/containers/Form/UpdateSLAPolicy'
 
+import Dispatchers from './modules/automations/dispatcher/components/containers/List/ListApolloContainer'
+import CreateDispatcher from './modules/automations/dispatcher/components/containers/Form/CreateDispatcher'
+import UpdateDispatcher from './modules/automations/dispatcher/components/containers/Form/UpdateDispatcher'
+
 import BusinessHours from './modules/businessHours/components/containers/EditBusinessHours'
 import TicketFields from './modules/ticketFields/components/containers/TicketFieldsPanel'
 
@@ -61,6 +65,13 @@ class Routes extends Component {
 						<IndexRoute component={SlaPolicies} />
 						<Route path="new" component={CreateSLAPolicy}/>
 						<Route path=":id" component={UpdateSLAPolicy}/>
+					</Route>
+					<Route path="automations">
+						<Route path="dispatchers">
+							<IndexRoute component={Dispatchers} />
+							<Route path="new" component={CreateDispatcher}/>
+							<Route path=":id" component={UpdateDispatcher}/>
+						</Route>
 					</Route>
 					<Route path="businessHours" component={BusinessHours}/>
 					<Route path="ticketFields" component={TicketFields}/>

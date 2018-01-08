@@ -1,0 +1,58 @@
+query ticketMetadata {
+    ticketMetadata {
+        default_fields {
+            key
+            label
+            type
+            ...on SelectField {
+                options {
+                    ...on Agent {
+                        id
+                        name
+                    }
+                    ...on Client {
+                        id
+                        name
+                    }
+                    ...on Device {
+                        id
+                        name
+                    }
+                    ...on State {
+                        key
+                        label
+                    }
+                    ...on Group {
+                        id
+                        name
+                    }
+                    ...on Supplier {
+                        id
+                        name
+                    }
+                    ...on TicketType {
+                        key
+                        label
+                    }
+                    ...on StandarOption {
+                        key
+                        label
+                    }
+                }
+            }
+        }
+        custom_fields {
+            key
+            label
+            type
+            ...on SelectField {
+                options {
+                    ...on StandarOption {
+                        key
+                        label
+                    }
+                }
+            }
+        }
+    }
+}

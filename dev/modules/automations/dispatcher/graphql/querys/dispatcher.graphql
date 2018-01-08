@@ -1,0 +1,8 @@
+#import "../fragments/dispatchersFragment.graphql"
+#import "../fragments/dispatcherFragment.graphql"
+query GetDispatcher($id : ID!) {
+	dispatcher(id: $id){
+		...dispatchersFields
+		...dispatcherFields
+	}
+}

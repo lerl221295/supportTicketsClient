@@ -1,0 +1,5 @@
+fragment dispatchersFields on Dispatcher {
+    id
+    name
+    description
+}

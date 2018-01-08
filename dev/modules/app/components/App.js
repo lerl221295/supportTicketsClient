@@ -49,7 +49,7 @@ const menu = [
 			{ text: 'Horario habil', icon: <Date/>, link: '/admin/businessHours' },
 			{ text: 'Automatizaciones', icon: <Laptop/>,
 				menuItems: [
-					{ text: 'Despachador', icon: <Truck/>, link: '/admin/agents' },
+					{ text: 'Despachador', icon: <Truck/>, link: '/admin/automations/dispatchers' },
 					{ text: 'Observador', icon: <Eye/>, link: '/admin/businessHours' },
 					{ text: 'Supervisor', icon: <Watch/>, link: '/admin/sla' },
 					{ text: 'Escenario', icon: <Tasks/>, link: '/admin/doc' }

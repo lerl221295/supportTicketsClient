@@ -1,0 +1,8 @@
+query GetSuppliersNames($search_text: String) {
+	entity: suppliers(search_text: $search_text) {
+		nodes {
+			id
+			name
+		}
+	}
+}

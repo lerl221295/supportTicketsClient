@@ -42,7 +42,7 @@ const LeftDrawer = ({ navDrawerOpen, menus, location: {pathname} }) => {
 		<Drawer
 			open={navDrawerOpen}
 		>
-			<Row center={'xs'}>
+			<Row center={'xs'} style={{margin: 0}}>
 				<Col xs={12}>
 					<Avatar src="/images/user.png"
 					        size={50}

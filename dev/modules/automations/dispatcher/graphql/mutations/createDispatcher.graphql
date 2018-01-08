@@ -1,0 +1,6 @@
+#import "../fragments/dispatchersFragment.graphql"
+mutation createDispatcher($dispatcher: DispatcherInput!) {
+    createDispatcher(dispatcher: $dispatcher) {
+        ...dispatchersFields
+    }
+}

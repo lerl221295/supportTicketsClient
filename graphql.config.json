@@ -3,7 +3,7 @@
   "README_schema" : "Specifies how to load the GraphQL schema that completion, error highlighting, and documentation is based on in the IDE",
   "schema": {
     "request": {
-      "url" : "http://directv.localhost:3000/graphql",
+      "url" : "http://localhost:3000/graphql",
       "method" : "POST",
       "README_postIntrospectionQuery" : "Whether to POST an introspectionQuery to the url. If the url always returns the schema JSON, set to false and consider using GET",
       "postIntrospectionQuery" : true,
@@ -21,12 +21,12 @@
   "endpoints" : [
     {
       "dev": {
-        "url": "http://directv.localhost:3000/graphql",
+        "url": "http://localhost:3000/graphql",
         "headers": {
           "Content-Type" : "application/json"
         },
         "subscription": {
-          "url": "ws://directv.localhost:3000/subscriptions"
+          "url": "ws://localhost:3000/subscriptions"
         }
       }
     }
