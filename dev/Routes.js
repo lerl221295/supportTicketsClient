@@ -3,7 +3,7 @@ import {Router, browserHistory, Route, IndexRoute} from 'react-router'
 import App from './modules/app/components/AppContainer'
 import Tickets from './modules/ticket/components/containers/TicketsContainer'
 import TicketDetails from './modules/ticket/components/containers/TicketDetails'
-//import LoginPage from './modules/login/LoginPage'
+import LoginPage from './modules/login/LoginPage'
 
 import ClientsContainer from './modules/client/components/containers/ClientsContainer'
 import CreateClient from './modules/client/components/containers/CreateClient'
@@ -29,6 +29,11 @@ import UpdateDispatcher from './modules/automations/dispatcher/components/contai
 
 import BusinessHours from './modules/businessHours/components/containers/EditBusinessHours'
 import TicketFields from './modules/ticketFields/components/containers/TicketFieldsPanel'
+import Palette from './modules/palette/components/containers/Palette'
+import EmailConfig from './modules/email/components/containers/Email'
+
+import TicketsReport from './modules/reports/components/presentationals/tickets/Panel'
+import SlaReport from './modules/reports/components/presentationals/sla/Panel'
 
 import DashboardContainer from './modules/dashboard/components/containers/DashboardContainer'
 import Doc from './modules/doc/Doc'
@@ -37,7 +42,7 @@ const notFound = () => <h1> not found </h1>
 class Routes extends Component {
 	render = () => (
 		<Router history={this.props.history}>
-			{/*<Route path="login" component={LoginPage}/>*/}
+			<Route path="login" component={LoginPage}/>
 			<Route path="/" component={App}>
 				<IndexRoute component={DashboardContainer} />
 				<Route path="tickets">
@@ -76,6 +81,12 @@ class Routes extends Component {
 					<Route path="businessHours" component={BusinessHours}/>
 					<Route path="ticketFields" component={TicketFields}/>
 					<Route path="doc" component={Doc} />
+					{/*<Route path="palette" component={Palette}/>*/}
+					<Route path="email" component={EmailConfig}/>
+				</Route>
+				<Route path="reports">
+					<Route path="tickets" component={TicketsReport}/>
+					<Route path="sla" component={SlaReport}/>
 				</Route>
 				<Route path="*" component={notFound}/>
 			</Route>

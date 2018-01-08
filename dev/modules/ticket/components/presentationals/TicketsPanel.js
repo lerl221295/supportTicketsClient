@@ -8,7 +8,7 @@ class TicketsPanel extends Component {
 		return(
 			<Row>
 				<Col md={4}>
-					<TicketsFilter onSubmit={(values) => console.log(values)} />
+					<TicketsFilter criteria={this.props.location.query} />
 				</Col>
 				<Col md={8}>
 					<TicketsList/>

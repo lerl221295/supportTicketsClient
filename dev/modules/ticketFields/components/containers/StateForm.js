@@ -20,5 +20,5 @@ export default compose(
 	}), {updateState, addState, closeModal}),
 	CustomContainer,
 	reduxForm({form: 'stateForm', enableReinitialize: true}),
-	connect(state => ({stage: getFormValues('stateForm')(state).stage}))
+	connect(state => ({stage: getFormValues('stateForm')(state) && getFormValues('stateForm')(state).stage}))
 )(Form)

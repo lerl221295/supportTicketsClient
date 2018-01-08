@@ -11,15 +11,22 @@ import {
 	Toggle
 } from 'material-ui'
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more'
+import Theme from '../../../../../theme-default'
 
 export default ({showActivities, toggleActivities}) => (
-	<Toolbar style={{marginLeft: "0.6rem"}}>
+	<Toolbar style={{marginLeft: "0.6rem", paddingRight: "5rem"}}>
+        <ToolbarGroup firstChild/>
         <ToolbarGroup lastChild>
-          	<Toggle label="Actividades" toggled={showActivities} onToggle={() => toggleActivities()} />
+          	<Toggle 
+              label="Actividades" 
+              toggled={showActivities} 
+              onToggle={() => toggleActivities()}
+              labelStyle={{color: Theme.palette.alternateTextColor}}
+            />
           	<IconMenu
             	iconButtonElement={
               		<IconButton touch={true}>
-                		<NavigationExpandMoreIcon />
+                		<NavigationExpandMoreIcon color={Theme.palette.alternateTextColor}/>
               		</IconButton>
             	}
           	>

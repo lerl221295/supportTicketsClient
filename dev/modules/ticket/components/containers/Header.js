@@ -3,7 +3,7 @@ import { toggleActivities } from '../../actions/header'
 import Header from '../presentationals/details/Header'
 
 export default connect(
-	({ticketDetail}) => ({showActivities: ticketDetail.showActivities}),
+	({ticket}) => ({showActivities: ticket.showActivities}),
 	{ toggleActivities }
 )
 (Header)

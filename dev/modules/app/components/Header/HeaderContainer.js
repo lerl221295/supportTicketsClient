@@ -1,5 +1,9 @@
 // React
 import React from 'react'
+// Redux
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+import { openModal } from '../../../ticket/actions/newTicket'
 // Apollo
 import { graphql, compose } from 'react-apollo'
 import Notifications from '../../graphql/querys/notifications.graphql'
@@ -60,6 +64,8 @@ const HeaderContainer = compose(
 				}
 			})
 		})
-	}))(Header);
+	}),
+	connect(null, { push, openModal })
+)(Header);
 
 export default HeaderContainer;

@@ -47,7 +47,7 @@ const StatesCards = ({states, deleteState, openModal}) => {
 								<Col xs={3}>
 									{do {
 										if(state.key === "new" || state.key === "resolved") (
-											<IconButton tooltip="Estado Escencial" style={{cursor: "not-allowed"}}>
+											<IconButton tooltip="Estado Indispensable" style={{cursor: "not-allowed"}}>
 												<Delete 
 													color={grey600}
 													onClick={(e) => e.stopPropagation()}

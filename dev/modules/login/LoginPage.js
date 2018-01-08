@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { graphql } from 'react-apollo'
-import Authenticate from '../../graphQL/mutations/authenticate.graphql'
-import { login } from '../../common/utils/Authenticate'
+import Authenticate from './authenticate.graphql'
+import { login as serviceLogin } from '../../common/utils/Authenticate'
 import { ToastContainer } from 'react-toastify'
 import { toast } from 'react-toastify'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
@@ -34,12 +35,18 @@ class LoginPage extends Component {
     this.setState({ loading: true });
     let { loading, ...datos } = this.state;
     this.props.mutate({
-      variables: { user: { tipo: "admin", ...datos } }
-    }).then( ({data}) => {
-      let user = data.authenticate;
-      login(user);
-      this.props.push("/");
-      toast.success(`Bienvenido ${user.admin.nombre} ${user.admin.apellido}`);
+      variables: { ...datos }
+    }).then( ({data: {login}}) => {
+      if(!login.ok){
+        for(let error of login.errors){
+          toast.error(`${error.message}`)
+        }
+        this.setState({ loading: false });
+      }
+      else {
+        serviceLogin(login);
+        this.props.push("/");
+      }
     }).catch( ({ graphQLErrors : [{ message }] }) => { 
       toast.error(message);
       this.setState({ loading: false });
@@ -48,7 +55,7 @@ class LoginPage extends Component {
 
   render = () => {
     return (
-      <MuiThemeProvider muiTheme={ThemeDefault}>
+      <MuiThemeProvider muiTheme={getMuiTheme(ThemeDefault)}>
         <div>
           <div style={styles.loginContainer}>
 

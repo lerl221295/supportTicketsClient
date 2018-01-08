@@ -1,5 +1,7 @@
-export default (pathname) => do {
-	if (pathname === '/') {'Dashboard'} else
+export default (pathname, userName) => do {
+	if (pathname === '/') {`${userName} - Dashboard`} else
+	if(pathname === '/reports/tickets') {'Reporte de Tickets'} else
+	if(pathname === '/reports/sla') {'Reporte de Cumplimiento del SLA'} else
 	if (pathname === '/tickets') {'Tickets'} else
 	if (pathname.includes('/tickets/')) {'Detalle del Ticket'} else
 	if (pathname === '/clients') {'Clientes y Organizaciones'} else
@@ -19,5 +21,7 @@ export default (pathname) => do {
 	if (pathname === '/admin/sla/new') {'Creación de nueva política SLA'} else
 	if (pathname.includes('/admin/sla/')) {'Detalle y edición de política SLA'} else
 	if (pathname === '/admin/businessHours') {'Horario operativo de la empresa'} else
-	if (pathname === '/admin/doc') {'Documentación interactiva GraphiQL'}
+	if (pathname === '/admin/doc') {'Documentación interactiva GraphiQL'} else
+	if (pathname === '/admin/email') {'Configuracion del Soporte via Email'} else
+	if (pathname === '/admin/palette') {'Paleta de Colores'}
 }

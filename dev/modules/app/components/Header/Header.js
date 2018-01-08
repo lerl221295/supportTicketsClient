@@ -1,19 +1,19 @@
 import React, {PropTypes} from 'react'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import {Link} from 'react-router'
-import { Badge, AppBar,	IconButton,	IconMenu,	MenuItem, Divider } from 'material-ui'
+import { Badge, AppBar,	IconButton,	IconMenu, MenuItem, Divider } from 'material-ui'
 import {
 	NavigationMoreVert as MoreVertIcon,
 	NavigationMenu as Menu,
 	SocialNotifications as Notification,
 	ImagePanoramaFishEye as Readed,
-	ImageLens as Unread
+	ImageLens as Unread,
+	NotificationConfirmationNumber as NewTicket,
+	ActionExitToApp as ExitIcon
 } from 'material-ui/svg-icons'
 import {white} from 'material-ui/styles/colors'
 import { SearchBox, TimeAgo } from '../../../../common/components'
 import hexToRgbA from '../../../../common/utils/hexToRgbA'
-import { logout } from '../../../../common/utils/Authenticate'
+import { logout as logoutService } from '../../../../common/utils/Authenticate'
 import {Col, Row} from 'react-flexbox-grid'
 import theme from '../../../../theme-default'
 import GetHeaderTitle from '../../utils/GetHeaderTitle'
@@ -58,11 +58,10 @@ const styles = {
 	}
 };
 
-@connect(null, { push })
 class Header extends React.Component {
 	
 	logout = () => {
-		// logout();
+		logoutService();
 		this.props.push("/login");
 	};
 	
@@ -72,7 +71,7 @@ class Header extends React.Component {
 	
 	render() {
 		
-		this.actualSectionTitle = GetHeaderTitle(this.props.location.pathname);
+		this.actualSectionTitle = GetHeaderTitle(this.props.location.pathname, this.props.userFullName);
 		
 		const { headerStyles, location, loading, notificationReaded } = this.props;
 		
@@ -94,6 +93,12 @@ class Header extends React.Component {
 						title={this.actualSectionTitle}
 						iconElementRight={
 							<Row middle={'xs'} style={styles.notification.row}>
+								<IconButton 
+									tooltip="Nuevo Ticket"
+									onClick={this.props.openModal}
+								>
+									<NewTicket color={white} />
+								</IconButton>
 								{
 									!loading &&
 									<Badge
@@ -156,13 +161,12 @@ class Header extends React.Component {
 								<IconMenu
 									color={white}
 									iconButtonElement={
-										<IconButton><MoreVertIcon color={white}/></IconButton>
+										<IconButton tooltip="Salir">
+											<ExitIcon color={white}/>
+										</IconButton>
 									}
-									anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-									targetOrigin={{horizontal: 'left', vertical: 'top'}}
-								>
-									<MenuItem primaryText="LogOut" onClick={this.logout}/>
-								</IconMenu>
+									onClick={this.logout}
+								/>
 							</Row>
 						}
 					/>

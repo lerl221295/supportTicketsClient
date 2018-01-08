@@ -129,7 +129,8 @@ class PropsForm extends Component {
 			dirty, 
 			ticketTypes, 
 			custom_fields,
-			searchData
+			searchData,
+			searchAgents
 		} = this.props;
 		
 		const STATUS = [
@@ -239,7 +240,7 @@ class PropsForm extends Component {
 							name="agent"
 							component={renderSelectReactField}
 							label="Agente"
-							loadOptions={searchData("agents", GetAgentsNames)}
+							loadOptions={searchAgents}
 						/>
 						<Field
 							name="supplier"

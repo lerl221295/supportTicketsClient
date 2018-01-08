@@ -37,14 +37,14 @@ const styles = {
 	}
 };
 
-const LeftDrawer = ({ navDrawerOpen, menus, location: {pathname} }) => {
+const LeftDrawer = ({ userImage, navDrawerOpen, menus, location: {pathname} }) => {
 	return (
 		<Drawer
 			open={navDrawerOpen}
 		>
 			<Row center={'xs'} style={{margin: 0}}>
 				<Col xs={12}>
-					<Avatar src="/images/user.png"
+					<Avatar src={userImage || "/images/user.png"}
 					        size={50}
 					        style={styles.avatar.icon}
 					/>
@@ -54,7 +54,7 @@ const LeftDrawer = ({ navDrawerOpen, menus, location: {pathname} }) => {
 				<MenuItem
 					key={index}
 					style={{...styles.menuItem, backgroundColor: do {
-						if (pathname === link || (_.isUndefined(link) && pathname.includes('/admin/')))
+						if (pathname === link || (_.isUndefined(link) && pathname.includes('/admin/') && text === "Admin" ) || (_.isUndefined(link) && pathname.includes('/reports/') && text === "Reportes" ) )
 							theme.palette.primary1Color
 					}}}
 					menuItems={do {

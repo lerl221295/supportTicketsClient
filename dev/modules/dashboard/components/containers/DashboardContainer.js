@@ -1,5 +1,6 @@
-// React
+// React & Redux
 import React from 'react'
+import { connect } from 'react-redux'
 // Apollo
 import { graphql, compose } from 'react-apollo'
 import Activities from '../../graphql/querys/activities.graphql'
@@ -7,6 +8,7 @@ import Indicators from '../../graphql/querys/indicators.graphql'
 import TicketsCountLastWeek from '../../graphql/querys/ticketsCountLastWeek.graphql'
 import MoreActivities from '../../graphql/subscriptions/newActivities.graphql'
 // External Libraries
+import { push } from 'react-router-redux'
 import moment from 'moment';
 moment.locale('es');
 // Presentationals Components
@@ -93,7 +95,8 @@ const DashboardContainer = compose(
 			})
 		}
 	}),
-	graphql(Indicators, {name: 'indicators'})
+	graphql(Indicators, {name: 'indicators'}),
+	connect(null, { push })
 )(Dashboard);
 
 export default DashboardContainer;

@@ -27,6 +27,7 @@ query GetTicketDetailsAndMetadata($number: Int!) {
 		interventions {
 			time
 			text
+			private
 			type_autor
 			autor {
 				...on Agent {

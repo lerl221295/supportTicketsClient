@@ -1,0 +1,19 @@
+mutation Authenticate($email: String!, $password: String!){
+  login(email: $email, password: $password){
+    ok
+    token
+    errors{
+      path
+      message
+    }
+    user{
+      rol
+      entity{
+        ...on Agent{
+          fullName
+          face_base64
+        }
+      }
+    }
+  }
+}

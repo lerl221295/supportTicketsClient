@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
-import {List, ListItem, Paper, Divider, FlatButton} from "material-ui";
+import {List, ListItem, Paper, Divider, FlatButton, IconMenu, IconButton, MenuItem} from "material-ui";
 import { Row, Col } from 'react-flexbox-grid'
 import _ from 'lodash'
 import Item from './TicketItemList'
+import { 
+	ContentSort as Sort,
+	ActionTrendingDown as DownOrder,
+	ActionTrendingUp as UpOrder
+} from 'material-ui/svg-icons'
 // Common Components
 import { WrappedSubheader, Loading } from '../../../../common/components'
+import Theme from '../../../../theme-default'
+
 const styles = {
 	paper: {
 		// maxHeight: '33rem'
@@ -35,7 +42,28 @@ class TicketList extends Component {
 		if(loading && !tickets) return <Loading size={60} thickness={3}/>
 		return(
 			<div>
-				<WrappedSubheader>Tickets</WrappedSubheader>
+				<WrappedSubheader>
+					<Row between="xs">
+						<Col> Tickets </Col>
+						<Col>
+							<IconMenu
+								color={Theme.palette.alternateTextColor}
+						    	iconButtonElement={
+						    		<IconButton tooltip="Ordenamiento">
+						    			<Sort color={Theme.palette.alternateTextColor}/>
+						    		</IconButton>
+						    	}
+						    	targetOrigin={{horizontal: 'left', vertical: 'top'}}
+						    	anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+						    	value={this.props.order}
+						    	onChange={(e, value) => this.props.changeOrder(value)}
+						    >
+						      	<MenuItem leftIcon={<DownOrder/>} value="FALLING" primaryText="Descendente" />
+						      	<MenuItem leftIcon={<UpOrder/>} value="UPWARD" primaryText="Ascendente" />
+						    </IconMenu>
+						</Col>
+					</Row>
+				</WrappedSubheader>
 				<Paper style={{...styles.paper, ...styles.paperOverflow}}>
 					<Row>
 						<Col xs={12} md={12} sm={12}>
