@@ -22,9 +22,10 @@ query GetTicketMetadata {
 			type
 			...on SelectField {
 				options {
-					key
-					label
-					position
+					...on StandarOption {
+						label
+						key
+					}
 				}
 			}
 		}
