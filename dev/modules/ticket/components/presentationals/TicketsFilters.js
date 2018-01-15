@@ -27,7 +27,7 @@ import {
 	renderSelectField,
 	renderSelectReactField
 } from '../../../../common/components/ReduxFormComponents'
-import { Toggle } from 'redux-form-material-ui'
+import { Toggle, TextField } from 'redux-form-material-ui'
 // Common Components
 import { WrappedSubheader } from '../../../../common/components'
 // Graphql
@@ -59,6 +59,14 @@ class FilterForm extends Component {
 				<WrappedSubheader>Filtrar Propiedades</WrappedSubheader>
 				<Paper style={styles.paper}>
 					<form onSubmit={handleSubmit}>
+						<Field
+							name="number"
+							type="number"
+							component={TextField}
+							hintText="Ticket especifico"
+							floatingLabelText="Numero"
+							style={{width: "100%"}}
+						/>
 						<Field
 							Icon={ClientIcon}
 							name="clients"

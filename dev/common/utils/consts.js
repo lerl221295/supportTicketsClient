@@ -24,7 +24,8 @@ export const CHANELS = [
 	{value: "PORTAL", text: "Portal", src: "/images/sources/PORTAL"},
 	{value: "EMAIL", text: "Email", src: "/images/sources/EMAIL"},
 	{value: "FACEBOOK", text: "Facebook", src: "/images/sources/FACEBOOK"},
-	{value: "TWITTER", text: "Twitter", src: "/images/sources/TWITTER"}
+	{value: "TWITTER", text: "Twitter", src: "/images/sources/TWITTER"},
+	{value: "PHONE", text: "Telefono", src: "/images/sources/PHONE"}
 ];
 
 export const WEEK_DAYS = [

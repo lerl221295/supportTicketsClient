@@ -79,6 +79,7 @@ const mapStateToProps = (state) => {
 			if(values[key] && values[key].length) filterMapedObject[key] = values[key];
 		}
 		if(values.unassigned) filterMapedObject.unassigned = true;
+		if(values.number) filterMapedObject.number = values.number;
 		if(_.isEmpty(filterMapedObject)) return {order: state.ticket.order};
 		return({
 			filter_form: {
