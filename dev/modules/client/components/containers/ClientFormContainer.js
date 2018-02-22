@@ -52,7 +52,8 @@ class FormContainer extends Component {
 		event.preventDefault();
 		let client = this.state;
 		client.phones = client.phones.replace(/\s/g, '').split(',');
-		client.organization_id = client.organization.id;
+		if(client.organization)
+			client.organization_id = client.organization.id;
 		delete client.organization;
 		delete client.avatar_filename;
 		this.props.submit({ ...client, id: this.props.edit })

@@ -64,8 +64,12 @@ class ClientesTable extends Component {
 											</TableRowColumn>
 										  	<TableRowColumn className="fullname">{`${client.name} ${client.lastname}`}</TableRowColumn>
 										  	<TableRowColumn className="email">{client.email}</TableRowColumn>
-										  	<TableRowColumn>{client.phones[0]}</TableRowColumn>
-										  	<TableRowColumn>{client.organization.name}</TableRowColumn>
+										  	<TableRowColumn>{client.phones[0] || "Desconocido"}</TableRowColumn>
+										  	<TableRowColumn>{do {
+										  		if(client.organization)
+										  			client.organization.name;
+										  		else "Particular";
+										  	}}</TableRowColumn>
 										  	<TableRowColumn className="center">
 												<Eye onClick={this.props.edit(client.id)}
 													  style={{cursor: "pointer"}}
