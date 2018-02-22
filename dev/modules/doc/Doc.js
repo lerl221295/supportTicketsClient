@@ -4,7 +4,7 @@ import voy, { Voyager } from 'graphql-voyager';
 import fetch from 'isomorphic-fetch';
 import { API_URL } from "../../apolloClient";
 import { getUser } from "../../common/utils/Authenticate";
-//import 'graphiql/graphiql.css';
+import 'graphiql/graphiql.css';
 
 const graphQLFetcher = (graphQLParams) => {
     const user = getUser();
@@ -23,10 +23,10 @@ const graphQLFetcher = (graphQLParams) => {
 
 export default () => (
     <div style={{height: "100vh"}}>
-        {/*<GraphiQL fetcher={graphQLFetcher} />*/}
-        <link rel="stylesheet" href="/voyager.css" />
+        <GraphiQL fetcher={graphQLFetcher} />
+        {/*<link rel="stylesheet" href="/voyager.css" />
         <Voyager 
             introspection={(query) => graphQLFetcher({query})}
-        />
+        />*/}
     </div>
 )
