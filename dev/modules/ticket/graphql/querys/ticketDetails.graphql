@@ -1,5 +1,6 @@
 #import "../fragments/ticketStatusAndTypes.graphql"
 #import "../fragments/ticketDetailsFragment.graphql"
+#import "../fragments/ticketActivities.graphql"
 query GetTicketDetailsAndMetadata($number: Int!) {
 	ticket(number: $number) {
 		...ticketsFields
@@ -37,42 +38,7 @@ query GetTicketDetailsAndMetadata($number: Int!) {
 				}
 			}
 		}
-		activities {
-			type
-			...on UpgradeActivity {
-				time
-				type_autor
-				autor {
-					id
-					name: fullName
-					face_base64
-				}
-				actions {
-					...on UpgradeActivityActionUpdate {
-						type
-						prop_name
-						new_value
-					}
-					...on UpgradeActivityActionAssignment {
-						type
-						bearer {
-							...on Agent {
-								id
-								name: fullName
-							}
-							...on Supplier {
-								id
-								name
-							}
-							...on Group {
-								id
-								name
-							}
-						}
-					}
-				}
-			}
-		}
+		...ticketActivities
 	}
 	ticketMetadata {
 		...statusAndTypes

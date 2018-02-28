@@ -6,9 +6,10 @@ mutation UpdateCustomFields($custom_fields: [CustomFieldInput!]){
 		type
 		...on SelectField {
 			options {
-				key
-				label
-				position
+				...on StandarOption {
+					key
+					label
+				}
 			}
 		}
 	}

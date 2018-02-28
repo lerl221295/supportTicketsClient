@@ -27,7 +27,8 @@ const getValueKey = (type) => do {
 }
 
 const getValue = (type, value) => do {
-	if(type === "DATE") new Date(value.text);
+	if(!value) null;
+	else if(type === "DATE") new Date(value.text);
 	else value[getValueKey(type)];
 };
 
@@ -128,7 +129,7 @@ const TicketPropsWithApollo = withApollo((prop) => {
 		agent: ticket.agent,
 		group: ticket.group,
 		supplier: ticket.supplier,
-		device_id: ticket.device.id
+		device_id: ticket.device && ticket.device.id
 	}
 
 	if(props.custom_fields && props.custom_fields.length) 
@@ -169,8 +170,10 @@ const TicketPropsWithApollo = withApollo((prop) => {
 		/*mapeo agent, suplier and group*/
 		const currents = {agent, supplier, group};
 		for(let key of ['agent', 'supplier', 'group']){
-			if(initialValues[key].id !== currents[key].id)
+			if(currents[key] && ((initialValues[key] && (initialValues[key].id !== currents[key].id) ) || !initialValues[key]) )
 				ticketUpdate[`${key}_id`] = currents[key].id;
+			else if(initialValues[key])
+				ticketUpdate[`${key}_id`] = null;
 		}
 
 		mutate({

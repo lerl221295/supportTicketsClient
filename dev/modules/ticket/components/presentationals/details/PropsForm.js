@@ -140,16 +140,19 @@ class PropsForm extends Component {
 
 		const TYPES = ticketTypes.map(({key: value, label: text}) => ({value, text}));
 		
-		let DEVICES = ticket.client.devices.map(({id: value, code, name}) => ({
-			value,
-			text: `${name} - ${code}`
-		}))
+		let DEVICES = [];
+		if(ticket.client.devices){
+			DEVICES = ticket.client.devices.map(({id: value, code, name}) => ({
+				value,
+				text: `${name} - ${code}`
+			}))
 
-		/*solo por la data mock*/
-		DEVICES = [
-			{value: ticket.device.id, text: ticket.device.name},
-			...DEVICES
-		]
+			/*solo por la data mock*/
+			DEVICES = [
+				{value: ticket.device.id, text: ticket.device.name},
+				...DEVICES
+			]
+		}	
 
 		return (
 			<Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>

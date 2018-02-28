@@ -1,7 +1,9 @@
 #import "../fragments/ticketDetailsFragment.graphql"
+#import "../fragments/ticketActivities.graphql"
 mutation UpdateTicket($ticketUpdate: TicketUpdateInput!){
 	updateTicket(ticket: $ticketUpdate){
 		...ticketsFields
+		...ticketActivities
 		custom_fields {
 			metadata {
 				key
