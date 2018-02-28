@@ -14,7 +14,7 @@ const MutateContainer = graphql(CreateTicket, {
 	props: ({mutate, ownProps}) => ({
 		onSubmit: ({agent, client, title, description, priority, type_key}) => {
 			let ticket = {
-				agent_id: agent.id,
+				agent_id: agent && agent.id,
 				client_id: client.id,
 				title,
 				description,

@@ -12,7 +12,7 @@ export default graphql(createAgent, {
   props: ({ mutate }) => ({
     submit: (agent) => mutate({
     	variables: { agent },
-    	refetchQueries: [ { query: Agents }]
+    	refetchQueries: [ { query: Agents, variables: {search_text: null, offset: null, limit: 7} }]
     })
   })
 })(formWithRedux);

@@ -10,7 +10,7 @@ const ActionsList = ({actions}) => {
 					if (type == 'UPDATE') return (
 						<li key={i}>{capitalize(prop_name)} cambió a {new_value}</li>
 					);
-					else {
+					else if(bearer){
 						let bearer_type = do {
 							if (bearer.__typename == 'Agent') ({name: 'agente', route: '/admin/agents/'})
 							else
@@ -23,6 +23,11 @@ const ActionsList = ({actions}) => {
 							</li>
 						)
 					}
+					else return (
+						<li key={i}>
+							Liberó el ticket
+						</li>
+					)
 				}))
 			}
 		</ul>

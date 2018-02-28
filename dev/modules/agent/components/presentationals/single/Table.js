@@ -11,7 +11,7 @@ import {
 import theme from '../../../../../theme-default'
 import Pagination from 'material-ui-pagination'
 import { LinearProgress, Avatar } from 'material-ui'
-import { ImageRemoveRedEye as Eye} from 'material-ui/svg-icons'
+import { ActionFace as Face, ImageRemoveRedEye as Eye} from 'material-ui/svg-icons'
 
 class AgentsTable extends Component {	
 	render = () => {
@@ -76,9 +76,9 @@ class AgentsTable extends Component {
 											</TableRowColumn>
 											<TableRowColumn className="fullname">{agent.name}</TableRowColumn>
 											<TableRowColumn className="email">{agent.email}</TableRowColumn>
-											<TableRowColumn>{agent.phones[0]}</TableRowColumn>
+											<TableRowColumn>{agent.phones[0] || "Desconocido"}</TableRowColumn>
 											<TableRowColumn>{agent.role}</TableRowColumn>
-											<TableRowColumn>{agent.supplier.name}</TableRowColumn>
+											<TableRowColumn>{agent.supplier && agent.supplier.name}</TableRowColumn>
 											<TableRowColumn className="center">
 												<Eye onClick={this.props.edit(agent.id)}
 												      className="edit"
