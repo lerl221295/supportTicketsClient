@@ -12,7 +12,7 @@ export default graphql(createClient, {
   props: ({ mutate }) => ({
     submit: (client) => mutate({ 
     	variables: { client },
-    	refetchQueries: [ { query: Clients }]
+    	refetchQueries: [ { query: Clients, variables: {search_text: null, offset: null, limit: 7} }]
     })
   })
 })(formWithRedux);

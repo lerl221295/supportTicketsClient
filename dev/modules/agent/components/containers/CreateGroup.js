@@ -12,7 +12,7 @@ export default graphql(createGroup, {
   props: ({ mutate }) => ({
     submit: (group) => mutate({
     	variables: { group },
-    	refetchQueries: [ { query: Groups }]
+    	refetchQueries: [ { query: Groups, variables: {search_text: null, offset: null, limit: 7} }]
     })
   })
 })(formWithRedux);

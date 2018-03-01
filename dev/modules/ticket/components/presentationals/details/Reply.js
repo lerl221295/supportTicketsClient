@@ -29,7 +29,8 @@ class Reply extends Component {
 	
 	componentDidUpdate = (_, prevState) => {
 		if(!prevState.expanded && this.state.expanded)
-			window.scrollTo(0,document.body.scrollHeight);
+			window.location = "#response-panel";
+			//window.scrollTo(0,document.body.scrollHeight);
 	}
 
 	render = () => {
@@ -44,6 +45,7 @@ class Reply extends Component {
 
 		return(
 			<Card
+				id="response-panel"
 				style={{margin: "0.6rem"}}
 				expanded={this.state.expanded}
 				onExpandChange={this.handleExpandChange}

@@ -12,7 +12,7 @@ export default graphql(createSupplier, {
   props: ({ mutate }) => ({
     submit: (supplier) => mutate({
     	variables: { supplier },
-    	refetchQueries: [ { query: Suppliers }]
+    	refetchQueries: [ { query: Suppliers, variables: {search_text: null, offset: null, limit: 7} }]
     })
   })
 })(formWithRedux);

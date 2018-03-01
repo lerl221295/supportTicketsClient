@@ -12,7 +12,7 @@ export default graphql(createOrganization, {
     props: ({ mutate }) => ({
         submit: (organization) => mutate({
             variables: { organization },
-            refetchQueries: [{ query: Organizations }]
+            refetchQueries: [{ query: Organizations, variables: {search_text: null, offset: null, limit: 7} }]
         })
     })
 })(formWithRedux);

@@ -31,10 +31,10 @@ const wsLink = new WebSocketLink({
 const httpLink = setContext(() => {
     const user = getUser();
     if(user)
-    return ({
-        headers: {
+        return ({
+            headers: {
                 authorization: `Bearer ${user.token}`
-        }
+            }
         });
     return {}
 }).concat(createHttpLink({ uri: `http://${API_URL}/graphql` }));
