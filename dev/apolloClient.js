@@ -15,7 +15,7 @@ let host = window.location.host.split(".")[0];
 	else host;
 };*/
 
-export const API_URL = `${host}.localhost:3000`;
+export const API_URL = `${host}.localhost:3001`;
 
 const wsLink = new WebSocketLink({
     uri: `ws://${API_URL}/subscriptions`,
@@ -31,10 +31,10 @@ const wsLink = new WebSocketLink({
 const httpLink = setContext(() => {
     const user = getUser();
     if(user)
-    return ({
-        headers: {
+        return ({
+            headers: {
                 authorization: `Bearer ${user.token}`
-        }
+            }
         });
     return {}
 }).concat(createHttpLink({ uri: `http://${API_URL}/graphql` }));
