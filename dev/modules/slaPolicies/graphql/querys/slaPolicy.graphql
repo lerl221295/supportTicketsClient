@@ -20,7 +20,7 @@ query GetSLAPolicies($id: ID!) {
                 name: fullName
             }
         }
-        policies {
+        policies: objectives {
             priority
             operational_hours
             first_response {
