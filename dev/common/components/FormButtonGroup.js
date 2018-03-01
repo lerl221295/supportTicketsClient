@@ -4,7 +4,7 @@ import {FlatButton, RaisedButton} from "material-ui";
 
 const FormButtonGroup = ({cancel, send, disabled, ...rest}) => (
 	<Col className={'button-group'} xs={12} {...rest}>
-		<Row center={"xs"}>
+		<Row center={"xs"} around="xs">
 			<Col xs={3}>
 				<RaisedButton
 					label="Cancelar"
