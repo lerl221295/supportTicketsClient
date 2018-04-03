@@ -22,7 +22,7 @@ const wsLink = new WebSocketLink({
     options: {
         reconnect: true,
         connectionParams: {
-            token: "falta colocar aca el token",
+            token: "",
             subdomain: host
         }
     }
