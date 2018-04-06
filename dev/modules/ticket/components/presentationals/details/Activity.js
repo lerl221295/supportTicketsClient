@@ -66,8 +66,7 @@ const FirstActivity = ({ticket}) => {
 					</Row>
 				</Col>
 			</Row>
-			<Row style={{padding: "1rem"}}>
-				{ticket.description}
+			<Row style={{padding: "1rem"}} dangerouslySetInnerHTML={{__html: ticket.description}}>
 			</Row>
 		</Paper>
 	)

@@ -33,7 +33,7 @@ export default compose(
 				mutate({ 
 					variables: { config },
 					update: (proxy, {data: {updateEmailSupport} }) => {
-						proxy.writeQuery({ query: GetEmail, data: {emailSupport: config.email} });
+						proxy.writeQuery({ query: GetEmail, data: {emailSupport: updateEmailSupport} });
 					}
 				})
 				.then(response => ownProps.openAlert("Email Support Configurado Exitosamente"))
