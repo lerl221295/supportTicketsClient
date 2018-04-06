@@ -155,25 +155,31 @@ const TicketPropsWithApollo = withApollo((prop) => {
 			...diff(initialValues, vals)
 		}
 
-		/*mapeo los custom values*/	
-		const customDiffs = diff(initialValues.custom, custom)
-		if(!_.isEmpty(customDiffs)){
-			ticketUpdate.custom_fields = Object.keys(customDiffs).map(field_key => {
-				const {type} = props.custom_fields.find(({key}) => (key === field_key));
-				return({
-					field_key,
-					[getValueKey(type)] : customDiffs[field_key]
+		if(custom || initialValues.custom){
+			/*mapeo los custom values*/	
+			const customDiffs = diff(initialValues.custom, custom)
+			if(!_.isEmpty(customDiffs)){
+				ticketUpdate.custom_fields = Object.keys(customDiffs).map(field_key => {
+					const {type} = props.custom_fields.find(({key}) => (key === field_key));
+					return({
+						field_key,
+						[getValueKey(type)] : customDiffs[field_key]
+					})
 				})
-			})
+			}
 		}
 
 		/*mapeo agent, suplier and group*/
 		const currents = {agent, supplier, group};
 		for(let key of ['agent', 'supplier', 'group']){
-			if(currents[key] && ((initialValues[key] && (initialValues[key].id !== currents[key].id) ) || !initialValues[key]) )
-				ticketUpdate[`${key}_id`] = currents[key].id;
+			if(currents[key]){
+				if(!initialValues[key] || (initialValues[key].id !== currents[key].id) ){
+					ticketUpdate[`${key}_id`] = currents[key].id;
+				}
+			}
 			else if(initialValues[key])
 				ticketUpdate[`${key}_id`] = null;
+			
 		}
 
 		mutate({
