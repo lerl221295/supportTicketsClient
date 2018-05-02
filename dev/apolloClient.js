@@ -8,14 +8,16 @@ import { getMainDefinition } from 'apollo-utilities';
 
 import { getUser } from './common/utils/Authenticate'
 
-let host = window.location.host.split(".")[0];
+const host = window.location.host;
 
-/*host = do {
-	if (host == "192") 'sidor'
-	else host;
-};*/
+let subdomain = do {
+	if (host !== 'localhost:8000') { host.split(".")[0] }
+};
 
-export const API_URL = `${host}.localhost:3001`;
+export const API_URL = do {
+	if (subdomain) { `${subdomain}.localhost:3001` }
+	else { 'localhost:3001' }
+};
 
 const wsLink = new WebSocketLink({
     uri: `ws://${API_URL}/subscriptions`,
@@ -23,7 +25,7 @@ const wsLink = new WebSocketLink({
         reconnect: true,
         connectionParams: {
             token: "",
-            subdomain: host
+            subdomain: subdomain
         }
     }
 });

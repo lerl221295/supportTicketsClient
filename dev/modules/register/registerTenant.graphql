@@ -1,0 +1,10 @@
+mutation registerTenant($tenant: TenantInput!) {
+  registerTenant(tenant: $tenant) {
+    id
+    name
+    subdomain
+    phones
+    active
+    subscription_time
+  }
+}

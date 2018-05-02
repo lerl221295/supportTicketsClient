@@ -23,99 +23,99 @@ import { LoginStyles as styles } from '../../theme-default'
 @connect(null, { push })
 @graphql(Authenticate)
 class LoginPage extends Component {
-  state = {
-    email: "",
-    password: "",
-    loading: false
-  }
+	state = {
+		email: "",
+		password: "",
+		loading: false
+	}
 
-  handleChange = e =>  this.setState({[e.target.name]: e.target.value});
+	handleChange = e =>  this.setState({[e.target.name]: e.target.value});
 
-  login = () => {
-    this.setState({ loading: true });
-    let { loading, ...datos } = this.state;
-    this.props.mutate({
-      variables: { ...datos }
-    }).then( ({data: {login}}) => {
-      if(!login.ok){
-        for(let error of login.errors){
-          toast.error(`${error.message}`)
-        }
-        this.setState({ loading: false });
-      }
-      else {
-        serviceLogin(login);
-        this.props.push("/");
-      }
-    }).catch( ({ graphQLErrors : [{ message }] }) => { 
-      toast.error(message);
-      this.setState({ loading: false });
-    })
-  }
+	login = () => {
+		this.setState({ loading: true });
+		let { loading, ...datos } = this.state;
+		this.props.mutate({
+			variables: { ...datos }
+		}).then( ({data: {login}}) => {
+			if(!login.ok){
+				for(let error of login.errors){
+					toast.error(`${error.message}`)
+				}
+				this.setState({ loading: false });
+			}
+			else {
+				serviceLogin(login);
+				this.props.push("/");
+			}
+		}).catch( ({ graphQLErrors : [{ message }] }) => {
+			toast.error(message);
+			this.setState({ loading: false });
+		})
+	}
 
-  render = () => {
-    return (
-      <MuiThemeProvider muiTheme={getMuiTheme(ThemeDefault)}>
-        <div>
-          <div style={styles.loginContainer}>
+	render = () => {
+		return (
+			<MuiThemeProvider muiTheme={getMuiTheme(ThemeDefault)}>
+				<div>
+					<div style={styles.loginContainer}>
 
-            <Paper style={styles.paper}>
+						<Paper style={styles.paper}>
 
-              <form>
-                <TextField
-                  hintText="E-mail"
-                  floatingLabelText="E-mail"
-                  fullWidth={true}
-                  value={this.state.email}
-                  name="email"
-                  onChange={this.handleChange}
-                />
-                <TextField
-                  hintText="Password"
-                  floatingLabelText="Password"
-                  fullWidth={true}
-                  type="password"
-                  value={this.state.password}
-                  name="password"
-                  onChange={this.handleChange}
-                />
+							<form>
+								<TextField
+									hintText="E-mail"
+									floatingLabelText="E-mail"
+									fullWidth={true}
+									value={this.state.email}
+									name="email"
+									onChange={this.handleChange}
+								/>
+								<TextField
+									hintText="Password"
+									floatingLabelText="Password"
+									fullWidth={true}
+									type="password"
+									value={this.state.password}
+									name="password"
+									onChange={this.handleChange}
+								/>
 
-                <div>
-                  <Checkbox
-                    label="Remember me"
-                    style={styles.checkRemember.style}
-                    labelStyle={styles.checkRemember.labelStyle}
-                    iconStyle={styles.checkRemember.iconStyle}
-                  />
+								<div>
+									{/*<Checkbox
+										label="Remember me"
+										style={styles.checkRemember.style}
+										labelStyle={styles.checkRemember.labelStyle}
+										iconStyle={styles.checkRemember.iconStyle}
+									/>*/}
 
-                  <RaisedButton
-                      disabled={this.state.loading} 
-                      label="Login"
-                      primary={true}
-                      style={styles.loginBtn}
-                      onClick={this.login}
-                      />
-                  
-                </div>
-              </form>
-            </Paper>
+									<RaisedButton
+										disabled={this.state.loading}
+										label="Login"
+										primary={true}
+										style={styles.loginBtn}
+										onClick={this.login}
+									/>
 
-            <div style={styles.buttonsDiv}>
-              <FlatButton
-                label="Register"
-                href="/"
-                style={styles.flatButton}
-                icon={<PersonAdd />}
-              />
+								</div>
+							</form>
+						</Paper>
 
-              <FlatButton
-                label="Forgot Password?"
-                href="/"
-                style={styles.flatButton}
-                icon={<Help />}
-              />
-            </div>
-            {/*<div style={styles.buttonsDiv}>
+						{/*<div style={styles.buttonsDiv}>
+							<FlatButton
+								label="Register"
+								href="/"
+								style={styles.flatButton}
+								icon={<PersonAdd />}
+							/>
+
+							<FlatButton
+								label="Forgot Password?"
+								href="/"
+								style={styles.flatButton}
+								icon={<Help />}
+							/>
+						</div>*/}
+						{/*<div style={styles.buttonsDiv}>
               <Link to="/" style={{...styles.btn, ...styles.btnFacebook}}>
                 <i className="fa fa-facebook fa-lg"/>
                 <span style={styles.btnSpan}>Log in with Facebook</span>
@@ -125,19 +125,19 @@ class LoginPage extends Component {
                 <span style={styles.btnSpan}>Log in with Google</span>
               </Link>
             </div>*/}
-          </div>
-          <ToastContainer 
-              type="default"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              pauseOnHover
-          />
-        </div>
-      </MuiThemeProvider>
-    );
-  }
+					</div>
+					<ToastContainer
+						type="default"
+						autoClose={5000}
+						hideProgressBar={false}
+						newestOnTop={false}
+						closeOnClick
+						pauseOnHover
+					/>
+				</div>
+			</MuiThemeProvider>
+		);
+	}
 }
 
 export default LoginPage;

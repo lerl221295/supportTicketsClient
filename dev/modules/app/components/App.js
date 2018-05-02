@@ -81,7 +81,8 @@ class App extends Component {
 
 	componentWillMount = () => {
 		//validar que el usuario este autenticado
-		if(!getUser()) this.props.push("login");
+		if (window.location.host === 'localhost:8000') this.props.push("/register");
+		else if (!getUser()) this.props.push("/login");
 	}
 	
 	componentWillReceiveProps(nextProps) {

@@ -13,14 +13,6 @@ export default graphql(CreateSLAPolicy, {
 		id,
 		submit: (slapolicy) => mutate({
 			variables: { slapolicy },
-			/*optimisticResponse: {
-				__typename: 'Mutation',
-				updateAgent : {
-					__typename: 'Agent',
-					...slapolicy,
-					name: `${slapolicy.name} ${slapolicy.lastname}`
-				}
-			},*/
 			update: (proxy, {data: {createSLAPolicy} }) => {
 				try {
 					const data = proxy.readQuery({
