@@ -4,7 +4,7 @@ import { push } from 'react-router-redux'
 import { graphql } from 'react-apollo'
 import RegisterTenant from './registerTenant.graphql'
 import { toast } from 'react-toastify'
-import {Link} from 'react-router'
+import config from '../../config'
 import {reduxForm} from "redux-form";
 import Form from "./Form";
 
@@ -19,9 +19,9 @@ class RegisterFormContainer extends Component {
 			variables: { tenant }
 		}).then( ({data: {registerTenant: {subdomain}}}) => {
 			toast.success("Tenant creado exitosamente");
-			window.location.href = `http://${subdomain}.localhost:8000`
+			window.location.href = `http://${subdomain}.${config.HOST}`
 		}).catch( (error) => {
-			console.log('error---', error)
+			console.log(error)
 		})
 	};
 

@@ -13,7 +13,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // Common Components
 import Header from './Header/HeaderContainer'
 import LeftDrawer from './Drawer/LeftDrawer'
-
 // Icons
 import {
 	ActionDashboard as Dashboard,
@@ -35,10 +34,11 @@ import {
 	CommunicationEmail as Email,
 	ImagePalette as Palette,
 	EditorInsertChart as Chart
-	} from 'material-ui/svg-icons/index'
+} from 'material-ui/svg-icons/index'
 import { getUser } from '../../../common/utils/Authenticate'
 import { ToastContainer } from 'react-toastify'
 import TicketForm from '../../../modules/ticket/components/containers/NewTicket'
+import config from '../../../config'
 
 const menu = [
 	{ text: 'Dashboard', icon: Dashboard, link: '/' },
@@ -81,26 +81,26 @@ class App extends Component {
 
 	componentWillMount = () => {
 		//validar que el usuario este autenticado
-		if (window.location.host === 'localhost:8000') this.props.push("/register");
+		if (window.location.host === config.HOST) this.props.push("/register");
 		else if (!getUser()) this.props.push("/login");
 	}
-	
+
 	componentWillReceiveProps(nextProps) {
 		if (this.props.width !== nextProps.width) {
 			this.setState({ navDrawerOpen: nextProps.width === LARGE });
 		}
 	}
-	
+
 	handleChangeRequestNavDrawer = () => {
 		this.setState({
 			navDrawerOpen: !this.state.navDrawerOpen
 		});
 	}
-	
+
 	render() {
 		let { navDrawerOpen } = this.state;
 		const paddingLeftDrawerOpen = 65;
-		
+
 		const styles = {
 			header: {
 				paddingLeft: navDrawerOpen ? paddingLeftDrawerOpen : 0
@@ -117,20 +117,20 @@ class App extends Component {
 		return (
 			<MuiThemeProvider muiTheme={getMuiTheme(ThemeDefault)}>
 				<div>
-					<Header 
+					<Header
 						userFullName={userFullName}
 						headerStyles={styles.header}
-					    handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer}
-					    location={this.props.location}
+						handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer}
+						location={this.props.location}
 					/>
-					
+
 					<LeftDrawer
 						userImage={userImage}
 						navDrawerOpen={navDrawerOpen}
 						menus={menu}
 						location={this.props.location}
 					/>
-					
+
 					<div style={styles.container}>
 						<ToastContainer
 							position="bottom-center"
@@ -148,13 +148,13 @@ class App extends Component {
 							onRequestClose={() => this.props.closeAlert()}
 						/>
 						<Dialog
-					        title="Nuevo Ticket"
-					        open={this.props.modalOpen}
-					        onRequestClose={this.props.closeModal}
-					        autoScrollBodyContent={true}
-					    >
-					    	<TicketForm />
-					    </Dialog>
+							title="Nuevo Ticket"
+							open={this.props.modalOpen}
+							onRequestClose={this.props.closeModal}
+							autoScrollBodyContent={true}
+						>
+							<TicketForm />
+						</Dialog>
 						{this.props.children}
 					</div>
 				</div>
